@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/scroll.css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/friend_action.js" charset="utf-8"></script>
+<script type="text/html" id="tpl_friendslist">
+{for d in data}
+{var tag = ""}
+{if d.isOnline && d.lastPlayedGameName}
+{var tag = nearmelang.lang_friend_nowisplay + d.lastPlayedGameName}
+{else}
+{/if}
+{if d.lastPlayedGameName && !d.isOnline}
+{var tag = nearmelang.lang_friend_lastplay + d.lastPlayedGameName}
+{else}
+{/if}
+<div style="padding: 5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;" >
+<dl onclick="goToOtherHome('${d.id}');event.cancelBubble==true;"><dt>
+{if d.sex}
+<img id="${d.imgid}" src="${nearmelang.image.defimg_user_xy}" onclick="goToOtherHome('${d.id}');event.cancelBubble==true;" width="66" height="66" />
+{else}
+<img id="${d.imgid}" src="${nearmelang.image.defimg_user_xx}" onclick="goToOtherHome('${d.id}');event.cancelBubble==true;" width="66" height="66" />
+{/if}
+</dt>
+<dd class="gamename">${d.name}</dd><dd class="gameranking">${nearmelang.lang_global_level}(${d.level})</dd>
+
+
+{if tag !== ""}
+<dd class="gameranking1">${tag}</dd>
+{elseif}
+<dd class="gameranking1">${tag}</dd>
+{/if}
+
+</dl>
+<div><label class="gameranking_this" onclick="deleteFriend('${d.id}','${d.name}');event.cancelBubble==true;">${nearmelang.lang_friend_deletefriend}</label></div><div class="clear"></div></div>
+{forelse}
+{/for}
+</script>
+
+<script type="text/html" id="tpl_friendrequestlist">
+{for d in data}
+{var tag = ""}
+{if d.isOnline && d.lastPlayedGameName}
+{var tag = nearmelang.lang_friend_nowisplay + d.lastPlayedGameName}
+{else}
+{/if}
+{if d.lastPlayedGameName && !d.isOnline}
+{var tag = nearmelang.lang_friend_lastplay + d.lastPlayedGameName}
+{else}
+{/if}
+<div style="padding: 5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;position:relative;" >
+<dl onclick="goToOtherHome('${d.id}');event.cancelBubble==true;" ><dt><img src="${d.profilePictureUrl}"  onclick="goToOtherHome('${d.id}');event.cancelBubble==true;" width="66" height="66" />
+</dt><dd class="gamename">${d.name}</dd><dd class="gameranking">${nearmelang.lang_global_level}(${d.level})</dd>
+<dd class="gameranking1">${tag}</dd></dl>
+<div class="dl_right"> 
+<label class="gameranking_this_small" onclick="refuseFriend('${d.id}');event.cancelBubble==true;">${nearmelang.lang_friend_refusefriend}</label>
+<label class="gameranking_this_small" onclick="acceptFriend('${d.id}');event.cancelBubble==true;">${nearmelang.lang_friend_acceptfriend}</label>
+</div><div class="clear"></div></div>
+{forelse}
+{/for}
+</script>
+<script type="text/html" id="tpl_searchlist">
+{for d in data}
+{var tag = ""}
+{if d.isOnline && d.lastPlayedGameName}
+{var tag = nearmelang.lang_friend_nowisplay + d.lastPlayedGameName}
+{else}
+{/if}
+{if d.lastPlayedGameName && !d.isOnline}
+{var tag = nearmelang.lang_friend_lastplay + d.lastPlayedGameName}
+{else}
+{/if}
+<div style="padding: 5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;" >
+<dl onclick="goToOtherHome('${d.id}');event.cancelBubble=true;"><dt>
+{if d.sex}
+<img id="${d.imgid}" src="${nearmelang.image.defimg_user_xy}" onclick="goToOtherHome('${d.id}');event.cancelBubble=true;" width="66" height="66" />
+{else}
+<img id="${d.imgid}" src="${nearmelang.image.defimg_user_xx}" onclick="goToOtherHome('${d.id}');event.cancelBubble=true;" width="66" height="66" />
+{/if}
+</dt><dd class="gamename">${d.name}
+</dd><dd class="gameranking">${nearmelang.lang_global_level}(${d.level})</dd>
+
+{if tag !== ""}
+<dd class="gameranking1">${tag}</dd>
+{elseif}
+<dd class="gameranking1">${tag}</dd>
+{/if}
+
+</dl>
+{if d.isFriend}
+<div><div class="isfriend">${nearmelang.lang_friend_alreadyfriend}</div></div><div class="clear"></div></div>
+{else}
+<div id="${d.id}"><label class="gameranking_this" onclick="addFriend('${d.id}');event.cancelBubble=true;">${nearmelang.lang_friend_addfriend}</label></div><div class="clear"></div></div>
+{/if}
+{forelse}
+{/for}
+</script>
+
+
+</head>
+<body id="friend">
+	<div class="container">
+		<div class="tab_3">
+			<img src="images/hdpi/common_tab_titlebar.png" width="100%" height="71" />
+			<ul id="tab_3">
+				<li onclick="showTab(this);" info='{"board":1,"count":0,"addtype":true}' id="tab1"><img width="100%" height="70" class="li_click" src="images/hdpi/common_titlebar_selected.png"/><span class="oppolang">${nearmelang.lang_friend_tab1title}</span>(<span id="friendsNum"></span>)</li>
+				<li onclick="showTab(this);" info='{"board":2,"count":0,"addtype":true}' id="tab2"><img width="100%" height="70" class="li_click" src="images/hdpi/common_titlebar_selected.png"/><span class="oppolang">${nearmelang.lang_friend_tab2title}</span>(<span
+					id="friendRequestNum"></span>)</li>
+				<li onclick="showTab(this);" info='{"board":3,"count":0,"addtype":true}' id="tab3"><img width="100%" height="70" class="li_click" src="images/hdpi/common_titlebar_selected.png"/><span class="oppolang">${nearmelang.lang_friend_tab3title}</span></li>
+			</ul>
+		</div>
+		<div id="part1" >
+		</div>
+		<div id="part2" style="display: none;">
+		</div>
+		
+		<div id="part3" style="display: none">
+			<div class="search">
+				<input id="keyword" class="search_text"type="text" inittext="${nearmelang.lang_friend_inittext}"/>
+				<div class="cleartext" onclick="clearResult();"><img src="images/hdpi/friend_clear_text.png" /></div>
+				<label class="search_btn" onclick="searchFriend();"><span class="oppolang">${nearmelang.lang_friend_search}</span></label>
+				<p class="clear"></p>
+			</div>
+	<!--		<div class="address">
+				<dl>
+					<dt></dt>
+					<dd class="address_head oppolang">${nearmelang.lang_friend_contacts1}</dd>
+					<dd class="address_time oppolang">${nearmelang.lang_friend_contacts2}</dd>
+				</dl>
+				<div class="clear"></div>
+			</div> -->
+			<div class="icon_tag">
+				<h3 class="oppolang">${nearmelang.lang_friend_someontyoumaylike}</h3>
+			</div>
+			<div id="part3content">
+				
+			</div>
+		</div>
+		<div id="footer" style="height: 40px;">
+		</div>
+	</div>
+	
+</body>
+</html>

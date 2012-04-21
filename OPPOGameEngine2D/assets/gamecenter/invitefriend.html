@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" />
+<link rel="stylesheet" href="css/scroll.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/fansclubinvite_action.js"
+	charset="utf-8"></script>
+<script type="text/html" id="tpl_friendslist">
+{for d in data}
+{var tag = ""}
+{if d.isOnline && d.lastPlayedGameName}
+{var tag = nearmelang.lang_friend_nowisplay + d.lastPlayedGameName}
+{else}
+{/if}
+{if d.lastPlayedGameName && !d.isOnline}
+{var tag = nearmelang.lang_friend_lastplay + d.lastPlayedGameName}
+{else}
+{/if}
+<div onclick="checkbox_click('checkbox_${d.id}','selectall')" style="padding: 5px 0; background:url(images/hdpi/line_x.png) repeat-x 0 100%" >
+<dl><dt>
+<img id="${d.imgid}" src="{if d.sex}${nearmelang.image.defimg_user_xy}{else}${nearmelang.image.defimg_user_xx}{/if}" width="66" height="66" />
+</dt>
+<dd class="gamename">${d.name}</dd><dd class="gameranking">${nearmelang.lang_global_level}(${d.level})</dd>
+<dd class="gameranking1">${tag}</dd></dl>  
+<!--正在玩选择类gameranking1显示为黄色，其他用gameranking显示为灰色-->
+
+<div>
+	<label class="fr"><div class="notchecked" id="checkbox_${d.id}" fid="${d.id}"></div></label>
+</div>
+<div class="clear"></div>
+</div>
+{forelse}
+{/for}
+</script>
+</head>
+
+<body id="invitefriend">
+	<div class="game_list_titlebar">
+		<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" />
+		<span class='oppolang'>${nearmelang.lang_fansclub_content1}</span>
+	</div>
+	<div class="search">
+		<input class="search_text" type="text" id="keyword"
+			inittext="${nearmelang.lang_fansclub_invitefriend_inittext}" />
+		<div class="cleartext" onclick="clearSearch()"><img src="images/hdpi/friend_clear_text.png" /></div>
+		<label class="search_btn" onclick="searchFriend();"><span
+			class="oppolang">${nearmelang.lang_friend_search}</span>
+		</label>
+		<p class="clear"></p>
+	</div>
+	<div class="address">
+	<!--  
+		<div class="icon_tag">
+			<h3 class='oppolang'>${nearmelang.lang_fansclub_selectall}</h3>
+			<label><div class="notchecked" id="selectall"
+					onclick="selectAll(this)"></div>
+			</label>
+		</div>
+		-->
+	</div>
+	<div id="part1" info='{"board":1,"count":0,"addtype":true}'>
+		<div id="part1content">
+		</div>
+	</div>
+	<div id="part3" style="display: none;" info='{"board":3,"count":0,"addtype":true}'>
+		<div id="part3content"></div>
+	</div>
+	<div class="container2">
+		<div class="addfriend oppolang" onclick="sendInvite()">${nearmelang.lang_fansclub_sentinvite}</div>
+	</div>
+</body>
+</html>

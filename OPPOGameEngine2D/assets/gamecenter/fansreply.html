@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/fansreply_action.js" charset="utf-8"></script>
+<link rel="stylesheet" href="css/common.css" />
+</head>
+<body id="state">
+	<div class="setinfo_titlebar">
+		<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" />
+		<div class="btn_left btn" onclick="goBack();"><span class="oppolang">${nearmelang.lang_global_cancel}</span></div>
+		<div class="btn_right btn" onclick="callSend();"><span class="oppolang">${nearmelang.lang_global_submit}</span></div>
+		<span class="oppolang">${nearmelang.lang_fansclub_feedback}</span>
+	</div>
+	<div class="state">
+		<img src="images/hdpi/state_textarea_bg.png" width="100%" height="322" />
+		<span id="word_number">0/140</span>
+		<textarea class="replybox" id="content" omaxlength='140' inittext="${nearmelang.lang_fansclub_feedback_inittext}${nearmelang.lang_global_word140}"></textarea>
+	</div>
+</body>
+</html>

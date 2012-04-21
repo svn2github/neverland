@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" />
+<link rel="stylesheet" href="css/scroll.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/whoisplaying_action.js" charset="utf-8"></script>
+<script type="text/html" id="tpl">
+{for d in data}
+<div style="padding:5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;">
+	<dl onclick="goToOtherHome('${d.id}');event.cancelBubble==true;">
+		<dt><img id="${d.imgid}" src="{if d.sex}${nearmelang.image.defimage_user_xy}{else}${nearmelang.image.defimage_user_xx}{/if}"  width="66" height="66" /></dt>
+		<dd class="gamename">${d.name}</dd>
+		<dd class="gameranking">${nearmelang.lang_whoisplaying_playing}&nbsp;<span onclick="goToGame(${d.lastPlayedGameId});event.cancelBubble==true;" >${d.lastPlayedGameName}</span></dd>		
+	</dl>
+	{if d.isMy || d.isFriend}
+	<label class="gameranking_this"><img src="images/hdpi/achievement_light.png" /><br />${d.achievementPoint}</label>
+	{else}
+	<div>
+		<label class="gameranking_this_btn" onclick="addFriend('${d.id}');event.cancelBubble==true;" id="${d.id}">加为好友</label>
+	</div>
+	{/if}
+	<div class="clear"></div>
+</div>
+{/for}
+</script>
+</head>
+
+<body id="whoisplaying">
+	<div class="game_list_titlebar" >
+		<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" />
+		<span id="gameName" class="oppolang">${nearmelang.lang_gamehome_whoisplay}</span>
+	</div>
+	<div class="container" id="tab1" info='{"board":1,"count":0,"addtype":true}'>
+		<div id= "line"></div>
+		<div id= "contentAll">
+		<div class="icon_tag oppolang" id="tag1">  <!--自己-->
+			<h3>${nearmelang.lang_whoisplaying_me}</h3><label>${nearmelang.lang_whoisplaying_achievement}</label>
+		</div>
+		<div id="part1">
+		</div>
+		<div class="part_friend" id="tag2">     <!--好友-->
+			<div class="icon_tag oppolang">
+				<h3>${nearmelang.lang_whoisplaying_friend}</h3>
+			</div>
+		</div>
+		<div id="part2">
+		</div>
+		<div class="part_friend" id="tag3">   <!--其他-->
+			<div class="icon_tag oppolang">
+				<h3>${nearmelang.lang_whoisplaying_other}</h3>
+			</div>
+		</div>
+		<div id="part3">
+		</div>
+		</div>
+	</div>	
+</body>
+</html>

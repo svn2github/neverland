@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/scroll.css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/timelist_action.js"
+	charset="utf-8"></script>
+<script type="text/html" id="tpl">
+{for d in data}
+<div style="padding : 5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;" onclick="goToOtherHome('${d.user.InternalUser.id}');event.cancelBubble==true;">
+	<dl >
+		<dt><img id="${d.user.imgid}" src="{if d.user.InternalUser.sex}${nearmelang.image.defimg_user_xy}{else}${nearmelang.image.defimg_user_xx}{/if}" onclick="goToOtherHome('${d.user.InternalUser.id}');event.cancelBubble==true;" width="66" height="66" /></dt>
+		{if d.isMy==true}
+		<dd class="gamename" isMy>${d.user.InternalUser.name}</dd>
+		<dd class="gameranking">(${nearmelang.lang_timelist_di}${d.rank}${nearmelang.lang_timelist_ming})</dd>
+		{var myHas=true}
+		{elseif d.isFriend==true}
+		<dd class="gamename">${d.rank}.${d.user.InternalUser.name}</dd>
+		{else}
+		<dd class="gamename">${d.rank}.${d.user.InternalUser.name}</dd>
+		{/if}
+	</dl>
+	<label class="gameranking_this">${d.score}</label>
+	<div class="clear"></div>
+</div>
+{/for}
+</script>
+</head>
+<body id="timelist">
+	<div class="container">
+		<div class="game_list_titlebar">
+			<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" /> <span
+				id="name"></span>
+		</div>
+		<div class="tab_3" style="margin-top:-3px;">
+			<img src="images/hdpi/common_tab_titlebar.png" width="100%" height="71" />
+			<ul id="tab_3">
+				<li id="tab1" onClick="showTab(this);" info='{"board":0,"count":0,"addtype":true}'><img width="100%" height="70" class="li_click" src="images/hdpi/common_titlebar_selected.png"/><span class="oppolang">${nearmelang.lang_timelist_tab1title}</span></li>
+				<li id="tab2" onClick="showTab(this);" info='{"board":1,"count":0,"addtype":true}'><img width="100%" height="70" class="li_click" src="images/hdpi/common_titlebar_selected.png"/><span class="oppolang">${nearmelang.lang_timelist_tab2title}</span></li>
+				<li id="tab3" onClick="showTab(this);" info='{"board":3,"count":0,"addtype":true}'><img width="100%" height="70" class="li_click" src="images/hdpi/common_titlebar_selected.png"/><span class="oppolang">${nearmelang.lang_timelist_tab3title}</span></li>
+			</ul>
+		</div>
+		<div id="line"></div>
+		<div id="contentAll">
+			<div class="icon_tag" id= "tag1">
+				<h3 class="oppolang">${nearmelang.lang_timelist_me}</h3>
+				<label class="oppolang">${nearmelang.lang_timelist_leaderboadrscore}</label>
+			</div>
+			<div class="common_part" id="part10">
+			</div>
+			<div class="common_part" id="part11" style="display:none">
+			</div>
+			<div class="common_part" id="part13" style="display:none">
+			</div>
+			<div class="icon_tag" id= "tag2">
+				<h3 class="oppolang">${nearmelang.lang_timelist_friend}</h3>
+			</div>
+			<div class="common_part" id="part20">
+			</div>
+			<div class="common_part" id="part21" style="display:none">
+			</div>
+			<div class="common_part" id="part23" style="display:none">
+			</div>
+			<div class="icon_tag" id = "tag3">
+				<h3 class="oppolang">${nearmelang.lang_timelist_all}</h3>
+			</div>
+			<div class="common_part" id="part30">
+			</div>
+			<div class="common_part" id="part31" style="display:none">
+			</div>
+			<div class="common_part" id="part33" style="display:none">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

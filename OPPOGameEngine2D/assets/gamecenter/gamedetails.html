@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>游戏详情</title>
+<link rel="stylesheet" href="css/gamedetails.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/gamedetails_action.js"></script>
+</head>
+<body bgcolor="#ffffff" onload="callNative();">
+	<div class="container">
+		<div class="header">
+			<dl>
+				<dt><img class="gamelogo" id="gameIcon" src="" width="55" height="55" alt="picture" /></dt>
+
+				<dd class="bold"><span id="gameName"></span></dd>
+				<dd class="font12">作者：<span id="gameAuthor"></span></dd>
+				<dd><img src="" alt="评价等级"></dd>
+			</dl>
+			<div class="headright">
+				<span id="price"></span>元<br />
+				<input type="button" value="购买游戏" />
+			</div>
+		</div>
+		<div class="menu">
+			<ul>
+				<li class="list"><a href="javascript:goToLeaderboard();"><img width="25" height="25" src="images/hdpi/icon_leaderboard.png" />排行</a></li>
+				<li class="list"><a href="javascript:goToAchievement();"><img width="25" height="25" src="images/hdpi/icon_achievement.png" />成就</a></li>
+				<li class="list"><a href="#"><img width="25" height="25" src="images/hdpi/icon_nowplay.png"/>打开</a></li>
+			</ul>
+		</div>
+		<ul class="statistics">
+			<li class="info1"><span id="favouriteNum"></span>位玩家的最爱</li>
+			<li class="info2"><span id="playerNum"></span>位玩家的正在玩</li>
+			<li class="info3"><span id="friendNum"></span>个好友玩过这个游戏</li>
+		</ul>
+		<p class="state"><a href="#"><img src="images/Mazes_Mini_012.png" /></a><a href="#"><img src="images/Mazes_Mini_045.png" /></a><a href="#"><img src="images/Mazes_Mini_012.png" /></a></p>
+		<!--添加图片动态展示的效果-->
+		<div class="gameimg">
+			<img width="300" height="300" src="images/b1.jpg" />
+		</div>
+		<p class="declare" id="gameProfile"></p>
+	</div>
+</body>
+</html>

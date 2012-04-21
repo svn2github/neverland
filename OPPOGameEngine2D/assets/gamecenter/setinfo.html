@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/setinfo_action.js"></script>
+</head>
+<body id="setinfo">
+	<div class="setinfo_titlebar">
+		<img  width="100%" height="100%" src="images/hdpi/common_titlebar.png" />
+		<div class="btn_left btn" onclick="goBack()"><span id="lang_global_cancel"></span></div>
+		<div class="btn_right btn" onclick="onSubmit()"><span id="lang_global_save"></span></div>
+		<span id="lang_setinfo_title"></span>
+	</div>
+	<div class="content">
+		<dl onclick="getPicture();">
+			<dt><img id="icon" src="images/hdpi/userhome_male.png" width="100" height="100" /></dt>
+			<dd><span id= "lang_setinfo_changeavatar"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/hdpi/setinfo_poiter.png" /></dd>
+		</dl>
+		<div class="sex"><span id="lang_setinfo_gender_colon"></span><span><img id="boy" onclick="show(this);" info="" src="images/hdpi/userhome_sex_boy_select.png" width="30" height="30" /><span style="margin-left: 0px;margin-left: 0px;" id="lang_global_male"></span></span> <img id="girl" onclick="show(this);" info="" src="images/hdpi/setinfo_sex_girl.png" width="30" height="30" /><span style="margin-left: 0px;margin-left: 0px;" id="lang_global_female"></span></div>
+		<div class="username"><span id="lang_setinfo_nickname_colon"></span><input type="text" id="name" omaxlength="6" inittext=""/></div>
+	</div>
+</body>
+</html>

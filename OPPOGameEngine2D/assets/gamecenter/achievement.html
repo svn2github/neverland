@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/scroll.css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/achievement_action.js"
+	charset="utf-8"></script>
+<script type="text/html" id="tpl">
+	{for node in ListResource.resourceList.Datas}
+	{if node.Achievement.is_unlocked == true}
+	{var imagePath = nearmelang.image.achievement_light;}
+	{else}
+	{var imagePath = nearmelang.image.achievement_dark;}
+	{/if}
+	{if node.Achievement.is_secret == true && node.Achievement.is_unlocked == false}
+<div style="padding:5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;"><dl><dt><img src="${node.Achievement.icon_url}" width="66" height="66" /></dt><dd class="gamename">
+${nearmelang.lang_achievement_secret}</dd><dd class="gameranking">
+${nearmelang.lang_achievement_secret_achievement}</dd></dl><label class="gameranking_this"><img src="${imagePath}" /><br/>${node.Achievement.gamerscore}
+</label><div class="clear"></div></div>
+	{else}
+<div style="padding:5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;"><dl><dt><img src="${node.Achievement.icon_url}" width="66" height="66" /></dt><dd class="gamename">
+${node.Achievement.title}</dd><dd class="gameranking">
+${node.Achievement.description}</dd></dl><label class="gameranking_this"><img src="${imagePath}" /><br/>${node.Achievement.gamerscore}
+</label><div class="clear"></div></div>
+	{/if}
+	{forelse} 
+	{/for}
+</script>
+</head>
+<body id="achievement" onLoad="callNative();">
+	<div class="container" id="content">
+		<div class="game_list_titlebar">
+
+			<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" /> <span class="oppolang">${nearmelang.lang_global_achievement}</span>(<span
+				id="achievementNum"></span>)
+		</div>
+		<div id="part1">
+		</div>
+	</div>
+</body>
+</html>

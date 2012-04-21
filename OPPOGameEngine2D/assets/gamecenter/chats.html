@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" />
+<link rel="stylesheet" href="css/scroll.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/chats_action.js"></script>
+<script type="text/html" id="tpl_chat">
+{if node.sender.InternalUser.id == myId}
+			<div class="message_status1">
+				<div>
+					<dl><dt><img src="${node.sender.InternalUser.profilePictureUrl}"  onclick="goToOtherHome(${node.sender.InternalUser.id})" width="66" height="66" / ></dt>
+						<dd>
+							<span class="friend_name" onclick="goToOtherHome(${node.sender.InternalUser.id});event.cancelBubble;" >${node.sender.InternalUser.name}</span><p class="comment_time">${time}</p>
+						</dd>
+						<dd class="chat_content">${node.content}</dd>
+					</dl>
+					<div class="clear"></div>
+				</div>
+			</div>
+{elseif}		
+			
+<div class="message_status">
+				<div>
+					<dl><dt><img src="${node.sender.InternalUser.profilePictureUrl}" onclick="goToOtherHome(${node.sender.InternalUser.id})" width="66" height="66" / ></dt>
+						<dd>
+							<span class="friend_name" onclick="goToOtherHome(${node.sender.InternalUser.id});event.cancelBubble;" >${node.sender.InternalUser.name}</span><p class="comment_time">${time}</p>
+						</dd>
+						<dd>${node.content}</dd>
+					</dl>
+					<div class="clear"></div>
+				</div>
+			</div>
+{/if}
+</script>
+</head>
+<body id="talking">
+	<div class="container" style="padding-bottom: 75px;">
+		<div class="game_list_titlebar" >
+			<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" />
+			<span class="oppolang">${nearmelang.lang_chats_yu}</span><span class="oppolang" id="chatterName"></span><span class="oppolang">${nearmelang.lang_chats_deduihua}</span>
+			<div class="refresh oppolang" onclick="refresh()">${nearmelang.lang_global_refresh}</div>
+		</div>
+		
+		<div class="loadmore" style="display: none;" id="loadMore" onclick="loadMore(); ">点我加载更多</div>
+		
+		<div class="message_content5">
+			<div id="content1">
+			</div>
+		</div>
+		<!--留言输入框,私信专用-->
+<!-- 
+		<div class="talking_newletter"> 
+			<div><input class="txt_search" type="text" id="content"/><input id="sendButton" onclick="callSend();" class="btn_search oppolang" type="button" value="${nearmelang.lang_global_send}" /></div>
+		</div>
+		 -->
+	</div>
+</body>
+</html>

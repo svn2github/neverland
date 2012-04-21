@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" />
+<link rel="stylesheet" href="css/scroll.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/fansclubdevgames_action.js" charset="utf-8"></script>
+<script type="text/html" id="tpl_list">
+{for d in data}
+<div class="list_container">
+	<dl >
+		<dt><img src="${d.gameIcon}" width="66" height="66" onclick="goToGame('${d.id}',event)" /></dt>
+		<dd class="gamename">${d.gameName}</dd>
+		<dd class="gameranking">${d.priceContent}</dd>		
+	</dl>
+	{if d.myAchievement>-1}
+	<label class="gameranking_this"><img src="images/hdpi/achievement_light.png" /><br />
+	<span>${d.myAchievement}</span>/<span>${d.achievementCount}</span></label>
+	<div class="clear"></div>
+	{if d.isMyFavourite}<div class="love_game"></div>{/if}
+	{else}
+	<label class="gameranking_this"><img  onclick="goToDownload(${d.id});" src="images/hdpi/devgames_download.png" /> </label>
+	<div class="clear"></div>
+	{/if}
+</div>
+{/for}
+</script>
+</head>
+
+<body id="develop_othergame">
+	<div class="container">
+		<div class="game_list_titlebar" >
+			<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" />
+			<span id="gameName"><span class="oppolang">${url.getParam('gameAuthorName')}${nearmelang.lang_fansclub_othergames}</span></span>
+		</div>
+		<div id="part1" info='{"board":1,"count":0,"addtype":true}'>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:id="@+id/LinearLayout01"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical">
+	<ImageView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:id="@+id/logo"
+		android:background="@drawable/dds" android:layout_gravity="center"
+		android:layout_marginBottom="15dip" android:layout_marginTop="15dip"></ImageView>
+
+	<Button
+	    android:id="@+id/btn_open_gc"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/open_GC" />
+
+	<Button android:id="@+id/begin" android:text="@string/begin"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+	<Button android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@+id/option"
+		android:text="@string/option"></Button>
+	<!--  
+	<Button android:layout_height="wrap_content" android:id="@+id/score"
+		android:text="@string/score" android:layout_width="fill_parent"></Button>
+		-->
+	<Button android:layout_height="wrap_content" android:id="@+id/check_board"
+		android:text="@string/check_board" android:layout_width="fill_parent"></Button>
+	<Button android:layout_height="wrap_content" android:id="@+id/check_ach"
+		android:text="@string/check_ach" android:layout_width="fill_parent"></Button>
+
+	<Button
+	    android:id="@+id/btn_log"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/log_out" />
+
+</LinearLayout>

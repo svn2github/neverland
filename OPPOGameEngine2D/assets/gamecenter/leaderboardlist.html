@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link charset="utf-8" href="css/common.css" rel="stylesheet">
+<link charset="utf-8" href="css/scroll.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.1.4.4.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/iscroll.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/commons.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/leaderboardlist_action.js"
+	charset="utf-8"></script>
+<script type="text/html" id="tpl">
+	{for node in ListResource.resourceList.Datas}
+	<div onclick="callTimelist('${node.InternalLeaderboard.id}');" style="padding:5px 0;background:url(images/hdpi/line_x.png) repeat-x 0 100%;"><dl><dt><img src="images/hdpi/leaderboardlist.png" width="66" height="66" /></dt><dd class="gamename">${node.InternalLeaderboard.name}</dd><dd class="gameranking">${node.InternalLeaderboard.leaderboardProfile}</dd></dl><div class="clear"></div></div>
+	{forelse} 
+	{/for}
+
+</script>
+</head>
+<body id="achievement" onLoad="javascript:callNative();">
+	<div class="container">
+		<div class="game_list_titlebar">
+			<img width="100%" height="100%" src="images/hdpi/common_titlebar.png" /> <span><span class="oppolang">${nearmelang.lang_global_leaderboard}</span>(<span
+				id="leaderboardNum"></span>)</span>
+		</div>
+		<div id="part1">
+		</div>
+	</div>
+</body>
+</html>

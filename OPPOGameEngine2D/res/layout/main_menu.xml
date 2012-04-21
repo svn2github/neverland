@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" android:textSize="20dip" android:layout_gravity="center"/>
+
+	<Button android:layout_height="wrap_content" android:id="@+id/sample" android:text="@string/sample" android:layout_width="fill_parent"></Button><Button android:id="@+id/dadishu" android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:text="@string/Da_Di_Shu"></Button>
+	<Button android:layout_height="wrap_content" android:id="@+id/dafeiji"
+		android:layout_width="fill_parent" android:text="@string/Da_Fei_Ji"></Button>
+
+	<Button
+	    android:id="@+id/btn_traffic"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="show traffic" />
+
+	<Button
+	    android:id="@+id/btn_beginTraffic"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="begin traffic" />
+
+	<Button
+	    android:id="@+id/btn_endTraffic"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="end traffic" />
+
+</LinearLayout>
