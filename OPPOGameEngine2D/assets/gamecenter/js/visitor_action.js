@@ -1,3 +1,0 @@
-function goToLogin() {
-	android.onGoToLogin();
-}
