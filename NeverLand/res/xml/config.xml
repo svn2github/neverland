@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <item name="org.jabe.neverland.activity.PullRefreshActivity">
+        <title>下拉刷新</title>
+    	<description>ListView下拉刷新</description>    
+    </item>
+</config>
