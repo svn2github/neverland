@@ -35,13 +35,14 @@ public class PullRefreshActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_pullrefresh);
+		
 		mRefreshHeader = new TextView(this);
         mRefreshHeader.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         mRefreshHeader.setGravity(Gravity.CENTER);
         mRefreshHeader.setText("Pull to refresh...");
 
         mContainerView = (PullRefreshContainerView) findViewById(R.id.container);
-        mContainerView.setRefreshHeader(mRefreshHeader, 50);
+        mContainerView.setRefreshHeader(mRefreshHeader);
         
         mContainerView.setOnChangeStateListener(new OnChangeStateListener() {
     		@Override
@@ -56,21 +57,15 @@ public class PullRefreshActivity extends Activity {
     				break;
     			case PullRefreshContainerView.STATE_LOADING:
     				mRefreshHeader.setText("Loading...");
-    				
     				new Thread(new Runnable() {
 						@Override
 						public void run() {
 							PullRefreshActivity.this.runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
-									try {
-										Thread.sleep(3000);
-									} catch (InterruptedException e) {
-										e.printStackTrace();
-									}
-									
 									addStrings(1);
 									mContainerView.completeRefresh();
+									mAdapter.notifyDataSetChanged();
 								}
 		    				});
 						}
@@ -82,7 +77,7 @@ public class PullRefreshActivity extends Activity {
         });
         
         mList = mContainerView.getList();
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,mStrings);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrings);
         mList.setAdapter(mAdapter);
         addStrings(3);
 	}

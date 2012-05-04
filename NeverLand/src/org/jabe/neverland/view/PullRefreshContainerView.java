@@ -8,6 +8,8 @@
  */
 package org.jabe.neverland.view;
 
+import org.jabe.neverland.util.Util;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -77,6 +79,7 @@ public class PullRefreshContainerView extends LinearLayout {
 	private View mHeaderView;
 	private float mInterceptY;
 	private int mLastMotionY;
+	private Context mContext;
 
 	private ListView mList;
 
@@ -87,7 +90,7 @@ public class PullRefreshContainerView extends LinearLayout {
 	/**
 	 * 是否需要拖动历史轨迹效果
 	 */
-	private boolean mNeedDragTrace = true;
+	private boolean mNeedDragTrace = false;
 
 	private volatile int mState;
 
@@ -231,10 +234,12 @@ public class PullRefreshContainerView extends LinearLayout {
 	}
 
 	private void init(Context context) {
+		this.mContext = context;
 		mState = STATE_IDLE; // Start out as idle.
 
 		float densityFactor = context.getResources().getDisplayMetrics().density;
 		REFRESH_VIEW_HEIGHT *= densityFactor;
+		Util.showToast(mContext, REFRESH_VIEW_HEIGHT+"");
 
 		// We don't want to see the fading edge on the container.
 		setVerticalFadingEdgeEnabled(false);
@@ -249,7 +254,7 @@ public class PullRefreshContainerView extends LinearLayout {
 
 		TextView headerView = new TextView(context);
 		headerView.setText("Default refresh header.");
-		setRefreshHeader(headerView, mCurRefreshViewHeight);
+		setRefreshHeader(headerView);
 
 		ListView list = new ListView(context);
 		setList(list);
@@ -310,8 +315,7 @@ public class PullRefreshContainerView extends LinearLayout {
 	 * @param headerView
 	 *            the view to use as the whole header.
 	 */
-	public void setRefreshHeader(View header, int height) {
-		REFRESH_VIEW_HEIGHT = height;
+	public void setRefreshHeader(View header) {
 		if (mHeaderView != null) {
 			mHeaderContainer.removeView(mHeaderView);
 		}
