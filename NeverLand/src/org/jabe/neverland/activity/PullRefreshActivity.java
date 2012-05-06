@@ -34,7 +34,7 @@ public class PullRefreshActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.act_pullrefresh);
+		setContentView(R.layout.act_pullrefresh_container);
 		
 		mRefreshHeader = new TextView(this);
         mRefreshHeader.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
