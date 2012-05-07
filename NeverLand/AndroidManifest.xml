@@ -20,6 +20,9 @@
         <activity 
             android:name=".activity.PullRefreshActivity">
         </activity>
+        <activity 
+            android:name=".activity.PullRefreshListviewActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <item name="org.jabe.neverland.activity.PullRefreshActivity">
-        <title>下拉刷新</title>
+        <title>下拉刷新(LinearLayout + ListView)</title>
     	<description>ListView下拉刷新</description>    
+    </item>
+    
+    <item name="org.jabe.neverland.activity.PullRefreshListviewActivity">
+        <title>下拉刷新(ListView + HeadView)</title>
+        <description>ListView下拉刷新</description>   
     </item>
 </config>

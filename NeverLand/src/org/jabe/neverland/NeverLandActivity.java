@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -24,20 +23,9 @@ public class NeverLandActivity extends ListActivity {
 		String title;
 		String description;
 
-		public Bean(String packageName, String title, String description) {
-			super();
-			this.packageName = packageName;
-			this.title = title;
-			this.description = description;
-		}
-
 		public Bean(String packageName) {
 			super();
 			this.packageName = packageName;
-		}
-
-		public Bean() {
-
 		}
 
 		@SuppressWarnings("rawtypes")
@@ -61,14 +49,17 @@ public class NeverLandActivity extends ListActivity {
 			return description;
 		}
 
+		@SuppressWarnings("unused")
 		public String getPackageName() {
 			return packageName;
 		}
 
+		@SuppressWarnings("unused")
 		public void setPackageName(String packageName) {
 			this.packageName = packageName;
 		}
 
+		@SuppressWarnings("unused")
 		public String getTitle() {
 			return title;
 		}

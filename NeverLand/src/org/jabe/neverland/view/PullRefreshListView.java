@@ -1,68 +1,49 @@
 package org.jabe.neverland.view;
 
-
-import java.util.Date;
-
-import org.jabe.neverland.R;
+import org.jabe.neverland.util.Util;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class PullRefreshListView extends ListView implements OnScrollListener {
 
 	public interface OnRefreshListener {
 		public void onRefresh();
+
+		public void onStateChange(PullRefreshListView listView, int nowState,
+				int oldState);
 	}
 
-	private final static int DONE = 3;
-	private final static int PULL_To_REFRESH = 1;
-	private final static int REFRESHING = 2;
+	public final static int DONE = 3;
+	public final static int PULL_To_REFRESH = 1;
+	public final static int REFRESHING = 2;
+	public final static int RELEASE_To_REFRESH = 0;
+
 	private final static int RATIO = 3;
-	private final static int RELEASE_To_REFRESH = 0;
 
-	private RotateAnimation animation;
-
-	private ImageView arrowImageView;
 	private int firstItemIndex;
 	private int headContentHeight;
 	private int headContentWidth;
 
-
 	private LinearLayout headView;
-	private LayoutInflater inflater;
-
-	private boolean isBack;
 
 	private boolean isRecored;
 	private boolean isRefreshable;
 
-	private TextView lastUpdatedTextView;
-	private ProgressBar progressBar;
-
 	private OnRefreshListener refreshListener;
-
-	private RotateAnimation reverseAnimation;
 
 	private int startY;
 
 	private int state;
-
-	private TextView tipsTextview;
 
 	public PullRefreshListView(Context context) {
 		super(context);
@@ -74,107 +55,29 @@ public class PullRefreshListView extends ListView implements OnScrollListener {
 		init(context);
 	}
 
-	private void changeHeaderViewByState() {
-		switch (state) {
-		case RELEASE_To_REFRESH:
-			arrowImageView.setVisibility(View.VISIBLE);
-			progressBar.setVisibility(View.GONE);
-			tipsTextview.setVisibility(View.VISIBLE);
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-
-			arrowImageView.clearAnimation();
-			arrowImageView.startAnimation(animation);
-
-			tipsTextview.setText("释放加载更多");
-			break;
-		case PULL_To_REFRESH:
-			progressBar.setVisibility(View.GONE);
-			tipsTextview.setVisibility(View.VISIBLE);
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-			arrowImageView.clearAnimation();
-			arrowImageView.setVisibility(View.VISIBLE);
-			
-			if (isBack) {
-				isBack = false;
-				arrowImageView.clearAnimation();
-				arrowImageView.startAnimation(reverseAnimation);
-
-				tipsTextview.setText("下拉加载更多");
-			} else {
-				tipsTextview.setText("下拉加载更多");
-			}
-			break;
-
-		case REFRESHING:
-
-			headView.setPadding(0, 0, 0, 0);
-
-			progressBar.setVisibility(View.VISIBLE);
-			arrowImageView.clearAnimation();
-			arrowImageView.setVisibility(View.GONE);
-			tipsTextview.setText("加载中");
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-
-			break;
-		case DONE:
-			headView.setPadding(0, -1 * headContentHeight, 0, 0);
-
-			progressBar.setVisibility(View.GONE);
-			arrowImageView.clearAnimation();
-			arrowImageView.setImageResource(R.drawable.arrow);
-			tipsTextview.setText("DONE");
-			lastUpdatedTextView.setVisibility(View.VISIBLE);
-			break;
+	/**
+	 * dispatch event(no redraw) 
+	 * 
+	 * @param newState
+	 */
+	private void changeHeaderViewByState(int newState) {
+		if (refreshListener != null) {
+			refreshListener.onStateChange(this, newState, state);
+			state = newState;
+		} else {
+			Util.dout("Error refreshListener is null.");
 		}
 	}
 
 	private void init(Context context) {
-		setCacheColorHint(context.getResources().getColor(android.R.color.transparent));
-		inflater = LayoutInflater.from(context);
 
-		headView = (LinearLayout) inflater.inflate(R.layout.act_pullrefresh_headview, null);
-
-		arrowImageView = (ImageView) headView
-				.findViewById(R.id.head_arrowImageView);
-		arrowImageView.setMinimumWidth(70);
-		arrowImageView.setMinimumHeight(50);
-		progressBar = (ProgressBar) headView
-				.findViewById(R.id.head_progressBar);
-		tipsTextview = (TextView) headView.findViewById(R.id.head_tipsTextView);
-		lastUpdatedTextView = (TextView) headView
-				.findViewById(R.id.head_lastUpdatedTextView);
-
-		measureView(headView);
-		headContentHeight = headView.getMeasuredHeight();
-		headContentWidth = headView.getMeasuredWidth();
-
-		headView.setPadding(0, -1 * headContentHeight, 0, 0);
-		headView.invalidate();
-
-		Log.v("size", "width:" + headContentWidth + " height:"
-				+ headContentHeight);
-
-		addHeaderView(headView, null, false);
+		setCacheColorHint(context.getResources().getColor(
+				android.R.color.transparent));
 		setOnScrollListener(this);
-
-		animation = new RotateAnimation(0, -180,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		animation.setInterpolator(new LinearInterpolator());
-		animation.setDuration(250);
-		animation.setFillAfter(true);
-
-		reverseAnimation = new RotateAnimation(-180, 0,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		reverseAnimation.setInterpolator(new LinearInterpolator());
-		reverseAnimation.setDuration(200);
-		reverseAnimation.setFillAfter(true);
-
 		state = DONE;
 		isRefreshable = false;
 	}
-	
+
 	private void measureView(View child) {
 		ViewGroup.LayoutParams p = child.getLayoutParams();
 		if (p == null) {
@@ -200,24 +103,20 @@ public class PullRefreshListView extends ListView implements OnScrollListener {
 		}
 	}
 
-	public void onRefreshComplete() {
-		state = DONE;
-		lastUpdatedTextView.setText("上次更新:" + new Date().toLocaleString());
-		changeHeaderViewByState();
-	}
-
+	@Override
 	public void onScroll(AbsListView arg0, int firstVisiableItem, int arg2,
 			int arg3) {
 		firstItemIndex = firstVisiableItem;
 	}
 
+	@Override
 	public void onScrollStateChanged(AbsListView arg0, int arg1) {
-		
+
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-
+		int tempY = (int) event.getY();
 		if (isRefreshable) {
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
@@ -230,21 +129,17 @@ public class PullRefreshListView extends ListView implements OnScrollListener {
 			case MotionEvent.ACTION_UP:
 				if (firstItemIndex == 0 && state != REFRESHING) {
 					if (state == PULL_To_REFRESH) {
-						state = DONE;
-						changeHeaderViewByState();
+						changeHeaderViewByState(DONE);
 					}
 					if (state == RELEASE_To_REFRESH) {
-						state = REFRESHING;
-						changeHeaderViewByState();
+						changeHeaderViewByState(REFRESHING);
 						onRefresh();
 					}
 				}
 				isRecored = false;
-				isBack = false;
 				break;
 
 			case MotionEvent.ACTION_MOVE:
-				int tempY = (int) event.getY();
 
 				if (!isRecored && firstItemIndex == 0) {
 					isRecored = true;
@@ -253,22 +148,17 @@ public class PullRefreshListView extends ListView implements OnScrollListener {
 
 				if (firstItemIndex == 0 && state != REFRESHING && isRecored) {
 
-
 					if (state == RELEASE_To_REFRESH) {
 
 						setSelection(0);
 
 						if (((tempY - startY) / RATIO < headContentHeight)
 								&& (tempY - startY) > 0) {
-							state = PULL_To_REFRESH;
-							changeHeaderViewByState();
+							changeHeaderViewByState(PULL_To_REFRESH);
 
-						}
-						else if (tempY - startY <= 0) {
-							state = DONE;
-							changeHeaderViewByState();
-						}
-						else {
+						} else if (tempY - startY <= 0) {
+							changeHeaderViewByState(DONE);
+						} else {
 						}
 					}
 					if (state == PULL_To_REFRESH) {
@@ -276,49 +166,86 @@ public class PullRefreshListView extends ListView implements OnScrollListener {
 						setSelection(0);
 
 						if ((tempY - startY) / RATIO >= headContentHeight) {
-							state = RELEASE_To_REFRESH;
-							isBack = true;
-							changeHeaderViewByState();
-						}
-						else if (tempY - startY <= 0) {
-							state = DONE;
-							changeHeaderViewByState();
+							changeHeaderViewByState(RELEASE_To_REFRESH);
+						} else if (tempY - startY <= 0) {
+							changeHeaderViewByState(DONE);
 						}
 					}
 
 					if (state == DONE) {
 						if (tempY - startY > 0) {
-							state = PULL_To_REFRESH;
-							changeHeaderViewByState();
+							changeHeaderViewByState(PULL_To_REFRESH);
 						}
 					}
-
-					if (state == PULL_To_REFRESH) {
-						headView.setPadding(0, -1 * headContentHeight
-								+ (tempY - startY) / RATIO, 0, 0);
-					}
-
-					if (state == RELEASE_To_REFRESH) {
-						headView.setPadding(0, (tempY - startY) / RATIO
-								- headContentHeight, 0, 0);
-					}
-
 				}
 				break;
 			}
+			//redraw headview
+			changHeadViewPadding(tempY);
 		}
 
 		return super.onTouchEvent(event);
 	}
 
-	public void setAdapter(BaseAdapter adapter) {
-		lastUpdatedTextView.setText("上次更新:" + new Date().toLocaleString());
-		super.setAdapter(adapter);
+	private void changHeadViewPadding(int tempY) {
+		switch (state) {
+		case RELEASE_To_REFRESH:
+			headView.setPadding(0,
+					(tempY - startY) / RATIO - headContentHeight, 0, 0);
+			break;
+		case PULL_To_REFRESH:
+			headView.setPadding(0, -1 * headContentHeight + (tempY - startY)
+					/ RATIO, 0, 0);
+			break;
+		case REFRESHING:
+			headView.setPadding(0, 0, 0, 0);
+			break;
+		case DONE:
+			headView.setPadding(0, -1 * headContentHeight, 0, 0);
+			break;
+		}
+		headView.invalidate();
 	}
 
+	/**
+	 * when state change awoke this listener
+	 * 
+	 * @param refreshListener
+	 */
 	public void setonRefreshListener(OnRefreshListener refreshListener) {
 		this.refreshListener = refreshListener;
 		isRefreshable = true;
 	}
 
+	/**
+	 * set header view (force linearlayout) and adapter
+	 * 
+	 * @param view
+	 * @param adapter
+	 */
+	public void setHeadViewAndAdapter(LinearLayout headView, BaseAdapter adapter) {
+		this.headView = headView;
+		measureView(headView);
+		headContentHeight = headView.getMeasuredHeight();
+		headContentWidth = headView.getMeasuredWidth();
+
+		// use padding to hide~~~
+		headView.setPadding(0, -1 * headContentHeight, 0, 0);
+		headView.invalidate();
+
+		Log.v("size", "width:" + headContentWidth + " height:"
+				+ headContentHeight);
+		addHeaderView(headView, null, false);
+		super.setAdapter(adapter);
+	}
+	
+	/**
+	 * interface to change state to DONE
+	 */
+	public void goneHeadView() {
+		//传时间
+		changeHeaderViewByState(DONE);
+		//redraw
+		changHeadViewPadding(0);
+	}
 }
