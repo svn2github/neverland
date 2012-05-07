@@ -243,7 +243,7 @@ public class PullRefreshListView extends ListView implements OnScrollListener {
 	 * interface to change state to DONE
 	 */
 	public void goneHeadView() {
-		//传时间
+		//传事件
 		changeHeaderViewByState(DONE);
 		//redraw
 		changHeadViewPadding(0);
