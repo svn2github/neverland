@@ -24,6 +24,9 @@
         <activity 
             android:name=".activity.PullRefreshListviewActivity">
         </activity>
+        <activity 
+            android:name=".activity.FastScrollerActivity">
+        </activity>
     </application>
 
 </manifest>

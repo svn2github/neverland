@@ -9,4 +9,9 @@
         <title>下拉刷新(ListView + HeadView)</title>
         <description>ListView下拉刷新</description>   
     </item>
+    
+    <item name="org.jabe.neverland.activity.FastScrollerActivity">
+        <title>ListView自定义滚动条</title>
+        <description>ListView自定义滚动条</description>   
+    </item>
 </config>
