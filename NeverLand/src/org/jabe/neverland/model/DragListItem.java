@@ -21,15 +21,28 @@ public abstract class DragListItem implements ListElement<String> {
 	}
 	
 	public class ViewHolder implements IViewHolder {
-		TextView textview;
+		TextView title;
+		TextView content;
+		ViewGroup box1;
+		ViewGroup box2;
 
 		@Override
 		public void saveView(View view, int position, boolean save) {
-			textview = (TextView) view.findViewById(R.id.drag_list_item_text);
+			title = (TextView) view.findViewById(R.id.drag_list_item_text_title);
+			content = (TextView) view.findViewById(R.id.drag_list_item_text_content);
+			box1 = (ViewGroup) view.findViewById(R.id.box1);
+			box2 = (ViewGroup) view.findViewById(R.id.box2);
 			if (save) {
 				view.setTag(this);
 			}
 		}
+	}
+	
+
+	@Override
+	public int getLayoutId() {
+		// TODO Auto-generated method stub
+		return R.layout.drag_list_item_all;
 	}
 	
 	@Override
@@ -41,13 +54,16 @@ public abstract class DragListItem implements ListElement<String> {
 				view = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
 				holder = new ViewHolder();
 				holder.saveView(view, position, true);
+				System.out.println("new at ::::::" + position);
 			} else {
 				holder =  (ViewHolder) view.getTag();
 				if (holder == null) {
 					view = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
 					holder = new ViewHolder();
 					holder.saveView(view, position, true);
+					System.out.println("new at ::::::" + position);
 				} else {
+					System.out.println("cache at ::::::" + position);
 					// nothing
 				}
 			}

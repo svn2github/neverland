@@ -5,6 +5,7 @@ import java.util.List;
 import org.jabe.neverland.R;
 
 import android.content.Context;
+import android.view.View;
 
 public class DragListItem_Normal extends DragListItem {
 
@@ -12,12 +13,6 @@ public class DragListItem_Normal extends DragListItem {
 		super(list, context);
 	}
 
-
-	@Override
-	public int getLayoutId() {
-		// TODO Auto-generated method stub
-		return R.layout.drag_list_item;
-	}
 
 
 	@Override
@@ -34,7 +29,9 @@ public class DragListItem_Normal extends DragListItem {
 
 	@Override
 	public void refreshHolder(ViewHolder holder, int position) {
-		holder.textview.setText(mLists.get(position));
+		holder.box1.setVisibility(View.GONE);
+		holder.box2.setVisibility(View.VISIBLE);
+		holder.content.setText(mLists.get(position));
 	}
 
 

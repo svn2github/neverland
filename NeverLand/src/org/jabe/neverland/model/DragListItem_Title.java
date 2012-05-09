@@ -5,6 +5,7 @@ import java.util.List;
 import org.jabe.neverland.R;
 
 import android.content.Context;
+import android.view.View;
 
 public class DragListItem_Title extends DragListItem {
 
@@ -12,13 +13,6 @@ public class DragListItem_Title extends DragListItem {
 		super(list, context);
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public int getLayoutId() {
-		// TODO Auto-generated method stub
-		return R.layout.drag_list_item_tag;
-	}
-
 
 	@Override
 	public boolean isClickable() {
@@ -33,13 +27,15 @@ public class DragListItem_Title extends DragListItem {
 
 	@Override
 	public void refreshHolder(ViewHolder holder, int position) {
-		holder.textview.setText(mLists.get(position));
+		holder.box1.setVisibility(View.VISIBLE);
+		holder.box2.setVisibility(View.GONE);
+		holder.title.setText(mLists.get(position));
 	}
 
 	@Override
 	public boolean useConvertView() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

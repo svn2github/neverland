@@ -47,6 +47,7 @@ public class DragListView extends ListView {
 			int x = (int) ev.getX();
 			int y = (int) ev.getY();
 
+			//AbsListView有个很好用的method:pointToPosition.
 			dragSrcPosition = dragPosition = pointToPosition(x, y);
 			if (dragPosition == AdapterView.INVALID_POSITION) {
 				return super.onInterceptTouchEvent(ev);
