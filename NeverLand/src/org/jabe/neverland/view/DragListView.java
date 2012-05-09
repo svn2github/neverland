@@ -26,6 +26,7 @@ public class DragListView extends ListView {
 	private int dragSrcPosition;// 手指拖动项原始在列表中的位置
 	private int dragPosition;// 手指拖动的时候，当前拖动项在列表中的位置
 
+	
 	private int dragPoint;// 在当前数据项中的位置
 	private int dragOffset;// 当前视图和屏幕的距离(这里只使用了y方向上)
 
