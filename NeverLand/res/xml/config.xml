@@ -14,4 +14,9 @@
         <title>ListView自定义滚动条</title>
         <description>ListView自定义滚动条</description>   
     </item>
+    
+    <item name="org.jabe.neverland.activity.DragListActivity">
+        <title>ListView分组拖拽</title>
+        <description>ListView分组拖拽</description>   
+    </item>
 </config>

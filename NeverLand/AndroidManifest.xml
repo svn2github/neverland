@@ -27,6 +27,9 @@
         <activity 
             android:name=".activity.FastScrollerActivity">
         </activity>
+        <activity 
+            android:name=".activity.DragListActivity">
+        </activity>
     </application>
 
 </manifest>
