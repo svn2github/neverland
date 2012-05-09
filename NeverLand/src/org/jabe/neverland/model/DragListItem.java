@@ -36,7 +36,7 @@ public abstract class DragListItem implements ListElement<String> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		ViewHolder holder = null;
-		if (userConvertView()) {
+		if (useConvertView()) {
 			if (view == null) {
 				view = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
 				holder = new ViewHolder();

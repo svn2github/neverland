@@ -14,5 +14,5 @@ public interface ListElement<T> {
 	public void remove(int position);
 	public void add(T data);
 	public void insert(T data, int position);
-	public boolean userConvertView();
+	public boolean useConvertView();
 }

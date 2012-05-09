@@ -39,7 +39,7 @@ public class DragListItem_Normal extends DragListItem {
 
 
 	@Override
-	public boolean userConvertView() {
+	public boolean useConvertView() {
 		// TODO Auto-generated method stub
 		return true;
 	}

@@ -37,7 +37,7 @@ public class DragListItem_Title extends DragListItem {
 	}
 
 	@Override
-	public boolean userConvertView() {
+	public boolean useConvertView() {
 		// TODO Auto-generated method stub
 		return false;
 	}
