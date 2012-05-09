@@ -35,24 +35,24 @@ public class DragListActivity extends Activity {
 
 	public void initData() {
 		 List<String> dataList = new ArrayList<String>();
-		 dataList.add("A��");
+		 dataList.add("A组");
 		 navList.add(new DragListItem_Title(dataList, this));
 		 for(int i=0; i<10; i++){
-			 dataList.add("Aѡ��"+i);
+			 dataList.add("A组"+i);
 			 navList.add(new DragListItem_Normal(dataList, this));
 		 }
 		 
-		 dataList.add("B��");
+		 dataList.add("B组");
 		 navList.add(new DragListItem_Title(dataList, this));
 		 for(int i=0; i<10; i++){
-			 dataList.add("Bѡ��"+i);
+			 dataList.add("B组"+i);
 			 navList.add(new DragListItem_Normal(dataList, this));
 		 }
 		 
-		 dataList.add("C��");
+		 dataList.add("C组");
 		 moreList.add(new DragListItem_Title(dataList, this));
 		 for(int i=0; i<10; i++){
-			 dataList.add("Cѡ��"+i);
+			 dataList.add("C组"+i);
 			 moreList.add(new DragListItem_Normal(dataList, this));
 		 }
 		 allList.addAll(navList);
