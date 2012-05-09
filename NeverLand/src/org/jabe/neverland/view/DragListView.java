@@ -4,7 +4,6 @@ import org.jabe.neverland.R;
 import org.jabe.neverland.model.CommonAdapter;
 import org.jabe.neverland.model.ListElement;
 
-import android.app.LauncherActivity.ListItem;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -18,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class DragListView extends ListView {
 

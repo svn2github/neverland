@@ -1,12 +1,10 @@
 package org.jabe.neverland.activity;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.jabe.neverland.R;
 import org.jabe.neverland.model.CommonAdapter;
-import org.jabe.neverland.model.DragListItem;
 import org.jabe.neverland.model.DragListItem_Normal;
 import org.jabe.neverland.model.DragListItem_Title;
 import org.jabe.neverland.model.ListElement;
@@ -37,24 +35,24 @@ public class DragListActivity extends Activity {
 
 	public void initData() {
 		 List<String> dataList = new ArrayList<String>();
-		 dataList.add("A组");
+		 dataList.add("A锟斤拷");
 		 navList.add(new DragListItem_Title(dataList, this));
 		 for(int i=0; i<10; i++){
-			 dataList.add("A选项"+i);
+			 dataList.add("A选锟斤拷"+i);
 			 navList.add(new DragListItem_Normal(dataList, this));
 		 }
 		 
-		 dataList.add("B组");
+		 dataList.add("B锟斤拷");
 		 navList.add(new DragListItem_Title(dataList, this));
 		 for(int i=0; i<10; i++){
-			 dataList.add("B选项"+i);
+			 dataList.add("B选锟斤拷"+i);
 			 navList.add(new DragListItem_Normal(dataList, this));
 		 }
 		 
-		 dataList.add("C组");
+		 dataList.add("C锟斤拷");
 		 moreList.add(new DragListItem_Title(dataList, this));
 		 for(int i=0; i<10; i++){
-			 dataList.add("C选项"+i);
+			 dataList.add("C选锟斤拷"+i);
 			 moreList.add(new DragListItem_Normal(dataList, this));
 		 }
 		 allList.addAll(navList);
