@@ -3,18 +3,24 @@ package org.jabe.neverland.model;
 import org.jabe.neverland.R;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ViewHolderFactory {
 	public static class DragListViewHolder implements IViewHolder {
-		TextView textview;
+		TextView title;
+		TextView content;
+		ViewGroup box1;
+		ViewGroup box2;
 		@Override
 		public void saveView(View view, int position, boolean save) {
-			textview = (TextView) view.findViewById(R.id.drag_list_item_text);
+			title = (TextView) view.findViewById(R.id.drag_list_item_text_title);
+			content = (TextView) view.findViewById(R.id.drag_list_item_text_content);
+			box1 = (ViewGroup) view.findViewById(R.id.box1);
+			box2 = (ViewGroup) view.findViewById(R.id.box2);
 			if (save) {
 				view.setTag(this);
 			}
 		}
-		
 	}
 }

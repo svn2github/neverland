@@ -16,7 +16,7 @@ public class DragListItem_Title extends ListItem<String> {
 
 	@Override
 	public int getLayoutId() {
-		return R.layout.drag_list_item_tag;
+		return R.layout.drag_list_item_all;
 	}
 
 
@@ -33,7 +33,9 @@ public class DragListItem_Title extends ListItem<String> {
 	@Override
 	public void refreshHolder(IViewHolder holder, int position) {
 		ViewHolderFactory.DragListViewHolder h = (DragListViewHolder) holder;
-		h.textview.setText(mLists.get(position));
+		h.box1.setVisibility(View.VISIBLE);
+		h.box2.setVisibility(View.GONE);
+		h.title.setText(mLists.get(position));
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class DragListItem_Normal extends ListItem<String> {
 
 	@Override
 	public int getLayoutId() {
-		return R.layout.drag_list_item;
+		return R.layout.drag_list_item_all;
 	}
 
 	@Override
@@ -34,7 +34,9 @@ public class DragListItem_Normal extends ListItem<String> {
 	@Override
 	public void refreshHolder(IViewHolder holder, int position) {
 		ViewHolderFactory.DragListViewHolder h = (DragListViewHolder) holder;
-		h.textview.setText(mLists.get(position));
+		h.box1.setVisibility(View.GONE);
+		h.box2.setVisibility(View.VISIBLE);
+		h.content.setText(mLists.get(position));
 	}
 
 
