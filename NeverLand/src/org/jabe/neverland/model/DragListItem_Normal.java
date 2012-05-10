@@ -3,17 +3,21 @@ package org.jabe.neverland.model;
 import java.util.List;
 
 import org.jabe.neverland.R;
+import org.jabe.neverland.model.ViewHolderFactory.DragListViewHolder;
 
 import android.content.Context;
 import android.view.View;
 
-public class DragListItem_Normal extends DragListItem {
+public class DragListItem_Normal extends ListItem<String> {
 
 	public DragListItem_Normal(List<String> list, Context context) {
 		super(list, context);
 	}
 
-
+	@Override
+	public int getLayoutId() {
+		return R.layout.drag_list_item;
+	}
 
 	@Override
 	public void onClick() {
@@ -28,16 +32,20 @@ public class DragListItem_Normal extends DragListItem {
 
 
 	@Override
-	public void refreshHolder(ViewHolder holder, int position) {
-		holder.box1.setVisibility(View.GONE);
-		holder.box2.setVisibility(View.VISIBLE);
-		holder.content.setText(mLists.get(position));
+	public void refreshHolder(IViewHolder holder, int position) {
+		ViewHolderFactory.DragListViewHolder h = (DragListViewHolder) holder;
+		h.textview.setText(mLists.get(position));
 	}
 
 
 	@Override
 	public boolean useConvertView() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+
+	@Override
+	public IViewHolder getViewHolder() {
+		return new ViewHolderFactory.DragListViewHolder();
 	}
 }
