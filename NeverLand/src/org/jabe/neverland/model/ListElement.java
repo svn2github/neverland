@@ -15,4 +15,5 @@ public interface ListElement<T> {
 	public void add(T data);
 	public void insert(T data, int position);
 	public boolean useConvertView();
+	public ListElement<T> clone();
 }

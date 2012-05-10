@@ -50,4 +50,10 @@ public class DragListItem_Normal extends ListItem<String> {
 	public IViewHolder getViewHolder() {
 		return new ViewHolderFactory.DragListViewHolder();
 	}
+
+	@Override
+	public ListElement<String> clone() {
+		// TODO Auto-generated method stub
+		return new DragListItem_Normal(mLists, mContext);
+	}
 }

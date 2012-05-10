@@ -2,8 +2,12 @@ package org.jabe.neverland.activity;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.jabe.neverland.R;
+import org.jabe.neverland.model.CommonAdapter;
+import org.jabe.neverland.model.ListElement;
+import org.jabe.neverland.model.SimpleListItem;
 import org.jabe.neverland.view.PullRefreshListView;
 import org.jabe.neverland.view.PullRefreshListView.OnRefreshListener;
 
@@ -25,7 +29,7 @@ public class PullRefreshListviewActivity extends Activity {
 	
 	PullRefreshListView mListview;
 	LinearLayout headView ;
-	BaseAdapter baseAdapter;
+	CommonAdapter<String> baseAdapter;
 	LinkedList<String> data = new LinkedList<String>();
 	
 	private TextView lastUpdatedTextView;
@@ -69,11 +73,13 @@ public class PullRefreshListviewActivity extends Activity {
 		lastUpdatedTextView = (TextView) headView
 				.findViewById(R.id.head_lastUpdatedTextView);
 		lastUpdatedTextView.setText(new Date().toLocaleString());
+		
+		List<ListElement<String>> allList = new LinkedList<ListElement<String>>();
 		for (int i = 10; i > 0; i --) {
 			data.addLast("string" + i);
+			allList.add(new SimpleListItem(data, this));
 		}
-		
-		baseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+		baseAdapter = new CommonAdapter<String>(allList);
 		
 		mListview.setHeadViewAndAdapter(headView, baseAdapter);
 		mListview.setonRefreshListener(new OnRefreshListener() {
@@ -133,8 +139,9 @@ public class PullRefreshListviewActivity extends Activity {
 						} catch (Exception e) {
 							
 						}
-						final int size = data.size() + 1;
-						data.addFirst("string" + size);
+						final int size = baseAdapter.getCount() + 1;
+						ListElement<String> dragItem = (ListElement<String>) baseAdapter.getItem(0);
+						baseAdapter.insert(dragItem.clone(), 0, "string" + size);
 						return null;
 					}
 					

@@ -23,4 +23,15 @@ public class ViewHolderFactory {
 			}
 		}
 	}
+	public static class SimpleListItem implements IViewHolder {
+		TextView text1;
+		@Override
+		public void saveView(View view, int position, boolean save) {
+			text1 = (TextView) view.findViewById(android.R.id.text1);
+			if (save) {
+				view.setTag(this);
+			}
+		}
+		
+	}
 }

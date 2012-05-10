@@ -48,6 +48,7 @@ public abstract class ListItem<T> implements ListElement<T> {
 	
 	public abstract void refreshHolder(IViewHolder holder, int position);
 	public abstract IViewHolder getViewHolder();
+	public abstract ListElement<T> clone();
 
 	@Override
 	public List<T> getDataList() {

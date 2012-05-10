@@ -37,6 +37,7 @@ public class DragListActivity extends Activity {
 
 	public void initData() {
 		 List<String> dataList = new ArrayList<String>();
+		 
 		 dataList.add("A组");
 		 navList.add(new DragListItem_Title(dataList, this));
 		 for(int i=0; i<10; i++){

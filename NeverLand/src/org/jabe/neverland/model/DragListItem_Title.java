@@ -48,4 +48,9 @@ public class DragListItem_Title extends ListItem<String> {
 		return new ViewHolderFactory.DragListViewHolder();
 	}
 
+	@Override
+	public ListElement<String> clone() {
+		return new DragListItem_Title(mLists, mContext);
+	}
+
 }
