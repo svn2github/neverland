@@ -42,6 +42,16 @@ public class SimpleListItem extends ListItem<String> {
 
 	@Override
 	public ListElement<String> clone() {
-		return new SimpleListItem(mLists, mContext);
+		if (canReuse()) {
+			return this;
+		} else {
+			return new SimpleListItem(mLists, mContext);
+		}
+	}
+
+	@Override
+	public boolean canReuse() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

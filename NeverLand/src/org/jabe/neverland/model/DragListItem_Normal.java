@@ -53,7 +53,15 @@ public class DragListItem_Normal extends ListItem<String> {
 
 	@Override
 	public ListElement<String> clone() {
-		// TODO Auto-generated method stub
-		return new DragListItem_Normal(mLists, mContext);
+		if (canReuse()) {
+			return this;	
+		} else {
+			return new DragListItem_Normal(mLists, mContext);
+		}
+	}
+
+	@Override
+	public boolean canReuse() {
+		return true;
 	}
 }

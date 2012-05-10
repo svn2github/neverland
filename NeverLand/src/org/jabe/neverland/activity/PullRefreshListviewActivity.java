@@ -18,8 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -75,7 +73,7 @@ public class PullRefreshListviewActivity extends Activity {
 		lastUpdatedTextView.setText(new Date().toLocaleString());
 		
 		List<ListElement<String>> allList = new LinkedList<ListElement<String>>();
-		for (int i = 10; i > 0; i --) {
+		for (int i = 100; i > 0; i --) {
 			data.addLast("string" + i);
 			allList.add(new SimpleListItem(data, this));
 		}
@@ -140,8 +138,7 @@ public class PullRefreshListviewActivity extends Activity {
 							
 						}
 						final int size = baseAdapter.getCount() + 1;
-						ListElement<String> dragItem = (ListElement<String>) baseAdapter.getItem(0);
-						baseAdapter.insert(dragItem.clone(), 0, "string" + size);
+						baseAdapter.addFirst("string" + size);
 						return null;
 					}
 					

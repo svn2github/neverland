@@ -1,12 +1,10 @@
 package org.jabe.neverland.activity;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.jabe.neverland.R;
 import org.jabe.neverland.model.CommonAdapter;
-import org.jabe.neverland.model.ListItem;
 import org.jabe.neverland.model.DragListItem_Normal;
 import org.jabe.neverland.model.DragListItem_Title;
 import org.jabe.neverland.model.ListElement;

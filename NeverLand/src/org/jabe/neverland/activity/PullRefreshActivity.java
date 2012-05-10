@@ -1,8 +1,13 @@
 package org.jabe.neverland.activity;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.jabe.neverland.R;
+import org.jabe.neverland.model.CommonAdapter;
+import org.jabe.neverland.model.ListElement;
+import org.jabe.neverland.model.SimpleListItem;
 import org.jabe.neverland.view.PullRefreshContainerView;
 import org.jabe.neverland.view.PullRefreshContainerView.OnChangeStateListener;
 
@@ -22,14 +27,18 @@ public class PullRefreshActivity extends Activity {
 	
 	private TextView mRefreshHeader;
 	private ArrayList<String> mStrings = new ArrayList<String>();
+	LinkedList<String> data = new LinkedList<String>();
+	CommonAdapter<String> baseAdapter;
 	
-    private void addStrings(int count) {
+    @SuppressWarnings("unused")
+	private void addStrings(int count) {
     	int curSize = mStrings.size();
     	for(int i = 0; i < count; ++i) {
     		mStrings.add("String " + (curSize + i));
     	}
     	mAdapter.notifyDataSetChanged();
     }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -63,9 +72,10 @@ public class PullRefreshActivity extends Activity {
 							PullRefreshActivity.this.runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
-									addStrings(1);
+									final int size = baseAdapter.getCount() + 1;
+									baseAdapter.addFirst("string" + size);
 									mContainerView.completeRefresh();
-									mAdapter.notifyDataSetChanged();
+									baseAdapter.notifyDataSetChanged();
 								}
 		    				});
 						}
@@ -75,10 +85,19 @@ public class PullRefreshActivity extends Activity {
     			}
     		}
         });
-        
+        //normal
         mList = mContainerView.getList();
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrings);
-        mList.setAdapter(mAdapter);
-        addStrings(3);
+        
+        
+        //common adapter
+        List<ListElement<String>> allList = new LinkedList<ListElement<String>>();
+		for (int i = 100; i > 0; i --) {
+			data.addLast("string" + i);
+			allList.add(new SimpleListItem(data, this));
+		}
+		baseAdapter = new CommonAdapter<String>(allList);
+		
+        mList.setAdapter(baseAdapter);
 	}
 }

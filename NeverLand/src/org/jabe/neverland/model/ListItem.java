@@ -17,26 +17,34 @@ public abstract class ListItem<T> implements ListElement<T> {
 		this.mLists = list;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.jabe.neverland.model.ListElement#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		IViewHolder holder = null;
 		if (useConvertView()) {
+			//缓存ViewHolder
 			if (view == null) {
+				//耗时操作inflate
 				view = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
 				holder = getViewHolder();
 				holder.saveView(view, position, true);
 			} else {
+				//获取缓存holder
 				holder =  (IViewHolder) view.getTag();
 				if (holder == null) {
+					//耗时操作inflate
 					view = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
 					holder = getViewHolder();
 					holder.saveView(view, position, true);
 				} else {
-					// nothing
+					// 缓存获取成功
 				}
 			}
 		} else {
+			//inflate,但是不缓存
 			view = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
 			holder = getViewHolder();
 			holder.saveView(view, position, false);
@@ -47,6 +55,10 @@ public abstract class ListItem<T> implements ListElement<T> {
 	}
 	
 	public abstract void refreshHolder(IViewHolder holder, int position);
+	/**
+	 * 由子类负责IViewHolder的实例
+	 * @return
+	 */
 	public abstract IViewHolder getViewHolder();
 	public abstract ListElement<T> clone();
 

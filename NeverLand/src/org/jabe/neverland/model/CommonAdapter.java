@@ -2,6 +2,8 @@ package org.jabe.neverland.model;
 
 import java.util.List;
 
+import org.jabe.neverland.util.Util;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -44,5 +46,42 @@ public class CommonAdapter<T> extends BaseAdapter{
 	public void insert(ListElement<T> dragItem, int position, T data) {
 		dragItem.insert(data, position);
 		mList.add(position, dragItem);
+	}
+	
+	/**
+	 * 确保ListItem可以浅复制
+	 * @param t
+	 */
+	public void addFirst(T t){
+		ListElement<T> dragItem = (ListElement<T>) this.getItem(0);
+		if (dragItem.canReuse()) {
+			this.insert(dragItem.clone(), 0, t);
+		} else {
+			Util.dout("this item can not reuse so can add");
+		}
+		
+	}
+	
+	public void addFirst(T t, ListElement<T> dragItem){
+		this.insert(dragItem.clone(), 0, t);
+	}
+	
+	/**
+	 * 确保ListItem可以浅复制
+	 * @param t
+	 */
+	public void addEnd(T t){
+		ListElement<T> dragItem = (ListElement<T>) this.getItem(0);
+		if (dragItem.canReuse()) {
+			dragItem.add(t);
+			mList.add(dragItem.clone());
+		} else {
+			Util.dout("this item can not reuse so can add");
+		}
+	}
+	
+	public void addEnd(T t, ListElement<T> dragItem){
+		dragItem.add(t);
+		mList.add(dragItem.clone());
 	}
 }

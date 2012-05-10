@@ -50,7 +50,17 @@ public class DragListItem_Title extends ListItem<String> {
 
 	@Override
 	public ListElement<String> clone() {
-		return new DragListItem_Title(mLists, mContext);
+		if (canReuse()) {
+			return this;
+		} else {
+			return new DragListItem_Title(mLists, mContext);
+		}
+	}
+
+	@Override
+	public boolean canReuse() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }
