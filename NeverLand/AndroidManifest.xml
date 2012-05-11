@@ -30,6 +30,9 @@
         <activity 
             android:name=".activity.DragListActivity">
         </activity>
+        <activity 
+            android:name=".activity.DragActivity">
+        </activity>
     </application>
 
 </manifest>
