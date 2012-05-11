@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ViewHolderFactory {
-	public static class DragListViewHolder implements IViewHolder {
+	public static class DragListViewHolder extends ViewHolder implements IViewHolder {
 		TextView title;
 		TextView content;
 		ViewGroup box1;
@@ -18,19 +18,15 @@ public class ViewHolderFactory {
 			content = (TextView) view.findViewById(R.id.drag_list_item_text_content);
 			box1 = (ViewGroup) view.findViewById(R.id.box1);
 			box2 = (ViewGroup) view.findViewById(R.id.box2);
-			if (save) {
-				view.setTag(this);
-			}
+			save(view, this, save);
 		}
 	}
-	public static class SimpleListItem implements IViewHolder {
+	public static class SimpleListItem extends ViewHolder implements IViewHolder {
 		TextView text1;
 		@Override
 		public void saveView(View view, int position, boolean save) {
 			text1 = (TextView) view.findViewById(android.R.id.text1);
-			if (save) {
-				view.setTag(this);
-			}
+			save(view, this, save);
 		}
 		
 	}
