@@ -21,7 +21,7 @@
     </item>
     
     <item name="org.jabe.neverland.activity.DragActivity">
-        <title>ListView分组拖拽</title>
-        <description>ListView分组拖拽</description>   
+        <title>ViewGroup左右滑动</title>
+        <description>ViewGroup左右滑动</description>   
     </item>
 </config>
