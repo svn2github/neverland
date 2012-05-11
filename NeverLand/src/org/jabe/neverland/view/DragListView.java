@@ -195,7 +195,7 @@ public class DragListView extends ListView {
 			dragPosition = getAdapter().getCount() - 1;
 		}
 
-		// 数据交换
+		// 删除插入,数据交换
 		if (dragPosition > 0 && dragPosition < getAdapter().getCount()) {
 			CommonAdapter<String> adapter = (CommonAdapter<String>) getAdapter();
 			ListElement<String> dragItem = (ListElement<String>) adapter.getItem(dragSrcPosition);

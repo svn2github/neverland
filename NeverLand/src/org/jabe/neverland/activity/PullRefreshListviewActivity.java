@@ -73,9 +73,10 @@ public class PullRefreshListviewActivity extends Activity {
 		lastUpdatedTextView.setText(new Date().toLocaleString());
 		
 		List<ListElement<String>> allList = new LinkedList<ListElement<String>>();
+		SimpleListItem tempListItem = new SimpleListItem(data, this);
 		for (int i = 100; i > 0; i --) {
 			data.addLast("string" + i);
-			allList.add(new SimpleListItem(data, this));
+			allList.add(tempListItem.clone());
 		}
 		baseAdapter = new CommonAdapter<String>(allList);
 		

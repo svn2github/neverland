@@ -59,7 +59,6 @@ public class DragListItem_Title extends ListItem<String> {
 
 	@Override
 	public boolean canReuse() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

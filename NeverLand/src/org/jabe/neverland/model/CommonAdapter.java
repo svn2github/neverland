@@ -49,7 +49,7 @@ public class CommonAdapter<T> extends BaseAdapter{
 	}
 	
 	/**
-	 * 确保ListItem可以浅复制
+	 * clone第一个,加入开头
 	 * @param t
 	 */
 	public void addFirst(T t){
@@ -62,12 +62,17 @@ public class CommonAdapter<T> extends BaseAdapter{
 		
 	}
 	
+	/**
+	 * 开头插入Item
+	 * @param t
+	 * @param dragItem
+	 */
 	public void addFirst(T t, ListElement<T> dragItem){
 		this.insert(dragItem.clone(), 0, t);
 	}
 	
 	/**
-	 * 确保ListItem可以浅复制
+	 * clone第一个,加入末尾
 	 * @param t
 	 */
 	public void addEnd(T t){
@@ -79,7 +84,7 @@ public class CommonAdapter<T> extends BaseAdapter{
 			Util.dout("this item can not reuse so can add");
 		}
 	}
-	
+
 	public void addEnd(T t, ListElement<T> dragItem){
 		dragItem.add(t);
 		mList.add(dragItem.clone());
