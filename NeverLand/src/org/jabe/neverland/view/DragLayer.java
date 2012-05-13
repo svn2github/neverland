@@ -69,7 +69,7 @@ public class DragLayer extends ViewGroup {
         final int width = MeasureSpec.getSize(widthMeasureSpec);
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         if (widthMode != MeasureSpec.EXACTLY) {
-            throw new IllegalStateException("ScrollLayout only canmCurScreen run at EXACTLY mode!");
+            throw new IllegalStateException("ScrollLayout only can run at EXACTLY mode!");
         }
 
         /**

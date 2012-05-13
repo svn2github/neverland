@@ -3,6 +3,7 @@ package org.jabe.neverland.model;
 import java.util.List;
 
 import android.content.Context;
+import android.view.View;
 
 public class SimpleListItem extends ListItem<String> {
 	public SimpleListItem(List<String> list, Context context) {
@@ -20,7 +21,7 @@ public class SimpleListItem extends ListItem<String> {
 	}
 
 	@Override
-	public void onClick() {
+	public void click(View v) {
 		
 	}
 
@@ -51,7 +52,6 @@ public class SimpleListItem extends ListItem<String> {
 
 	@Override
 	public boolean canReuse() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 }

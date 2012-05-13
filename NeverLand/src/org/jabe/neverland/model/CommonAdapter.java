@@ -81,7 +81,7 @@ public class CommonAdapter<T> extends BaseAdapter{
 			dragItem.add(t);
 			mList.add(dragItem.clone());
 		} else {
-			Util.dout("this item can not reuse so can add");
+			Util.dout("this item can not reuse so can not add");
 		}
 	}
 

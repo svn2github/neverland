@@ -26,7 +26,7 @@ public class DragListItem_Title extends ListItem<String> {
 	}
 
 	@Override
-	public void onClick() {
+	public void click(View v) {
 		
 	}
 

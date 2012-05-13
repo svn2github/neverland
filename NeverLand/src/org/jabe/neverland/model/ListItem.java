@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class ListItem<T> implements ListElement<T> {
+public abstract class ListItem<T> implements ListElement<T>, View.OnClickListener {
 	
 	protected List<T> mLists;
 	protected Context mContext;
@@ -53,14 +53,8 @@ public abstract class ListItem<T> implements ListElement<T> {
 		refreshHolder(holder, position);
 		return view;
 	}
-	
-	public abstract void refreshHolder(IViewHolder holder, int position);
-	/**
-	 * 由子类负责IViewHolder的实例
-	 * @return
-	 */
-	public abstract IViewHolder getViewHolder();
 	public abstract ListElement<T> clone();
+	public abstract void click(View v);
 
 	@Override
 	public List<T> getDataList() {
@@ -81,5 +75,10 @@ public abstract class ListItem<T> implements ListElement<T> {
 	@Override
 	public void insert(T data, int position) {
 		mLists.add(position, data);
+	}
+	
+	@Override
+	public void onClick(View v) {
+		this.click(v);
 	}
 }

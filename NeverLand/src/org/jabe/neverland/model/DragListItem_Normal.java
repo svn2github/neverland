@@ -20,7 +20,7 @@ public class DragListItem_Normal extends ListItem<String> {
 	}
 
 	@Override
-	public void onClick() {
+	public void click(View v) {
 		
 	}
 
