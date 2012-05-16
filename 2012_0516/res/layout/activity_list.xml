@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:id="@+id/root" android:layout_width="fill_parent" 
-    android:layout_height="fill_parent">
-    <include android:id="@+id/R1" layout="@layout/inc_loading_full" />
-	<ListView android:id="@+id/listView01" style="@style/Normal_List"
-	    	  android:fastScrollEnabled="true"/>
-</RelativeLayout>
