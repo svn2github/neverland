@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:background="@drawable/title_background"
+    android:checkedButton="@+id/btn_1"
+    android:freezesText="false"
+    android:orientation="horizontal" >
+
+    <LinearLayout android:id="@+id/send_layout"
+        android:layout_width="@dimen/title_left_button_width"
+        android:layout_height="fill_parent" android:visibility="gone"
+        android:gravity="left|center_vertical">
+        <ImageView android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_send_feed"/>
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+        <RadioButton
+            android:id="@+id/btn_1"
+            style="@style/TabRadioButton.TopButtonChecked"
+            android:background="@drawable/tab_button_selector"
+            android:freezesText="false"
+            android:text="@string/menu_bar_Recommend" 
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+        <RadioButton
+            android:id="@+id/btn_2"
+            style="@style/TabRadioButton.TopButton"
+            android:background="@drawable/tab_button_selector"
+            android:freezesText="false"
+            android:text="@string/menu_bar_category" 
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" 
+        android:visibility="gone">
+        <RadioButton
+            android:id="@+id/btn_3"
+            style="@style/TabRadioButton.TopButton"
+            android:background="@drawable/tab_button_selector"
+            android:freezesText="false"
+            android:text="@string/menu_bar_category" 
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    
+    <LinearLayout android:id="@+id/refresh_layout"
+        android:layout_width="@dimen/title_left_button_width"
+        android:layout_height="fill_parent" android:visibility="gone"
+        android:layout_marginRight="@dimen/title_update_margin_right"
+        android:gravity="right|center_vertical">
+        <ImageView android:id="@+id/refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_update_background"/>
+    </LinearLayout>
+</RadioGroup>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" 
+	android:minHeight="@dimen/list_item_height"
+	android:paddingTop="@dimen/list_item_margin_top"
+	android:paddingRight="@dimen/list_item_margin_left"
+	android:paddingLeft="@dimen/list_item_margin_right">
+	<RelativeLayout android:id="@+id/h1"
+	    android:layout_width="@dimen/head_icon_bg_width" 
+	    android:layout_height="@dimen/head_icon_bg_height"
+		android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
+		android:background="@drawable/item_icon_bg">
+		<ImageView style="@style/Normal_ImageView" android:id="@+id/imageView1"
+		    android:layout_width="@dimen/head_icon_to_save_width"
+		    android:layout_height="@dimen/head_icon_to_save_width"
+			android:src="@drawable/item_default_avatar_male"
+			android:layout_centerInParent="true" android:background="@null" />
+	</RelativeLayout>
+	<RelativeLayout android:id="@+id/relative02"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/h1"
+		android:layout_marginLeft="@dimen/list_item_text_margin_image"
+		android:layout_centerVertical="true">
+		<TextView android:id="@+id/textView1" style="@style/ListItemText.nameText"
+		    android:textColor="@color/game_page_green"
+			android:layout_marginLeft="@dimen/list_item_text_margin_image"
+			android:layout_toRightOf="@id/h1" android:layout_centerVertical="true" />
+		<CheckBox android:id="@+id/checkBox1"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_below="@+id/h1" 
+			android:layout_alignParentRight="true"
+			android:button="@drawable/custom_checkbox"
+			android:visibility="gone"></CheckBox>
+	</RelativeLayout>
+
+</RelativeLayout>

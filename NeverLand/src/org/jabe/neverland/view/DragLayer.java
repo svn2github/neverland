@@ -32,6 +32,7 @@ public class DragLayer extends ViewGroup {
     private int mTouchState = TOUCH_STATE_REST;
     private int mTouchSlop;
     private float mLastMotionX;
+    private boolean mElasticity = false;
 
     private PageListener pageListener;
 
@@ -158,7 +159,11 @@ public class DragLayer extends ViewGroup {
             case MotionEvent.ACTION_MOVE :
                 int deltaX = (int) (mLastMotionX - x);
                 mLastMotionX = x;
-
+                if ((deltaX > 0 && mCurScreen == (getChildCount() - 1)) || (deltaX < 0 && mCurScreen == 0)) {
+                	if (!mElasticity) {
+                		return super.onTouchEvent(event);
+                	}
+                }
                 scrollBy(deltaX, 0);
                 break;
             case MotionEvent.ACTION_CANCEL :

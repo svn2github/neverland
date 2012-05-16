@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:background="@drawable/title_background"
+    android:checkedButton="@+id/btn_1"
+    android:freezesText="false"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+        <RadioButton
+            android:id="@+id/btn_1"
+            style="@style/TabRadioButton.TopButtonChecked"
+            android:background="@drawable/tab_button_selector"
+            android:freezesText="false"
+            android:text="@string/menu_bar_friends" 
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+        <RadioButton
+            android:id="@+id/btn_2"
+            style="@style/TabRadioButton.TopButton"
+            android:layout_weight="1"
+            android:background="@drawable/tab_button_selector"
+            android:freezesText="false"
+            android:text="@string/menu_bar_friends_request" 
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+        <RadioButton
+            android:id="@+id/btn_3"
+            style="@style/TabRadioButton.TopButton"
+            android:layout_weight="1"
+            android:background="@drawable/tab_button_selector"
+            android:freezesText="false"
+            android:text="@string/menu_bar_add_friend" 
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+</RadioGroup>

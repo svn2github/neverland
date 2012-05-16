@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<ViewFlipper android:id="@+id/show_upgrade"
+		android:layout_width="fill_parent" android:layout_height="fill_parent" />
+	<LinearLayout android:orientation="horizontal" android:visibility="gone"
+		android:layout_marginBottom="5dp" android:layout_gravity="bottom|center_horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<ImageView android:id="@+id/iv_star1"
+			android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+			android:layout_marginTop="6dp" android:layout_marginBottom="6dp"
+			android:visibility="gone" android:layout_width="10dp"
+			android:scaleType="fitXY" android:layout_height="10dp"
+			android:src="@drawable/point_default" />
+		<ImageView android:id="@+id/iv_star2"
+			android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+			android:layout_marginTop="6dp" android:layout_marginBottom="6dp"
+			android:visibility="gone" android:layout_width="10dp"
+			android:scaleType="fitXY" android:layout_height="10dp"
+			android:src="@drawable/point_default" />
+		<ImageView android:id="@+id/iv_star3"
+			android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+			android:layout_marginTop="6dp" android:layout_marginBottom="6dp"
+			android:visibility="gone" android:layout_width="10dp"
+			android:scaleType="fitXY" android:layout_height="10dp"
+			android:src="@drawable/point_default" />
+		<ImageView android:id="@+id/iv_star4"
+			android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+			android:layout_marginTop="6dp" android:layout_marginBottom="6dp"
+			android:visibility="gone" android:layout_width="10dp"
+			android:scaleType="fitXY" android:layout_height="10dp"
+			android:src="@drawable/point_default" />
+		<ImageView android:id="@+id/iv_star5"
+			android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+			android:layout_marginTop="6dp" android:layout_marginBottom="6dp"
+			android:visibility="gone" android:layout_width="10dp"
+			android:scaleType="fitXY" android:layout_height="10dp"
+			android:src="@drawable/point_default" />
+	</LinearLayout>
+</FrameLayout>

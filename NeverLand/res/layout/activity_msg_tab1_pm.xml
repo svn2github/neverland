@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical" >
+    
+    <include
+        android:id="@+id/R1"
+        layout="@layout/inc_loading_full" 
+        android:visibility="gone"/>
+
+    <ListView
+        android:id="@+id/ListView01"
+        style="@style/Normal_List"
+        android:paddingBottom="@dimen/list_padding_bottom" 
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/no_data_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/key_no_data_tip"
+        android:src="@drawable/no_letter_tip" />
+
+    <LinearLayout
+        android:id="@+id/bottom_btn_group"
+        android:layout_width="@dimen/msg_user_bottom_width"
+        android:layout_height="@dimen/msg_user_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bottom_button_group_bg"
+        android:gravity="center"
+        android:paddingLeft="@dimen/person_page_bottom_button_group_padding_left"
+        android:paddingRight="@dimen/person_page_bottom_button_group_padding_right"
+        android:paddingTop="@dimen/person_page_bottom_button_group_padding_top" >
+
+        <TextView
+            android:id="@+id/newMsgText"
+            style="@style/PersonPage.BottomButton"
+            android:drawableLeft="@drawable/bottom_msg_btn_selector"
+            android:drawablePadding="@dimen/leaveMsg_drawable_padding"
+            android:text="@string/new_msg_button_title" />
+    </LinearLayout>
+
+</RelativeLayout>

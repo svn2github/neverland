@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/list_padding_bottom"
+        android:layout_marginTop="@dimen/content_margin_title_bar"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/R1"
+            layout="@layout/inc_loading_full" />
+
+        <ListView
+            android:id="@+id/ListView01"
+            style="@style/Normal_List"
+            android:paddingBottom="@dimen/list_padding_bottom"
+            android:transcriptMode="alwaysScroll" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/rg_header"
+        android:layout_alignParentTop="true"
+        layout="@layout/inc_topbar" />
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/re01"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/msg_input_layout_height"
+            android:background="@drawable/bottom_bar_msg_bg"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/msg_input_layout_padding_top" >
+
+            <ImageView
+                android:id="@+id/motion"
+                style="@style/Normal_ImageView"
+                android:src="@drawable/write_add_motion" />
+
+            <EditText
+                android:id="@+id/newMsgText"
+                style="@style/BottomBar.editText"
+                android:layout_width="@dimen/msg_input_view_width"
+                android:layout_height="@dimen/msg_input_view_height"
+                android:background="@drawable/new_msg_input_bg"
+                android:gravity="center_vertical"
+                android:hint="@string/new_msg_text_hint"
+                android:paddingLeft="@dimen/msg_input_view_padding_left"
+                android:textSize="@dimen/bottom_bar_edit_text_size" />
+
+            <Button
+                android:id="@+id/btn_reply"
+                style="@style/BottomBar.twoWordButton"
+                android:layout_width="@dimen/bottom_bar_btn_width"
+                android:layout_height="@dimen/bottom_bar_btn_height"
+                android:layout_marginLeft="@dimen/bottom_bar_btn_margin_txt"
+                android:text="@string/pub_send" />
+        </LinearLayout>
+
+        <com.nearme.commoncode.view.DefaultFaceView
+            android:id="@+id/motion_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="@drawable/menu_default"
+            android:paddingTop="@dimen/face_image_layout_padding_top"
+            android:visibility="gone" >
+
+            <com.nearme.commoncode.view.DragLayer
+                android:id="@+id/scroll_view"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/game_page_player_group_height" >
+            </com.nearme.commoncode.view.DragLayer>
+
+            <com.nearme.commoncode.view.PageDisplayView
+                android:id="@+id/page_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/recommend_indicator_margin_top" >
+            </com.nearme.commoncode.view.PageDisplayView>
+        </com.nearme.commoncode.view.DefaultFaceView>
+    </LinearLayout>
+
+</RelativeLayout>

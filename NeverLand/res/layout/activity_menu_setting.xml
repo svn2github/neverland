@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_item_margin_left"
+        android:layout_marginRight="@dimen/list_item_margin_right"
+        android:background="@drawable/choose_region_bg"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/menu_setting_layout_margin_top">
+
+        <RelativeLayout
+            android:id="@+id/setting_profile"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/list_item_height"
+            android:paddingLeft="@dimen/menu_setting_txt_margin_left" 
+            android:background="@drawable/item_up_bg_selector">
+
+            <TextView
+                android:id="@+id/textView1"
+                style="@style/SettingText"
+                android:layout_centerVertical="true"
+                android:text="@string/setting_menu_title_person" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/item_divider_dotted" />
+
+        <RelativeLayout
+            android:id="@+id/setting_clean"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/list_item_height"
+            android:paddingLeft="@dimen/menu_setting_txt_margin_left"
+            android:background="@drawable/item_middle_bg_selector">
+
+            <TextView
+                style="@style/SettingText"
+                android:layout_centerVertical="true"
+                android:text="@string/setting_menu_title_clean" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/item_divider_dotted" />
+        
+        <RelativeLayout
+            android:id="@+id/setting_notify"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/list_item_height"
+            android:paddingLeft="@dimen/menu_setting_txt_margin_left" 
+            android:background="@drawable/item_middle_bg_selector">
+
+            <TextView
+                style="@style/SettingText"
+                android:layout_centerVertical="true"
+                android:text="@string/setting_menu_title_notify_enabled" />
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:checked="true"
+                android:clickable="false"
+                android:layout_below="@+id/h1"
+                android:button="@drawable/custom_checkbox" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/item_divider_dotted" />
+        
+        <RelativeLayout
+            android:id="@+id/setting_check_update"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/list_item_height"
+            android:background="@drawable/item_down_bg_selector">
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/SettingText"
+                android:layout_centerVertical="true"
+            	android:paddingLeft="@dimen/menu_setting_txt_margin_left" 
+                android:text="@string/setting_menu_title_update" />
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/inc_topbar" />
+</RelativeLayout>

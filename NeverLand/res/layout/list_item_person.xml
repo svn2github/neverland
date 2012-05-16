@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_item_height"
+    android:paddingTop="@dimen/game_page_player_margin_top" >
+
+    <RelativeLayout
+        android:id="@+id/person01"
+        android:layout_width="@dimen/game_page_player_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/game_page_player_group_margin_left"
+        android:visibility="gone">
+
+        <LinearLayout android:id="@+id/headLayout01"
+            android:layout_width="@dimen/head_icon_bg_width"
+            android:layout_height="@dimen/head_icon_bg_height"
+            android:background="@drawable/item_icon_bg" 
+            android:layout_centerHorizontal="true"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/head01"
+                android:layout_width="@dimen/head_icon_width"
+                android:layout_height="@dimen/head_icon_height"
+                android:src="@drawable/item_default_avatar_male" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/friend01"
+            style="@style/GamePage.PersonName"
+            android:layout_below="@id/headLayout01"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/person02"
+        android:layout_width="@dimen/game_page_player_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/game_page_player_padding"
+        android:visibility="gone" >
+
+        <LinearLayout android:id="@+id/headLayout02"
+            android:layout_width="@dimen/head_icon_bg_width"
+            android:layout_height="@dimen/head_icon_bg_height"
+            android:background="@drawable/item_icon_bg" 
+            android:layout_centerHorizontal="true"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/head02"
+                android:layout_width="@dimen/head_icon_width"
+                android:layout_height="@dimen/head_icon_height"
+                android:src="@drawable/item_default_avatar_male" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/friend02"
+            style="@style/GamePage.PersonName"
+            android:layout_below="@id/headLayout02"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/person03"
+        android:layout_width="@dimen/game_page_player_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/game_page_player_padding"
+        android:visibility="gone" >
+
+        <LinearLayout android:id="@+id/headLayout03"
+            android:layout_width="@dimen/head_icon_bg_width"
+            android:layout_height="@dimen/head_icon_bg_height"
+            android:background="@drawable/item_icon_bg" 
+            android:layout_centerHorizontal="true"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/head03"
+                android:layout_width="@dimen/head_icon_width"
+                android:layout_height="@dimen/head_icon_height"
+                android:src="@drawable/item_default_avatar_male" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/friend03"
+            style="@style/GamePage.PersonName"
+            android:layout_below="@id/headLayout03"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/person04"
+        android:layout_width="@dimen/game_page_player_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/game_page_player_padding"
+        android:visibility="gone" >
+
+        <LinearLayout  android:id="@+id/headLayout04"
+            android:layout_width="@dimen/head_icon_bg_width"
+            android:layout_height="@dimen/head_icon_bg_height"
+            android:background="@drawable/item_icon_bg" 
+            android:layout_centerHorizontal="true"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/head04"
+                android:layout_width="@dimen/head_icon_width"
+                android:layout_height="@dimen/head_icon_height"
+                android:src="@drawable/item_default_avatar_male" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/friend04"
+            style="@style/GamePage.PersonName"
+            android:layout_below="@id/headLayout04"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/person05"
+        android:layout_width="@dimen/game_page_player_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/game_page_player_padding"
+        android:visibility="gone" >
+
+        <LinearLayout android:id="@+id/headLayout05"
+            android:layout_width="@dimen/head_icon_bg_width"
+            android:layout_height="@dimen/head_icon_bg_height"
+            android:background="@drawable/item_icon_bg" 
+            android:layout_centerHorizontal="true"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/head05"
+                android:layout_width="@dimen/head_icon_width"
+                android:layout_height="@dimen/head_icon_height"
+                android:src="@drawable/item_default_avatar_male" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/friend05"
+            style="@style/GamePage.PersonName"
+            android:layout_below="@id/headLayout05"/>
+    </RelativeLayout>
+</LinearLayout>

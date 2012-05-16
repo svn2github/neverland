@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/inc_topbar" />
+
+    <RelativeLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/write_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/write_title_height"
+                    android:layout_marginTop="@dimen/write_title_margin_top"
+                	android:layout_marginLeft="@dimen/list_item_margin_left"
+                	android:layout_marginRight="@dimen/list_item_margin_right"
+                    android:background="@drawable/write_title_background"
+                    android:paddingLeft="@dimen/write_edit_padding_left"
+                    android:paddingRight="@dimen/write_edit_padding_right"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/edit_line"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/write_edit_height"
+                    android:layout_marginTop="@dimen/write_content_margin_title"
+                	android:layout_marginLeft="@dimen/list_item_margin_left"
+                	android:layout_marginRight="@dimen/list_item_margin_right"
+                    android:background="@drawable/write_edit_bg" >
+
+                    <RelativeLayout
+                        android:id="@+id/write_bottom_btn_group"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="@dimen/write_del_words_marginRight" >
+
+                        <ImageView
+                            android:id="@+id/motion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/write_add_motion" />
+
+                        <Button
+                            android:id="@+id/del_words"
+                            style="@style/Write.Button_Text"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="@dimen/write_del_words_padding_left"
+                            android:paddingRight="@dimen/write_del_words_padding_right" />
+                    </RelativeLayout>
+
+                    <com.nearme.commoncode.view.InterceptEditText
+                        android:id="@+id/content"
+                        style="@style/Write.Edit"
+                        android:layout_above="@id/write_bottom_btn_group"
+                        android:layout_marginBottom="@dimen/write_del_words_marginBottom"
+                        android:layout_marginLeft="@dimen/write_edit_padding_left"
+                        android:layout_marginRight="@dimen/write_edit_padding_right"
+                        android:layout_marginTop="@dimen/write_edit_padding_top"
+                        android:background="@null" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <com.nearme.commoncode.view.DefaultFaceView
+            android:id="@+id/motion_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <com.nearme.commoncode.view.DragLayer
+                android:id="@+id/scroll_view"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/game_page_player_group_height" >
+            </com.nearme.commoncode.view.DragLayer>
+
+            <com.nearme.commoncode.view.PageDisplayView
+                android:id="@+id/page_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/recommend_indicator_margin_top" >
+            </com.nearme.commoncode.view.PageDisplayView>
+        </com.nearme.commoncode.view.DefaultFaceView>
+    </RelativeLayout>>
+
+</LinearLayout>

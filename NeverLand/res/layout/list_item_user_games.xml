@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/inc_content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_height"
+        android:paddingLeft="@dimen/list_item_margin_left" >
+
+        <RelativeLayout
+            android:id="@+id/h1"
+            android:layout_width="@dimen/head_icon_bg_width"
+            android:layout_height="@dimen/head_icon_bg_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/list_item_margin_top"
+            android:background="@drawable/item_icon_bg" >
+
+            <ImageView
+                android:id="@+id/gameIconImage"
+                style="@style/Normal_ImageView"
+                android:layout_width="@dimen/head_icon_to_save_width"
+                android:layout_height="@dimen/head_icon_to_save_height"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:src="@drawable/item_default_avatar_male" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line1"
+            android:layout_width="@dimen/user_game_table_width"
+            android:layout_height="@dimen/user_game_table_height"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/list_item_margin_top" >
+
+            <ImageView
+                android:id="@+id/myFavourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/user_game_table_margin_right"
+                android:src="@drawable/item_favourite_bg" />
+
+            <TextView
+                android:id="@+id/myScore"
+                style="@style/UserGameTextView.ScoreText"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/user_game_score_margin_fav"
+                android:layout_toLeftOf="@id/myFavourite"
+                android:drawableTop="@drawable/item_achieve_light"
+                android:gravity="center_horizontal"
+                android:scaleType="fitXY" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/user_game_table_height"
+            android:layout_toLeftOf="@id/line1"
+            android:scaleType="fitXY"
+            android:src="@drawable/list_item_vertical_divider" />
+
+        <RelativeLayout
+            android:id="@+id/line2"
+            android:layout_width="@dimen/user_game_table_width"
+            android:layout_height="@dimen/user_game_table_height"
+            android:layout_marginTop="@dimen/list_item_margin_top"
+            android:layout_toLeftOf="@id/imageView3" >
+
+            <ImageView
+                android:id="@+id/userFavourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/user_game_table_margin_right"
+                android:src="@drawable/item_favourite_bg" />
+
+            <TextView
+                android:id="@+id/userScore"
+                style="@style/UserGameTextView.ScoreText"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/user_game_score_margin_fav"
+                android:layout_toLeftOf="@id/userFavourite"
+                android:drawableTop="@drawable/item_achieve_light"
+                android:gravity="center_horizontal"
+                android:scaleType="fitXY" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/user_game_table_height"
+            android:layout_toLeftOf="@id/line2"
+            android:scaleType="fitXY"
+            android:src="@drawable/list_item_vertical_divider" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/list_item_text_margin_image"
+            android:layout_marginTop="@dimen/list_item_margin_top"
+            android:layout_toLeftOf="@id/imageView4"
+            android:layout_toRightOf="@id/h1"
+            android:gravity="center_vertical"
+            android:textColor="@color/list_item_name_black"
+            android:textSize="@dimen/list_title_text_size" />
+    </RelativeLayout>

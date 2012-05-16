@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="translucent">
+        <item name="android:windowBackground">@color/translucent_background</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <!-- 通用 -->
+    <style name="AlertDialog">
+        <item name="android:fullDark">@drawable/pop_window_bg</item>
+        <item name="android:topDark">@drawable/dialog_top</item>
+        <item name="android:centerDark">@drawable/dialog_center</item>
+        <item name="android:bottomDark">@drawable/dialog_bottom</item>
+        <item name="android:fullBright">@drawable/pop_window_bg</item>
+        <item name="android:topBright">@drawable/dialog_top</item>
+        <item name="android:centerBright">@drawable/dialog_center</item>
+        <item name="android:bottomBright">@drawable/dialog_bottom</item>
+        <item name="android:bottomMedium">@drawable/dialog_bottom</item>
+        <item name="android:centerMedium">@drawable/dialog_center</item>
+    </style>
+
+    <style name="Theme.Translucent.NoTitleBar" parent="android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowBackground">@drawable/translucent_bg</item>
+        <item name="android:alertDialogStyle">@style/AlertDialog</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Normal_ImageView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:src">@drawable/ic_launcher_nearme_gamecenter</item>
+    </style>
+
+    <style name="Normal_TextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:text">TextView</item>
+        <item name="android:textSize">@dimen/list_title_text_size</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Normal_List">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:divider">@drawable/list_item_divider</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@drawable/list_item_selector</item>
+    </style>
+
+    <style name="Normal_LinearLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Normal_LinearLayout.Vertical">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="NormalRadio_Button">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">-1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ff000000</item>
+    </style>
+
+    <!-- 列表项标题 -->
+    <style name="ListItemTitle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/game_page_player_title_txt_size</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+        <item name="android:paddingLeft">@dimen/notice_title_padding_left</item>
+        <item name="android:background">@drawable/item_title_up_bg</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- 列表项按钮 -->
+    <style name="ListItemButton">
+        <item name="android:focusable">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:textSize">@dimen/list_right_button_txt_size</item>
+        <item name="android:background">@drawable/button_background_selector</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="ListItemButton.twoWordButton">
+        <item name="android:layout_width">@dimen/button_two_word_width</item>
+        <item name="android:layout_height">@dimen/button_two_word_height</item>
+    </style>
+
+    <style name="ListItemButton.fourWordButton">
+        <item name="android:layout_width">@dimen/button_four_word_width</item>
+        <item name="android:layout_height">@dimen/button_two_word_height</item>
+    </style>
+
+    <style name="ListItemButton.sixWordButton">
+        <item name="android:layout_width">@dimen/button_six_word_width</item>
+        <item name="android:layout_height">@dimen/button_two_word_height</item>
+    </style>
+
+    <style name="ListItemButton.LeaveMsgButton">
+        <item name="android:textSize">@dimen/bottom_bar_text_size</item>
+    </style>
+
+    <!-- 列表项Icon -->
+    <style name="ListItemIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ListItemIcon.Reply">
+        <item name="android:src">@drawable/icon_reply_selector</item>
+    </style>
+
+    <!-- 列表项TextView -->
+    <style name="ListItemText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="ListItemText.nameText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/list_title_text_size</item>
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="ListItemText.profileText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/list_profile_text_size</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+    </style>
+
+    <style name="ListItemText.profileText2">
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:drawablePadding">@dimen/name_icon_padding_right</item>
+        <item name="android:textSize">@dimen/list_profile_text_size</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+    </style>
+
+    <style name="ListItemText.MsgContent">
+        <item name="android:textSize">@dimen/list_item_notice_content_txt_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:lineSpacingExtra">@dimen/msg_content_line_space</item>
+    </style>
+
+    <style name="ListItemText.RightText">
+        <item name="android:focusable">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/list_item_right_text_size</item>
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ListItemText.ButtonText">
+        <item name="android:layout_width">@dimen/list_item_right_text_width</item>
+        <item name="android:layout_height">@dimen/list_item_right_text_height</item>
+        <item name="android:focusable">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/list_item_right_text_size</item>
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:background">@drawable/button_background_selector</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ListItemText.PersonName">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/list_item_notice_person_name_txt_size</item>
+        <item name="android:textColor">@color/game_page_green</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="ListItemText.Content">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:textSize">@dimen/list_item_notice_content_txt_size</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+        <item name="android:lineSpacingExtra">@dimen/list_item_notice_content_line_space</item>
+    </style>
+
+    <style name="ListItemText.NoticeOriginal">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingTop">@dimen/list_item_notice_original_padding_top</item>
+        <item name="android:textSize">@dimen/list_item_original_txt_size</item>
+        <item name="android:textColor">@color/game_page_person_gray</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="ListItemText.NoticeAttach">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:paddingLeft">@dimen/list_item_notice_original_padding_left</item>
+        <item name="android:layout_marginRight">@dimen/list_item_notice_original_margin_right</item>
+        <item name="android:paddingTop">@dimen/list_item_notice_original_padding_top</item>
+        <item name="android:textSize">@dimen/list_item_original_txt_size</item>
+        <item name="android:textColor">@color/game_page_person_gray</item>
+        <item name="android:lineSpacingExtra">@dimen/list_item_notice_original_line_space</item>
+    </style>
+
+    <style name="ListItemText.NoticeTime">
+        <item name="android:gravity">right</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/list_item_time_txt_size</item>
+        <item name="android:textColor">@color/game_page_person_gray</item>
+    </style>
+
+    <style name="ListItemText.FeedOriginal">
+        <item name="android:layout_width">@dimen/list_item_feed_original_width</item>
+        <item name="android:layout_height">@dimen/list_item_feed_original_height</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/list_item_original_txt_size</item>
+        <item name="android:textColor">@color/game_page_person_gray</item>
+        <item name="android:drawableLeft">@drawable/icon_feed_game</item>
+        <item name="android:drawablePadding">@dimen/list_item_feed_original_drawable_padding</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="ListItemText.FeedComment">
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textSize">@dimen/list_item_time_txt_size</item>
+        <item name="android:textColor">@color/game_page_person_gray</item>
+    </style>
+
+    <style name="ListItemText.FeedTime">
+        <item name="android:textSize">@dimen/list_item_time_txt_size</item>
+        <item name="android:textColor">@color/game_page_person_gray</item>
+    </style>
+
+    <!-- 提示语 -->
+    <style name="LoadingBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="LoadingBar.LoadingTxt">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/inc_loading_progress_text_size</item>
+        <item name="android:text">@string/pub_loading</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+    </style>
+
+    <style name="LoadingBar.LoadingResult">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/inc_loading_result_text_size</item>
+        <item name="android:text">@string/pub_data_error</item>
+        <item name="android:paddingLeft">@dimen/inc_loading_txt_padding_left</item>
+        <item name="android:paddingRight">@dimen/inc_loading_txt_padding_right</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+    </style>
+
+    <!-- 底部栏 -->
+    <style name="BottomBar">
+        <item name="android:focusable">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/tabbar_button_color_black</item>
+        <item name="android:textSize">@dimen/bottom_bar_btn_text_size</item>
+        <item name="android:background">@drawable/button_background_selector</item>
+    </style>
+
+    <style name="BottomBar.twoWordButton">
+        <item name="android:layout_width">@dimen/button_two_word_width</item>
+        <item name="android:layout_height">@dimen/button_two_word_height</item>
+    </style>
+
+    <style name="BottomBar.fourWordButton">
+        <item name="android:layout_width">@dimen/button_four_word_width</item>
+        <item name="android:layout_height">@dimen/button_two_word_height</item>
+    </style>
+
+    <style name="BottomBar.editText">
+        <item name="android:focusable">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@null</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#58ffffff</item>
+    </style>
+
+    <!-- 文本框Style -->
+    <style name="SettingText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/tabbar_button_color_black</item>
+        <item name="android:textSize">@dimen/setting_profile_setting_text_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="SettingText.TitleText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/item_title_middle_bg</item>
+        <item name="android:paddingLeft">@dimen/menu_setting_txt_margin_left</item>
+        <item name="android:layout_marginLeft">1px</item>
+        <item name="android:layout_marginRight">1px</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+        <item name="android:textSize">@dimen/setting_profile_setting_title_text_size</item>
+    </style>
+
+    <style name="IconText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/name_icon_padding_right</item>
+        <item name="android:textColor">@color/topbar_title_color_black</item>
+        <item name="android:textSize">@dimen/info_item_txt_size</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="IconText.NameTitle">
+        <item name="android:textColor">@color/setting_item_title_txt_color</item>
+        <item name="android:textSize">@dimen/inc_head_name_txt_size</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="IconText.ListTitle">
+        <item name="android:textColor">@color/topbar_title_color_black</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="IconText.ListItemTitle">
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:textSize">@dimen/list_title_text_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="IconText.ListItemProfile">
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+        <item name="android:textSize">@dimen/list_profile_text_size</item>
+    </style>
+
+    <!-- RadioGroup -->
+    <style name="TabRadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:freezesText">false</item>
+    </style>
+
+    <style name="TabRadioButton.RooterChecked">
+        <item name="android:textSize">@dimen/tab_bar_text_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center|bottom</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#e5000000</item>
+    </style>
+
+    <style name="TabRadioButton.Rooter">
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/tab_bar_text_size</item>
+        <item name="android:textColor">@color/tab_main_gray</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">-1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bc000000</item>
+    </style>
+
+    <style name="TabRadioButton.TopButton">
+        <item name="android:layout_width">@dimen/title_button_group_width</item>
+        <item name="android:layout_height">@dimen/title_button_group_height</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TabRadioButton.TopButtonChecked">
+        <item name="android:layout_width">@dimen/title_button_group_width</item>
+        <item name="android:layout_height">@dimen/title_button_group_height</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TabRadioButton.DoubleTopButtonChecked">
+        <item name="android:layout_width">@dimen/title_double_button_group_width</item>
+        <item name="android:layout_height">@dimen/title_button_group_height</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/tab_button_selector</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bf000000</item>
+    </style>
+
+    <style name="TabRadioButton.LbTopButtonChecked">
+        <item name="android:layout_width">@dimen/title_button_group_width</item>
+        <item name="android:layout_height">@dimen/lb_tab_button_height</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="TabRadioButton.LbTopButton">
+        <item name="android:layout_width">@dimen/title_button_group_width</item>
+        <item name="android:layout_height">@dimen/lb_tab_button_height</item>
+        <item name="android:background">@drawable/tab_button_selector</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="TabRadioButton.TabButtonChecked">
+        <item name="android:layout_width">@dimen/title_double_button_group_width</item>
+        <item name="android:layout_height">@dimen/tab_bar_button_height</item>
+        <item name="android:background">@drawable/tab_bar_button_selector</item>
+        <item name="android:textColor">@color/tabbar_button_color_black</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#c6ffffff</item>
+    </style>
+
+    <style name="TabRadioButton.TabButton">
+        <item name="android:layout_width">@dimen/title_double_button_group_width</item>
+        <item name="android:layout_height">@dimen/tab_bar_button_height</item>
+        <item name="android:background">@drawable/tab_bar_button_selector</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#c6ffffff</item>
+    </style>
+
+    <style name="TabRadioButton.DoubleTopButton">
+        <item name="android:layout_width">@dimen/title_double_button_group_width</item>
+        <item name="android:layout_height">@dimen/title_button_group_height</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/tab_button_selector</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+    </style>
+
+    <!-- 顶部栏按钮 -->
+    <style name="TopImageButton">
+        <item name="android:background">@drawable/title_btn_background</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <style name="TopImageButton.Right">
+        <item name="android:background">@drawable/title_save_btn_background</item>
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="TopImageButton.Left">
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:textSize">@dimen/title_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <!-- 登陆页面 -->
+    <style name="Login">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Login.Button">
+        <item name="android:layout_width">@dimen/login_txt_btn_width</item>
+        <item name="android:layout_height">@dimen/login_txt_btn_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/big_button_bg_selector</item>
+        <item name="android:textSize">@dimen/login_txt_btn_txt_size</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#99000000</item>
+    </style>
+
+    <!-- 编辑页面 -->
+    <style name="Write">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Write.Edit">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:textSize">@dimen/write_edit_txt_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">top</item>
+        <item name="android:freezesText">true</item>
+    </style>
+
+    <style name="Write.Button_Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/write_delwords_txt_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/write_edit_available_input_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawableRight">@drawable/icon_delwords</item>
+        <item name="android:drawablePadding">@dimen/write_delwords_drawable_padding</item>
+    </style>
+
+    <!-- 首页推荐 -->
+    <style name="Prompt_Game">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!--
+	<style name="Prompt_Game.Game_Title_TextView">
+		<item name="android:textSize">@dimen/recommend_item_title_text_size</item>
+		<item name="android:textColor">@color/white</item>
+		<item name="android:shadowDx">0.0</item>
+		<item name="android:shadowDy">1.0</item>
+		<item name="android:shadowRadius">1</item>
+		<item name="android:shadowColor">#cc000000</item>
+	</style>
+	
+	<style name="Prompt_Game.Game_Profile_TextView">
+		<item name="android:textSize">@dimen/recommend_item_profile_text_size</item>
+		<item name="android:textColor">@color/white</item>
+		<item name="android:shadowDx">0.0</item>
+		<item name="android:shadowDy">1.0</item>
+		<item name="android:shadowRadius">1</item>
+		<item name="android:shadowColor">#cc000000</item>
+	</style>
+
+	
+	<style name="Prompt_Game.SpecialImageView">
+		<item name="android:layout_height">@dimen/recommend_small_icon_width</item>
+		<item name="android:layout_width">@dimen/recommend_small_icon_height</item>
+		<item name="android:src">@drawable/ic_launcher_nearme_gamecenter</item>
+	</style>
+    -->
+
+    <style name="Prompt_Game.Game_Download_Btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/recommend_btn_download_txt_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#93000000</item>
+    </style>
+
+    <!-- 我的主页 -->
+    <style name="PersonPage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="PersonPage.CombineButtonTitle">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/game_page_green</item>
+        <item name="android:textSize">@dimen/person_page_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="PersonPage.MsgTip">
+        <item name="android:background">@drawable/person_msg_dark</item>
+        <item name="android:gravity">center_horizontal|top</item>
+        <item name="android:paddingTop">@dimen/msg_icon_txt_padding_top</item>
+        <item name="android:textColor">@color/person_msg_orange</item>
+        <item name="android:textSize">@dimen/msg_text_size</item>
+    </style>
+
+    <style name="PersonPage.Visitor">
+        <item name="android:background">@color/white</item>
+        <item name="android:padding">1px</item>
+        <item name="android:layout_marginRight">10px</item>
+        <item name="android:src">@drawable/item_default_avatar_male</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="PersonPage.gameScore">
+        <item name="android:textSize">@dimen/list_profile_text_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+    </style>
+
+    <style name="PersonPage.FeedContent">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/list_profile_text_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+    </style>
+
+    <style name="PersonPage.BottomButton">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:background">@drawable/bottom_button_bg_selector</item>
+        <item name="android:textSize">@dimen/tab_bar_button_txt_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Menu菜单 -->
+    <style name="IconMenu" parent="@android:style/Theme">
+        <item name="android:itemBackground">@drawable/menu_background_selector</item>
+        <item name="android:verticalDivider">@drawable/menu_divider_vertical</item>
+        <item name="android:itemTextAppearance">@style/MenuText</item>
+        <item name="android:itemIconDisabledAlpha">?android:attr/disabledAlpha</item>
+        <item name="android:horizontalDivider">@drawable/menu_divider_horizontal</item>
+        <item name="android:windowAnimationStyle">@style/OptionsPanel</item>
+        <item name="android:moreIcon">@android:drawable/ic_menu_more</item>
+        <item name="android:background">@drawable/menu_default</item>
+    </style>
+
+    <style name="ExpandedMenu" parent="@android:style/Theme"></style>
+
+    <style name="MenuText" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="OptionsPanel">
+        <item name="android:windowEnterAnimation">@anim/options_panel_enter</item>
+        <item name="android:windowExitAnimation">@anim/options_panel_exit</item>
+    </style>
+
+    <!-- 底部按钮框 -->
+    <style name="LeaveMsgText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/list_padding_bottom</item>
+        <item name="android:textSize">@dimen/user_leave_msg_txt_size</item>
+        <item name="android:text">@string/new_msg_button_title</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bottom_button_group_bg</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bf000000</item>
+        <item name="android:paddingTop">@dimen/title_button_padding_top</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <!-- 弹出框 -->
+    <style name="DialogTitle">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/alert_dialog_title_height</item>
+        <item name="android:text">@string/pub_exit_confim_title</item>
+        <item name="android:textSize">@dimen/alert_dialog_title_txt_size</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#99000000</item>
+    </style>
+
+    <style name="DialogContent">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/alert_dialog_content_height</item>
+        <item name="android:text">@string/pub_exit_confim_title</item>
+        <item name="android:textSize">@dimen/alert_dialog_msg_txt_size</item>
+        <item name="android:textColor">@color/topbar_title_color_black</item>
+    </style>
+
+    <style name="DialogButton">
+        <item name="android:background">@drawable/pop_btn_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">@dimen/alert_dialog_button_width</item>
+        <item name="android:layout_height">@dimen/alert_dialog_button_height</item>
+        <item name="android:textSize">@dimen/alert_dialog_button_txt_size</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/list_item_name_black</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <!-- 搜索 -->
+    <style name="SearchAutoCompleteText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- 游戏主页 -->
+    <style name="GamePage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="GamePage.PlayerNumText">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/game_page_img_margin_txt</item>
+        <item name="android:textColor">@color/setting_item_title_txt_color</item>
+        <item name="android:textSize">@dimen/game_page_player_num_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#e0ffffff</item>
+    </style>
+
+    <style name="GamePage.TabBtn">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">@dimen/game_page_tab_button_margin_top</item>
+        <item name="android:paddingBottom">@dimen/game_page_tab_button_margin_bottom</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/game_page_green</item>
+        <item name="android:textSize">@dimen/game_page_tab_button_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ffffffff</item>
+    </style>
+
+    <style name="GamePage.BigBtn">
+        <item name="android:layout_width">@dimen/game_page_item_width</item>
+        <item name="android:layout_height">@dimen/list_item_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/game_page_button_padding_left</item>
+        <item name="android:drawablePadding">@dimen/game_page_button_drawable_padding</item>
+        <item name="android:background">@drawable/game_page_big_button_bg_selector</item>
+        <item name="android:textSize">@dimen/login_txt_btn_txt_size</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+    </style>
+
+    <style name="GamePage.PersonName">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/game_page_player_name_margin_head</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@color/game_page_person_gray</item>
+        <item name="android:textSize">@dimen/game_page_player_num_txt_size</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- 好友的游戏列表 -->
+    <style name="UserGameTextView">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="UserGameTextView.ScoreText">
+        <item name="android:textSize">@dimen/list_profile_text_size</item>
+        <item name="android:textColor">@color/list_item_profile_gray</item>
+        <item name="android:drawablePadding">@dimen/achieve_drawable_padding</item>
+    </style>
+
+    <!-- 关于 -->
+    <style name="About">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="About.Title">
+        <item name="android:text">@string/app_title</item>
+        <item name="android:textSize">@dimen/about_logo_title_text_size</item>
+        <item name="android:textColor">@color/setting_item_title_txt_color</item>
+        <item name="android:drawableTop">@drawable/ic_launcher_nearme_gamecenter</item>
+        <item name="android:drawablePadding">@dimen/about_logo_drawable_padding</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#8fffffff</item>
+    </style>
+
+    <style name="About.Content">
+        <item name="android:textSize">@dimen/about_content_text_size</item>
+        <item name="android:textColor">@color/setting_item_title_txt_color</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#8fffffff</item>
+    </style>
+
+    <!-- 进度条 -->
+    <style name="iosProgressBar">
+        <item name="android:indeterminateDrawable">@anim/spinner_black20</item>
+        <item name="android:minWidth">@dimen/inc_loading_bar_size</item>
+        <item name="android:maxWidth">@dimen/inc_loading_bar_size</item>
+        <item name="android:minHeight">@dimen/inc_loading_bar_size</item>
+        <item name="android:maxHeight">@dimen/inc_loading_bar_size</item>
+    </style>
+
+    <style name="AdcolumnLayout"></style>
+
+    <!-- widget -->
+    <style name="widget">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="widget.Title">
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/app_title</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/app_title_txt_size</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">-1</item>
+        <item name="android:shadowColor">#b57d3500</item>
+    </style>
+
+</resources>

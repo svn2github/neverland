@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/tab_bar_button_group_height"
+    android:background="@drawable/tab_bar_bg" >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/tab_bar_image" 
+        android:layout_alignParentBottom="true"/>
+
+    <RadioGroup
+        android:id="@+id/rg_tab"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:checkedButton="@+id/btn_1"
+        android:freezesText="false"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <RadioButton
+                android:id="@+id/btn_1"
+                style="@style/TabRadioButton.TabButtonChecked"
+                android:layout_centerHorizontal="true"
+                android:freezesText="false"
+                android:text="@string/menu_bar_Recommend" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <RadioButton
+                android:id="@+id/btn_2"
+                style="@style/TabRadioButton.TabButton"
+                android:layout_centerHorizontal="true"
+                android:freezesText="false"
+                android:text="@string/menu_bar_category" />
+        </RelativeLayout>
+    </RadioGroup>
+
+</RelativeLayout>
