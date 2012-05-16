@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="wrap_content"
-	android:gravity="center" android:id="@+id/refreshLayout"
-	>
-	<include layout="@layout/inc_loading" />
-	<!-- 如果直接用inc_loading的话，include进来的layout会有一个最外面的layout_height设置无用的bug，顶不起那50dip，所以外面要再套一层-->
-</RelativeLayout>
