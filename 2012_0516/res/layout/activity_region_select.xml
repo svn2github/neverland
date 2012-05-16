@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/rg_header"
+        layout="@layout/inc_topbar" />
+
+    <ScrollView
+        android:id="@+id/region_scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/list_item_margin_left"
+        android:layout_marginRight="@dimen/list_item_margin_right" 
+        android:layout_marginTop="@dimen/setting_city_choose_margin_top">
+
+        <LinearLayout
+            style="@style/Normal_LinearLayout"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/provinceLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/choose_region_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/ListItemTitle"
+                    android:text="@string/choose_province_title" />
+
+                <com.nearme.commoncode.view.CommonGridView
+                    android:id="@+id/gridView_province"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/setting_city_choose_province_group_margin_vertical"
+                    android:layout_marginLeft="@dimen/setting_city_choose_province_group_margin_horizontal"
+                    android:layout_marginRight="@dimen/setting_city_choose_province_group_margin_horizontal"
+                    android:layout_marginTop="@dimen/setting_city_choose_province_group_margin_vertical"
+                    android:columnWidth="@dimen/setting_city_choose_province_item_width"
+                    android:gravity="center_horizontal"
+                    android:horizontalSpacing="@dimen/setting_city_choose_province_item_margin_horizontal"
+                    android:listSelector="@drawable/grid_item_choosed"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/setting_city_choose_province_item_margin_vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cityLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/choose_region_bg"
+                android:layout_marginTop="@dimen/setting_city_group_margin_top"
+                android:layout_marginBottom="@dimen/setting_city_group_margin_top"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/province_title"
+                    style="@style/ListItemTitle" />
+
+                <com.nearme.commoncode.view.CommonGridView
+                    android:id="@+id/gridView_city"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/setting_city_choose_province_group_margin_vertical"
+                    android:layout_marginLeft="@dimen/setting_city_choose_province_group_margin_horizontal"
+                    android:layout_marginRight="@dimen/setting_city_choose_province_group_margin_horizontal"
+                    android:layout_marginTop="@dimen/setting_city_choose_province_group_margin_vertical"
+                    android:columnWidth="@dimen/setting_city_choose_province_item_width"
+                    android:gravity="center_horizontal"
+                    android:horizontalSpacing="@dimen/setting_city_choose_province_item_margin_horizontal"
+                    android:listSelector="@drawable/grid_item_choosed"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/setting_city_choose_province_item_margin_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

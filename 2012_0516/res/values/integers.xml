@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<integer name="index_dropdown_width_l">730</integer>
+	<integer name="index_dropdown_width_p">410</integer>
+	<integer name="index_dropdown_height">200</integer>
+	<integer name="index_dropdown_vertical">13</integer>
+	<integer name="index_dropdown_horizontal">-101</integer>
+</resources>

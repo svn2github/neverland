@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/search_result_title_height"
+    android:paddingLeft="@dimen/list_item_margin_right"
+    android:paddingRight="@dimen/list_item_margin_left" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/list_item_padding_background"
+        android:layout_marginRight="@dimen/list_item_padding_background">
+
+        <TextView
+            android:id="@+id/title_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="left"
+            android:textColor="@color/list_item_profile_gray"
+            android:textSize="@dimen/search_result_title_txt_size" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:paddingRight="@dimen/search_result_profile_txt_padding_right"
+            android:text="@string/title_lb_score"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/search_result_title_txt_size" />
+    </RelativeLayout>
+
+</RelativeLayout>

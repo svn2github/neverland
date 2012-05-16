@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/item_title_bg" >
+
+    <RelativeLayout
+        android:id="@+id/invite_header"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/game_page_player_titlet_height" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/game_page_item_title_margin_left"
+            android:text="@string/game_page_playing"
+            android:textColor="@color/list_item_profile_gray"
+            android:textSize="@dimen/game_page_player_title_txt_size" />
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/no_player_tip"
+        style="@style/LoadingBar.LoadingResult"
+        android:text="@string/game_no_player" 
+        android:layout_centerInParent="true" 
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/personLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/game_page_player_head_layout_height"
+        android:layout_below="@id/invite_header"
+        layout="@layout/inc_gallery" />
+</RelativeLayout>

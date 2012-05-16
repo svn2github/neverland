@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+    <TextView android:id="@+id/activity_region_select_tv_item"
+    	android:layout_width="@dimen/setting_city_choose_province_item_width"
+    	android:layout_height="@dimen/setting_city_choose_province_item_height"
+    	android:textSize="@dimen/setting_city_choose_txt_size"
+    	android:textColor="@color/list_item_profile_gray"
+    	android:singleLine="true"
+    	android:gravity="center"
+    	android:layout_centerInParent="true"/>
+</RelativeLayout>

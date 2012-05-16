@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:background="@null">
+	<RelativeLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/list_item_margin_top"
+		android:layout_marginLeft="@dimen/search_bar_margin_left"
+		android:layout_marginRight="@dimen/search_bar_margin_right">
+		<RelativeLayout android:id="@+id/linear01"
+			android:layout_width="@dimen/search_bg_width" android:layout_height="wrap_content"
+			android:paddingLeft="@dimen/search_textview_padding_left"
+			android:background="@drawable/search_text_bg">
+			<ImageView android:id="@+id/img_search" style="@style/Normal_ImageView"
+				android:src="@drawable/search_icon"
+				android:layout_centerVertical="true" 
+				android:layout_alignParentLeft="true"/>
+			<AutoCompleteTextView android:id="@+id/auto_complete"
+				android:layout_width="@dimen/search_textview_width"
+				android:layout_height="@dimen/search_textview_height" android:hint="@string/search_by_nickName"
+				android:layout_toRightOf="@id/img_search"
+				android:layout_centerVertical="true" android:background="@null" 
+				android:singleLine="true" android:ellipsize="end"/>
+			<ImageView android:id="@+id/img_del" style="@style/Normal_ImageView"
+				android:src="@drawable/icon_delwords"
+				android:layout_centerVertical="true" android:padding="@dimen/search_del_padding"
+				android:layout_alignParentRight="true" android:visibility="gone"/>
+		</RelativeLayout>
+		<Button android:id="@+id/btn_search" style="@style/ListItemButton.twoWordButton"
+			android:text="@string/pub_search" android:layout_toRightOf="@id/linear01"
+			android:layout_centerVertical="true" android:layout_marginLeft="@dimen/search_button_margin_left" />
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/search_result_layout"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/search_result_title_height"
+		android:background="@drawable/item_title_middle_bg"
+		android:layout_marginTop="20px" android:layout_marginBottom="10px"
+		android:visibility="gone">
+		<TextView android:id="@+id/text" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="@string/search_result_title"
+			android:textColor="@color/black" android:paddingLeft="@dimen/list_item_margin_left"
+			android:layout_centerVertical="true" android:shadowDx="0.0"
+			android:shadowDy="1.0" android:shadowRadius="1" android:shadowColor="#bfffffff" />
+	</RelativeLayout>
+</LinearLayout>

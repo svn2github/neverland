@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/inc_head" />
+
+    <LinearLayout
+        android:id="@+id/notice_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/person_page_visitor_margin_top"
+        android:background="@drawable/item_person_page_visitor_bg"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/personLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/visitor_header"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/game_page_player_titlet_height" >
+
+                <TextView android:id="@+id/visitor_title_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/game_page_item_title_margin_left"
+                    android:text="@string/profile_page_visitor"
+                    android:textColor="@color/list_item_profile_gray"
+                    android:textSize="@dimen/game_page_player_title_txt_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/game_page_player_head_layout_height" >
+
+                <TextView
+                    android:id="@+id/visitor_tip"
+                    style="@style/LoadingBar.LoadingResult"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/no_my_visitor_tip"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/Linearlayout01"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="@dimen/person_page_visitor_top"
+                    layout="@layout/list_item_person" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/notice_title"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/person_page_feed_title_height" >
+
+            <TextView android:id="@+id/feed_title_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/game_page_item_title_margin_left"
+                android:text="@string/profile_page_feeds"
+                android:textColor="@color/list_item_profile_gray"
+                android:textSize="@dimen/game_page_player_title_txt_size" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

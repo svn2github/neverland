@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="@dimen/alert_dialog_all_width"
+    android:minHeight="@dimen/alert_dialog_choice_content_height"
+    android:background="@drawable/pop_window_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/titleTextView"
+        style="@style/DialogTitle"
+        android:text="@string/pub_tip_dialog_title" />
+
+    <ListView
+        android:id="@+id/choice_layout"
+        style="@style/Normal_List"
+        android:layout_height="@dimen/alert_dialog_choice_list_height"
+        android:layout_marginBottom="@dimen/alert_dialog_choice_content_margin_bottom"
+        android:layout_marginLeft="@dimen/alert_dialog_content_margin_left"
+        android:layout_marginRight="@dimen/alert_dialog_content_margin_left"
+        android:listSelector="@drawable/list_item_selector" />
+
+</LinearLayout>

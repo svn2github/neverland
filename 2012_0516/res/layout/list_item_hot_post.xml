@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/list_item_margin_bottom"
+    android:paddingLeft="@dimen/list_item_margin_left"
+    android:paddingRight="@dimen/list_item_margin_right"
+    android:paddingTop="@dimen/list_item_margin_top" >
+
+    <LinearLayout
+        android:id="@+id/h2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_item_notice_content_margin_top" >
+
+        <ImageView
+            android:id="@+id/post_flag_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/forum_post_title_margin_flag"
+            android:src="@drawable/forum_flag_hot"
+			android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/post_flag_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/forum_post_title_margin_flag"
+            android:src="@drawable/forum_flag_top"
+			android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/content"
+            style="@style/ListItemText.Content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/list_title_text_size" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/originalTextView"
+        style="@style/ListItemText.FeedOriginal"
+        android:layout_marginRight="@dimen/notice_list_item_txt_margin_right"
+        android:layout_marginTop="@dimen/list_item_notice_original_marginTop"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_item_feed_content_margin_top" >
+
+        <TextView
+            android:id="@+id/personName"
+            style="@style/ListItemText.PersonName"
+            android:layout_width="@dimen/hot_post_name_width"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="@dimen/forum_poster_name_txt_size" />
+
+        <LinearLayout
+            android:layout_width="@dimen/hot_post_comment_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/hot_post_info_item_margin" >
+
+            <TextView
+                android:id="@+id/reply_title"
+                style="@style/ListItemText.NoticeTime"
+                android:gravity="left" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/forum_post_divider_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/forum_post_info_divider" />
+
+            <TextView
+                android:id="@+id/review_title"
+                style="@style/ListItemText.NoticeTime"
+                android:layout_marginLeft="@dimen/forum_post_divider_margin"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/ListItemText.FeedTime"
+            android:layout_width="@dimen/hot_post_time_width"
+            android:layout_marginLeft="@dimen/hot_post_info_item_margin"
+            android:gravity="right" />
+    </LinearLayout>
+
+</LinearLayout>

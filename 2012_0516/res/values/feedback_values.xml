@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="feedback_new_reply">您在%1$s中的意见反馈有%2$s条新的回复</string>
+    <string name="feedback_check">点击查看</string>
+
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- 升级模块 -->
+	<string name="upgrade_notify_upgrade_label">have the latest software version </string>
+	<string name="upgrade_notify_upgrade_content">The latest software version is %s,please update</string>
+	<string name="upgrade_dialog_force_upgrade_title">Software Update</string>
+	<string name="upgrade_dialog_force_upgrade_label" formatted="false">With the latest software version %s, please update, if not update can not continue to use the software,suggestions in wifi network environment to update.\n%s</string>
+	<string name="upgrade_update_now">Update</string>
+	<string name="upgrade_update_later">Cancel</string>
+	<string name="upgrade_dialog_upgrade_label" formatted="false">%s have the latest software version %s, suggestions in wifi network environment to update.\n%s</string>
+	<string name="upgrade_notify_install_fail">%s installation fails</string>
+	<string name="upgrade_download_pause">Pause</string>
+	<string name="upgrade_download_resume">Continue</string>
+	<string name="upgrade_download_cancel">Cancel</string>
+	<string name="upgrade_dialog_download_ing">Being download，please wait...</string>
+	<string name="upgrade_dialog_download_pause">Download suspended,click continue to download.</string>
+	<string name="upgrade_dialog_download_fail">Network problems lead to update interrupt,\n please continue later.  </string>
+	<string name="upgrade_maintain_title">Update maintenance</string>
+	<string name="upgrade_update_already">Your software version is the newest one, you do not need to update.</string>
+	<string name="upgrade_confirm">Confirm</string>
+	<string name="upgrade_update_checking">Acquiring update，please wait…</string>
+	<string name="upgrade_network_error">Network anomaly, please try again.</string>
+	<string name="upgrade_no_enough_space">Phone memory is not enough, delete the other files and try again</string>
+	<string name="upgrade_fail">Update failed</string>
+	<string name="upgrade_error_md5">Due to network instability, the download data is missing, please re-download.</string>
+	<string name="upgrade_retry">Re-download</string>
+	<string name="upgrade_no_sdcard">Did not find the SD card, can not loading image and upgrade</string>
+</resources>
+

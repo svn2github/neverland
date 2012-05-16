@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<color name="white">#ffffff</color>
+	<color name="black">#272725</color>
+	<color name="gray">#565656</color>
+	<color name="blue">#005f90</color>
+	<color name="red">#c66</color>
+	<color name="yellow">#e48101</color>
+	<color name="green">#70a505</color>
+	
+	<color name="tab_main_gray">#c3c3c3</color>
+	
+	<color name="list_item_name_black">#232323</color>
+	<color name="list_item_profile_gray">#494949</color>
+	
+	<color name="tabbar_button_color_black">#232323</color>
+	
+	<color name="topbar_title_color_black">#3e3e3e</color>
+	
+	<!-- 游戏主页 -->
+	<color name="game_page_green">#496a07</color>
+	
+	<color name="game_page_tab_button_shadow">#ffffffff</color>
+	
+	<color name="game_page_person_gray">#6d6d6d</color>
+	
+	<!-- 我的主页 -->
+	<color name="person_msg_orange">#fba90c</color>
+	
+	<!-- 来源 -->
+	<color name="original_click_blue">#057eb1</color>
+	
+	<!-- 设置 -->
+	<color name="setting_item_title_txt_color">#3e3e3e</color>
+	
+	<!-- 邀请好友 -->
+	<color name="invite_gray">#8f8e8e</color>
+	
+	
+	<color name="info_item_blue">#1882cc</color>
+	
+	
+	
+	<color name="about_blue">#007fb4</color>
+	
+	
+	<color name="tab_bar_txt_color">#8ac7ef</color>
+	
+	<color name="widget_75_profile_txt_color">#ffffff</color>
+	<color name="widget_61_profile_txt_color">#1d1d1d</color>
+	
+	<color name="widget_msg_txt_color">#1e1c1a</color>
+	<color name="widget_61_msg_txt_color">#e3e3e3</color>
+	
+	<color name="list_item_msg_name_text">#369</color>
+	<color name="list_item_msg_content_text">#343634</color>
+	<color name="list_item_msg_content2_text">#5c5d5f</color>
+	<color name="list_item_msg_small_comment_text">#a4b7d6</color>
+	<color name="list_item_msg_source_text">#6f706f</color>
+	<color name="main_bg">#f7f7f7</color>
+	
+	<!-- For List -->
+	<color name="common_buttonCharColor">#000000</color>
+	<color name="common_charColor">#ffffff</color>	
+  	
+    <color name="color_desc">#111111</color>
+    <color name="item_select">#99B3E9</color>
+    <color name="text_about">#595757</color>
+    <!-- 透明效果 -->
+    <color name="translucent_background">#60000000</color>
+    
+    <!-- RadioGroup 切换字体投影颜色 -->
+    <color name="tab_text_color_black">#ff000000</color>
+    <color name="tab_text_color_white">#ffffffff</color>
+</resources>

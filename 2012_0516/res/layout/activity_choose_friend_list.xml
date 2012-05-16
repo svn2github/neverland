@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg" >
+
+    <RelativeLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:id="@+id/divider_image"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/list_item_divider" 
+            android:scaleType="fitXY"/>
+
+        <ListView
+            android:id="@+id/ListView01"
+            style="@style/Normal_List"
+            android:layout_below="@id/divider_image"
+            android:paddingBottom="@dimen/list_padding_bottom" />
+
+        <LinearLayout
+            android:id="@+id/bottom_btn_group"
+            android:layout_width="@dimen/msg_user_bottom_width"
+            android:layout_height="@dimen/msg_user_bottom_height"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bottom_button_group_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/person_page_bottom_button_group_padding_left"
+            android:paddingRight="@dimen/person_page_bottom_button_group_padding_right"
+            android:paddingTop="@dimen/person_page_bottom_button_group_padding_top"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/sendButton"
+                style="@style/PersonPage.BottomButton"
+                android:layout_marginLeft="@dimen/person_page_bottom_button_margin_left"
+                android:drawableLeft="@drawable/bottom_msg_btn_selector"
+                android:drawablePadding="@dimen/tab_bar_button_btn_add_drawable_padding"
+                android:text="@string/send_invite_btn_title" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/R1"
+        layout="@layout/inc_loading_full" />
+
+</RelativeLayout>

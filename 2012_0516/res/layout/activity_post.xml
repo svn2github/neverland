@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/title_bar_bg_padding_height" >
+
+        <ListView
+            android:id="@+id/ListView01"
+            style="@style/Normal_List"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/bottom_bar_height"
+            android:layout_marginLeft="@dimen/list_item_margin_left"
+            android:layout_marginRight="@dimen/list_item_margin_right"
+            android:divider="@null" />
+
+        <LinearLayout
+            android:id="@+id/no_data_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/ListView01"
+            android:layout_marginBottom="@dimen/bottom_bar_height"
+            android:layout_marginLeft="@dimen/list_item_margin_left"
+            android:layout_marginRight="@dimen/list_item_margin_right"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/LoadingBar.LoadingResult"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/write_edit_bg"
+                android:text="@string/no_reply_for_post" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/msg_user_bottom_width"
+            android:layout_height="@dimen/msg_user_bottom_height"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bottom_button_group_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/person_page_bottom_button_group_padding_left"
+            android:paddingRight="@dimen/person_page_bottom_button_group_padding_right"
+            android:paddingTop="@dimen/person_page_bottom_button_group_padding_top" >
+
+            <TextView
+                android:id="@+id/add_comment"
+                style="@style/PersonPage.BottomButton"
+                android:clickable="true"
+                android:drawableLeft="@drawable/bottom_leave_msg_btn_selector"
+                android:drawablePadding="@dimen/leaveMsg_drawable_padding"
+                android:text="@string/add_comment" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/layout_word_item_shadow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/list_item_margin_left"
+        android:layout_marginRight="@dimen/list_item_margin_right"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:visibility="invisible" >
+
+        <TextView
+            android:id="@+id/tv_word_shadow"
+            style="@style/ListItemText.Content"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/rg_header"
+            layout="@layout/inc_topbar" />
+
+        <include
+            android:id="@+id/R1"
+            layout="@layout/inc_loading_full" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/inc_post_item_bg_middle"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:id="@+id/h1"
+        android:layout_width="@dimen/head_icon_bg_width"
+        android:layout_height="@dimen/head_icon_bg_height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/list_item_feed_head_icon_margin_left"
+        android:layout_marginTop="@dimen/list_item_margin_top"
+        android:background="@drawable/item_icon_bg" >
+
+        <ImageView
+            android:id="@+id/head"
+            style="@style/Normal_ImageView"
+            android:layout_width="@dimen/head_icon_to_save_width"
+            android:layout_height="@dimen/head_icon_to_save_height"
+            android:layout_centerInParent="true"
+            android:src="@drawable/item_default_avatar_male" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/forum_poster_name_margin_image"
+        android:layout_marginRight="@dimen/list_item_feed_margin_right"
+        android:layout_marginTop="@dimen/list_item_margin_top"
+        android:layout_toRightOf="@id/h1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/poster_name"
+            style="@style/ListItemText.PersonName"/>
+
+        <RelativeLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="@dimen/forum_poster_title_margin_name">
+
+            <ImageView
+                android:id="@+id/reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:focusable="false"
+                android:src="@drawable/icon_reply_selector" />
+
+            <TextView
+                android:id="@+id/comment_content"
+                style="@style/ListItemText.Content"
+                android:layout_below="@id/poster_name"
+                android:layout_toLeftOf="@id/reply"
+                android:focusable="false" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_more_layout01"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/forum_post_content_more_margin_bottom"
+            android:layout_marginTop="@dimen/forum_post_more_margin_content"
+            android:gravity="right"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/btn_word_more"
+                android:layout_width="@dimen/btn_more_word_width"
+                android:layout_height="@dimen/btn_more_word_height"
+                android:background="@drawable/write_edit_available_input_bg"
+                android:gravity="center"
+                android:text="@string/forum_post_word_more"
+                android:textColor="@color/white"
+                android:textSize="@dimen/list_item_time_txt_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/info_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/notice_list_item_txt_margin_right"
+            android:layout_marginTop="@dimen/forum_post_detail_margin_top"
+        	android:layout_marginBottom="@dimen/forum_post_info_margin_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/floor"
+                style="@style/ListItemText.NoticeTime"
+                android:gravity="left"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/comment_time"
+                style="@style/ListItemText.NoticeTime"
+                android:layout_width="0px"
+                android:layout_marginTop="@dimen/list_item_time_margin_top"
+                android:layout_weight="1"
+                android:gravity="right" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/feed_comment_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainLayout"
+        android:scaleType="fitXY"
+        android:src="@drawable/item_divider_dotted" />
+
+</RelativeLayout>
