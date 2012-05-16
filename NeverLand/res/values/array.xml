@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string-array name="list_change_avatar_pop">/
-        <item>@string/new_photo</item>    
-        <item>@string/choose_from_album</item>
-        <item>@string/revert_default_photo</item>
-    </string-array>
-    
     <string-array name="entryvalues_list_change_avatar_pop">
     	<item>0</item>
         <item>1</item>
