@@ -34,7 +34,7 @@
             android:name=".activity.DragActivity">
         </activity>
          <activity 
-            android:name=".activity.MyScroller">
+            android:name=".activity.MotionActivity">
         </activity>
     </application>
 

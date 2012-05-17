@@ -1,7 +1,5 @@
 package org.jabe.neverland.view;
 
-import org.jabe.neverland.util.Util;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -11,12 +9,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
-
 public class DragLayer extends ViewGroup {
-	public interface PageListener {
-	    void page(int page);
-	}
-	
     private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
 
@@ -32,9 +25,9 @@ public class DragLayer extends ViewGroup {
     private int mTouchState = TOUCH_STATE_REST;
     private int mTouchSlop;
     private float mLastMotionX;
-    private boolean mElasticity = false;
 
     private PageListener pageListener;
+	private boolean mElasticity = true;
 
     public DragLayer(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -43,7 +36,6 @@ public class DragLayer extends ViewGroup {
     public DragLayer(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mScroller = new Scroller(context);
-
         mCurScreen = mDefaultScreen;
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
@@ -70,7 +62,7 @@ public class DragLayer extends ViewGroup {
         final int width = MeasureSpec.getSize(widthMeasureSpec);
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         if (widthMode != MeasureSpec.EXACTLY) {
-            throw new IllegalStateException("ScrollLayout only can run at EXACTLY mode!");
+            throw new IllegalStateException("ScrollLayout only canmCurScreen run at EXACTLY mode!");
         }
 
         /**
@@ -141,6 +133,7 @@ public class DragLayer extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
@@ -160,14 +153,16 @@ public class DragLayer extends ViewGroup {
                 int deltaX = (int) (mLastMotionX - x);
                 mLastMotionX = x;
                 if ((deltaX > 0 && mCurScreen == (getChildCount() - 1)) || (deltaX < 0 && mCurScreen == 0)) {
-                	if (!mElasticity) {
+                	if (!mElasticity ) {
                 		return super.onTouchEvent(event);
                 	}
                 }
+                onStopGifPlayer(true);
                 scrollBy(deltaX, 0);
                 break;
-            case MotionEvent.ACTION_CANCEL :
+            case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP :
+                onStopGifPlayer(false);
                 final VelocityTracker velocityTracker = mVelocityTracker;
                 velocityTracker.computeCurrentVelocity(1000);
                 int velocityX = (int) velocityTracker.getXVelocity();
@@ -184,6 +179,7 @@ public class DragLayer extends ViewGroup {
                     pageListener.page(page);
                 } else {
                     snapToDestination();
+
                 }
                 if (mVelocityTracker != null) {
                     mVelocityTracker.recycle();
@@ -192,7 +188,6 @@ public class DragLayer extends ViewGroup {
                 mTouchState = TOUCH_STATE_REST;
                 break;
         }
-        Util.dout("onTouchEvent action: " + action + "   " + String.valueOf(mTouchState != TOUCH_STATE_REST));
         return true;
     }
 
@@ -205,7 +200,6 @@ public class DragLayer extends ViewGroup {
         }
 
         final float x = ev.getX();
-
         switch (action) {
             case MotionEvent.ACTION_MOVE :
                 final int xDiff = (int) Math.abs(mLastMotionX - x);
@@ -217,16 +211,25 @@ public class DragLayer extends ViewGroup {
                 mLastMotionX = x;
                 mTouchState = mScroller.isFinished() ? TOUCH_STATE_REST : TOUCH_STATE_SCROLLING;
                 break;
+
             case MotionEvent.ACTION_CANCEL :
             case MotionEvent.ACTION_UP :
                 mTouchState = TOUCH_STATE_REST;
                 break;
         }
-        Util.dout("onInterceptTouchEvent action: " + action + "   " + String.valueOf(mTouchState != TOUCH_STATE_REST));
         return mTouchState != TOUCH_STATE_REST;
     }
 
     public void setPageListener(PageListener pageListener) {
         this.pageListener = pageListener;
+    }
+
+    public void onStopGifPlayer(boolean flag) {
+//        GifDecoderView.isFaceViewScroll = flag;
+    }
+
+    public interface PageListener {
+
+        void page(int page);
     }
 }

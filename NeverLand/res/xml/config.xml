@@ -24,8 +24,8 @@
         <title>ViewGroup左右滑动</title>
         <description>ViewGroup左右滑动</description>   
     </item>
-    <item name="org.jabe.neverland.activity.MyScroller">
-        <title>Scroller</title>
-        <description>Scroller</description>   
+    <item name="org.jabe.neverland.activity.MotionActivity">
+        <title>Motion</title>
+        <description>Motion Test</description>   
     </item>
 </config>

@@ -2,4 +2,5 @@
 <resources>
     <dimen name="drag_item_normal_height">48dip</dimen>
     <dimen name="drag_item_expand_height">96dip</dimen>
+    <dimen name="face_view_size">32dp</dimen>
 </resources>
