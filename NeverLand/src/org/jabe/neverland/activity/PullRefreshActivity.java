@@ -14,6 +14,7 @@ import org.jabe.neverland.view.PullRefreshContainerView.OnChangeStateListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -100,5 +101,19 @@ public class PullRefreshActivity extends Activity {
 		baseAdapter = new CommonAdapter<String>(allList);
 		
         mList.setAdapter(baseAdapter);
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_BACK:
+//			finish();
+			//测试System.exit(0)的作用~~~~
+			System.exit(0);
+			return true;
+		default:
+			break;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }
