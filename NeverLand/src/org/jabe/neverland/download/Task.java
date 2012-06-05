@@ -6,19 +6,24 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.jabe.neverland.download.TaskAssign.TaskListener;
 
 //这个是任务Bean
 
 public class Task {
 	private String downURL;
 	private String saveFile;
-	private int bufferSize = 64 * 1024;
+	private int bufferSize = 4 * 1024;//64K, 4K
 	private int workerCount;
 	private int sectionCount;
 	private long contentLength;
+	private volatile long downloadedLength = 0;
 	private long[] sectionsOffset;
 
-	public static final int HEAD_SIZE = 4096;
+	public static final int HEAD_SIZE = 4 * 1024;//单位字节
 
 	// 读下载描述文件内容
 
@@ -47,6 +52,9 @@ public class Task {
 		sectionCount = dis.readInt();
 
 		contentLength = dis.readLong();
+		
+		downloadedLength = dis.readLong();
+		
 		sectionsOffset = new long[sectionCount];
 		for (int i = 0; i < sectionCount; i++) {
 			sectionsOffset[i] = file.readLong();
@@ -76,7 +84,7 @@ public class Task {
 		dos.writeInt(sectionCount);
 
 		dos.writeLong(contentLength);
-
+		
 		byte[] src = baos.toByteArray();
 
 		byte[] temp = new byte[HEAD_SIZE];
@@ -91,22 +99,23 @@ public class Task {
 	}
 
 	// 更新下载的过程
-
 	public synchronized void writeOffset(RandomAccessFile file)
 			throws IOException {
-
 		if (sectionCount != sectionsOffset.length) {
-
-			throw new RuntimeException();
-
+			throw new RuntimeException("sectionCount != sectionsOffset.length");
 		}
 		file.seek(HEAD_SIZE);
+		file.writeLong(downloadedLength);//write default downloaded count
 		for (int i = 0; i < sectionsOffset.length; i++) {
 			file.writeLong(sectionsOffset[i]);
 		}// 这个是下载主程序
 	}
+	
+	public synchronized void updateDownloadedLength(long added) {
+		downloadedLength += added;
+	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		long oldTime = System.currentTimeMillis();
 		
@@ -136,7 +145,7 @@ public class Task {
 		ta.work(task);
 	}
 
-	public static void test2() throws IOException {
+	public static void test2() {
 
 		Task task = new Task();
 
@@ -155,11 +164,12 @@ public class Task {
 		ta.work(task);
 	}
 
-	public static void test3() throws IOException {
-
+	public static void test3() {
+		final String url = "http://go.microsoft.com/fwlink/?linkid=57034";
+		
 		Task task = new Task();
 
-		task.setDownURL("http://go.microsoft.com/fwlink/?linkid=57034");
+		task.setDownURL(url);
 
 		task.setSaveFile("H:/vc2005express.iso");
 
@@ -170,11 +180,48 @@ public class Task {
 		task.setBufferSize(128 * 1024);
 
 		TaskAssign ta = new TaskAssign();
+		
+		ta.setTaskListener(new TaskListener() {
+			
+			@Override
+			public void resumeTask() {
+				
+			}
+			
+			@Override
+			public void onUpdateProgress(double added, double downloaded, double total) {
+				showPercent(added, total);
+			}
+			
+			@Override
+			public void onSuccess() {
+				
+			}
+			
+			@Override
+			public void onPreTask() {
+				
+			}
+			
+			@Override
+			public void onFailure() {
+				
+			}
+			
+			@Override
+			public void onBeforeExecute() {
+				
+			}
 
+			@Override
+			public void onException(Exception e) {
+				
+			}
+		});
 		ta.work(task);
 	}
 
-	public static void test4() throws IOException {
+	public static void test4() {
 
 		Task task = new Task();
 
@@ -193,7 +240,7 @@ public class Task {
 		ta.work(task);
 	}
 
-	public static void test5() throws IOException {
+	public static void test5() {
 
 		Task task = new Task();
 
@@ -210,6 +257,23 @@ public class Task {
 		TaskAssign ta = new TaskAssign();
 
 		ta.work(task);
+	}
+	public static double currentCount = 0;
+	public static void showPercent(double add, double total) {
+		currentCount += add;
+		System.out.println("Total percent : "
+				+ (currentCount / total) * 100 + "%");
+	}
+	
+
+	public static long getContentLength(String url) throws IOException {
+		URL u = new URL(url);
+		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+		try {
+			return conn.getContentLength();
+		} finally {
+			conn.disconnect();
+		}
 	}
 
 	public String getDownURL() {
@@ -266,6 +330,10 @@ public class Task {
 
 	public void setSectionsOffset(long[] sectionsOffset) {
 		this.sectionsOffset = sectionsOffset;
+	}
+
+	public long getDownloadedLength() {
+		return downloadedLength;
 	}
 
 }

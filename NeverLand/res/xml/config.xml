@@ -28,4 +28,8 @@
         <title>Motion</title>
         <description>Motion Test</description>   
     </item>
+    <item name="org.jabe.neverland.activity.DownloadActivity">
+        <title>Download</title>
+        <description>Download Test</description>   
+    </item>
 </config>
