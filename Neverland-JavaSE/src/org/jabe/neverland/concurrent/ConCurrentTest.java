@@ -485,6 +485,9 @@ public class ConCurrentTest {
 		}
 	}
 
+	/**
+	 *	使用读写锁
+	 */
 	public static class TestReentrantReadWriteLock {
 		public static void testReentrantReadWriteLock() {
 			// 创建并发访问的账户
