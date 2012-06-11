@@ -1,8 +1,6 @@
 package org.jabe.neverland.download;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -23,42 +21,32 @@ public class Task {
 	private volatile long downloadedLength = 0;
 	private long[] sectionsOffset;
 
-	public static final int HEAD_SIZE = 4 * 1024;//单位字节
+	public static final int HEAD_SIZE = 1024;//单位字节
 
 	// 读下载描述文件内容
 
-	public synchronized void read(RandomAccessFile file) throws IOException {
+	public synchronized void read(RandomAccessFile file) throws ReadTaskFileException {
+		try {
+			file.seek(0);
+			downURL = file.readUTF();
 
-		byte[] temp = new byte[HEAD_SIZE];
+			saveFile = file.readUTF();
 
-		file.seek(0);
+			sectionCount = file.readInt();
 
-		int readed = file.read(temp);
-
-		if (readed != temp.length) {
-
-			throw new RuntimeException();
-
+			contentLength = file.readLong();
+			
+			file.seek(HEAD_SIZE);
+			downloadedLength = file.readLong();
+			
+			sectionsOffset = new long[sectionCount];
+			for (int i = 0; i < sectionCount; i++) {
+				sectionsOffset[i] = file.readLong();
+			}
+		} catch (Exception e) {
+			throw new ReadTaskFileException(e.getMessage());
 		}
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(temp);
-
-		DataInputStream dis = new DataInputStream(bais);
-
-		downURL = dis.readUTF();
-
-		saveFile = dis.readUTF();
-
-		sectionCount = dis.readInt();
-
-		contentLength = dis.readLong();
 		
-		downloadedLength = dis.readLong();
-		
-		sectionsOffset = new long[sectionCount];
-		for (int i = 0; i < sectionCount; i++) {
-			sectionsOffset[i] = file.readLong();
-		}
 	}
 
 	public synchronized void create(RandomAccessFile file) throws IOException {
@@ -108,7 +96,7 @@ public class Task {
 		file.writeLong(downloadedLength);//write default downloaded count
 		for (int i = 0; i < sectionsOffset.length; i++) {
 			file.writeLong(sectionsOffset[i]);
-		}// 这个是下载主程序
+		}
 	}
 	
 	public synchronized void updateDownloadedLength(long added) {
@@ -215,6 +203,11 @@ public class Task {
 
 			@Override
 			public void onException(Exception e) {
+				
+			}
+
+			@Override
+			public void onFileExist() {
 				
 			}
 		});
