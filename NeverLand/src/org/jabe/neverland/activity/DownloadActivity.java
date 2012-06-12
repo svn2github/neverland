@@ -10,9 +10,7 @@ import org.jabe.neverland.download.Task;
 import org.jabe.neverland.download.TaskAssign;
 import org.jabe.neverland.download.TaskAssign.TaskListener;
 
-import android.R.attr;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +18,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -53,6 +52,7 @@ public class DownloadActivity extends Activity {
 		beginToDown();
 	}
 
+	@SuppressWarnings("unused")
 	private void testBigFile() {
 		File file = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + File.separator + "a.temp");
@@ -86,6 +86,7 @@ public class DownloadActivity extends Activity {
 
 	}
 
+	@SuppressWarnings("unused")
 	private void beginToDown() {
 		final String url1 = "http://storefs.nearme.com.cn/uploadFiles/Pfiles/201205/104ca8a227e1429ca638f3450217dff5.apk";
 		final String url2 = "http://go.microsoft.com/fwlink/?linkid=57034";
@@ -183,6 +184,7 @@ public class DownloadActivity extends Activity {
 
 	private void setUpView() {
 		mButton = (Button) findViewById(R.id.button1);
+		mButton.setVisibility(View.GONE);
 		mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		mProgressDialog = new ProgressDialog(this);
 		mProgressDialog.setCancelable(false);

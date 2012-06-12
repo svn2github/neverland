@@ -9,8 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TaskAssign {
 	public static final String TAG = "TaskAssign";
