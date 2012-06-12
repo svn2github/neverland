@@ -95,8 +95,8 @@ public class DownloadActivity extends Activity {
 		task.setDownURL(url1);
 		task.setSaveFile(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + File.separator + name1);
-		task.setSectionCount(1);
-		task.setWorkerCount(1);
+		task.setSectionCount(5);
+		task.setWorkerCount(5);
 		task.setBufferSize(8 * 1024);
 		taskAssign = new TaskAssign();
 		taskAssign.setTaskListener(new TaskListener() {

@@ -172,8 +172,10 @@ public class TaskAssign {
 
 		Loger.log(TAG, "start worker : " + secCount);
 		successTag = new Boolean[secCount];
-		for (int i = 0; i < secCount; i++) {
+		for (int i = 0; i < successTag.length; i++) {
 			successTag[i] = false;
+		}
+		for (int i = 0; i < secCount; i++) {
 			final int j = i;
 
 			final Task t = task;
@@ -209,6 +211,7 @@ public class TaskAssign {
 			final long end = endt;
 
 			if (start >= end) {
+				triggerSuccess(j);
 				Loger.log(TAG, "Section has finished before. " + j);
 				continue;
 			}
