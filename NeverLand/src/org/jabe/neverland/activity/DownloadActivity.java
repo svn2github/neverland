@@ -8,7 +8,7 @@ import java.io.RandomAccessFile;
 import org.jabe.neverland.R;
 import org.jabe.neverland.download.Task;
 import org.jabe.neverland.download.TaskAssign;
-import org.jabe.neverland.download.TaskAssign.TaskListener;
+import org.jabe.neverland.download.TaskListener;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -96,8 +96,8 @@ public class DownloadActivity extends Activity {
 		task.setDownURL(url1);
 		task.setSaveFile(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + File.separator + name1);
-		task.setSectionCount(5);
-		task.setWorkerCount(5);
+		task.setSectionCount(1);
+		task.setWorkerCount(1);
 		task.setBufferSize(8 * 1024);
 		taskAssign = new TaskAssign();
 		taskAssign.setTaskListener(new TaskListener() {
@@ -128,23 +128,11 @@ public class DownloadActivity extends Activity {
 			}
 
 			@Override
-			public void onFailure() {
+			public void onFailure(Exception e) {
 				makeToast("Download failure");
 			}
-
 			@Override
-			public void onBeforeExecute() {
-
-			}
-
-			@Override
-			public void onException(Exception e) {
-				makeToast("An exception occured while downloading : "
-						+ e.getMessage());
-			}
-
-			@Override
-			public void onFileExist() {
+			public void onFileExist(File file) {
 				makeToast("File Exist");
 			}
 		});

@@ -38,18 +38,22 @@ import android.text.style.ImageSpan;
  */
 public class SmileyParser {
 	// Singleton stuff
-	private static SmileyParser sInstance;
+	private static volatile SmileyParser sInstance;
 
 	public static SmileyParser getInstance(Context context) {
 		if (sInstance == null) {
-			sInstance = new SmileyParser(context);
+			synchronized (SmileyParser.class) {
+				sInstance = new SmileyParser(context);
+			}
 		}
 		return sInstance;
 	}
 	
 	public static SmileyParser getInstance() {
 		if (sInstance == null) {
-			sInstance = new SmileyParser();
+			synchronized (SmileyParser.class) {
+				sInstance = new SmileyParser();
+			}
 		}
 		return sInstance;
 	}

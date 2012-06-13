@@ -2,12 +2,13 @@ package org.jabe.neverland.download;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.jabe.neverland.download.TaskAssign.TaskListener;
+import org.jabe.neverland.download.exception.ReadTaskFileException;
 
 //这个是任务Bean
 
@@ -192,7 +193,7 @@ public class Task {
 			}
 			
 			@Override
-			public void onFailure() {
+			public void onFailure(Exception e) {
 				
 			}
 			
@@ -202,12 +203,7 @@ public class Task {
 			}
 
 			@Override
-			public void onException(Exception e) {
-				
-			}
-
-			@Override
-			public void onFileExist() {
+			public void onFileExist(File file) {
 				
 			}
 		});

@@ -10,6 +10,11 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.jabe.neverland.download.exception.CreateTaskFileException;
+import org.jabe.neverland.download.exception.ReadTaskFileException;
+import org.jabe.neverland.download.exception.StorageFullException;
+import org.jabe.neverland.download.exception.WorkerThreadException;
+
 public class TaskAssign {
 	public static final String TAG = "TaskAssign";
 
@@ -31,10 +36,11 @@ public class TaskAssign {
 			public void run() {
 				// TODO Auto-generated method stub
 				mTask = task;
-
+				
 				if (taskListener == null || task.getContentLength() < 0) {
-					throw new RuntimeException(
-							"task listener can not be null or task content length can not < 0");
+					Loger.log(TAG,
+					"task listener can not be null or task content length can not < 0");
+					return;
 				}
 
 				// TaskListener lifecycle
@@ -43,7 +49,7 @@ public class TaskAssign {
 				File file = new File(task.getSaveFile());
 				if (file.exists()) {
 					checkRandomFileClose();
-					taskListener.onFileExist();
+					taskListener.onFileExist(file);
 					return;
 				}
 
@@ -81,25 +87,23 @@ public class TaskAssign {
 						//如果文件很大,会用时很久,也可能存储空间不够.
 						//存储空间不够抛出的是IOException, 文件会被创建, 大小为剩余容量, 所以创建失败后应该删除.
 						Loger.log(TAG, "begin to create save file , size:" + rtnLen);
-						downRandomFile.setLength(rtnLen);
+						try {
+							downRandomFile.setLength(rtnLen);
+						} catch (Exception e) {
+							throw new StorageFullException(e.getMessage());
+						}
 						Loger.log(TAG, "end to create save file , size:" + rtnLen);
 
 					} else {
 
 						// 检查 任务文件 的合法性
-						invalidateTaskFile(taskRandomFile);
+						if(!validateTaskFile(taskRandomFile)) {
+							throw new ReadTaskFileException("while validateTaskFile");
+						}
 
 						taskListener.resumeTask();
 
 						task.read(taskRandomFile);
-
-						if (task.getContentLength() != rtnLen) {
-							taskListener.onFailure();
-							Loger.log(TAG,
-									"saved content length not equal listenter's assigned length while resume task");
-							return;
-						}
-
 					}
 
 					int secCount = task.getSectionCount();
@@ -114,26 +118,30 @@ public class TaskAssign {
 						doSingleWork();
 					}
 
-				} catch (ReadTaskFileException e) {
-					Loger.log(
-							TAG,
-							"Main worker ReadTaskFileException : "
-									+ e.getMessage());
-					stopWork();
-					taskListener.onFailure();
-					taskListener.onException(e);
 				} catch (Exception e) {
-					Loger.log(TAG, "Main worker error : " + e.getMessage());
-					stopWork();
-					taskListener.onFailure();
-					taskListener.onException(e);
+					handMainException(e);
 				}
 			}
 		});
 		th.start();
 	}
+	
+	private void handMainException(Exception e) {
+		stopWork();
+		checkRandomFileClose();
+		deleteSaveAndTaskFile();
+		taskListener.onFailure(e);
+	}
 
-	private boolean invalidateTaskFile(RandomAccessFile taskRandomFile) {
+	private void deleteSaveAndTaskFile() {
+		if (saveFile != null) {
+			saveFile.delete();
+		}
+		if (taskFile != null) {
+			taskFile.delete();
+		}
+	}
+	private boolean validateTaskFile(RandomAccessFile taskRandomFile) {
 		try {
 			if (taskRandomFile != null && taskRandomFile.length() == 0) {
 				return false;
@@ -216,14 +224,7 @@ public class TaskAssign {
 
 			es.execute(new Runnable() {
 				public void run() {
-					try {
-						down(f1, f2, t, start, end, length, j);
-					} catch (Exception e) {
-						stopWork();
-						taskListener.onFailure();
-						Loger.log(TAG,
-								"runnable worker error : " + e.getMessage());
-					}
+					down(f1, f2, t, start, end, length, j);
 				}
 
 			});
@@ -288,7 +289,7 @@ public class TaskAssign {
 	 */
 	private void down(RandomAccessFile taskRandomFile,
 			RandomAccessFile downRandomFile, Task task, long start, long end,
-			long length, int sectionNo) throws Exception {
+			long length, int sectionNo) {
 		HttpURLConnection conn = null;
 		try {
 			long oldTime = System.currentTimeMillis();
@@ -308,13 +309,13 @@ public class TaskAssign {
 
 			if (conn.getResponseCode() != 206) {
 
-				throw new RuntimeException();
+				throw new Exception("conn.getResponseCode() != 206");
 
 			}
 
 			if (conn.getContentLength() != (end - start)) {
 
-				throw new RuntimeException();
+				throw new Exception("conn.getContentLength() != (end - start)");
 
 			}
 
@@ -357,8 +358,10 @@ public class TaskAssign {
 			Loger.log(TAG, "Section finished. " + sectionNo + "cast: "
 					+ (System.currentTimeMillis() - oldTime));
 		} catch (Exception e) {
+			Loger.log(TAG,
+					"runnable worker error : " + e.getMessage());
 			stopWork();
-			taskListener.onFailure();
+			taskListener.onFailure(new WorkerThreadException(e.getMessage()));
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
@@ -410,7 +413,7 @@ public class TaskAssign {
 		} catch (Exception e) {
 			Loger.log(TAG, "downSingle Error:" + e.getMessage());
 			stopWork();
-			taskListener.onFailure();
+			taskListener.onFailure(new WorkerThreadException(e.getMessage()));
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
@@ -456,43 +459,19 @@ public class TaskAssign {
 	}
 
 	private void initTaskFile(RandomAccessFile taskRandomFile, Task task)
-			throws IOException {
-		int secCount = task.getSectionCount();
-		long per = task.getContentLength() / secCount;
-		long[] sectionsOffset = new long[secCount];
-		for (int i = 0; i < secCount; i++) {
-			sectionsOffset[i] = per * i;
+			throws CreateTaskFileException {
+		try {
+			int secCount = task.getSectionCount();
+			long per = task.getContentLength() / secCount;
+			long[] sectionsOffset = new long[secCount];
+			for (int i = 0; i < secCount; i++) {
+				sectionsOffset[i] = per * i;
+			}
+			task.setSectionsOffset(sectionsOffset);
+			task.create(taskRandomFile);
+		} catch (Exception e) {
+			throw new CreateTaskFileException(e.getMessage());
 		}
-		task.setSectionsOffset(sectionsOffset);
-		task.create(taskRandomFile);
-	}
-
-	public interface TaskListener {
-		public void onSuccess();
-
-		public void onFailure();
-
-		public void onException(Exception e);
-
-		public void onPreTask();
-
-		public void resumeTask();
-
-		public void onBeforeExecute();
-
-		/**
-		 * not assigned main thread will call this method, you can count the
-		 * current downloaded number by yourself.
-		 * 
-		 * @param added
-		 * @param downloaded
-		 *            has added the increment
-		 * @param total
-		 */
-		public void onUpdateProgress(double added, double downloaded,
-				double total);
-
-		public void onFileExist();
 	}
 
 	public void setTaskListener(TaskListener taskListener) {
