@@ -230,6 +230,7 @@ public class TaskAssign {
 	}
 
 	private void success() {
+		checkRandomFileClose();
 		if (!taskFile.delete()) {
 			taskFile = new File(mTask.getSaveFile() + APPEND_TASKFILE);
 			if (taskFile.exists() && taskFile.isFile()) {
@@ -250,7 +251,6 @@ public class TaskAssign {
 				}
 			}
 		}
-		checkRandomFileClose();
 		taskListener.onSuccess();
 	}
 
