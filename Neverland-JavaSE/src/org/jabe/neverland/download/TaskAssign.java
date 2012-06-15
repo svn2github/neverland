@@ -9,203 +9,266 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.jabe.neverland.download.exception.CreateTaskFileException;
+import org.jabe.neverland.download.exception.ReadTaskFileException;
+import org.jabe.neverland.download.exception.StorageFullException;
+import org.jabe.neverland.download.exception.WorkerThreadException;
 
 public class TaskAssign {
-
-	public static long currentCount = 0;
 	public static final String TAG = "TaskAssign";
 
-	public static void showPercent(int add, long total) {
-		currentCount += add;
-		System.out.println("Total percent : "
-				+ ((double) currentCount / (double) total) * 100 + "%");
-	}
-
+	private static final String APPEND_TASKFILE = ".r_task";
+	private static final String APPEND_SAVEFIlE = ".r_save";
 	private TaskListener taskListener;
+	private volatile boolean keepWorking = true;
+	private Task mTask;
+	private Boolean[] successTag;
+	private RandomAccessFile taskRandomFile;
+	private RandomAccessFile downRandomFile;
+	private File taskFile;
+	private File saveFile;
 
-	public void work(Task task) {
+	public void work(final Task task) {
+		Thread th = new Thread(new Runnable() {
 
-		if (taskListener == null) {
-			throw new RuntimeException("task listener can not be null!");
-		}
-
-		// TaskListener lifecycle
-		taskListener.onPreTask();
-
-		File file = new File(task.getSaveFile());
-		if (file.exists()) {
-			return;
-		}
-
-		// 这个是记录是否下载成功。我这里也没有增加失败回复、重试之类的工作。
-
-		final AtomicBoolean success = new AtomicBoolean(true);
-
-		// 任务描述文件
-
-		File taskFile = new File(task.getSaveFile() + ".r_task");
-
-		// 真正下载的文件
-
-		File saveFile = new File(task.getSaveFile() + ".r_save");
-
-		boolean taskFileExist = taskFile.exists();
-
-		RandomAccessFile taskRandomFile = null;
-
-		RandomAccessFile downRandomFile = null;
-
-		try {
-
-			taskRandomFile = new RandomAccessFile(taskFile, "rw");
-
-			downRandomFile = new RandomAccessFile(saveFile, "rw");
-
-			long rtnLen = taskListener.getContentLength();
-
-			Loger.log(TAG, "get length : " + (double) rtnLen / 1024 + "K");
-
-			if (!taskFileExist) {
-
-				// 如果文件不存在，就初始化任务文件和下载文件
-
-				task.setContentLength(rtnLen);
-
-				initTaskFile(taskRandomFile, task);
-
-				downRandomFile.setLength(rtnLen);
-
-			} else {
-
-				// 任务文件存在就读取任务文件
-
-				taskListener.resumeTask();
-
-				task.read(taskRandomFile);
-
-				if (task.getContentLength() != rtnLen) {
-
-					throw new RuntimeException(
-							"saved content length not equal listenter's assigned length while resume task");
-
+			@Override
+			public void run() {
+				mTask = task;
+				
+				if (taskListener == null || task.getContentLength() < 0) {
+					Loger.log(TAG,
+					"task listener can not be null or task content length can not < 0");
+					return;
 				}
 
-			}
+				// TaskListener lifecycle
+				taskListener.onPreTask();
 
-			int secCount = task.getSectionCount();
-
-			// 分配线程去下载，这里用到线程池
-
-			taskListener.onBeforeExecute();
-
-			ExecutorService es = Executors.newFixedThreadPool(task
-					.getWorkerCount());
-
-			Loger.log(TAG, "start worker : " + secCount);
-
-			for (int i = 0; i < secCount; i++) {
-
-				final int j = i;
-
-				final Task t = task;
-
-				final RandomAccessFile f1 = taskRandomFile;
-
-				final RandomAccessFile f2 = downRandomFile;
-
-				final long length = t.getContentLength();
-
-				final long start = t.getSectionsOffset()[j];
-
-				long endt = -1;
-
-				long per = 0;
-
-				// 这里要注意一下，这里是计算当前块的长度
-
-				if (j < t.getSectionCount() - 1) {
-
-					per = t.getContentLength() / t.getSectionCount();
-
-					endt = per * (j + 1);
-
-				} else {
-
-					endt = t.getContentLength();
-
-					per = endt - start;
-
+				File file = new File(task.getSaveFile());
+				if (file.exists()) {
+					checkRandomFileClose();
+					taskListener.onFileExist(file);
+					return;
 				}
 
-				final long end = endt;
+				// 任务描述文件
 
-				if (start >= end) {
-					Loger.log(TAG, "Section has finished before. " + j);
-					continue;
-				}
+				taskFile = new File(task.getSaveFile() + APPEND_TASKFILE);
 
-				es.execute(new Runnable() {
-					public void run() {
+				// 真正下载的文件
+
+				saveFile = new File(task.getSaveFile() + APPEND_SAVEFIlE);
+
+				boolean taskFileExist = taskFile.exists();
+
+				checkRandomFileClose();
+
+				try {
+
+					taskRandomFile = new RandomAccessFile(taskFile, "rw");
+
+					downRandomFile = new RandomAccessFile(saveFile, "rw");
+
+					long rtnLen = task.getContentLength();
+
+					Loger.log(TAG, "get length : " + (double) rtnLen / 1024
+							+ "K");
+
+					if (!taskFileExist) {
+
+						// 如果文件不存在，就初始化任务文件和下载文件
+
+						task.setContentLength(rtnLen);
+
+						initTaskFile(taskRandomFile, task);
+
+						//如果文件很大,会用时很久,也可能存储空间不够.
+						//存储空间不够抛出的是IOException, 文件会被创建, 大小为剩余容量, 所以创建失败后应该删除.
+						Loger.log(TAG, "begin to create save file , size:" + rtnLen);
 						try {
-							down(f1, f2, t, start, end, length, j);
-						} catch (IOException e) {
-							success.set(false);
-							Loger.log(TAG,
-									"runnable worker error : " + e.getMessage());
+							downRandomFile.setLength(rtnLen);
+						} catch (Exception e) {
+							throw new StorageFullException(e.getMessage());
 						}
+						Loger.log(TAG, "end to create save file , size:" + rtnLen);
+
+					} else {
+
+						// 检查 任务文件 的合法性
+						if(!validateTaskFile(taskRandomFile)) {
+							throw new ReadTaskFileException("while validateTaskFile");
+						}
+
+						taskListener.resumeTask();
+
+						task.read(taskRandomFile);
 					}
 
-				});
+					int secCount = task.getSectionCount();
 
+					// 分配线程去下载，这里用到线程池
+
+					taskListener.onBeforeExecute();
+
+					if (secCount > 1) {
+						doMultipleWork(task, secCount);
+					} else {
+						doSingleWork();
+					}
+
+				} catch (Exception e) {
+					handMainException(e);
+				}
 			}
+		});
+		th.start();
+	}
+	
+	private void handMainException(Exception e) {
+		stopWork();
+		checkRandomFileClose();
+		deleteSaveAndTaskFile();
+		taskListener.onFailure(e);
+	}
 
-			es.shutdown();
+	private void deleteSaveAndTaskFile() {
+		if (saveFile != null) {
+			saveFile.delete();
+		}
+		if (taskFile != null) {
+			taskFile.delete();
+		}
+	}
+	private boolean validateTaskFile(RandomAccessFile taskRandomFile) {
+		try {
+			if (taskRandomFile != null && taskRandomFile.length() == 0) {
+				return false;
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
+	}
 
-			es.awaitTermination(24 * 3600, TimeUnit.SECONDS);
+	private void doSingleWork() {
+		final RandomAccessFile f1 = taskRandomFile;
+		final RandomAccessFile f2 = downRandomFile;
+		final long length = mTask.getContentLength();
+		final long start = mTask.getDownloadedLength();
+		final long end = mTask.getContentLength();
+		if (start == end) {
+			success();
+			return;
+		}
+		Thread worker = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				downSingle(f1, f2, mTask, length, start, end);
+			}
+		});
+		worker.start();
+	}
 
-			taskRandomFile.close();
+	private void doMultipleWork(Task task, int secCount) {
+		ExecutorService es = Executors
+				.newFixedThreadPool(task.getWorkerCount());
 
-			taskRandomFile = null;
+		Loger.log(TAG, "start worker : " + secCount);
+		successTag = new Boolean[secCount];
+		for (int i = 0; i < successTag.length; i++) {
+			successTag[i] = false;
+		}
+		for (int i = 0; i < secCount; i++) {
+			final int j = i;
 
-			downRandomFile.close();
+			final Task t = task;
 
-			downRandomFile = null;
+			final RandomAccessFile f1 = taskRandomFile;
 
-			// 如果下载成功，去掉任务描述文件、帮下载文件改名
+			final RandomAccessFile f2 = downRandomFile;
 
-			if (success.get()) {
+			final long length = t.getContentLength();
 
-				taskFile.delete();
+			final long start = t.getSectionsOffset()[j];
 
-				saveFile.renameTo(file);
+			long endt = -1;
 
-				taskListener.onSuccess();
+			long per = 0;
+
+			// 这里要注意一下，这里是计算当前块的长度
+
+			if (j < t.getSectionCount() - 1) {
+
+				per = t.getContentLength() / t.getSectionCount();
+
+				endt = per * (j + 1);
 
 			} else {
-				taskListener.onFailure();
+
+				endt = t.getContentLength();
+
+				per = endt - start;
+
 			}
 
-		} catch (Exception e) {
-			Loger.log(TAG, "Main worker error : " + e.getMessage());
-			taskListener.onFailure();
-		} finally {
-			if (taskRandomFile != null) {
-				try {
-					taskRandomFile.close();
-				} catch (IOException e) {
-				}
-				taskRandomFile = null;
+			final long end = endt;
+
+			if (start >= end) {
+				triggerSuccess(j);
+				Loger.log(TAG, "Section has finished before. " + j);
+				continue;
 			}
-			if (downRandomFile != null) {
-				try {
-					downRandomFile.close();
-				} catch (IOException e) {
+
+			es.execute(new Runnable() {
+				public void run() {
+					down(f1, f2, t, start, end, length, j);
+				}
+
+			});
+		}
+	}
+
+	private void success() {
+		if (!taskFile.delete()) {
+			taskFile = new File(mTask.getSaveFile() + APPEND_TASKFILE);
+			if (taskFile.exists() && taskFile.isFile()) {
+				if (!taskFile.delete()) {
+					Loger.log(TAG, "delete file failure!");
+				} else {
 
 				}
-				downRandomFile = null;
 			}
+		}
+		if (!saveFile.renameTo(new File(mTask.getSaveFile()))) {
+			saveFile = new File(mTask.getSaveFile() + APPEND_SAVEFIlE);
+			if (saveFile.exists()) {
+				if (!saveFile.renameTo(new File(mTask.getSaveFile()))) {
+					Loger.log(TAG, "rename file failure!");
+				} else {
+
+				}
+			}
+		}
+		checkRandomFileClose();
+		taskListener.onSuccess();
+	}
+
+	private void checkRandomFileClose() {
+		if (taskRandomFile != null) {
+			try {
+				taskRandomFile.close();
+			} catch (IOException e) {
+			}
+			taskRandomFile = null;
+		}
+		if (downRandomFile != null) {
+			try {
+				downRandomFile.close();
+			} catch (IOException e) {
+
+			}
+			downRandomFile = null;
 		}
 	}
 
@@ -222,57 +285,49 @@ public class TaskAssign {
 	 *            index
 	 * @throws IOException
 	 */
-	public void down(RandomAccessFile taskRandomFile,
+	private void down(RandomAccessFile taskRandomFile,
 			RandomAccessFile downRandomFile, Task task, long start, long end,
-			long length, int sectionNo) throws IOException {
-
-		long oldTime = System.currentTimeMillis();
-
-		// 这里我用HttpURLConnection下载，你也可以用HttpClient或者自己实现一个Http协议（不过貌似没有必要）
-
-		URL u = new URL(task.getDownURL());
-
-		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-
-		String range = "bytes=" + start + "-" + (end - 1);
-
-		conn.setRequestProperty("Range", range);
-
-		conn.setRequestProperty("User-Agent", "Ray-Downer");
+			long length, int sectionNo) {
+		HttpURLConnection conn = null;
 		try {
+			long oldTime = System.currentTimeMillis();
+
+			// 这里我用HttpURLConnection下载，你也可以用HttpClient或者自己实现一个Http协议（不过貌似没有必要）
+
+			URL u = new URL(task.getDownURL());
+
+			conn = (HttpURLConnection) u.openConnection();
+			initHeaders(conn);
+
+			String range = "bytes=" + start + "-" + (end - 1);
+
+			conn.setRequestProperty("Range", range);
 
 			conn.connect();
 
 			if (conn.getResponseCode() != 206) {
 
-				throw new RuntimeException();
+				throw new Exception("conn.getResponseCode() != 206");
 
 			}
 
 			if (conn.getContentLength() != (end - start)) {
 
-				throw new RuntimeException();
+				throw new Exception("conn.getContentLength() != (end - start)");
 
 			}
 
 			InputStream is = conn.getInputStream();
 
-			byte[] temp = new byte[task.getBufferSize()];// 8KB
+			byte[] temp = new byte[task.getBufferSize()];
 
 			BufferedInputStream bis = new BufferedInputStream(is, temp.length);
 
 			int readed = 0;
 
-			int total = 0;
-
-			while ((readed = bis.read(temp)) > 0) {
-
-				total += readed;
-
+			while ((readed = bis.read(temp)) > 0 && keepWorking) {
 				long offset = task.getSectionsOffset()[sectionNo];
-
 				synchronized (task) {
-
 					// 下载之后顺便更新描述文件，你可能会发现这里效率比较低，在一个线程同步里进行两次文件操作。你可以自己实现一个缓冲写。
 
 					downRandomFile.seek(offset);
@@ -283,82 +338,138 @@ public class TaskAssign {
 
 					task.getSectionsOffset()[sectionNo] = offset;
 
+					task.updateDownloadedLength(readed);
+
 					task.writeOffset(taskRandomFile);
 
-					taskListener.onUpdateProgress(readed, length);
-
-					showPercent(readed, length);
+					taskListener.onUpdateProgress(readed,
+							task.getDownloadedLength(), length);
 				}
-
 			}
-
-		} finally {
+			if (keepWorking) {
+				triggerSuccess(sectionNo);
+			}
 			if (conn != null) {
 				conn.disconnect();
 				conn = null;
 			}
-		}
-		Loger.log(
-				TAG,
-				"Section finished. " + sectionNo + "cast: "
-						+ (System.currentTimeMillis() - oldTime));
-	}
-
-	public void initTaskFile(RandomAccessFile taskRandomFile, Task task)
-			throws IOException {
-
-		int secCount = task.getSectionCount();
-
-		long per = task.getContentLength() / secCount;
-
-		long[] sectionsOffset = new long[secCount];
-
-		for (int i = 0; i < secCount; i++) {
-
-			sectionsOffset[i] = per * i;
-
-		}
-
-		task.setSectionsOffset(sectionsOffset);
-
-		task.create(taskRandomFile);
-
-	}
-
-	public long getContentLength(String url) throws IOException {
-		System.out.println("begin to get contentLength");
-		URL u = new URL(url);
-		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-		try {
-			return conn.getContentLength();
+			Loger.log(TAG, "Section finished. " + sectionNo + "cast: "
+					+ (System.currentTimeMillis() - oldTime));
+		} catch (Exception e) {
+			Loger.log(TAG,
+					"runnable worker error : " + e.getMessage());
+			stopWork();
+			taskListener.onFailure(new WorkerThreadException(e.getMessage()));
 		} finally {
-			conn.disconnect();
+			if (conn != null) {
+				conn.disconnect();
+			}
+		}
+
+	}
+
+	private void downSingle(RandomAccessFile taskRandomFile,
+			RandomAccessFile downRandomFile, Task task, long length,
+			long start, long end) {
+		HttpURLConnection conn = null;
+		try {
+			// 这里我用HttpURLConnection下载，你也可以用HttpClient或者自己实现一个Http协议（不过貌似没有必要）
+
+			URL u = new URL(task.getDownURL());
+
+			conn = (HttpURLConnection) u.openConnection();
+			initHeaders(conn);
+
+			if (start > 0) {
+				String range = "bytes=" + start + "-" + (end - 1);
+				conn.setRequestProperty("Range", range);
+			}
+			conn.connect();
+			if (start > 0 && conn.getContentLength() != (end - start)) {
+				throw new RuntimeException(
+						"conn.getContentLength() != (end - start)");
+			}
+
+			InputStream is = conn.getInputStream();
+
+			byte[] temp = new byte[task.getBufferSize()];
+
+			BufferedInputStream bis = new BufferedInputStream(is, temp.length);
+
+			int readed = 0;
+			long offset = task.getDownloadedLength();
+			while ((readed = bis.read(temp)) > 0 && keepWorking) {
+				downRandomFile.seek(offset);
+				downRandomFile.write(temp, 0, readed);
+				offset += readed;
+				task.updateDownloadedLength(readed);
+				task.writeOffset(taskRandomFile);
+				taskListener.onUpdateProgress(readed,
+						task.getDownloadedLength(), length);
+			}
+			success();
+		} catch (Exception e) {
+			Loger.log(TAG, "downSingle Error:" + e.getMessage());
+			stopWork();
+			taskListener.onFailure(new WorkerThreadException(e.getMessage()));
+		} finally {
+			if (conn != null) {
+				conn.disconnect();
+			}
 		}
 	}
 
-	public interface TaskListener {
-		public long getContentLength();
+	private void initHeaders(HttpURLConnection conn) {
+		conn.setRequestProperty("Connection", "Keep-Alive");
+		conn.setRequestProperty("Charset", "UTF-8");
+		conn.setRequestProperty("Accept-Language", "zh-CN");
+		conn.setRequestProperty("User-Agent", "Android");
+	}
 
-		public void onSuccess();
+	private void triggerSuccess(int sectionNo) {
+		successTag[sectionNo] = true;
+		checkAllSuccess();
+	}
 
-		public void onFailure();
+	private void checkAllSuccess() {
+		boolean temp = true;
+		for (int i = 0; i < successTag.length; i++) {
+			if (!successTag[i]) {
+				temp = false;
+				break;
+			}
+		}
+		if (temp) {
+			success();
+		}
+	}
 
-		public void onPreTask();
+	public void stopWork() {
+		keepWorking = false;
+		checkRandomFileClose();
+	}
 
-		public void resumeTask();
+	public void reStartWork() {
+		if (mTask != null) {
+			keepWorking = true;
+			work(mTask);
+		}
+	}
 
-		public void onBeforeExecute();
-
-		/**
-		 * not assigned main thread will call this method, you may count the
-		 * current downloaded number by yourself.
-		 * 
-		 * @param added
-		 *            new added data count
-		 * @param total
-		 *            total data count
-		 */
-		public void onUpdateProgress(double added, double total);
+	private void initTaskFile(RandomAccessFile taskRandomFile, Task task)
+			throws CreateTaskFileException {
+		try {
+			int secCount = task.getSectionCount();
+			long per = task.getContentLength() / secCount;
+			long[] sectionsOffset = new long[secCount];
+			for (int i = 0; i < secCount; i++) {
+				sectionsOffset[i] = per * i;
+			}
+			task.setSectionsOffset(sectionsOffset);
+			task.create(taskRandomFile);
+		} catch (Exception e) {
+			throw new CreateTaskFileException(e.getMessage());
+		}
 	}
 
 	public void setTaskListener(TaskListener taskListener) {

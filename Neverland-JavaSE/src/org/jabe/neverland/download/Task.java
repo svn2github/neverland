@@ -1,60 +1,53 @@
 package org.jabe.neverland.download;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.jabe.neverland.download.TaskAssign.TaskListener;
+import org.jabe.neverland.download.exception.ReadTaskFileException;
 
 //这个是任务Bean
 
 public class Task {
 	private String downURL;
 	private String saveFile;
-	private int bufferSize = 64 * 1024;//单位bit
+	private int bufferSize = 4 * 1024;//64K, 4K
 	private int workerCount;
 	private int sectionCount;
 	private long contentLength;
+	private volatile long downloadedLength = 0;
 	private long[] sectionsOffset;
 
-	public static final int HEAD_SIZE = 4096;//单位字节, 4K
+	public static final int HEAD_SIZE = 1024;//单位字节
 
 	// 读下载描述文件内容
 
-	public synchronized void read(RandomAccessFile file) throws IOException {
+	public synchronized void read(RandomAccessFile file) throws ReadTaskFileException {
+		try {
+			file.seek(0);
+			downURL = file.readUTF();
 
-		byte[] temp = new byte[HEAD_SIZE];
+			saveFile = file.readUTF();
 
-		file.seek(0);
+			sectionCount = file.readInt();
 
-		int readed = file.read(temp);
+			contentLength = file.readLong();
 
-		if (readed != temp.length) {
+			file.seek(HEAD_SIZE);
+			downloadedLength = file.readLong();
 
-			throw new RuntimeException();
-
+			sectionsOffset = new long[sectionCount];
+			for (int i = 0; i < sectionCount; i++) {
+				sectionsOffset[i] = file.readLong();
+			}
+		} catch (Exception e) {
+			throw new ReadTaskFileException(e.getMessage());
 		}
 
-		ByteArrayInputStream bais = new ByteArrayInputStream(temp);
-
-		DataInputStream dis = new DataInputStream(bais);
-
-		downURL = dis.readUTF();
-
-		saveFile = dis.readUTF();
-
-		sectionCount = dis.readInt();
-
-		contentLength = dis.readLong();
-		sectionsOffset = new long[sectionCount];
-		for (int i = 0; i < sectionCount; i++) {
-			sectionsOffset[i] = file.readLong();
-		}
 	}
 
 	public synchronized void create(RandomAccessFile file) throws IOException {
@@ -97,25 +90,27 @@ public class Task {
 	// 更新下载的过程
 	public synchronized void writeOffset(RandomAccessFile file)
 			throws IOException {
-
 		if (sectionCount != sectionsOffset.length) {
-
-			throw new RuntimeException();
-
+			throw new RuntimeException("sectionCount != sectionsOffset.length");
 		}
 		file.seek(HEAD_SIZE);
+		file.writeLong(downloadedLength);//write default downloaded count
 		for (int i = 0; i < sectionsOffset.length; i++) {
 			file.writeLong(sectionsOffset[i]);
-		}// 这个是下载主程序
+		}
+	}
+
+	public synchronized void updateDownloadedLength(long added) {
+		downloadedLength += added;
 	}
 
 	public static void main(String[] args) {
-		
+
 		long oldTime = System.currentTimeMillis();
-		
+
 		System.out.println("Start Download");
 
-		test4();
+		test3();
 
 		System.out.println("\n\n===============\nFinished. Total Cast : " + ((double)(System.currentTimeMillis() - oldTime))/(double)60000 + "min");
 	}
@@ -159,10 +154,18 @@ public class Task {
 	}
 
 	public static void test3() {
+		final String url = "http://go.microsoft.com/fwlink/?linkid=57034";
 
 		Task task = new Task();
 
-		task.setDownURL("http://go.microsoft.com/fwlink/?linkid=57034");
+		task.setDownURL(url);
+
+		try {
+			task.setContentLength(getContentLength(url));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
 
 		task.setSaveFile("H:/vc2005express.iso");
 
@@ -173,46 +176,25 @@ public class Task {
 		task.setBufferSize(128 * 1024);
 
 		TaskAssign ta = new TaskAssign();
+
 		ta.setTaskListener(new TaskListener() {
-			
-			@Override
-			public void resumeTask() {
-				
-			}
-			
-			@Override
-			public void onUpdateProgress(double added, double total) {
-				
-			}
-			
+
 			@Override
 			public void onSuccess() {
-				
+
 			}
-			
+
 			@Override
-			public void onPreTask() {
-				
+			public void onFailure(Exception e) {
+
 			}
-			
+
 			@Override
-			public void onFailure() {
-				
+			public void onUpdateProgress(double added, double downloaded,
+					double total) {
+				System.out.println("current percent :" + ((downloaded / total) * 100));
 			}
-			
-			@Override
-			public void onBeforeExecute() {
-				
-			}
-			
-			@Override
-			public long getContentLength() {
-				try {
-					return Task.getContentLength("http://go.microsoft.com/fwlink/?linkid=57034");
-				} catch (IOException e) {
-					return 0;
-				}
-			}
+
 		});
 		ta.work(task);
 	}
@@ -232,47 +214,7 @@ public class Task {
 		task.setBufferSize(128 * 1024);
 
 		TaskAssign ta = new TaskAssign();
-		ta.setTaskListener(new TaskListener() {
-			
-			@Override
-			public void resumeTask() {
-				
-			}
-			
-			@Override
-			public void onUpdateProgress(double added, double total) {
-				
-			}
-			
-			@Override
-			public void onSuccess() {
-				
-			}
-			
-			@Override
-			public void onPreTask() {
-				
-			}
-			
-			@Override
-			public void onFailure() {
-				
-			}
-			
-			@Override
-			public void onBeforeExecute() {
-				
-			}
-			
-			@Override
-			public long getContentLength() {
-				try {
-					return Task.getContentLength("http://down.sandai.net/Thunder5.7.9.472.exe");
-				} catch (IOException e) {
-					return 0;
-				}
-			}
-		});
+
 		ta.work(task);
 	}
 
@@ -294,9 +236,15 @@ public class Task {
 
 		ta.work(task);
 	}
-	
+	public static double currentCount = 0;
+	public static void showPercent(double add, double total) {
+		currentCount += add;
+		System.out.println("Total percent : "
+				+ (currentCount / total) * 100 + "%");
+	}
+
+
 	public static long getContentLength(String url) throws IOException {
-		System.out.println("begin to get contentLength");
 		URL u = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
 		try {
@@ -360,6 +308,10 @@ public class Task {
 
 	public void setSectionsOffset(long[] sectionsOffset) {
 		this.sectionsOffset = sectionsOffset;
+	}
+
+	public long getDownloadedLength() {
+		return downloadedLength;
 	}
 
 }
