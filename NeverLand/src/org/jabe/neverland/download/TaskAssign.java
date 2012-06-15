@@ -22,6 +22,7 @@ public class TaskAssign {
 	private static final String APPEND_SAVEFIlE = ".r_save";
 	private TaskListener taskListener;
 	private volatile boolean keepWorking = true;
+	private volatile boolean needWait = false;
 	private Task mTask;
 	private Boolean[] successTag;
 	private RandomAccessFile taskRandomFile;
@@ -344,6 +345,10 @@ public class TaskAssign {
 
 					taskListener.onUpdateProgress(readed,
 							task.getDownloadedLength(), length);
+					
+					if (needWait) {
+						task.wait();
+					}
 				}
 			}
 			if (keepWorking) {
@@ -406,6 +411,11 @@ public class TaskAssign {
 				task.writeOffset(taskRandomFile);
 				taskListener.onUpdateProgress(readed,
 						task.getDownloadedLength(), length);
+				if (needWait) {
+					synchronized (task) {
+						task.wait();
+					}
+				}
 			}
 			success();
 		} catch (Exception e) {
@@ -453,6 +463,17 @@ public class TaskAssign {
 		if (mTask != null) {
 			keepWorking = true;
 			work(mTask);
+		}
+	}
+	
+	public void pauseWork() {
+		needWait = true;
+	}
+	
+	public void resumeWork() {
+		needWait = false;
+		synchronized (mTask) {
+			mTask.notifyAll();
 		}
 	}
 

@@ -19,13 +19,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class DownloadActivity extends Activity {
 
-	private Button mButton;
+	private Button mPauseButton, mResumeButton;
 	private ProgressBar mProgressBar;
 	private ProgressDialog mProgressDialog;
 	private long contentLength = -1;
@@ -168,11 +169,25 @@ public class DownloadActivity extends Activity {
 			}
 		};
 		aTask.execute();
+		mPauseButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				taskAssign.pauseWork();
+			}
+		});
+		mResumeButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				taskAssign.resumeWork();
+			}
+		});
 	}
 
 	private void setUpView() {
-		mButton = (Button) findViewById(R.id.button1);
-		mButton.setVisibility(View.GONE);
+		mPauseButton = (Button) findViewById(R.id.button1);
+		mResumeButton = (Button) findViewById(R.id.button2);
 		mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		mProgressDialog = new ProgressDialog(this);
 		mProgressDialog.setCancelable(false);

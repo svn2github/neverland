@@ -115,44 +115,6 @@ public class Task {
 		System.out.println("\n\n===============\nFinished. Total Cast : " + ((double)(System.currentTimeMillis() - oldTime))/(double)60000 + "min");
 	}
 
-	public static void test1() throws IOException {
-
-		Task task = new Task();
-
-		task.setDownURL("http://61.152.235.21/qqfile/qq/2007iistable/QQ2007IIKB1.exe");
-
-		task.setSaveFile("H:/Test2.exe");
-
-		task.setSectionCount(200);
-
-		task.setWorkerCount(100);
-
-		task.setBufferSize(256 * 1024);
-
-		TaskAssign ta = new TaskAssign();
-
-		ta.work(task);
-	}
-
-	public static void test2() {
-
-		Task task = new Task();
-
-		task.setDownURL("http://student1.scut.edu.cn:8880/manage/news/data/1208421861893.xls");
-
-		task.setSaveFile("H:/Test3.xls");
-
-		task.setSectionCount(5);
-
-		task.setWorkerCount(1);
-
-		task.setBufferSize(128 * 1024);
-
-		TaskAssign ta = new TaskAssign();
-
-		ta.work(task);
-	}
-
 	public static void test3() {
 		final String url = "http://go.microsoft.com/fwlink/?linkid=57034";
 		
@@ -179,7 +141,8 @@ public class Task {
 			
 			@Override
 			public void onUpdateProgress(double added, double downloaded, double total) {
-				showPercent(added, total);
+				System.out.println("Total percent : "
+						+ (downloaded / total) * 100 + "%");
 			}
 			
 			@Override
@@ -247,14 +210,6 @@ public class Task {
 
 		ta.work(task);
 	}
-	public static double currentCount = 0;
-	public static void showPercent(double add, double total) {
-		currentCount += add;
-		System.out.println("Total percent : "
-				+ (currentCount / total) * 100 + "%");
-	}
-	
-
 	public static long getContentLength(String url) throws IOException {
 		URL u = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
