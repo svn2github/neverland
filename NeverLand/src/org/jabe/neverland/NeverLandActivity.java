@@ -35,7 +35,7 @@ public class NeverLandActivity extends ListActivity {
 				Class clazz = Class.forName(packageName);
 				startIntentByClass(clazz);
 			} catch (Exception e) {
-				
+				e.printStackTrace(System.out);
 			}
 		}
 

@@ -34,7 +34,6 @@ public class TaskAssign {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				mTask = task;
 				
 				if (taskListener == null || task.getContentLength() < 0) {
@@ -165,7 +164,6 @@ public class TaskAssign {
 		Thread worker = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				downSingle(f1, f2, mTask, length, start, end);
 			}
 		});

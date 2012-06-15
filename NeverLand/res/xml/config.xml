@@ -2,34 +2,42 @@
 <config>
     <item name="org.jabe.neverland.activity.PullRefreshActivity">
         <title>下拉刷新(LinearLayout + ListView)</title>
-    	<description>ListView下拉刷新</description>    
+    	<description>ListView下拉刷新</description>
     </item>
-    
+
     <item name="org.jabe.neverland.activity.PullRefreshListviewActivity">
         <title>下拉刷新(ListView + HeadView)</title>
-        <description>ListView下拉刷新</description>   
+        <description>ListView下拉刷新</description>
     </item>
-    
+
     <item name="org.jabe.neverland.activity.FastScrollerActivity">
         <title>ListView自定义滚动条</title>
-        <description>ListView自定义滚动条</description>   
+        <description>ListView自定义滚动条</description>
     </item>
-    
+
     <item name="org.jabe.neverland.activity.DragListActivity">
         <title>ListView分组拖拽</title>
-        <description>ListView分组拖拽</description>   
+        <description>ListView分组拖拽</description>
     </item>
-    
+
     <item name="org.jabe.neverland.activity.DragActivity">
         <title>ViewGroup左右滑动</title>
-        <description>ViewGroup左右滑动</description>   
+        <description>ViewGroup左右滑动</description>
     </item>
     <item name="org.jabe.neverland.activity.MotionActivity">
-        <title>Motion</title>
-        <description>Motion Test</description>   
+        <title>Motion表情</title>
+        <description>Motion Test</description>
     </item>
     <item name="org.jabe.neverland.activity.DownloadActivity">
-        <title>Download</title>
-        <description>Download Test</description>   
+        <title>Download(多线程断点下载)</title>
+        <description>Download Test</description>
+    </item>
+    <item name="org.jabe.neverland.activity.SurfaceViewActivity">
+        <title>SurfaceViewTest</title>
+        <description>SurfaceViewTest</description>
+    </item>
+    <item name="org.jabe.neverland.activity.HandWriterActivity">
+        <title>HandWriting(手写)</title>
+        <description>HandWriting</description>
     </item>
 </config>

@@ -26,27 +26,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity 
+
+        <activity
             android:name=".activity.PullRefreshActivity">
         </activity>
-        <activity 
+        <activity
             android:name=".activity.PullRefreshListviewActivity">
         </activity>
-        <activity 
+        <activity
             android:name=".activity.FastScrollerActivity">
         </activity>
-        <activity 
+        <activity
             android:name=".activity.DragListActivity">
         </activity>
-        <activity 
+        <activity
             android:name=".activity.DragActivity">
         </activity>
-         <activity 
+         <activity
             android:name=".activity.MotionActivity">
         </activity>
-        <activity 
+        <activity
             android:name=".activity.DownloadActivity">
+        </activity>
+        <activity
+            android:name=".activity.SurfaceViewActivity">
+        </activity>
+        <activity
+            android:name=".activity.HandWriterActivity">
         </activity>
     </application>
 
