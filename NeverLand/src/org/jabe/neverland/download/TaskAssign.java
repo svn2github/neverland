@@ -119,6 +119,7 @@ public class TaskAssign {
 					}
 
 				} catch (Exception e) {
+					Loger.log(TAG, "A exception occured at main work thread: " + e.toString());
 					handMainException(e);
 				}
 			}
