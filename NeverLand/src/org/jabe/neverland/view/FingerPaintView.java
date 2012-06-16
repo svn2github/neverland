@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.CornerPathEffect;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -27,7 +28,9 @@ public class FingerPaintView extends View {
 	private VelocityTracker mVelocityTracker;
 	private static final int VELOCITY_UNITS = 1000;
 	private float mCurrentVelocity;
-	private volatile float mCurrentStrokeWidth = 20;
+	private static final float STROKEWIDTH_MAX = 30;
+	private static final float STROKEWIDTH_MIN = 20;
+	private volatile float mCurrentStrokeWidth = STROKEWIDTH_MAX;
 
 	private Path mCurrentPath;
 	private Paint mCurrentPaint;
@@ -81,11 +84,12 @@ public class FingerPaintView extends View {
 		mCurrentPaint = new Paint();
 		mCurrentPaint.setAntiAlias(true);
 		mCurrentPaint.setDither(true);
-		mCurrentPaint.setColor(0xFFFF0000);
+		mCurrentPaint.setColor(0xFF000000);
 		mCurrentPaint.setStyle(Paint.Style.STROKE);
 		mCurrentPaint.setStrokeJoin(Paint.Join.ROUND);
 		mCurrentPaint.setStrokeCap(Paint.Cap.ROUND);
-		mCurrentPaint.setStrokeWidth(20);
+		mCurrentPaint.setStrokeWidth(STROKEWIDTH_MAX);
+		mCurrentPaint.setPathEffect(new CornerPathEffect(10));
 		savePath = new ArrayList<DrawPath>();
 	}
 
@@ -118,7 +122,7 @@ public class FingerPaintView extends View {
 		if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
 			float x2 = (x + mX) / 2;
 			float y2 = (y + mY) / 2;
-			mCurrentPath.quadTo(mX, mY, x2, y2);
+			mCurrentPath.quadTo(mX, mY, x, y);
 			mX = x;
 			mY = y;
 		}
@@ -135,6 +139,7 @@ public class FingerPaintView extends View {
 		mCurrentPath.lineTo(mX, mY);
 		savePath.add(getCurrentDrawPath());
 		mCurrentPath = null;
+		mCurrentStrokeWidth = STROKEWIDTH_MAX;
 		if (mListern != null) {
 			mListern.onTouchUp();
 		}
@@ -180,7 +185,7 @@ public class FingerPaintView extends View {
 	        mVelocityTracker.addMovement(event);
 
 			mCurrentPath = new Path();
-			mCurrentStrokeWidth = 20;
+			mCurrentStrokeWidth = STROKEWIDTH_MAX;
 
 			mIsFingerMoving = true;
 			touch_start(x, y);
@@ -218,14 +223,14 @@ public class FingerPaintView extends View {
 	}
 
 	private void addStrokeWidth() {
-		if (mCurrentStrokeWidth < 20) {
-			mCurrentStrokeWidth = mCurrentStrokeWidth + 0.5f;
+		if (mCurrentStrokeWidth < STROKEWIDTH_MAX) {
+			mCurrentStrokeWidth = mCurrentStrokeWidth + 1f;
 		}
 	}
 
 	private void removeStrokeWidth() {
-		if (mCurrentStrokeWidth > 10) {
-			mCurrentStrokeWidth = mCurrentStrokeWidth - 0.5f;
+		if (mCurrentStrokeWidth > STROKEWIDTH_MIN) {
+			mCurrentStrokeWidth = mCurrentStrokeWidth - 1f;
 		}
 	}
 
