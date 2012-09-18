@@ -18,6 +18,18 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/button1"
             android:text="Resume" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button2"
+            android:text="Delete" />
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button3"
+            android:text="Restart" />
     </RelativeLayout>
 
     <ProgressBar

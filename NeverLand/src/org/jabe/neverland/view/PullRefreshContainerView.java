@@ -328,6 +328,10 @@ public class PullRefreshContainerView extends LinearLayout {
 		mHeaderContainer.addView(header, 0);
 		mHeaderView = header;
 	}
+	
+	public void goneHeadView() {
+		setRefreshViewHeight(0);
+	}
 
 	private void setRefreshViewHeight(int height) {
 		if (mCurRefreshViewHeight == height) {

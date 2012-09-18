@@ -9,6 +9,7 @@ import org.jabe.neverland.R;
 import org.jabe.neverland.download.Task;
 import org.jabe.neverland.download.TaskAssign;
 import org.jabe.neverland.download.TaskListener;
+import org.jabe.neverland.util.Util;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -26,7 +27,7 @@ import android.widget.Toast;
 
 public class DownloadActivity extends Activity {
 
-	private Button mPauseButton, mResumeButton;
+	private Button mPauseButton, mResumeButton, mDeleteButton, mRestartButton;
 	private ProgressBar mProgressBar;
 	private ProgressDialog mProgressDialog;
 	private long contentLength = -1;
@@ -49,7 +50,7 @@ public class DownloadActivity extends Activity {
 		setContentView(R.layout.act_download_manager);
 		setUpView();
 //		testBigFile();
-		makeToast("AvailaleSize SD size : " + getAvailaleSize()/1024/1024 + "M"); 
+		makeToast("AvailaleSize SD size : " + getAvailaleSize()/1024/1024 + "M");
 		beginToDown();
 	}
 
@@ -170,24 +171,44 @@ public class DownloadActivity extends Activity {
 		};
 		aTask.execute();
 		mPauseButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				taskAssign.pauseWork();
 			}
 		});
 		mResumeButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				taskAssign.resumeWork();
 			}
 		});
+		mRestartButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mProgressBar.setProgress(0);
+				taskAssign.reStartWork();
+			}
+		});
+		mDeleteButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				File file = new File(task.getSaveFile());
+				if(file.delete()) {
+					Util.showToast(DownloadActivity.this, "删除文件成功!");
+				}
+			}
+		});
+
 	}
 
 	private void setUpView() {
 		mPauseButton = (Button) findViewById(R.id.button1);
 		mResumeButton = (Button) findViewById(R.id.button2);
+		mDeleteButton = (Button) findViewById(R.id.button3);
+		mRestartButton = (Button) findViewById(R.id.button4);
 		mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		mProgressDialog = new ProgressDialog(this);
 		mProgressDialog.setCancelable(false);

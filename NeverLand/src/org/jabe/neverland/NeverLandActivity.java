@@ -1,14 +1,24 @@
 package org.jabe.neverland;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -72,6 +82,105 @@ public class NeverLandActivity extends ListActivity {
 			this.description = description;
 		}
 
+	}
+
+	private String mDateTimeXmlContent;
+	private static final String TAG = "yanwc";
+	private static final String oppoServerURL = "http://newds.oppo.com/autotime/dateandtime.xml";
+
+	private boolean getNetType() {
+		ConnectivityManager conn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (conn == null) {
+			// Log.d(TAG, "conn = " + conn );
+			return false;
+		}
+
+		NetworkInfo info = conn.getActiveNetworkInfo();
+		if (info == null) {
+			// Log.d(TAG, "info = " + info );
+			return false;
+		}
+
+		String type = info.getTypeName(); // MOBILE(GPRS)WIFI
+		// Log.d(TAG, "type = " + type );
+		if (type.equalsIgnoreCase("WIFI")) {
+			return true;
+		} else if (type.equalsIgnoreCase("MOBILE")
+				|| type.equalsIgnoreCase("GPRS")) {
+			String apn = info.getExtraInfo();
+			// Log.d(TAG, "apn = " + apn );
+			if (apn != null && apn.equalsIgnoreCase("cmwap")) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		return true;
+	}
+
+	private boolean oppoServer() {
+		boolean returnFlag = false;
+		Log.d(TAG, "oppoServer run");
+		try {
+			// modify by maoJianGuo 2011-07-08
+			URL url = new URL(oppoServerURL);
+			HttpURLConnection httpconn = null;
+			String proxyHost = android.net.Proxy.getDefaultHost();
+			// Log.d(TAG, "proxyHost: " + proxyHost);
+			int proxyPort = android.net.Proxy.getDefaultPort();
+			// Log.d(TAG, "proxyPort: " + proxyPort);
+
+			// establish the connection
+			if (true == getNetType()) {
+				// Log.d(TAG, "true == getNetType()");
+				Log.d(TAG, "1");
+				httpconn = (HttpURLConnection) url.openConnection();
+				Log.d(TAG, "2");
+			} else if (false == getNetType()) {
+				// Log.d(TAG, "false == getNetType()");
+				// InetSocketAddress("10.0.0.172", 80)
+				Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(
+						proxyHost, proxyPort));
+				httpconn = (HttpURLConnection) url.openConnection(proxy);
+			}
+
+			httpconn.setDoInput(true);
+			httpconn.setConnectTimeout(5000);
+			Log.d(TAG, "3");
+			httpconn.connect();
+			Log.d(TAG, "4");
+			InputStreamReader mInputStreamReader = null;
+			BufferedReader mBufferedReader = null;
+			String mDateTimeXmlString = "";
+			long mBeginParseTime = 0;
+			if (httpconn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				Log.d(TAG, "5");
+				// get the time when begin parse the xml file
+				mBeginParseTime = System.currentTimeMillis();
+				// read data from net stream
+				mInputStreamReader = new InputStreamReader(
+						httpconn.getInputStream(), "utf-8");// GB2312
+				mBufferedReader = new BufferedReader(mInputStreamReader);
+				String lineString = "";
+				while ((lineString = mBufferedReader.readLine()) != null) {
+					mDateTimeXmlString = lineString;
+					// Log.e(TAG, "mDateTimeXmlString" + mDateTimeXmlString);
+					mDateTimeXmlContent = mDateTimeXmlString;
+				}
+				Log.d(TAG, "6");
+			}
+			// disconnect
+			mBufferedReader.close();
+			mInputStreamReader.close();
+			httpconn.disconnect();
+			Log.d(TAG, "7");
+
+		} catch (Exception e) {
+			Log.e(TAG, "oppoServer exception: " + e);
+			returnFlag = false;
+		} finally {
+			return returnFlag;
+		}
 	}
 
 	private interface Entry {

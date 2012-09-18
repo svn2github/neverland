@@ -21,6 +21,7 @@ public class Task {
 	private long contentLength;
 	private volatile long downloadedLength = 0;
 	private long[] sectionsOffset;
+	private String packageName;
 
 	public static final int HEAD_SIZE = 1024;//单位字节
 
@@ -278,6 +279,14 @@ public class Task {
 
 	public long getDownloadedLength() {
 		return downloadedLength;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	public String getPackageName() {
+		return packageName;
 	}
 
 }

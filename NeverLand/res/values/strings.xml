@@ -3,7 +3,7 @@
 
     <string name="hello">Hello World, NeverLandActivity!</string>
     <string name="app_name">NeverLand</string>
-    <string name="last_update">上传更新</string>
+    <string name="last_update">上次更新</string>
     <string name="begin">Begin</string>
 
 </resources>

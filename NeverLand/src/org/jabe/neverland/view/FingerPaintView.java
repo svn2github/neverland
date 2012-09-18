@@ -31,6 +31,7 @@ public class FingerPaintView extends View {
 	private static final float STROKEWIDTH_MAX = 30;
 	private static final float STROKEWIDTH_MIN = 20;
 	private volatile float mCurrentStrokeWidth = STROKEWIDTH_MAX;
+	private float mCurrentPressure;
 
 	private Path mCurrentPath;
 	private Paint mCurrentPaint;
@@ -116,19 +117,29 @@ public class FingerPaintView extends View {
 		}
 	}
 
-	protected void touch_move(float x, float y) {
+	protected void touch_move(float x, float y, boolean isFirstPath) {
+		if (isFirstPath) {
+			mCurrentStrokeWidth = STROKEWIDTH_MIN;
+		}
 		float dx = Math.abs(x - mX);
 		float dy = Math.abs(y - mY);
 		if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
 			float x2 = (x + mX) / 2;
 			float y2 = (y + mY) / 2;
-			mCurrentPath.quadTo(mX, mY, x, y);
+			mCurrentPath.quadTo(mX, mY, x2, y2);
+			savePath.add(getCurrentDrawPath());
+			mCurrentPath = new Path();
+			mCurrentPath.moveTo(x2, y2);
+			mCurrentPath.quadTo(x2, y2, x, y);
 			mX = x;
 			mY = y;
 		}
 		savePath.add(getCurrentDrawPath());
 		mCurrentPath = new Path();
 		mCurrentPath.moveTo(mX, mY);
+		if (isFirstPath) {
+			mCurrentStrokeWidth = STROKEWIDTH_MAX;
+		}
 	}
 
 	private DrawPath getCurrentDrawPath() {
@@ -186,6 +197,7 @@ public class FingerPaintView extends View {
 
 			mCurrentPath = new Path();
 			mCurrentStrokeWidth = STROKEWIDTH_MAX;
+			mCurrentPressure = event.getPressure();
 
 			mIsFingerMoving = true;
 			touch_start(x, y);
@@ -193,7 +205,9 @@ public class FingerPaintView extends View {
 			break;
 		case MotionEvent.ACTION_MOVE:
 			mVelocityTracker.addMovement(event);
+			boolean isFirstPath = false;
 			if (!mFirstMove) {
+				isFirstPath = true;
 				mVelocityTracker.computeCurrentVelocity(VELOCITY_UNITS);
 				mCurrentVelocity = computeVelocity(mVelocityTracker);
 				mFirstMove = true;
@@ -206,10 +220,17 @@ public class FingerPaintView extends View {
 				} else if (tempV < mCurrentVelocity) {
 					addStrokeWidth();
 				}
+				final float tempP = event.getPressure();
+				if (tempP > mCurrentPressure) {
+					addStrokeWidth();
+				} else if (tempP < mCurrentPressure) {
+					removeStrokeWidth();
+				}
+				mCurrentPressure = tempP;
 				mCurrentVelocity = tempV;
 				System.out.println("changed v:" + mCurrentVelocity);
 			}
-			touch_move(x, y);
+			touch_move(x, y, isFirstPath);
 			invalidate();
 			break;
 		case MotionEvent.ACTION_UP:
@@ -224,13 +245,13 @@ public class FingerPaintView extends View {
 
 	private void addStrokeWidth() {
 		if (mCurrentStrokeWidth < STROKEWIDTH_MAX) {
-			mCurrentStrokeWidth = mCurrentStrokeWidth + 1f;
+			mCurrentStrokeWidth = mCurrentStrokeWidth + 0.8f;
 		}
 	}
 
 	private void removeStrokeWidth() {
 		if (mCurrentStrokeWidth > STROKEWIDTH_MIN) {
-			mCurrentStrokeWidth = mCurrentStrokeWidth - 1f;
+			mCurrentStrokeWidth = mCurrentStrokeWidth - 0.8f;
 		}
 	}
 
