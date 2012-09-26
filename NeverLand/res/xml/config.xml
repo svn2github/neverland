@@ -40,4 +40,9 @@
         <title>HandWriting(手写)</title>
         <description>HandWriting</description>
     </item>
+    
+    <item name="org.jabe.neverland.activity.CircleActivity">
+        <title>OpenGL_3D</title>
+        <description>OpenGL_3D</description>
+    </item>
 </config>
