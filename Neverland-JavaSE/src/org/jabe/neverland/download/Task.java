@@ -154,31 +154,21 @@ public class Task {
 	}
 
 	public static void test3() {
-		final String url = "http://go.microsoft.com/fwlink/?linkid=57034";
-
+		final String url = "http://dl01.topsage.com/club/computer/c_cpp/Visual.C++.2008%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8(%E4%B8%AD%E6%96%87%E7%89%88)%5Bwww.TopSage.com%5D.zip";
 		Task task = new Task();
-
 		task.setDownURL(url);
-
 		try {
 			task.setContentLength(getContentLength(url));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
-
-		task.setSaveFile("H:/vc2005express.iso");
-
-		task.setSectionCount(500);
-
-		task.setWorkerCount(300);
-
-		task.setBufferSize(128 * 1024);
-
+		task.setSaveFile("H:/201203281039.zip");
+		task.setSectionCount(50);
+		task.setWorkerCount(50);
+		task.setBufferSize(8 * 1024);
 		TaskAssign ta = new TaskAssign();
-
 		ta.setTaskListener(new TaskListener() {
-
 			@Override
 			public void onSuccess() {
 
@@ -194,7 +184,6 @@ public class Task {
 					double total) {
 				System.out.println("current percent :" + ((downloaded / total) * 100));
 			}
-
 		});
 		ta.work(task);
 	}

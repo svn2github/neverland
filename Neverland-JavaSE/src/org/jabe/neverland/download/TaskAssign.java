@@ -35,7 +35,7 @@ public class TaskAssign {
 			@Override
 			public void run() {
 				mTask = task;
-				
+
 				if (taskListener == null || task.getContentLength() < 0) {
 					Loger.log(TAG,
 					"task listener can not be null or task content length can not < 0");
@@ -124,7 +124,7 @@ public class TaskAssign {
 		});
 		th.start();
 	}
-	
+
 	private void handMainException(Exception e) {
 		stopWork();
 		checkRandomFileClose();
@@ -230,6 +230,7 @@ public class TaskAssign {
 	}
 
 	private void success() {
+		checkRandomFileClose();
 		if (!taskFile.delete()) {
 			taskFile = new File(mTask.getSaveFile() + APPEND_TASKFILE);
 			if (taskFile.exists() && taskFile.isFile()) {
@@ -250,7 +251,6 @@ public class TaskAssign {
 				}
 			}
 		}
-		checkRandomFileClose();
 		taskListener.onSuccess();
 	}
 
@@ -274,7 +274,7 @@ public class TaskAssign {
 
 	/**
 	 * open connection to download data from start to end.
-	 * 
+	 *
 	 * @param taskRandomFile
 	 * @param downRandomFile
 	 * @param task
