@@ -123,7 +123,7 @@ public class Task {
 
 		task.setDownURL(url);
 
-		task.setSaveFile("H:/vc2005express.iso");
+		task.setSaveFile("F:/vc2005express.iso");
 
 		task.setSectionCount(500);
 

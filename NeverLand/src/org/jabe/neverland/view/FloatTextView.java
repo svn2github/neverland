@@ -5,6 +5,7 @@ import org.jabe.neverland.util.ViewUtil;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -25,7 +26,15 @@ public class FloatTextView extends TextView {
 
 	public FloatTextView(Context context) {
 		super(context);
-		this.setBackgroundResource(R.drawable.assist_anzai_left_green);
+		changeBG2Left();
+	}
+
+	private void changeBG2Left() {
+		this.setBackgroundResource(R.drawable.act_float_left_selector);
+	}
+	
+	private void changeBG2Right() {
+		this.setBackgroundResource(R.drawable.act_float_right_selector);
 	}
 
 	@Override
@@ -40,17 +49,35 @@ public class FloatTextView extends TextView {
 		case MotionEvent.ACTION_DOWN:
 			startX = event.getX();
 			startY = event.getY() + this.getHeight()/2;
+			changeBG2Mid();
 			break;
 		case MotionEvent.ACTION_MOVE:
-//			onDrag(x, y);
 			updatePosition();
 			break;
 		case MotionEvent.ACTION_UP:
-			updatePosition();
-			startX = startY = 0;
+			endUp();
 			break;
 		}
 		return true;
+	}
+
+	private void changeBG2Mid() {
+		this.setBackgroundResource(R.drawable.assist_anzai_middle_green);
+	}
+	private void endUp() {
+		DisplayMetrics metric = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels;     // 屏幕宽度（像素）
+		if ((int) (x - startX) > width/2) {
+			params.x = width;
+			changeBG2Right();
+		} else {
+			params.x = 0;
+			changeBG2Left();
+		}
+		params.y = (int) (y - startY);
+		wm.updateViewLayout(this, params);
+		startX = startY = 0;
 	}
 	
 	/**
