@@ -154,7 +154,7 @@ public class Task {
 	}
 
 	public static void test3() {
-		final String url = "http://storefspic.nearme.com.cn/uploadFiles/Pfiles/201210/28218b29987e424198a7277f9b09b7a9.zip?n=NearMeGameCenterSDK1.1_20121019";
+		final String url = "http://netstorage.unity3d.com/unity/UnitySetup-3.5.6.exe";
 		Task task = new Task();
 		task.setDownURL(url);
 		try {
@@ -163,9 +163,9 @@ public class Task {
 			e.printStackTrace();
 			return;
 		}
-		task.setSaveFile("H:/201203281039.zip");
-		task.setSectionCount(10);
-		task.setWorkerCount(10);
+		task.setSaveFile("H:/UnitySetup-3.5.6.exe");
+		task.setSectionCount(100);
+		task.setWorkerCount(100);
 		task.setBufferSize(8 * 1024);
 		TaskAssign ta = new TaskAssign();
 		ta.setTaskListener(new TaskListener() {
