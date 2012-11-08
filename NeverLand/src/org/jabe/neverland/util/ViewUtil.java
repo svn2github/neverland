@@ -7,6 +7,7 @@ import org.jabe.neverland.view.SearchDialog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.view.Gravity;
 import android.view.View;
@@ -28,11 +29,11 @@ public class ViewUtil {
 		params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		params.alpha = 100;
 		params.gravity = Gravity.LEFT|Gravity.TOP;
+		params.format = PixelFormat.RGBA_8888;
 		// 以屏幕左上角为原点，设置x、y初始值
 		params.x = 0;
 		params.y = 0;
-		View tv = new FloatTextView(context);
-		wm.addView(tv, params);
+		wm.addView(view, params);
 		return params;
 	}
 	

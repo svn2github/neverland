@@ -18,9 +18,6 @@ public class FloatTextView extends TextView {
 	public static int TOOL_BAR_HIGH = 0;
 	private float startX;
 	private float startY;
-	private int lLeft, lRight, lTop, lBottom;
-	private int offsetX;
-	private int offsetY;
 	private WindowManager wm = (WindowManager) getContext()
 			.getApplicationContext().getSystemService(ViewUtil.WINDOW_SERVICE);
 	private float x;
@@ -35,14 +32,14 @@ public class FloatTextView extends TextView {
 	public boolean onTouchEvent(MotionEvent event) {
 		// 触摸点相对于屏幕左上角坐标
 		x = event.getRawX();
-		y = event.getRawY();
+		y = event.getRawY() - TOOL_BAR_HIGH;
 		Log.d(TAG, "------getX: " + event.getX() + "------getY:" + event.getY());
 		Log.d(TAG, "------getRawX: " + event.getRawX() + "------getRawY:"
 				+ event.getRawY());
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			startX = event.getX();
-			startY = event.getY();
+			startY = event.getY() + this.getHeight()/2;
 			break;
 		case MotionEvent.ACTION_MOVE:
 //			onDrag(x, y);
@@ -55,19 +52,7 @@ public class FloatTextView extends TextView {
 		}
 		return true;
 	}
-
-	private void onDrag(int x, int y) {
-		WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams();
-		windowParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		windowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		windowParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-				| WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
-		windowParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL
-				| LayoutParams.FLAG_NOT_FOCUSABLE;
-		windowParams.x = x;
-		windowParams.y = y;
-	}
-
+	
 	/**
 	 * 更新浮动窗口位置参数
 	 */
