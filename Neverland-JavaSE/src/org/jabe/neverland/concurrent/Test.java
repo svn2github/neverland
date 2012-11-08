@@ -1,5 +1,7 @@
 package org.jabe.neverland.concurrent;
 
+import java.text.DecimalFormat;
+
 import com.nearme.oauth.model.AccessToken;
 import com.nearme.oauth.open.AccountAgent;
 import com.nearme.oauth.provider.URLProvider;
@@ -19,6 +21,9 @@ public class Test {
 //		list.add(c);
 //		Collections.sort(list);
 //		System.out.println(list);
+		double d1 = 50.0;
+		double d2 = 42.19;
+		System.out.println(String.valueOf(new DecimalFormat("####.##").format(d1 - d2)));
 		URLProvider.init();
 		Constants.APP_KEY = "c5217trjnrmU6gO5jG8VvUFU0";
 		Constants.APP_SECRET = "e2eCa732422245E8891F6555e999878B";

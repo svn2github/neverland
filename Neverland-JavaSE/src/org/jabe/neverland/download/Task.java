@@ -154,7 +154,7 @@ public class Task {
 	}
 
 	public static void test3() {
-		final String url = "http://dl01.topsage.com/club/computer/c_cpp/Visual.C++.2008%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8(%E4%B8%AD%E6%96%87%E7%89%88)%5Bwww.TopSage.com%5D.zip";
+		final String url = "http://storefspic.nearme.com.cn/uploadFiles/Pfiles/201210/28218b29987e424198a7277f9b09b7a9.zip?n=NearMeGameCenterSDK1.1_20121019";
 		Task task = new Task();
 		task.setDownURL(url);
 		try {
@@ -164,8 +164,8 @@ public class Task {
 			return;
 		}
 		task.setSaveFile("H:/201203281039.zip");
-		task.setSectionCount(50);
-		task.setWorkerCount(50);
+		task.setSectionCount(10);
+		task.setWorkerCount(10);
 		task.setBufferSize(8 * 1024);
 		TaskAssign ta = new TaskAssign();
 		ta.setTaskListener(new TaskListener() {
