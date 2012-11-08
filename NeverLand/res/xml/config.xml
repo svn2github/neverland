@@ -40,9 +40,12 @@
         <title>HandWriting(手写)</title>
         <description>HandWriting</description>
     </item>
-    
     <item name="org.jabe.neverland.activity.CircleActivity">
         <title>OpenGL_3D</title>
         <description>OpenGL_3D</description>
+    </item>SlidingDrawActivity
+    <item name="org.jabe.neverland.activity.SlidingDrawActivity">
+        <title>SlidingDraw</title>
+        <description>SlidingDraw</description>
     </item>
 </config>

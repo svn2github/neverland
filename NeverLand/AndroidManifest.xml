@@ -54,9 +54,11 @@
         <activity
             android:name=".activity.HandWriterActivity">
         </activity>
-        
-         <activity
+        <activity
             android:name=".activity.CircleActivity">
+        </activity>
+        <activity
+            android:name=".activity.SlidingDrawActivity">
         </activity>
     </application>
 
