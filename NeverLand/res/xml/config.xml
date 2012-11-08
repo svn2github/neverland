@@ -48,4 +48,8 @@
         <title>SlidingDraw</title>
         <description>SlidingDraw</description>
     </item>
+    <item name="org.jabe.neverland.activity.MoveViewDemo">
+        <title>MoveViewDemo</title>
+        <description>MoveViewDemo</description>
+    </item>
 </config>

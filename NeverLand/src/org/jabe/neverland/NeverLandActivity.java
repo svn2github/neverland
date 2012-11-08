@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jabe.neverland.util.ViewUtil;
+import org.jabe.neverland.view.FloatTextView;
 import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;
@@ -206,6 +208,9 @@ public class NeverLandActivity extends ListActivity {
 				mBeansList.get(position).run();
 			}
 		});
+		FloatTextView floatTextView = new FloatTextView(this);
+		FloatTextView.TOOL_BAR_HIGH = ViewUtil.getWindowVisibleDisplayFrame(this).top;
+		FloatTextView.params = ViewUtil.addTopView(this, floatTextView);
 	}
 
 	private void initData() {
