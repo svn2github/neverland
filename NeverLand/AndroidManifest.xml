@@ -64,6 +64,9 @@
         <activity
             android:name=".activity.MoveViewDemo">
         </activity>
+        <activity
+            android:name=".activity.TopFrameActivity">
+        </activity>
     </application>
 
 </manifest>

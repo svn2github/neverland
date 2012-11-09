@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.jabe.neverland.util.ViewUtil;
 import org.jabe.neverland.view.FloatTextView;
+import org.jabe.neverland.view.FloatTextView.Callback;
 import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;
@@ -211,6 +212,12 @@ public class NeverLandActivity extends ListActivity {
 		FloatTextView floatTextView = new FloatTextView(this);
 		FloatTextView.TOOL_BAR_HIGH = ViewUtil.getWindowVisibleDisplayFrame(this).top;
 		FloatTextView.params = ViewUtil.addTopView(this, floatTextView);
+		floatTextView.setCallback(new Callback() {
+			@Override
+			public void onClick(FloatTextView floatTextView) {
+				
+			}
+		});
 	}
 
 	private void initData() {

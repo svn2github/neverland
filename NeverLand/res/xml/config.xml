@@ -52,4 +52,8 @@
         <title>MoveViewDemo</title>
         <description>MoveViewDemo</description>
     </item>
+    <item name="org.jabe.neverland.activity.TopFrameActivity">
+        <title>歌词效果</title>
+        <description>歌词效果</description>
+    </item>
 </config>
