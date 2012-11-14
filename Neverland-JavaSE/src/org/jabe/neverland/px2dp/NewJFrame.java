@@ -93,11 +93,11 @@ public class NewJFrame extends JFrame {
 				NewJFrame.this.jButton3ActionPerformed(evt);
 			}
 		});
-		this.jLabel3.setText("上面为Android布局文件DP批量转换为PX ，px分辨率为800*480");
+		this.jLabel3.setText("上面为Android布局文件DP批量转换为PX,分辨率为800*480");
 
 		this.text_3.setEditable(false);
 
-		this.jLabel4.setText("上面为Android样式文件PX批量转换为DP ，px分辨率为800*480");
+		this.jLabel4.setText("上面为Android样式文件PX批量转换为DP,px分辨率为800*480");
 
 		this.jLabel5.setText("保存路径");
 
