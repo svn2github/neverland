@@ -22,7 +22,12 @@ public class Test {
 //		Collections.sort(list);
 //		System.out.println(list);
 		double d1 = 50.0;
-		double d2 = 42.19;
+		Double d2 = 42.19;
+		if (String.valueOf(d2).contains(".")) {
+			System.out.println(d2.intValue() + 1);
+		} else {
+			System.out.println(d2.intValue());
+		}
 		System.out.println(String.valueOf(new DecimalFormat("####.##").format(d1 - d2)));
 		URLProvider.init();
 		Constants.APP_KEY = "c5217trjnrmU6gO5jG8VvUFU0";
