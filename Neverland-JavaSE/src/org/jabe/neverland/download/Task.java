@@ -2,13 +2,11 @@ package org.jabe.neverland.download;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.jabe.neverland.download.exception.ReadTaskFileException;
 
 //这个是任务Bean
 
@@ -154,7 +152,7 @@ public class Task {
 	}
 
 	public static void test3() {
-		final String url = "http://netstorage.unity3d.com/unity/UnitySetup-3.5.6.exe";
+		final String url = "http://download.unity3d.com/download_unity/UnitySetup-3.5.2.exe";
 		Task task = new Task();
 		task.setDownURL(url);
 		try {
@@ -163,7 +161,7 @@ public class Task {
 			e.printStackTrace();
 			return;
 		}
-		task.setSaveFile("H:/UnitySetup-3.5.6.exe");
+		task.setSaveFile("H:/UnitySetup-3.5.2.exe");
 		task.setSectionCount(100);
 		task.setWorkerCount(100);
 		task.setBufferSize(8 * 1024);

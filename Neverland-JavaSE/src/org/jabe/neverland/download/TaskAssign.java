@@ -10,10 +10,6 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.jabe.neverland.download.exception.CreateTaskFileException;
-import org.jabe.neverland.download.exception.ReadTaskFileException;
-import org.jabe.neverland.download.exception.StorageFullException;
-import org.jabe.neverland.download.exception.WorkerThreadException;
 
 public class TaskAssign {
 	public static final String TAG = "TaskAssign";

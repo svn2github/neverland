@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.exception;
+package org.jabe.neverland.download;
 
 public class StorageFullException extends Exception{
 
