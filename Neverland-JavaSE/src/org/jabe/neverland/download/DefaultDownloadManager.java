@@ -10,10 +10,7 @@ import java.util.concurrent.Executors;
 public class DefaultDownloadManager extends DownloadManager {
 
 	public static void main(String[] args) {
-		test3();
-	}
-
-	public static void test3() {
+		DefaultDownloadManager defaultDownloadManager = new DefaultDownloadManager("F://");
 		
 	}
 
@@ -22,28 +19,6 @@ public class DefaultDownloadManager extends DownloadManager {
 	private String mDownloadPathString;
 
 	private ExecutorService mExecutorService = Executors.newCachedThreadPool();
-
-	private TaskListener mTaskListener = new TaskListener() {
-
-		@Override
-		public void onUpdateProgress(double added, double downloaded,
-				double total) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onSuccess() {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onFailure(Exception e) {
-			// TODO Auto-generated method stub
-
-		}
-	};
 
 	public DefaultDownloadManager(String path) {
 		mDownloadPathString = path;
@@ -76,10 +51,35 @@ public class DefaultDownloadManager extends DownloadManager {
 		task.setWorkerCount(1);
 		task.setBufferSize(8 * 1024);
 		final TaskAssign ta = new TaskAssign(mExecutorService);
-		final TaskListener tl = mTaskListener;
+		final TaskListener tl = new TaskListener(tag) {
+			
+			@Override
+			public void onUpdateProgress(double added, double downloaded, double total) {
+				Loger.log(TAG, "Progress: " + (downloaded/total) * 100);
+			}
+			
+			@Override
+			public void onSuccess() {
+				sendStatusToListener(DownloadStatus.DOWNLOAD_STATUS_FINISHED, getTag());
+			}
+			
+			@Override
+			public void onPreTask() {
+				sendStatusToListener(DownloadStatus.DOWNLOAD_STATUS_STARTED, getTag());
+			}
+			
+			@Override
+			public void onFailure(Exception e) {
+				Loger.log(TAG, e.getMessage());
+			}
+		};;;
 		ta.setTaskListener(tl);
 		ta.work(task);
 		mTaskMap.put(tag, ta);
+	}
+	
+	private void sendStatusToListener(DownloadStatus status, String tag) {
+		
 	}
 
 	public Task getCacheDownloadTask(String url, String tag) {

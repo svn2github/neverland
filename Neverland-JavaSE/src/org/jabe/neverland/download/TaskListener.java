@@ -3,7 +3,11 @@ package org.jabe.neverland.download;
 import java.io.File;
 
 public abstract class TaskListener {
-	public TaskListener() {
+	
+	private String tag;
+	
+	public TaskListener(String tag) {
+		this.tag = tag;
 	}
 
 	public abstract void onSuccess();
@@ -44,5 +48,9 @@ public abstract class TaskListener {
 
 	public void onFileExist(File file) {
 
+	}
+
+	public String getTag() {
+		return tag;
 	}
 }
