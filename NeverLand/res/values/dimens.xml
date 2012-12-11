@@ -3,4 +3,11 @@
     <dimen name="drag_item_normal_height">48dip</dimen>
     <dimen name="drag_item_expand_height">96dip</dimen>
     <dimen name="face_view_size">32dp</dimen>
+    
+    <!-- for sliding menu -->
+    <dimen name="slidingmenu_offset">60dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
+    
+    
 </resources>

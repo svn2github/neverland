@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.exception;
+package org.jabe.neverland.download;
 
 public class ReadTaskFileException extends Exception {
 	public ReadTaskFileException(String message) {

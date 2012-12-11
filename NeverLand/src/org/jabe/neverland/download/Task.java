@@ -8,22 +8,20 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.jabe.neverland.download.exception.ReadTaskFileException;
-
 //这个是任务Bean
 
 public class Task {
 	private String downURL;
 	private String saveFile;
-	private int bufferSize = 4 * 1024;//64K, 4K
+	private int bufferSize = 4 * 1024;// 64K, 4K
 	private int workerCount;
 	private int sectionCount;
 	private long contentLength;
+	private String packageName;
 	private volatile long downloadedLength = 0;
 	private long[] sectionsOffset;
-	private String packageName;
 
-	public static final int HEAD_SIZE = 1024;//单位字节
+	public static final int HEAD_SIZE = 1024;// 单位字节
 
 	// 读下载描述文件内容
 
@@ -34,13 +32,15 @@ public class Task {
 
 			saveFile = file.readUTF();
 
+			packageName = file.readUTF();
+
 			sectionCount = file.readInt();
 
 			contentLength = file.readLong();
-			
+
 			file.seek(HEAD_SIZE);
 			downloadedLength = file.readLong();
-			
+
 			sectionsOffset = new long[sectionCount];
 			for (int i = 0; i < sectionCount; i++) {
 				sectionsOffset[i] = file.readLong();
@@ -48,7 +48,7 @@ public class Task {
 		} catch (Exception e) {
 			throw new ReadTaskFileException(e.getMessage());
 		}
-		
+
 	}
 
 	public synchronized void create(RandomAccessFile file) throws IOException {
@@ -71,10 +71,12 @@ public class Task {
 
 		dos.writeUTF(saveFile);
 
+		dos.writeUTF(packageName);
+
 		dos.writeInt(sectionCount);
 
 		dos.writeLong(contentLength);
-		
+
 		byte[] src = baos.toByteArray();
 
 		byte[] temp = new byte[HEAD_SIZE];
@@ -89,41 +91,41 @@ public class Task {
 	}
 
 	// 更新下载的过程
-	public synchronized void writeOffset(RandomAccessFile file)
-			throws IOException {
+	public synchronized void writeOffset(RandomAccessFile file) throws IOException {
 		if (sectionCount != sectionsOffset.length) {
 			throw new RuntimeException("sectionCount != sectionsOffset.length");
 		}
 		file.seek(HEAD_SIZE);
-		file.writeLong(downloadedLength);//write default downloaded count
+		file.writeLong(downloadedLength);// write default downloaded count
 		for (int i = 0; i < sectionsOffset.length; i++) {
 			file.writeLong(sectionsOffset[i]);
 		}
 	}
-	
+
 	public synchronized void updateDownloadedLength(long added) {
 		downloadedLength += added;
 	}
 
 	public static void main(String[] args) {
-		
+
 		long oldTime = System.currentTimeMillis();
-		
+
 		System.out.println("Start Download");
 
 		test3();
 
-		System.out.println("\n\n===============\nFinished. Total Cast : " + ((double)(System.currentTimeMillis() - oldTime))/(double)60000 + "min");
+		System.out.println("\n\n===============\nFinished. Total Cast : "
+				+ ((double) (System.currentTimeMillis() - oldTime)) / (double) 60000 + "min");
 	}
 
 	public static void test3() {
 		final String url = "http://go.microsoft.com/fwlink/?linkid=57034";
-		
+
 		Task task = new Task();
 
 		task.setDownURL(url);
 
-		task.setSaveFile("F:/vc2005express.iso");
+		task.setSaveFile("H:/vc2005express.iso");
 
 		task.setSectionCount(500);
 
@@ -132,43 +134,42 @@ public class Task {
 		task.setBufferSize(128 * 1024);
 
 		TaskAssign ta = new TaskAssign();
-		
-		ta.setTaskListener(new TaskListener() {
-			
+
+		ta.setTaskListener(new TaskListener(null) {
+
 			@Override
 			public void resumeTask() {
-				
+
 			}
-			
+
 			@Override
 			public void onUpdateProgress(double added, double downloaded, double total) {
-				System.out.println("Total percent : "
-						+ (downloaded / total) * 100 + "%");
+				System.out.println("Total percent : " + (downloaded / total) * 100 + "%");
 			}
-			
+
 			@Override
 			public void onSuccess() {
-				
+
 			}
-			
+
 			@Override
 			public void onPreTask() {
-				
+
 			}
-			
+
 			@Override
 			public void onFailure(Exception e) {
-				
+
 			}
-			
+
 			@Override
 			public void onBeforeExecute() {
-				
+
 			}
 
 			@Override
 			public void onFileExist(File file) {
-				
+
 			}
 		});
 		ta.work(task);
@@ -211,14 +212,13 @@ public class Task {
 
 		ta.work(task);
 	}
+
 	public static long getContentLength(String url) throws IOException {
 		URL u = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-		try {
-			return conn.getContentLength();
-		} finally {
-			conn.disconnect();
-		}
+		long l = conn.getContentLength();
+		conn.disconnect();
+		return l;
 	}
 
 	public String getDownURL() {
@@ -281,12 +281,12 @@ public class Task {
 		return downloadedLength;
 	}
 
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
-
 	public String getPackageName() {
 		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
 	}
 
 }

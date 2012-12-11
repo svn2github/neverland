@@ -102,7 +102,7 @@ public class DownloadActivity extends Activity {
 		task.setWorkerCount(1);
 		task.setBufferSize(8 * 1024);
 		taskAssign = new TaskAssign();
-		taskAssign.setTaskListener(new TaskListener() {
+		taskAssign.setTaskListener(new TaskListener("") {
 			@Override
 			public void resumeTask() {
 				makeToast("Resume to download");
