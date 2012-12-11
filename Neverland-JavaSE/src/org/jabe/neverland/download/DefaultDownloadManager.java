@@ -10,8 +10,9 @@ import java.util.concurrent.Executors;
 public class DefaultDownloadManager extends DownloadManager {
 
 	public static void main(String[] args) {
-		DefaultDownloadManager defaultDownloadManager = new DefaultDownloadManager("F://");
-		
+		final String url = "http://storefs.nearme.com.cn/uploadFiles/Pfiles/201209/a31ee18e4cb741dfa3f8bced1ce6c29a.apk";
+		DefaultDownloadManager defaultDownloadManager = new DefaultDownloadManager("H:/");
+		defaultDownloadManager.startDownload(url, "com.boyaa.lordland.nearme.gamecenter");
 	}
 
 	private File mDownloadPathFile;

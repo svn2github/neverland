@@ -197,7 +197,7 @@ public class TaskAssign {
 				downSingle(f1, f2, mTask, length, start, end);
 			}
 		});
-		mExecutorService.equals(worker);
+		mExecutorService.execute(worker);
 	}
 
 	public Task getTask() {
