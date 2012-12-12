@@ -3,6 +3,7 @@ package org.jabe.neverland;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jabe.neverland.activity.SlidingTestActivity;
 import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;

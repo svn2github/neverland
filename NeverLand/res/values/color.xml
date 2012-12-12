@@ -6,7 +6,6 @@
     <color name="gray_66">#66666666</color>
     <color name="gray_f3">#FF333333</color>
     <color name="gray_f2">#FF222222</color>
-    <color name="red">#FFFF0000</color>
     <color name="black">#FF000000</color>
     <color name="blue_royal">#4169E1</color>
     <color name="blue_cornflower">#6495ED</color>
@@ -33,5 +32,11 @@
     <color name="traffic_txt">#ff414141</color>
     <color name="traffic_data">#ff666666</color>
     <color name="main_dialog_bg">#CCFCFCFC</color>
+    
+    <color name="red">#900</color>
+    <color name="green">#090</color>
+    <color name="blue">#009</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
 
 </resources>

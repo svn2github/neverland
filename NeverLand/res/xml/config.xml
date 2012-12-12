@@ -56,4 +56,9 @@
         <title>歌词效果</title>
         <description>歌词效果</description>
     </item>
+    
+    <item name="org.jabe.neverland.activity.SlidingTestActivity">
+        <title>侧滑导航效果</title>
+        <description>侧滑导航效果</description>
+    </item>
 </config>

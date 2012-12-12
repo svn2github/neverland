@@ -19,24 +19,16 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class SlidingBaseActivity extends SlidingFragmentActivity {
 
-	private int mTitleRes;
 	protected ListFragment mFrag;
-
-	public SlidingBaseActivity(int titleRes) {
-		mTitleRes = titleRes;
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		setTitle(mTitleRes);
-
 		// set the Behind View
 		setBehindContentView(R.layout.act_sliding_menu_frame);
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
 		mFrag = new SampleListFragment();
-		t.replace(R.id.menu_frame, mFrag);
+		t.replace(R.id.sliding_menu_frame, mFrag);
 		t.commit();
 
 		// customize the SlidingMenu

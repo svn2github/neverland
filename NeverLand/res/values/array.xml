@@ -21,6 +21,14 @@
 		<item>摩羯座</item>
 	</string-array>
 	
+    <string-array name="color_names">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>White</item>
+        <item>Black</item>
+    </string-array>
+	
     <string-array name="default_smiley_names">
 		<item msgid="6418813270603201918">[悲伤]</item>
 		<item msgid="5037069969500587717">[侧面微笑]</item>
