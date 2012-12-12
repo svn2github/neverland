@@ -23,7 +23,7 @@ public abstract class DownloadManager {
 		mDownloadListeners.remove(downloadInterface);
 	}
 	
-	public abstract DownloadStatus startDownload(String url, String tag);
+	public abstract void startDownload(String url, String tag);
 	
 	public abstract boolean resumeDownload(String tag);
 	

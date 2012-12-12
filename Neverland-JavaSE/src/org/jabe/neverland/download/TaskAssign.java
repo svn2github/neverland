@@ -152,6 +152,7 @@ public class TaskAssign {
 			}
 		});
 		mExecutorService.execute(th);
+		return;
 	}
 
 	private void handMainException(Exception e) {

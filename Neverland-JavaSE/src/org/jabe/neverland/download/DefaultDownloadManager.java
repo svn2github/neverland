@@ -29,18 +29,14 @@ public class DefaultDownloadManager extends DownloadManager {
 	private Map<String, TaskAssign> mTaskMap = new HashMap<String, TaskAssign>();
 
 	@Override
-	public DownloadStatus startDownload(String url, String tag) {
-		if (hasFinished(url, tag)) {
-			return DownloadStatus.DOWNLOAD_STATUS_FINISHED;
-		}
+	public void startDownload(String url, String tag) {
 		if (hasDownloadingFile(url, tag)) {
 			resumeDownload(tag);
-			return DownloadStatus.DOWNLOAD_STATUS_RESUME;
+			return;
 		}
 		if (!isDownloading(tag)) {
 			startNewTask(url, tag);
 		}
-		return DownloadStatus.DOWNLOAD_STATUS_STARTED;
 	}
 
 	private void startNewTask(String url, String tag) {
@@ -70,6 +66,12 @@ public class DefaultDownloadManager extends DownloadManager {
 			}
 			
 			@Override
+			public void onFileExist(File file) {
+				Loger.log(TAG, "file already exist !");
+				sendStatusToListener(DownloadStatus.DOWNLOAD_STATUS_FINISHED, getTag());
+			}
+			
+			@Override
 			public void onFailure(Exception e) {
 				Loger.log(TAG, e.getMessage());
 			}
@@ -80,7 +82,9 @@ public class DefaultDownloadManager extends DownloadManager {
 	}
 	
 	private void sendStatusToListener(DownloadStatus status, String tag) {
-		
+		if (status == DownloadStatus.DOWNLOAD_STATUS_FINISHED) {
+			Loger.log(TAG, "下载完成啦!");
+		}
 	}
 
 	public Task getCacheDownloadTask(String url, String tag) {
@@ -92,7 +96,6 @@ public class DefaultDownloadManager extends DownloadManager {
 				raf = new RandomAccessFile(file, "rw");
 				task.read(raf);
 			} catch (Exception e) {
-				e.printStackTrace();
 				file.delete();
 				task = null;
 			} finally {
