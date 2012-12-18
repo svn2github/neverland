@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="white">#66FFFFFF</color>
     <color name="gray_55">#55555555</color>
     <color name="gray_66">#66666666</color>
     <color name="gray_f3">#FF333333</color>
     <color name="gray_f2">#FF222222</color>
-    <color name="black">#FF000000</color>
     <color name="blue_royal">#4169E1</color>
     <color name="blue_cornflower">#6495ED</color>
     <color name="gray_f7">#FF777777</color>
