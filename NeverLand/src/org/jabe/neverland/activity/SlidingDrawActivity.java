@@ -44,7 +44,7 @@ public class SlidingDrawActivity extends Activity {
             public void onDrawerClosed() {  
 //                iv.setImageResource(R.drawable.touch_handler);// 响应关抽屉事件  
             }  
-        });  
+        });
     }  
   
     private void loadApps() {  

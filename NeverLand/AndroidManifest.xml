@@ -59,6 +59,14 @@
         </activity>
         <activity android:name=".activity.SlidingTestActivity" >
         </activity>
+        <activity android:name=".activity.PageTurnActivity" >
+        </activity>
+        <activity android:name=".activity.ColClockAdjustActivity" >
+        </activity>
+        <activity android:name=".activity.RolateAnimActivity" >
+        </activity>
+        <activity android:name=".activity.CurlActivity" >
+        </activity>
     </application>
 
 </manifest>

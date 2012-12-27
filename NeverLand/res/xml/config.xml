@@ -61,4 +61,21 @@
         <title>侧滑导航效果</title>
         <description>侧滑导航效果</description>
     </item>
+    
+    <item name="org.jabe.neverland.activity.PageTurnActivity">
+        <title>贝塞尔曲线翻页效果</title>
+        <description>贝塞尔曲线翻页效果</description>
+    </item>
+    <item name="org.jabe.neverland.activity.ColClockAdjustActivity">
+        <title>简单时钟效果</title>
+        <description>简单时钟效果</description>
+    </item>
+    <item name="org.jabe.neverland.activity.RolateAnimActivity">
+        <title>磁贴点击下沉倾斜效果(ImageView)</title>
+        <description>磁贴点击下沉倾斜效果</description>
+    </item>
+    <item name="org.jabe.neverland.activity.CurlActivity">
+        <title>翻页效果(GLSurfaceView)</title>
+        <description>翻页效果(GLSurfaceView)</description>
+    </item>
 </config>
