@@ -78,4 +78,9 @@
         <title>翻页效果(GLSurfaceView)</title>
         <description>翻页效果(GLSurfaceView)</description>
     </item>
+    
+    <item name="org.jabe.neverland.activity.MenuTestActivity">
+        <title>MenuTest</title>
+        <description>MenuTest</description>
+    </item>
 </config>
