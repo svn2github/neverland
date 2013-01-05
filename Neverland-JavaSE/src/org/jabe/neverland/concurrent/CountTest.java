@@ -9,13 +9,14 @@ import java.io.IOException;
 
 public class CountTest {
 	private static final String PROJECT_DIR = "E:\\WorkspaceForEclipse";
-	private static final String PROJECT_DIR1 = "E:\\WorkspaceForEclipse\\GameCenter-V2.0";
+	private static final String PROJECT_DIR1 = "E:\\WorkspaceForEclipse\\GameCenter-V2.1";
 	private static final String PROJECT_DIR2 = "E:\\WorkspaceForEclipse\\DataExchange";
 	private static final String PROJECT_DIR3 = "E:\\WorkspaceForEclipse\\OpenSDK";
 	private static final String PROJECT_DIR4 = "E:\\WorkspaceForEclipse\\OpenSDKDemo";
 	private static final String PROJECT_DIR5 = "E:\\WorkspaceForEclipse\\OpenOauth";
 	private static final String PROJECT_DIR6 = "E:\\WorkspaceForEclipse\\GameCenterSDK_2.0";
 	private static final String PROJECT_DIR7 = "E:\\WorkspaceForEclipse\\Oppo_lianliankan2";
+	private static final String PROJECT_DIR8 = "E:\\WorkspaceForEclipse\\gamecenter_v2.2";
 	
 	private static int fileNum = 0;
 	private static int lineNum = 0;
@@ -63,9 +64,10 @@ public class CountTest {
 		File root5 = new File(PROJECT_DIR5);
 		File root6 = new File(PROJECT_DIR6);
 		File root7 = new File(PROJECT_DIR7);
+		File root8 = new File(PROJECT_DIR8);
 //		listNext(root1);
 //		listNext(root2);
-		listNext(root3);
+		listNext(root8);
 //		listNext(root4);
 //		listNext(root5);
 //		listNext(root6);
