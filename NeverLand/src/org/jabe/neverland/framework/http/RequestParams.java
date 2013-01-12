@@ -16,7 +16,7 @@
     limitations under the License.
 */
 
-package org.jabe.neverland.http;
+package org.jabe.neverland.framework.http;
 
 import java.io.InputStream;
 import java.io.File;

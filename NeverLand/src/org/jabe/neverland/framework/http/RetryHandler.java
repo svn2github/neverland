@@ -21,7 +21,7 @@
     fantastic droid-fu project: https://github.com/donnfelker/droid-fu
 */
 
-package org.jabe.neverland.http;
+package org.jabe.neverland.framework.http;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;

@@ -21,7 +21,7 @@
     http://blog.rafaelsanches.com/2011/01/29/upload-using-multipart-post-using-httpclient-in-android/
 */
 
-package org.jabe.neverland.http;
+package org.jabe.neverland.framework.http;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
