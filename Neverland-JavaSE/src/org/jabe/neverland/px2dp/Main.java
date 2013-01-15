@@ -5,4 +5,5 @@ public class Main {
 		NewJFrame njf = new NewJFrame();
 		njf.setVisible(true);
 	}
+	
 }
