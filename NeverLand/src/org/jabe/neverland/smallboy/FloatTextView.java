@@ -9,6 +9,7 @@ import org.jabe.neverland.R;
 import org.jabe.neverland.util.Util;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -98,6 +99,9 @@ public class FloatTextView extends TextView implements IBoy {
 			}
 		});
 		mExecutorService.execute(th);
+//		this.setBackgroundResource(R.anim.nmgc_loading_boy);
+//		final AnimationDrawable animationDrawable = (AnimationDrawable) this.getBackground();
+//		animationDrawable.start();
 	}
 	
 	private void startBlinAndWagsAnimation() {
@@ -514,11 +518,6 @@ public class FloatTextView extends TextView implements IBoy {
 		return this;
 	}
 
-	@Override
-	public int getPositionStatus() {
-		return isLeft ? POSITION_STATUS_LEFT : POSITION_STATUS_RIGHT;
-	}
-
 	private Animation mDialogDismiss;
 
 	@Override
@@ -590,13 +589,18 @@ public class FloatTextView extends TextView implements IBoy {
 
 	@Override
 	public void destroy() {
-		mDialogRoot.setVisibility(GONE);
-		ViewUtil.removeViewInTop(mContext, mDialogRoot);
-		hasAddDialog = false;
+		
 	}
 
 	@Override
 	public void showAnimation() {
 		startEndAnimation();
+	}
+
+	@Override
+	public void dismiss() {
+		mDialogRoot.setVisibility(GONE);
+		ViewUtil.removeViewInTop(mContext, mDialogRoot);
+		hasAddDialog = false;
 	}
 }

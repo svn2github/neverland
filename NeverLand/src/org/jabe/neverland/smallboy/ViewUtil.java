@@ -1,9 +1,14 @@
 package org.jabe.neverland.smallboy;
 
+import java.io.ByteArrayOutputStream;
+
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.util.Base64;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -12,6 +17,16 @@ import android.view.WindowManager.LayoutParams;
 
 public class ViewUtil {
 	public static final String WINDOW_SERVICE = "window";
+
+	public static String getBitmapStrBase64(Bitmap bitmap) {
+		if (bitmap == null) {
+			return "";
+		}
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bitmap.compress(CompressFormat.JPEG, 100, baos);
+		byte[] bytes = baos.toByteArray();
+		return Base64.encodeToString(bytes, Base64.DEFAULT);
+	}
 
 	/**
 	 * FLAG_NOT_TOUCH_MODAL : view本身可以响应touch事件,不在view范围的内的touch事件也可以被传递.

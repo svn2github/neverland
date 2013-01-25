@@ -3,6 +3,8 @@ package org.jabe.neverland.smallboy;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jabe.neverland.R;
+
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -16,6 +18,7 @@ public class FloatAdView extends RelativeLayout implements IBoy {
 
 	public FloatAdView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+//		mInterceptIds.add(R.id.nmgc_ad_x);
 	}
 
 	private WindowManager.LayoutParams mParams;
@@ -50,11 +53,6 @@ public class FloatAdView extends RelativeLayout implements IBoy {
 	@Override
 	public View getBoyView() {
 		return this;
-	}
-
-	@Override
-	public int getPositionStatus() {
-		return 0;
 	}
 
 	@Override
@@ -130,6 +128,11 @@ public class FloatAdView extends RelativeLayout implements IBoy {
 
 	@Override
 	public void showAnimation() {
+		
+	}
+
+	@Override
+	public void dismiss() {
 		
 	}
 }

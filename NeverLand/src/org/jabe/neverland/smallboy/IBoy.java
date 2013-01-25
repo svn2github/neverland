@@ -24,13 +24,13 @@ public interface IBoy {
 	
 	public View getBoyView();
 	
-	public int getPositionStatus();
-	
 	public void displayMessage(String message);
 	
 	public void init();
 	
 	public void destroy();
+	
+	public void dismiss();
 	
 	public void showAnimation();
 	

@@ -3,14 +3,16 @@ package org.jabe.neverland;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jabe.neverland.activity.SlidingTestActivity;
+import org.jabe.neverland.smallboy.BoyPosition;
+import org.jabe.neverland.smallboy.IBoy;
+import org.jabe.neverland.smallboy.IBoyAction;
+import org.jabe.neverland.smallboy.SmallBoyManager;
 import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -99,6 +101,29 @@ public class NeverLandActivity extends ListActivity {
 				mBeansList.get(position).run();
 			}
 		});
+		SmallBoyManager smallBoyManager = SmallBoyManager.getInstance();
+		smallBoyManager.showDefaultBoy(this, new IBoyAction() {
+			
+			@Override
+			public void onMoveEnd() {
+				
+			}
+			
+			@Override
+			public void onMove() {
+				
+			}
+			
+			@Override
+			public void onClose(IBoy boy) {
+				
+			}
+			
+			@Override
+			public void onClick(IBoy boy) {
+				boy.displayMessage("嘿嘿");
+			}
+		}, new BoyPosition());
 	}
 
 	private void initData() {
