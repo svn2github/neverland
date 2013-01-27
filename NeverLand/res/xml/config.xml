@@ -83,4 +83,8 @@
         <title>MenuTest</title>
         <description>MenuTest</description>
     </item>
+    <item name="org.jabe.neverland.activity.ProgressTestActivity">
+        <title>Progress</title>
+        <description>Progress</description>
+    </item>
 </config>

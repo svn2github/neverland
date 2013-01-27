@@ -78,6 +78,8 @@
         </activity>
         <activity android:name=".activity.MenuTestActivity" >
         </activity>
+        <activity android:name=".activity.ProgressTestActivity" >
+        </activity> 
     </application>
 
 </manifest>
