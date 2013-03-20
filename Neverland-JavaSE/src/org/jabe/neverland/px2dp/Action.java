@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JButton;
@@ -12,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Action {
-	public static final float SCALE = 1.5F;
+	public static final float SCALE = 3.0F;
 	
 	public static synchronized void ExeLaout(String inPath, String outPath,
 			JButton jb, JFrame jf) {
@@ -48,7 +49,7 @@ public class Action {
 					String group = m.group();
 					group = group.replaceAll("\"", "");
 					group = group.replaceAll("px", "");
-					int dI = px2dip(Float.parseFloat(group));
+					float dI = px2dip(Float.parseFloat(group));
 					group = "\"" + dI + "dp\"";
 					toString = toString.replace(m.group(), group);
 				}
@@ -66,6 +67,9 @@ public class Action {
 			jb.setEnabled(true);
 		}
 	}
+	
+	public static final String DP = "dp";
+	public static String SP = "sp";
 
 	public static synchronized void ExeStyle(String inPath, String outPath,
 			JButton jb, JFrame jf) {
@@ -79,6 +83,7 @@ public class Action {
 			File f = new File(inPath);
 			String[] list = f.list();
 			for (String string : list) {
+				String ending = string.contains("text") ? SP : DP;
 				if (!string.endsWith("xml")) {
 					continue;
 				}
@@ -90,22 +95,23 @@ public class Action {
 				BufferedReader input = new BufferedReader(new FileReader(file));
 				StringBuffer buffer = new StringBuffer();
 				String text;
+				Pattern p = Pattern.compile("(\\d+)px");
+				
 				while ((text = input.readLine()) != null) {
+					Matcher m = p.matcher(text);		
+					while (m.find()) {
+						String old = m.group();
+						String newS = old.replaceAll("px", "");
+						float dI = px2dip(Float.parseFloat(newS));
+						DecimalFormat df = new DecimalFormat("###.##");
+						String newEnding = df.format(new Float(dI).doubleValue());
+						newS = newEnding + ending;
+						text = text.replace(old, newS);
+					}
 					buffer.append(text + "\n");
+					
 				}
 				String toString = buffer.toString();
-				Pattern p = Pattern.compile("(\\d+)px");
-
-				Matcher m = p.matcher(toString);
-				while (m.find()) {
-					String group = m.group();
-					group = group.replaceAll("\"", "");
-					group = group.replaceAll("px", "");
-					int dI = px2dip(Float.parseFloat(group));
-					group = dI + "dp";
-					toString = toString.replace(m.group(), group);
-				}
-
 				fw.write(toString);
 				fw.flush();
 				fw.close();
@@ -120,8 +126,8 @@ public class Action {
 		}
 	}
 
-	private static int px2dip(float pxValue) {
-		return (int) (pxValue / SCALE + 0.5F);
+	private static float px2dip(float pxValue) {
+		return (pxValue / SCALE + 0.5F);
 	}
 	
 	private static int dip2px(float dpValue) {

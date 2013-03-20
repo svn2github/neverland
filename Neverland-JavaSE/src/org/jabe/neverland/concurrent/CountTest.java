@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CountTest {
-	private static final String PROJECT_DIR = "E:\\WorkspaceForEclipse";
+	private static final String PROJECT_DIR = "E:\\WorkspaceForEclipseNew";
 	private static final String PROJECT_DIR1 = "E:\\WorkspaceForEclipse\\GameCenter-V2.1";
 	private static final String PROJECT_DIR2 = "E:\\WorkspaceForEclipse\\DataExchange";
 	private static final String PROJECT_DIR3 = "E:\\WorkspaceForEclipse\\OpenSDK";
@@ -67,7 +67,7 @@ public class CountTest {
 		File root8 = new File(PROJECT_DIR8);
 //		listNext(root1);
 //		listNext(root2);
-		listNext(root8);
+		listNext(root3);
 //		listNext(root4);
 //		listNext(root5);
 //		listNext(root6);
