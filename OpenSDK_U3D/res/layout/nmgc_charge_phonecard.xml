@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/nmgc_card_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/nmgc_charge_index_margin_top"
+        android:layout_marginTop="@dimen/nmgc_charge_index_margin_top"
+        android:gravity="center"
+        android:textColor="#079abf"
+        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nmgc_charge_index_margin"
+            android:layout_marginRight="@dimen/nmgc_charge_index_margin"
+            android:background="@drawable/nmgc_charge_content_border"
+            android:gravity="center|top"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/nmgc_charge_content_hint_margin_bottom"
+                android:layout_marginLeft="@dimen/nmgc_charge_content_hint_margin_left"
+                android:layout_marginTop="@dimen/nmgc_charge_content_hint_margin_top"
+                android:gravity="center_vertical"
+                android:text="@string/nmgc_charge_card_hint"
+                android:textColor="#3e3e3e"
+                android:textSize="@dimen/nmgc_charge_content_hint_text_size" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/nmgc_charge_content_hint_margin_bottom"
+                android:layout_marginLeft="@dimen/nmgc_charge_content_hint_margin_left"
+                android:layout_marginRight="@dimen/nmgc_charge_content_hint_margin_left"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_1"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_2"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_3"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/nmgc_charge_content_hint_margin_bottom"
+                android:layout_marginLeft="@dimen/nmgc_charge_content_hint_margin_left"
+                android:layout_marginRight="@dimen/nmgc_charge_content_hint_margin_left"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_4"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_5"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_6"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/nmgc_charge_content_hint_margin_bottom"
+                android:layout_marginLeft="@dimen/nmgc_charge_content_hint_margin_left"
+                android:layout_marginRight="@dimen/nmgc_charge_content_hint_margin_left"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_7"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_7"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_8"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_8"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size" />
+
+                <TextView
+                    android:id="@+id/nmgc_card_button_9"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/nmgc_charge_button_height"
+                    android:layout_marginLeft="@dimen/nmgc_charge_button_margin"
+                    android:layout_marginRight="@dimen/nmgc_charge_button_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/nmgc_charge_button_selector"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/nmgc_charge_card_button_6"
+                    android:textColor="#3e3e3e"
+                    android:textSize="@dimen/nmgc_charge_button_text_size"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/nmgc_card_ok"
+                android:layout_width="@dimen/nmgc_charge_bottom_button_width"
+                android:layout_height="@dimen/nmgc_charge_bottom_button_height"
+                android:layout_marginBottom="@dimen/nmgc_charge_ok_button_margin_bottom"
+                android:background="@drawable/nmgc_button_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/nmgc_global_queding"
+                android:textColor="#3e3e3e"
+                android:textSize="@dimen/nmgc_charge_index_text_size" />
+        </LinearLayout>
+
+        <!--
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nmgc_charge_bind_root"
+            android:orientation="vertical"
+            android:gravity="center" >
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/nmgc_charge_content_hint_margin_bottom"
+                android:layout_marginLeft="@dimen/nmgc_charge_content_hint_margin_left"
+                android:layout_marginRight="@dimen/nmgc_charge_content_hint_margin_left"
+                android:layout_marginTop="@dimen/nmgc_charge_content_hint_margin_top"
+                android:gravity="center"
+                android:text="@string/nmgc_charge_bind_hint"
+                android:textColor="#3e3e3e"
+                android:textSize="@dimen/nmgc_charge_content_hint_text_size" />
+            <TextView
+                android:id="@+id/nmgc_charge_bind_ok"
+                android:layout_width="@dimen/nmgc_charge_bind_ok_width"
+                android:layout_height="@dimen/nmgc_charge_bind_ok_height"
+                android:background="@drawable/nmgc_button_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/nmgc_charge_bind_ok"
+                android:textColor="#3e3e3e"
+                android:textSize="@dimen/nmgc_charge_index_text_size" />
+        </LinearLayout>
+        -->
+
+        <LinearLayout
+            android:id="@+id/nmgc_charge_bind_root"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/nmgc_charge_bind_ok"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/nmgc_charge_content_hint_margin_left"
+                android:layout_marginRight="@dimen/nmgc_charge_content_hint_margin_left"
+                android:gravity="center"
+                android:text="@string/nmgc_charge_bind_hint"
+                android:textColor="#3e3e3e"
+                android:textSize="@dimen/nmgc_charge_index_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

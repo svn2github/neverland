@@ -43,13 +43,13 @@ public class UnityEntry extends UnityPlayerActivity {
 			@Override
 			public void onSuccess(String content, int code) {
 				UnityPlayer.UnitySendMessage("Main", "onNearMeLoginCallback",
-						"" + code);
+						code + "#" + content);
 			}
 
 			@Override
 			public void onFailure(String content, int code) {
 				UnityPlayer.UnitySendMessage("Main", "onNearMeLoginCallback",
-						"" + code);
+						code + "#" + content);
 			}
 		});
 	}

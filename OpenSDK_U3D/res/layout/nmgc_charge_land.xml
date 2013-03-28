@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="@dimen/nmgc_charge_land_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nmgc_alert_title_border"
+            android:gravity="center" >
+
+            <TextView
+                style="@style/nmgc_login_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/nmgc_charge_yuanbaochognzhi"
+                android:textSize="@dimen/nmgc_login_title_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/nmgc_charge_land_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nmgc_alert_content_border"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/nmgc_charge_land_index_margin_left"
+                android:layout_marginRight="@dimen/nmgc_charge_land_index_margin_left"
+                android:layout_marginTop="@dimen/nmgc_charge_index_margin_top"
+                android:gravity="left"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/nmgc_charge_inforoot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible" >
+
+                    <TextView
+                        android:id="@+id/nmgc_charge_info1"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nmgc_charege_info1"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <TextView
+                        android:id="@+id/nmgc_charge_username"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="@dimen/nmgc_charge_info_maxwidth"
+                        android:singleLine="true"
+                        android:text="@string/nmgc_charge_empty"
+                        android:textColor="#079abf"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <TextView
+                        android:id="@+id/nmgc_charge_info2"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/nmgc_charge_info_margin_left"
+                        android:text="@string/nmgc_charege_info2"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <TextView
+                        android:id="@+id/nmgc_charge_balance"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="@dimen/nmgc_charge_info_maxwidth"
+                        android:singleLine="true"
+                        android:maxLength="8"
+                        android:text="@string/nmgc_charge_empty"
+                        android:textColor="#079abf"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <TextView
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nmgc_charge_yuanbao"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/nmgc_charge_need_root"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/nmgc_charge_inforoot"
+                    android:layout_marginLeft="@dimen/nmgc_charge_info_margin_left"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <TextView
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nmgc_charge_info3"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <TextView
+                        android:id="@+id/nmgc_charge_needs"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLength="8"
+                        android:text="@string/nmgc_charge_empty"
+                        android:textColor="#079abf"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <TextView
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nmgc_charge_yuanbao"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/nmgc_charge_bind_root"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_alignParentRight="true" >
+
+                    <TextView
+                        android:id="@+id/nmgc_charge_bind_ok"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/nmgc_charge_bind_ok_line"
+                        android:textColor="#079abf"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/nmgc_charge_land_index_height"
+                android:orientation="horizontal" >
+
+                <!-- index -->
+
+                <RadioGroup
+                    android:id="@+id/nmgc_button_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/nmgc_charge_land_index_margin_left"
+                    android:layout_marginTop="@dimen/nmgc_charge_land_index_margin_top"
+                    android:orientation="vertical" >
+
+                    <RadioButton
+                        android:id="@+id/nmgc_button_left"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="@dimen/nmgc_charge_land_index_button_width"
+                        android:layout_height="@dimen/nmgc_charge_land_index_button_height"
+                        android:layout_marginBottom="@dimen/nmgc_charge_land_index_margin_top"
+                        android:layout_weight="1"
+                        android:background="@drawable/nmgc_charge_button_selector"
+                        android:button="@null"
+                        android:checked="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="@string/nmgc_charge_phonecharge"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/nmgc_button_middle"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="@dimen/nmgc_charge_land_index_button_width"
+                        android:layout_height="@dimen/nmgc_charge_land_index_button_height"
+                        android:layout_marginBottom="@dimen/nmgc_charge_land_index_margin_top"
+                        android:layout_weight="1"
+                        android:background="@drawable/nmgc_charge_button_selector"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="@string/nmgc_charge_zhifubao"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/nmgc_button_right"
+                        style="@style/nmgc_common_text"
+                        android:layout_width="@dimen/nmgc_charge_land_index_button_width"
+                        android:layout_height="@dimen/nmgc_charge_land_index_button_height"
+                        android:layout_marginBottom="@dimen/nmgc_charge_land_index_margin_top"
+                        android:layout_weight="1"
+                        android:background="@drawable/nmgc_charge_button_selector"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="@string/nmgc_charge_caifutong"
+                        android:textSize="@dimen/nmgc_charge_index_text_size" />
+                </RadioGroup>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginBottom="@dimen/nmgc_charge_land_index_margin_top"
+                        android:layout_marginLeft="@dimen/nmgc_charge_land_index_tag_content_left"
+                        android:layout_marginRight="@dimen/nmgc_charge_land_index_margin_left"
+                        android:layout_marginTop="@dimen/nmgc_charge_land_content_margin_top"
+                        android:background="@drawable/nmgc_charge_content_border" >
+
+                        <LinearLayout
+                            android:id="@+id/nmgc_content_card"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@android:color/transparent"
+                            android:visibility="visible" >
+
+                            <include layout="@layout/nmgc_charge_phonecard_land" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/nmgc_content_other"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@android:color/transparent"
+                            android:visibility="gone" >
+
+                            <include layout="@layout/nmgc_charge_zhifubao_land" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="@dimen/nmgc_charge_land_index_tag_margin_left"
+                        android:layout_marginTop="@dimen/nmgc_charge_land_index_margin_top"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/nmgc_charge_land_index_button_height"
+                            android:layout_marginBottom="@dimen/nmgc_charge_land_index_margin_top"
+                            android:gravity="center" >
+
+                            <ImageView
+                                android:id="@+id/nmgc_charge_land_tag1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/nmgc_charge_index_tag" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/nmgc_charge_land_index_button_height"
+                            android:layout_marginBottom="@dimen/nmgc_charge_land_index_margin_top"
+                            android:gravity="center" >
+
+                            <ImageView
+                                android:id="@+id/nmgc_charge_land_tag2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/nmgc_charge_index_tag"
+                                android:visibility="invisible" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/nmgc_charge_land_index_button_height"
+                            android:layout_marginBottom="@dimen/nmgc_charge_land_index_margin_top"
+                            android:gravity="center" >
+
+                            <ImageView
+                                android:id="@+id/nmgc_charge_land_tag3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/nmgc_charge_index_tag"
+                                android:visibility="invisible" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <!-- content <include layout="@layout/nmgc_charge_zhifubao" /> -->
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
