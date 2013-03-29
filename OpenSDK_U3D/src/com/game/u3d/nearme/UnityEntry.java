@@ -24,7 +24,6 @@ public class UnityEntry extends UnityPlayerActivity {
 			
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				// 测试用的appkey和secret
 				GameCenterSettings gameCenterSettings = new GameCenterSettings(
 						"c5217trjnrmU6gO5jG8VvUFU0", "e2eCa732422245E8891F6555e999878B") {
@@ -49,7 +48,6 @@ public class UnityEntry extends UnityPlayerActivity {
 			
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				GameCenterSDK.getInstance().doLogin(new ApiCallback() {
 
 					@Override
