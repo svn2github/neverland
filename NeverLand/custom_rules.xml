@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GameCenter-Main" default="help" >
+    <echo level="info">Running custom_rules </echo>
+    <property name="icon-res">${basedir}/build-res/${target-phone}/drawable</property>
+    <target name="init">
+        <!-- <exec executable="svn" failonerror="true">
+            <arg value="update" />
+        </exec> -->
+        
+    </target>
+    
+	<target name="12025" depends="init">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-xxhdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="12009" depends="init">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+</project>

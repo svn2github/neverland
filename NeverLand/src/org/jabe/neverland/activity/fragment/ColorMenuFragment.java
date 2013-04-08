@@ -17,7 +17,7 @@ public class ColorMenuFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.list, null);
+		return inflater.inflate(R.layout.act_sliding_list, null);
 	}
 
 	@Override
