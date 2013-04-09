@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="GameCenter-Main" default="help" >
     <echo level="info">Running custom_rules </echo>
+    
     <property name="icon-res">${basedir}/build-res/${target-phone}/drawable</property>
+    <property name="env-jar-path">${basedir}/build-res/env-jar</property>
+    <property name="libs-path">${basedir}/libs</property>
+    <property name="old-env-jar-file">${libs-path}/env.jar</property>
+    
     <target name="init">
         <!-- <exec executable="svn" failonerror="true">
             <arg value="update" />
@@ -9,7 +14,47 @@
         
     </target>
     
-	<target name="12025" depends="init">
+    <target name="build-env-release">
+        <delete file="old-env-jar-file" ></delete>
+        <copy todir="${libs-path}" overwrite="true">
+           <fileset dir="${env-jar-path}/release">
+              <include name="env.jar" />
+          </fileset>
+       </copy>
+    </target>
+    
+    <target name="build-env-test">
+        <delete file="old-env-jar-file" ></delete>
+        <copy todir="${libs-path}" overwrite="true">
+           <fileset dir="${env-jar-path}/test">
+              <include name="env.jar" />
+          </fileset>
+       </copy>
+    </target>
+    
+    <target name="build-env-gamma">
+        <delete file="old-env-jar-file" ></delete>
+        <copy todir="${libs-path}" overwrite="true">
+           <fileset dir="${env-jar-path}/gamma">
+              <include name="env.jar" />
+          </fileset>
+       </copy>
+    </target>
+    
+    <target name="svn-update-revert">
+        <!-- <exec executable="${svn_home}/svn.exe" failonerror="true">
+            <arg value="cleanup" />
+        </exec>
+        <exec executable="${svn_home}/svn.exe" failonerror="true">
+            <arg value="update" />
+        </exec>
+        <exec executable="${svn_home}/svn.exe" failonerror="true">
+            <arg value="revert *" />
+        </exec> -->
+    </target>
+    
+    <!-- xxhdpi begin -->
+	<target name="12025">
 		<echo level="info">target : ${target-phone}</echo>
 		<property name="icon-dir">${basedir}/res/drawable-xxhdpi</property>
 		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
@@ -20,8 +65,10 @@
           </fileset>
        </copy>
 	</target>
+	<!-- xxhdpi end -->
 	
-	<target name="12009" depends="init">
+	<!-- hdpi begin -->
+	<target name="12009">
 		<echo level="info">target : ${target-phone}</echo>
 		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
 		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
@@ -33,4 +80,130 @@
        </copy>
 	</target>
 	
+	<target name="12001">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="11061">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="11075">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="12021">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="12015">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="12053">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="12035">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="13009">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	
+	<target name="12061">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	<!-- hdpi end -->
+	
+	<!-- mdpi begin -->
+	<!-- mdpi end -->
+	
+	
+	<!-- xhdpi begin -->
+	<target name="12083">
+		<echo level="info">target : ${target-phone}</echo>
+		<property name="icon-dir">${basedir}/res/drawable-xhdpi</property>
+		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
+		<delete file="icon-file" ></delete>
+		<copy todir="${icon-dir}">
+           <fileset dir="${icon-res}">
+              <include name="ic_launcher_nearme_gamecenter.png" />
+          </fileset>
+       </copy>
+	</target>
+	<!-- xhdpi end -->
 </project>
