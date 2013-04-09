@@ -53,157 +53,98 @@
         </exec> -->
     </target>
     
+    <!-- --------------------------------------我是分割线-------------------------------------- -->
+    
     <!-- xxhdpi begin -->
-	<target name="12025">
+    
+    <target name="icon-copy-xxhdpi">
 		<echo level="info">target : ${target-phone}</echo>
 		<property name="icon-dir">${basedir}/res/drawable-xxhdpi</property>
 		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
 		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
+		<copy todir="${icon-dir}" overwrite="true">
            <fileset dir="${icon-res}">
               <include name="ic_launcher_nearme_gamecenter.png" />
           </fileset>
        </copy>
 	</target>
+	
+	<target name="12025"  depends="icon-copy-xxhdpi">
+	</target>
+	
 	<!-- xxhdpi end -->
 	
+	<!-- --------------------------------------我是分割线-------------------------------------- -->
+	
 	<!-- hdpi begin -->
-	<target name="12009">
+	
+	<target name="icon-copy-hdpi">
 		<echo level="info">target : ${target-phone}</echo>
 		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
 		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
 		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
+		<copy todir="${icon-dir}" overwrite="true">
            <fileset dir="${icon-res}">
               <include name="ic_launcher_nearme_gamecenter.png" />
           </fileset>
        </copy>
 	</target>
 	
-	<target name="12001">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="12009" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="11061">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="12001" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="11075">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="11061" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="12021">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="11075" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="12015">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="12021" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="12053">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="12015" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="12035">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="12053" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="13009">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="12035" depends="icon-copy-hdpi">
 	</target>
 	
-	<target name="12061">
-		<echo level="info">target : ${target-phone}</echo>
-		<property name="icon-dir">${basedir}/res/drawable-hdpi</property>
-		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
-		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
-           <fileset dir="${icon-res}">
-              <include name="ic_launcher_nearme_gamecenter.png" />
-          </fileset>
-       </copy>
+	<target name="13009" depends="icon-copy-hdpi">
+	</target>
+	
+	<target name="12061" depends="icon-copy-hdpi">
 	</target>
 	<!-- hdpi end -->
 	
+	<!-- --------------------------------------我是分割线-------------------------------------- -->
+	
 	<!-- mdpi begin -->
+	
 	<!-- mdpi end -->
 	
+	<!-- --------------------------------------我是分割线-------------------------------------- -->
 	
 	<!-- xhdpi begin -->
-	<target name="12083">
+	
+	<target name="icon-copy-xhdpi">
 		<echo level="info">target : ${target-phone}</echo>
 		<property name="icon-dir">${basedir}/res/drawable-xhdpi</property>
 		<property name="icon-file">${icon-dir}/ic_launcher_nearme_gamecenter.png</property>
 		<delete file="icon-file" ></delete>
-		<copy todir="${icon-dir}">
+		<copy todir="${icon-dir}" overwrite="true">
            <fileset dir="${icon-res}">
               <include name="ic_launcher_nearme_gamecenter.png" />
           </fileset>
        </copy>
 	</target>
+	
+	<target name="12083" depends="icon-copy-xhdpi">
+	</target>
+	
 	<!-- xhdpi end -->
 </project>
