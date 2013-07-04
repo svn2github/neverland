@@ -16,7 +16,8 @@ public class CountTest {
 	private static final String PROJECT_DIR5 = "E:\\WorkspaceForEclipse\\OpenOauth";
 	private static final String PROJECT_DIR6 = "E:\\WorkspaceForEclipse\\GameCenterSDK_2.0";
 	private static final String PROJECT_DIR7 = "E:\\WorkspaceForEclipse\\Oppo_lianliankan2";
-	private static final String PROJECT_DIR8 = "E:\\WorkspaceForEclipse\\gamecenter_v2.2";
+	private static final String PROJECT_DIR8 = "E:\\WorkspaceForEclipseNew\\GameCenter-Main";
+	private static final String PROJECT_DIR9 = "E:\\WorkspaceForEclipse\\Note";
 	
 	private static int fileNum = 0;
 	private static int lineNum = 0;
@@ -25,6 +26,9 @@ public class CountTest {
 		File[] files = dir.listFiles();
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].isDirectory()) {
+				if (files[i].getName().equals("bin")) {
+					continue;
+				}
 				listNext(files[i]);
 			} else {
 				try {
@@ -65,9 +69,10 @@ public class CountTest {
 		File root6 = new File(PROJECT_DIR6);
 		File root7 = new File(PROJECT_DIR7);
 		File root8 = new File(PROJECT_DIR8);
+		File root9 = new File(PROJECT_DIR9);
 //		listNext(root1);
 //		listNext(root2);
-		listNext(root3);
+		listNext(root8);
 //		listNext(root4);
 //		listNext(root5);
 //		listNext(root6);

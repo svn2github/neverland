@@ -1,5 +1,6 @@
 package org.jabe.neverland.concurrent;
 
+import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
 
 import com.nearme.oauth.model.AccessToken;
@@ -39,4 +40,5 @@ public class Test {
 			e.printStackTrace();
 		}
 	}
+	RandomAccessFile ra ;
 }
