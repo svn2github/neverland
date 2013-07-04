@@ -2,6 +2,7 @@ package org.jabe.neverland.download.downloader;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -41,29 +42,41 @@ public class BaseImageDownloader implements Downloader {
 		switch (Scheme.ofUri(imageUri)) {
 			case HTTP:
 			case HTTPS:
-				return getStreamFromNetwork(imageUri, extra);
+				return getStreamFromNetwork(imageUri, extra, sb);
 			case FILE:
 				return getStreamFromFile(imageUri, extra);
 			case CONTENT:
-//				return getStreamFromContent(imageUri, extra);
+				return getStreamFromContent(imageUri, extra);
 			case ASSETS:
-//				return getStreamFromAssets(imageUri, extra);
+				return getStreamFromAssets(imageUri, extra);
 			case DRAWABLE:
-//				return getStreamFromDrawable(imageUri, extra);
+				return getStreamFromDrawable(imageUri, extra);
 			case UNKNOWN:
 			default:
 				return getStreamFromOtherSource(imageUri, extra);
 		}
 	}
 
-	protected InputStream getStreamFromNetwork(String imageUri, Object extra) throws IOException {
+	protected InputStream getStreamFromNetwork(String imageUri, Object extra, SizeBean sb) throws IOException {
 		HttpURLConnection conn = createConnection(imageUri);
+		initHeaders(conn);
+		if (sb != null && sb.start > 0) {
+			String range = "bytes=" + sb.start + "-" + (sb.end - 1);
+			conn.setRequestProperty("Range", range);
+		}
 		int redirectCount = 0;
 		while (conn.getResponseCode() / 100 == 3 && redirectCount < MAX_REDIRECT_COUNT) {
 			conn = createConnection(conn.getHeaderField("Location"));
 			redirectCount++;
 		}
 		return new BufferedInputStream(conn.getInputStream(), BUFFER_SIZE);
+	}
+	
+	private void initHeaders(HttpURLConnection conn) {
+		conn.setRequestProperty("Connection", "Keep-Alive");
+		conn.setRequestProperty("Charset", "UTF-8");
+		conn.setRequestProperty("Accept-Language", "zh-CN");
+		conn.setRequestProperty("User-Agent", "Android");
 	}
 
 	protected HttpURLConnection createConnection(String url) throws IOException {
@@ -80,5 +93,17 @@ public class BaseImageDownloader implements Downloader {
 
 	protected InputStream getStreamFromOtherSource(String imageUri, Object extra) throws IOException {
 		throw new UnsupportedOperationException(String.format(ERROR_UNSUPPORTED_SCHEME, imageUri));
+	}
+	
+	protected InputStream getStreamFromContent(String imageUri, Object extra) throws FileNotFoundException {
+		return null;
+	}
+
+	protected InputStream getStreamFromAssets(String imageUri, Object extra) throws IOException {
+		return null;
+	}
+
+	protected InputStream getStreamFromDrawable(String imageUri, Object extra) {
+		return null;
 	}
 }

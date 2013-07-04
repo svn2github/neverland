@@ -29,10 +29,14 @@ public class DownloadTask implements Runnable {
 		// task life cycle
 		mTaskConfig.mDownloadTaskListener.onPreTask();
 		
-		if (mCacheTask.isInCache()) {
-			mCacheTask.readFromCache();
-		} else {
-			mCacheTask.saveToCache();
+		try {
+			if (mCacheTask.isInCache()) {
+				mCacheTask.readFromCache();
+			} else {
+				mCacheTask.saveToCache();
+			}
+		} catch (Exception e) {
+			
 		}
 		
 		final int secCount = mCacheTask.mSectionCount;
@@ -58,7 +62,7 @@ public class DownloadTask implements Runnable {
 			@Override
 			public void run() {
 				try {
-					doRealDownload(mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
+					doRealDownload(1, mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
 				} catch (IOException e) {
 				}
 			}
@@ -70,14 +74,22 @@ public class DownloadTask implements Runnable {
 		
 	}
 
-	private void doRealDownload(final long contentLength, final long start, final long end) throws IOException {
-		
+	private void doRealDownload(final int sectionNo, final long contentLength, final long start, final long end) throws IOException {
 		final SizeBean sb = new SizeBean(contentLength, start, end);
 		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheTask.mDownloadUrl, null, sb);
 		try {
 			OutputStream os = new BufferedOutputStream(new FileOutputStream(mCacheTask.mSaveFileFullPath), BUFFER_SIZE);
 			try {
-				IoUtils.copyStream(is, os);
+//				IoUtils.copyStream(is, os);
+				byte[] bytes = new byte[BUFFER_SIZE];
+				while (true) {
+					int count = is.read(bytes, 0, BUFFER_SIZE);
+					if (count == -1) {
+						break;
+					}
+					os.write(bytes, 0, count);
+					mCacheTask.updateSectionProgress(sectionNo, count);
+				}
 			} finally {
 				IoUtils.closeSilently(os);
 			}
