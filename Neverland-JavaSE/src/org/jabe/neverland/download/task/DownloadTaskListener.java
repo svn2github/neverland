@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.task;
+package org.jabe.neverland.download.task;
 
 import java.io.File;
 

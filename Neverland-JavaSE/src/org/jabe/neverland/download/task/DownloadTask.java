@@ -1,7 +1,18 @@
-package org.jabe.neverland.download.core.task;
+package org.jabe.neverland.download.task;
+
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.jabe.neverland.download.downloader.Downloader.SizeBean;
+import org.jabe.neverland.download.util.IoUtils;
 
 
 public class DownloadTask implements Runnable {
+	
+	private static final int BUFFER_SIZE = 8 * 1024;
 	
 	private TaskConfig mTaskConfig;
 	
@@ -46,7 +57,10 @@ public class DownloadTask implements Runnable {
 			
 			@Override
 			public void run() {
-				doRealDownload(mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
+				try {
+					doRealDownload(mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
+				} catch (IOException e) {
+				}
 			}
 		};
 		mTaskConfig.mDownloadExecutorService.execute(r);
@@ -56,8 +70,20 @@ public class DownloadTask implements Runnable {
 		
 	}
 
-	private void doRealDownload(final long contengLength, final long start, final long end) {
+	private void doRealDownload(final long contentLength, final long start, final long end) throws IOException {
 		
+		final SizeBean sb = new SizeBean(contentLength, start, end);
+		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheTask.mDownloadUrl, null, sb);
+		try {
+			OutputStream os = new BufferedOutputStream(new FileOutputStream(mCacheTask.mSaveFileFullPath), BUFFER_SIZE);
+			try {
+				IoUtils.copyStream(is, os);
+			} finally {
+				IoUtils.closeSilently(os);
+			}
+		} finally {
+			IoUtils.closeSilently(is);
+		}
 	}
 	
 	private void onSuccess() {

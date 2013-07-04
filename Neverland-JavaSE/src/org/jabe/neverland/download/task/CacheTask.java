@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.task;
+package org.jabe.neverland.download.task;
 
 import org.jabe.neverland.download.core.DownloadInfo;
 
@@ -11,6 +11,8 @@ public abstract class CacheTask {
 	protected int mSectionCount;
 	
 	protected long mContentLength;
+	protected String mDownloadUrl;
+	protected String mSaveFileFullPath;
 	
 	
 	private DownloadInfo mDownloadInfo;
