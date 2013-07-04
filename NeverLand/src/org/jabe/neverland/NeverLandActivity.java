@@ -91,8 +91,7 @@ public class NeverLandActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initData();
-		setListAdapter(new ArrayAdapter<Entry>(this,
-				android.R.layout.simple_list_item_1, mBeansList));
+		setListAdapter(new ArrayAdapter<Entry>(this, R.layout.simple_list_item_1, mBeansList));
 		ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -174,5 +173,12 @@ public class NeverLandActivity extends ListActivity {
 			xml.close();
 		}
 		return list;
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		System.exit(0);
 	}
 }
