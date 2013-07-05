@@ -1,7 +1,6 @@
 package org.jabe.neverland.download.task;
 
 import java.io.IOException;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.jabe.neverland.download.cache.ProgressCacheManager;
 import org.jabe.neverland.download.core.DownloadInfo;
@@ -15,13 +14,9 @@ public class CacheTask {
 	public int mSectionCount;
 	
 	public long mContentLength;
-	public String mDownloadUrl;
-	public String mSaveFileFullPath;
-	
 	public DownloadInfo mDownloadInfo;
 	
 	private ProgressCacheManager mProgressCacheManager;
-	private ReentrantLock mDownloadedLock;
 	
 	private CacheTask(ProgressCacheManager progressCacheManager) {
 		this.mProgressCacheManager = progressCacheManager;
@@ -51,14 +46,20 @@ public class CacheTask {
 		mProgressCacheManager.saveToCache(this);
 	}
 	
+	public String generateCacheSaveFullPath() {
+		return mProgressCacheManager.generateCacheSaveFullPath(mDownloadInfo);
+	}
+	
 	public boolean isInCache() {
 		return mProgressCacheManager.isInCache(this);
 	}
 	
+	public boolean checkFinish() {
+		return mProgressCacheManager.completeCacheTask(this);
+	}
+	
 	public void updateSectionProgress(int sectionNo, long progress) throws IOException {
-		mDownloadedLock.lock();
-		mDownloadedLength =+ progress;
-		mDownloadedLock.unlock();
 		mProgressCacheManager.updateSectionProgress(sectionNo, progress, this);
 	}
+
 }

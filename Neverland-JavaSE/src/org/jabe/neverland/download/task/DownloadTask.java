@@ -76,9 +76,9 @@ public class DownloadTask implements Runnable {
 
 	private void doRealDownload(final int sectionNo, final long contentLength, final long start, final long end) throws IOException {
 		final SizeBean sb = new SizeBean(contentLength, start, end);
-		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheTask.mDownloadUrl, null, sb);
+		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheTask.mDownloadInfo.getmDownloadUrl(), null, sb);
 		try {
-			OutputStream os = new BufferedOutputStream(new FileOutputStream(mCacheTask.mSaveFileFullPath), BUFFER_SIZE);
+			OutputStream os = new BufferedOutputStream(new FileOutputStream(mCacheTask.generateCacheSaveFullPath()), BUFFER_SIZE);
 			try {
 //				IoUtils.copyStream(is, os);
 				byte[] bytes = new byte[BUFFER_SIZE];
@@ -90,6 +90,7 @@ public class DownloadTask implements Runnable {
 					os.write(bytes, 0, count);
 					mCacheTask.updateSectionProgress(sectionNo, count);
 				}
+				onSuccess();
 			} finally {
 				IoUtils.closeSilently(os);
 			}

@@ -477,5 +477,45 @@ public class DownloadInfo {
             return defaultValue;
         }
     }
+    
+    public String getmDownloadUrl() {
+		return getString(P_DOWNLOAD_URI, "");
+	}
+
+	public void setmDownloadUrl(String mDownloadUrl) {
+		putString(P_DOWNLOAD_URI, mDownloadUrl);
+	}
+
+	public String getmPackageName() {
+		return getString(P_PACKAGENAME, "");
+	}
+
+	public void setmPackageName(String mPackageName) {
+		putString(P_PACKAGENAME, mPackageName);
+	}
+
+	public String getmName() {
+		return getString(P_DOWNLOAD_NAME, "");
+	}
+
+	public void setmName(String mName) {
+		putString(P_DOWNLOAD_NAME, mName);
+	}
+
+	public String getmIconUrl() {
+		return getString(P_ICON_URL, "");
+	}
+
+	public void setmIconUrl(String mIconUrl) {
+		putString(P_ICON_URL, mIconUrl);
+	}
+
+	public String getmId() {
+		return getString(P_ID, "");
+	}
+
+	public void setmId(String mId) {
+		putString(P_ID, mId);
+	}
 
 }

@@ -11,10 +11,16 @@ public abstract class ProgressCacheManager {
 	
 	public abstract boolean isInCache(final CacheTask cacheTask);
 	
-	public abstract void updateSectionProgress(int sectionNo, long progress, final CacheTask cacheTask);
+	public abstract void updateSectionProgress(final int sectionNo, final long progress, final CacheTask cacheTask);
 	
-	public abstract int getDownloadedPercent(DownloadInfo downloadInfo);
+	public abstract int getDownloadedPercent(final DownloadInfo downloadInfo);
 	
-	public abstract boolean isDownloadFinished(DownloadInfo downloadInfo);
+	public abstract boolean isDownloadFinished(final DownloadInfo downloadInfo);
+	
+	public abstract String generateCacheSaveFullPath(final DownloadInfo downloadInfo);
+	
+	public abstract String generateFinishPath(final DownloadInfo downloadInfo);
+	
+	public abstract boolean completeCacheTask(final CacheTask cacheTask);
 	
 }
