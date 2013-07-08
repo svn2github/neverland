@@ -102,4 +102,29 @@ public class DownloadTask implements Runnable {
 	private void onSuccess() {
 		
 	}
+
+	public boolean startDownload() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean resumeDownload() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean pauseDownload() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean cancelDownload() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean restartDownload() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

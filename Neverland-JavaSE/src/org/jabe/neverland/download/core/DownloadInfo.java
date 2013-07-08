@@ -16,6 +16,7 @@ public class DownloadInfo {
 	public static final String P_SIZE = "size";
 	public static final String P_ID = "id";
 	public DownloadStatus currentDownloadStatus = DownloadStatus.DOWNLOAD_STATUS_PREPARE;
+	
 	static {
 		EMPTY = new DownloadInfo();
 		EMPTY.mMap = Collections.unmodifiableMap(new HashMap<String, Object>());
