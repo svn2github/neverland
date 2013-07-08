@@ -1,10 +1,11 @@
-package org.jabe.neverland.download.task;
+package org.jabe.neverland.download.core.impl;
 
 import java.io.File;
 
 public abstract class DownloadTaskListener {
-private String tag;
 	
+	private String tag;
+
 	public DownloadTaskListener(String tag) {
 		this.tag = tag;
 	}
@@ -33,9 +34,9 @@ private String tag;
 	public void onBeforeExecute() {
 
 	}
-	
+
 	public void onCancel() {
-		
+
 	}
 
 	/**
@@ -47,7 +48,8 @@ private String tag;
 	 *            has added the increment
 	 * @param total
 	 */
-	public abstract void onUpdateProgress(double added, double downloaded, double total);
+	public abstract void onUpdateProgress(double added, double downloaded,
+			double total);
 
 	public void onFileExist(File file) {
 

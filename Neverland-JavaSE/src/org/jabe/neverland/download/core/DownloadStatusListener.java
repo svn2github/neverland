@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.listener;
+package org.jabe.neverland.download.core;
 
 public interface DownloadStatusListener extends DownloadListener{
 	

@@ -1,11 +1,10 @@
-package org.jabe.neverland.download.task;
+package org.jabe.neverland.download.core;
 
 import java.io.IOException;
 
-import org.jabe.neverland.download.cache.ProgressCacheManager;
-import org.jabe.neverland.download.core.DownloadInfo;
 
-public class CacheTask {
+
+public class DownloadCacheTask {
 	
 	public long mDownloadedLength = 0;
 	
@@ -16,9 +15,9 @@ public class CacheTask {
 	public long mContentLength;
 	public DownloadInfo mDownloadInfo;
 	
-	private ProgressCacheManager mProgressCacheManager;
+	private DownloadCacheManager mProgressCacheManager;
 	
-	private CacheTask(ProgressCacheManager progressCacheManager) {
+	public DownloadCacheTask(DownloadCacheManager progressCacheManager, DownloadInfo downloadInfo) {
 		this.mProgressCacheManager = progressCacheManager;
 	}
 	
@@ -28,14 +27,6 @@ public class CacheTask {
 		for (int i = 0; i < mSectionCount; i++) {
 			mSectionsOffset[i] = per * i;
 		}
-	}
-
-	public DownloadInfo getmDownloadInfo() {
-		return mDownloadInfo;
-	}
-
-	public void setmDownloadInfo(DownloadInfo mDownloadInfo) {
-		this.mDownloadInfo = mDownloadInfo;
 	}
 	
 	public void readFromCache() throws IOException {

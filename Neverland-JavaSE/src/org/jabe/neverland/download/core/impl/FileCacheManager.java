@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.cache;
+package org.jabe.neverland.download.core.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -8,11 +8,12 @@ import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.jabe.neverland.download.core.DownloadCacheTask;
 import org.jabe.neverland.download.core.DownloadInfo;
-import org.jabe.neverland.download.task.CacheTask;
+import org.jabe.neverland.download.core.DownloadCacheManager;
 import org.jabe.neverland.download.util.IoUtils;
 
-public class FileCacheManager extends ProgressCacheManager {
+public class FileCacheManager extends DownloadCacheManager {
 
 	private static final String TAG = FileCacheManager.class.getSimpleName();
 	
@@ -32,7 +33,7 @@ public class FileCacheManager extends ProgressCacheManager {
 	}
 
 	@Override
-	public void readFromCache(CacheTask cacheTask) {
+	public void readFromCache(DownloadCacheTask cacheTask) {
 		synchronized (cacheTask) {
 			try {
 				final File f = getTaskFile(cacheTask.mDownloadInfo);
@@ -45,7 +46,7 @@ public class FileCacheManager extends ProgressCacheManager {
 	}
 
 	@Override
-	public void saveToCache(CacheTask cacheTask) {
+	public void saveToCache(DownloadCacheTask cacheTask) {
 		synchronized (cacheTask) {
 			try {
 				final File f = getTaskFile(cacheTask.mDownloadInfo);
@@ -59,7 +60,7 @@ public class FileCacheManager extends ProgressCacheManager {
 	}
 
 	@Override
-	public boolean isInCache(CacheTask cacheTask) {
+	public boolean isInCache(DownloadCacheTask cacheTask) {
 		final File taskFile = getTaskFile(cacheTask.mDownloadInfo);
 		if (taskFile.exists()) {
 			return true;
@@ -70,7 +71,7 @@ public class FileCacheManager extends ProgressCacheManager {
 
 	@Override
 	public void updateSectionProgress(int sectionNo, long progress,
-			CacheTask cacheTask) {
+			DownloadCacheTask cacheTask) {
 		synchronized (cacheTask) {
 			cacheTask.mDownloadedLength =+ progress;
 			cacheTask.mSectionsOffset[sectionNo] = cacheTask.mSectionsOffset[sectionNo] + progress;
@@ -117,7 +118,7 @@ public class FileCacheManager extends ProgressCacheManager {
 	}
 	
 
-	private void read(final RandomAccessFile file, final CacheTask cacheTask)
+	private void read(final RandomAccessFile file, final DownloadCacheTask cacheTask)
 			throws CacheAccessException {
 		try {
 			file.seek(0);
@@ -186,7 +187,7 @@ public class FileCacheManager extends ProgressCacheManager {
 		}
 	}
 
-	private void create(final RandomAccessFile file, final CacheTask cacheTask)
+	private void create(final RandomAccessFile file, final DownloadCacheTask cacheTask)
 			throws CacheAccessException {
 		try {
 			final DownloadInfo downloadInfo = cacheTask.mDownloadInfo;
@@ -263,7 +264,7 @@ public class FileCacheManager extends ProgressCacheManager {
 	}
 
 	@Override
-	public boolean completeCacheTask(CacheTask cacheTask) {
+	public boolean completeCacheTask(DownloadCacheTask cacheTask) {
 		final File saveFile = new File(generateCacheSaveFullPath(cacheTask.mDownloadInfo));
 		if (!saveFile.exists()) {
 			return false;

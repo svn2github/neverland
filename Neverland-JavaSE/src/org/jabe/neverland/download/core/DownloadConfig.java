@@ -3,7 +3,7 @@ package org.jabe.neverland.download.core;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.jabe.neverland.download.cache.ProgressCacheManager;
+import org.jabe.neverland.download.core.impl.DefaultConfigurationFactory;
 
 public final class DownloadConfig {
 	
@@ -14,7 +14,7 @@ public final class DownloadConfig {
 	
 	public final DownloadOperationMaper mDownloadOperationMaper;
 	public final DownloadEngine mDownloadEngine;
-	public final ProgressCacheManager mProgressCacheManager;
+	public final DownloadCacheManager mProgressCacheManager;
 	public final String mCacheRootPath;
 	
 	private static final int DEFAULT_TASK_WAITING_SIZE = 3;
@@ -36,7 +36,7 @@ public final class DownloadConfig {
 		private int mMaxTaskSizeInRunningQueue = 0;
 		private DownloadOperationMaper mDownloadOperationMaper;
 		private DownloadEngine mDownloadEngine;
-		private ProgressCacheManager mProgressCacheManager;
+		private DownloadCacheManager mProgressCacheManager;
 		private String mCacheRootPath;
 		public Builder() {
 			
@@ -95,7 +95,7 @@ public final class DownloadConfig {
 				mProgressCacheManager = DefaultConfigurationFactory.getDefaultCacheManager(mCacheRootPath);
 			}
 			if (mDownloadEngine == null) {
-				mDownloadEngine = DefaultConfigurationFactory.getDefaultDownloadEngine(mProgressCacheManager);
+				mDownloadEngine = DefaultConfigurationFactory.getDefaultDownloadEngine(mProgressCacheManager, mTaskExecutor);
 			}
 			if (mDownloadOperationMaper == null) {
 				mDownloadOperationMaper = DefaultConfigurationFactory.getDefaultMaper(mDownloadEngine);

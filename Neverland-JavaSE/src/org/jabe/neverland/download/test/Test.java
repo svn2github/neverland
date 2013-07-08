@@ -1,7 +1,7 @@
 package org.jabe.neverland.download.test;
 
 import org.jabe.neverland.download.core.DownloadConfig;
-import org.jabe.neverland.download.core.DownloadListenerManager;
+import org.jabe.neverland.download.core.DownloadInfo;
 import org.jabe.neverland.download.core.DownloadManager;
 
 public class Test {
@@ -15,7 +15,10 @@ public class Test {
 				.addMaxTaskSizeInRunning(2)
 				.addMaxTaskSizeInWaiting(2)
 				.build();
-		final DownloadListenerManager dm = new DownloadManager(downloadConfig);
+		final DownloadInfo downloadInfo = new DownloadInfo();
+		final DownloadManager dm = new DownloadManager(downloadConfig);
+		
+		dm.startDownload(null);
 	}
 
 }

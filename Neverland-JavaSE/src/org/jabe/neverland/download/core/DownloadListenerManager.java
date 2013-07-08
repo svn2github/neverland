@@ -3,9 +3,6 @@ package org.jabe.neverland.download.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jabe.neverland.download.listener.DownloadListener;
-import org.jabe.neverland.download.listener.DownloadProgressListener;
-import org.jabe.neverland.download.listener.DownloadStatusListener;
 
 public class DownloadListenerManager {
 	

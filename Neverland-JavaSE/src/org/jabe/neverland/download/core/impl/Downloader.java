@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.downloader;
+package org.jabe.neverland.download.core.impl;
 
 import java.io.IOException;
 import java.io.InputStream;

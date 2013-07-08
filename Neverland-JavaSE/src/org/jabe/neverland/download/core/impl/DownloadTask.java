@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.task;
+package org.jabe.neverland.download.core.impl;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.jabe.neverland.download.downloader.Downloader.SizeBean;
+import org.jabe.neverland.download.core.DownloadCacheTask;
+import org.jabe.neverland.download.core.impl.Downloader.SizeBean;
 import org.jabe.neverland.download.util.IoUtils;
 
 
@@ -14,15 +15,15 @@ public class DownloadTask implements Runnable {
 	
 	private static final int BUFFER_SIZE = 8 * 1024;
 	
-	private TaskConfig mTaskConfig;
+	protected TaskConfig mTaskConfig;
 	
-	public DownloadTask(TaskConfig mTaskConfig, CacheTask mCacheTask) {
+	public DownloadTask(TaskConfig mTaskConfig) {
 		super();
 		this.mTaskConfig = mTaskConfig;
-		this.mCacheTask = mCacheTask;
+		mCacheTask = mTaskConfig.mCacheTask;
 	}
 
-	private CacheTask mCacheTask;
+	private DownloadCacheTask mCacheTask;
 	
 	@Override
 	public void run() {
