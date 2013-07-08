@@ -1,5 +1,6 @@
 package org.jabe.neverland.download.core.engine.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -11,7 +12,7 @@ import org.jabe.neverland.download.core.cache.DownloadCacheTask;
 
 public class TaskDownloadEngine implements DownloadEngine {
 
-	protected final Map<String, DownloadTask> mDownloadTaskMap = new HashMap<String, DownloadTask>();
+	protected final Map<String, DownloadTask> mDownloadTaskMap = Collections.synchronizedMap(new HashMap<String, DownloadTask>());
 	protected final DownloadCacheManager mProgressCacheManager;
 	protected final ExecutorService mDownloadExecutor;
 
@@ -24,7 +25,7 @@ public class TaskDownloadEngine implements DownloadEngine {
 	@Override
 	public boolean startDownload(DownloadInfo downloadInfo) {
 		// TODO Auto-generated method stub
-		return false;
+		return startD(downloadInfo);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class TaskDownloadEngine implements DownloadEngine {
 					.addCacheTask(cacheTask)
 					.addDownloadExecutor(mDownloadExecutor)
 					.addDownloadTaskListener(mDownloadTaskListener)
-					.addDownloader(new BaseDownloader())
+					.addDownloader(new BaseIODownloader())
 					.build();
 			final DownloadTask downloadTask = new DownloadTask(taskConfig);
 			mDownloadTaskMap.put(downloadInfo.getmPackageName(), downloadTask);
@@ -75,7 +76,7 @@ public class TaskDownloadEngine implements DownloadEngine {
 		@Override
 		public void onUpdateProgress(double added, double downloaded, double total) {
 			// TODO Auto-generated method stub
-			
+			System.out.println("Downloaded Percent : " + downloaded/total*100);
 		}
 		
 		@Override

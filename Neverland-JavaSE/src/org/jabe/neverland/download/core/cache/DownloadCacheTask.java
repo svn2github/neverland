@@ -19,8 +19,15 @@ public class DownloadCacheTask {
 	
 	public DownloadCacheTask(DownloadCacheManager progressCacheManager, DownloadInfo downloadInfo) {
 		this.mProgressCacheManager = progressCacheManager;
+		this.mDownloadInfo = downloadInfo;
+		init();
 	}
 	
+	private void init() {
+		mSectionCount = mDownloadInfo.getInt(DownloadInfo.P_SECTION_COUNT, 1);
+		mWorkerCount = mDownloadInfo.getInt(DownloadInfo.P_WORKER_COUNT, 1);
+	}
+
 	protected void initSectionOffset() {
 		final long per = mContentLength / mSectionCount;
 		mSectionsOffset = new long[mSectionCount];

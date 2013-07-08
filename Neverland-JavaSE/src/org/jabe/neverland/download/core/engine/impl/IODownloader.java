@@ -3,7 +3,7 @@ package org.jabe.neverland.download.core.engine.impl;
 import java.io.IOException;
 import java.io.InputStream;
 
-public interface Downloader {
+public interface IODownloader {
 
 	InputStream getStream(String imageUri, Object extra, SizeBean sb)
 			throws IOException;

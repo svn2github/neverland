@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.jabe.neverland.download.core.cache.DownloadCacheTask;
-import org.jabe.neverland.download.core.engine.impl.Downloader.SizeBean;
+import org.jabe.neverland.download.core.engine.impl.IODownloader.SizeBean;
 import org.jabe.neverland.download.util.IoUtils;
 
 
@@ -24,9 +24,11 @@ public class DownloadTask implements Runnable {
 	}
 
 	private DownloadCacheTask mCacheTask;
+	private volatile boolean hasStarted = false;
 	
 	@Override
 	public void run() {
+		hasStarted = true;
 		// task life cycle
 		mTaskConfig.mDownloadTaskListener.onPreTask();
 		
@@ -34,6 +36,9 @@ public class DownloadTask implements Runnable {
 			if (mCacheTask.isInCache()) {
 				mCacheTask.readFromCache();
 			} else {
+				if (mCacheTask.mContentLength == 0) {
+					
+				}
 				mCacheTask.saveToCache();
 			}
 		} catch (Exception e) {
@@ -56,19 +61,14 @@ public class DownloadTask implements Runnable {
 			doSingleWork();
 		}
 	}
+	
+//	private long 
 
 	private void doSingleWork() {
-		final Runnable r = new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					doRealDownload(1, mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
-				} catch (IOException e) {
-				}
-			}
-		};
-		mTaskConfig.mDownloadExecutorService.execute(r);
+		try {
+			doRealDownload(1, mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
+		} catch (IOException e) {
+		}
 	}
 
 	private void doMultipleWork() {
@@ -105,8 +105,12 @@ public class DownloadTask implements Runnable {
 	}
 
 	public boolean startDownload() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!hasStarted) {
+			mTaskConfig.mDownloadExecutorService.execute(this);
+			return true;
+		} else {
+			return restartDownload();
+		}
 	}
 
 	public boolean resumeDownload() {
@@ -125,7 +129,12 @@ public class DownloadTask implements Runnable {
 	}
 
 	public boolean restartDownload() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!hasStarted) {
+			mTaskConfig.mDownloadExecutorService.execute(this);
+			return true;
+		} else {
+			// TODO
+			return false;
+		}
 	}
 }

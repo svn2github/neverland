@@ -15,6 +15,10 @@ public class DownloadInfo {
 	public static final String P_DOWNLOAD_NAME = "name";
 	public static final String P_SIZE = "size";
 	public static final String P_ID = "id";
+	
+	public static final String P_SECTION_COUNT = "sectionCount";
+	public static final String P_WORKER_COUNT = "workerCount";
+	
 	public DownloadStatus currentDownloadStatus = DownloadStatus.DOWNLOAD_STATUS_PREPARE;
 	
 	static {

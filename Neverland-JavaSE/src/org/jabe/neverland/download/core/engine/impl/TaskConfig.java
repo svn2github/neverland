@@ -9,7 +9,7 @@ public class TaskConfig {
 	public final DownloadCacheTask mCacheTask;
 	public final DownloadTaskListener mDownloadTaskListener;
 	public final ExecutorService mDownloadExecutorService;
-	public final Downloader mDownloader;
+	public final IODownloader mDownloader;
 	
 	private TaskConfig(final Builder builder) {
 		mCacheTask = builder.mCacheTask;
@@ -23,7 +23,7 @@ public class TaskConfig {
 		private DownloadCacheTask mCacheTask;
 		private DownloadTaskListener mDownloadTaskListener;
 		private ExecutorService mDownloadExecutorService;
-		private Downloader mDownloader;
+		private IODownloader mDownloader;
 		
 		public Builder() {
 		}
@@ -43,7 +43,7 @@ public class TaskConfig {
 			return this;
 		}
 		
-		public Builder addDownloader(final Downloader downloader) {
+		public Builder addDownloader(final IODownloader downloader) {
 			this.mDownloader = downloader;
 			return this;
 		}

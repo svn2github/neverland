@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class BaseDownloader implements Downloader {
+public class BaseIODownloader implements IODownloader {
 	/** {@value} */
 	public static final int DEFAULT_HTTP_CONNECT_TIMEOUT = 5 * 1000; // milliseconds
 	/** {@value} */
@@ -27,12 +27,12 @@ public class BaseDownloader implements Downloader {
 	protected final int connectTimeout;
 	protected final int readTimeout;
 
-	public BaseDownloader() {
+	public BaseIODownloader() {
 		this.connectTimeout = DEFAULT_HTTP_CONNECT_TIMEOUT;
 		this.readTimeout = DEFAULT_HTTP_READ_TIMEOUT;
 	}
 
-	public BaseDownloader(int connectTimeout, int readTimeout) {
+	public BaseIODownloader(int connectTimeout, int readTimeout) {
 		this.connectTimeout = connectTimeout;
 		this.readTimeout = readTimeout;
 	}
