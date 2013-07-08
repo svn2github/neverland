@@ -1,13 +1,13 @@
-package org.jabe.neverland.download.core.impl;
+package org.jabe.neverland.download.core.engine.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
-import org.jabe.neverland.download.core.DownloadCacheTask;
 import org.jabe.neverland.download.core.DownloadEngine;
 import org.jabe.neverland.download.core.DownloadInfo;
-import org.jabe.neverland.download.core.DownloadCacheManager;
+import org.jabe.neverland.download.core.cache.DownloadCacheManager;
+import org.jabe.neverland.download.core.cache.DownloadCacheTask;
 
 public class TaskDownloadEngine implements DownloadEngine {
 

@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.impl;
+package org.jabe.neverland.download.core.cache;
 
 import java.io.IOException;
 

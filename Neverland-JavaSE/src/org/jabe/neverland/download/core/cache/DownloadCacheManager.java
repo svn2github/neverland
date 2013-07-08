@@ -1,6 +1,6 @@
-package org.jabe.neverland.download.core;
+package org.jabe.neverland.download.core.cache;
 
-
+import org.jabe.neverland.download.core.DownloadInfo;
 
 public abstract class DownloadCacheManager {
 	

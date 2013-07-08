@@ -1,8 +1,8 @@
-package org.jabe.neverland.download.core;
+package org.jabe.neverland.download.core.cache;
 
 import java.io.IOException;
 
-
+import org.jabe.neverland.download.core.DownloadInfo;
 
 public class DownloadCacheTask {
 	

@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.impl;
+package org.jabe.neverland.download.core.engine.impl;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.jabe.neverland.download.core.DownloadCacheTask;
-import org.jabe.neverland.download.core.impl.Downloader.SizeBean;
+import org.jabe.neverland.download.core.cache.DownloadCacheTask;
+import org.jabe.neverland.download.core.engine.impl.Downloader.SizeBean;
 import org.jabe.neverland.download.util.IoUtils;
 
 

@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.impl;
+package org.jabe.neverland.download.core.cache.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -8,9 +8,10 @@ import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.jabe.neverland.download.core.DownloadCacheTask;
 import org.jabe.neverland.download.core.DownloadInfo;
-import org.jabe.neverland.download.core.DownloadCacheManager;
+import org.jabe.neverland.download.core.cache.CacheAccessException;
+import org.jabe.neverland.download.core.cache.DownloadCacheManager;
+import org.jabe.neverland.download.core.cache.DownloadCacheTask;
 import org.jabe.neverland.download.util.IoUtils;
 
 public class FileCacheManager extends DownloadCacheManager {

@@ -3,6 +3,7 @@ package org.jabe.neverland.download.core;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 import org.jabe.neverland.download.core.impl.DefaultConfigurationFactory;
 
 public final class DownloadConfig {

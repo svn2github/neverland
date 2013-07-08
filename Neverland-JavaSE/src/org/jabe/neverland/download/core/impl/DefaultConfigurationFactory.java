@@ -4,7 +4,10 @@ import java.util.concurrent.ExecutorService;
 
 import org.jabe.neverland.download.core.DownloadEngine;
 import org.jabe.neverland.download.core.DownloadOperationMaper;
-import org.jabe.neverland.download.core.DownloadCacheManager;
+import org.jabe.neverland.download.core.cache.DownloadCacheManager;
+import org.jabe.neverland.download.core.cache.impl.FileCacheManager;
+import org.jabe.neverland.download.core.engine.impl.DefaultOperationMaper;
+import org.jabe.neverland.download.core.engine.impl.TaskDownloadEngine;
 
 public class DefaultConfigurationFactory {
 
