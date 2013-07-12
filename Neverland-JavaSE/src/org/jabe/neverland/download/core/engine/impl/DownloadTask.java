@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.jabe.neverland.download.core.cache.DownloadCacheTask;
 import org.jabe.neverland.download.core.engine.impl.IODownloader.SizeBean;
@@ -37,7 +39,7 @@ public class DownloadTask implements Runnable {
 				mCacheTask.readFromCache();
 			} else {
 				if (mCacheTask.mContentLength == 0) {
-					
+					mCacheTask.mContentLength = getContentLength(mCacheTask.mDownloadInfo.getmDownloadUrl());
 				}
 				mCacheTask.saveToCache();
 			}
@@ -98,6 +100,14 @@ public class DownloadTask implements Runnable {
 		} finally {
 			IoUtils.closeSilently(is);
 		}
+	}
+	
+	private long getContentLength(String url) throws IOException {
+		URL u = new URL(url);
+		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+		long l = conn.getContentLength();
+		conn.disconnect();
+		return l;
 	}
 	
 	private void onSuccess() {
