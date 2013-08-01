@@ -1,10 +1,9 @@
 package org.jabe.neverland.download.core.engine.impl;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -25,6 +24,7 @@ public class DownloadTask implements Runnable {
 		mCacheTask = mTaskConfig.mCacheTask;
 	}
 
+	private Boolean[] successTag;
 	private DownloadCacheTask mCacheTask;
 	private volatile boolean hasStarted = false;
 	
@@ -56,42 +56,61 @@ public class DownloadTask implements Runnable {
 			return;
 		}
 		
-		if (secCount > 1) {
-			doMultipleWork();
-		} else {
-			doSingleWork();
+		successTag = new Boolean[secCount];
+		for (int i = 0; i < successTag.length; i++) {
+			successTag[i] = false;
+		}
+		try {
+			if (secCount > 1) {
+				doMultipleWork();
+			} else {
+				doSingleWork();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 	
-	private void doSingleWork() {
+	private void doSingleWork() throws IOException {
+		mCacheAccessFile = new RandomAccessFile(mCacheTask.generateCacheSaveFullPath(), "rw");
 		try {
 			doRealDownload(1, mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
 		} catch (IOException e) {
 			// TODO
+			IoUtils.closeSilently(mCacheAccessFile);
 		}
 	}
+	
+	private RandomAccessFile mCacheAccessFile;
 
-	private void doMultipleWork() {
+	private void doMultipleWork() throws FileNotFoundException {
 		final int secCount = mCacheTask.mSectionCount;
+		mCacheAccessFile = new RandomAccessFile(mCacheTask.generateCacheSaveFullPath(), "rw");
 		for (int j = 0; j < secCount; j++) {
 			final long length = mCacheTask.mContentLength;
 			final long start = mCacheTask.mSectionsOffset[j];
+			final long per = length / secCount;
 			long endt = -1;
-			long per = 0;
 			// 计算当前块的长度
-			if (j < secCount - 1) {
-
-				per = length / secCount;
-
+			if (j < secCount - 1) {// 当前块是否为最后一块
 				endt = per * (j + 1);
-
 			} else {
-
 				endt = length;
-
-				per = endt - start;
-
 			}
+			final long endF = endt;
+			final int s = j + 1;
+			mTaskConfig.mDownloadExecutorService.execute(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						doRealDownload(s, length, start, endF);
+					} catch (IOException e) {
+						// TODO
+						triggerSectionFailure(s);
+					}
+				}
+			});
 		}
 	}
 
@@ -99,7 +118,10 @@ public class DownloadTask implements Runnable {
 		final SizeBean sb = new SizeBean(contentLength, start, end);
 		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheTask.mDownloadInfo.getmDownloadUrl(), null, sb);
 		try {
-			OutputStream os = new BufferedOutputStream(new FileOutputStream(mCacheTask.generateCacheSaveFullPath()), BUFFER_SIZE);
+			final long per = contentLength / sectionNo;
+			synchronized (mCacheAccessFile) {
+				mCacheAccessFile.seek(sectionNo * per + start);
+			}
 			try {
 				byte[] bytes = new byte[BUFFER_SIZE];
 				while (true) {
@@ -107,13 +129,15 @@ public class DownloadTask implements Runnable {
 					if (count == -1) {
 						break;
 					}
-					os.write(bytes, 0, count);
+					synchronized (mCacheAccessFile) {
+						mCacheAccessFile.write(bytes, 0, count);
+					}
 					mCacheTask.updateSectionProgress(sectionNo, count);
 					mTaskConfig.mDownloadTaskListener.onUpdateProgress(count, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
 				}
-				onSuccess();
+				triggerSuccess(sectionNo);
 			} finally {
-				IoUtils.closeSilently(os);
+//				IoUtils.closeSilently(raf);
 			}
 		} finally {
 			IoUtils.closeSilently(is);
@@ -128,8 +152,31 @@ public class DownloadTask implements Runnable {
 		return l;
 	}
 	
-	private void onSuccess() {
+	private void triggerSectionFailure(int section) {
 		
+	}
+	
+	private void triggerSuccess(int sectionNo) {
+		successTag[sectionNo - 1] = true;
+		checkAllSuccess();
+	}
+
+	private void checkAllSuccess() {
+		boolean temp = true;
+		for (int i = 0; i < successTag.length; i++) {
+			if (!successTag[i]) {
+				temp = false;
+				break;
+			}
+		}
+		if (temp) {
+			onSuccess();
+		}
+	}
+	
+	private void onSuccess() {
+		mCacheTask.checkFinish();
+		mTaskConfig.mDownloadTaskListener.onSuccess();
 	}
 
 	public boolean startDownload() {
