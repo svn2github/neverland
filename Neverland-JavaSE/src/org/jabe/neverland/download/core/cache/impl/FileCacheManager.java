@@ -10,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
 
 import org.jabe.neverland.download.core.DownloadInfo;
 import org.jabe.neverland.download.core.cache.CacheAccessException;
+import org.jabe.neverland.download.core.cache.CacheReadException;
+import org.jabe.neverland.download.core.cache.CacheWriteException;
 import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 import org.jabe.neverland.download.core.cache.DownloadCacheTask;
 import org.jabe.neverland.download.util.IoUtils;
@@ -34,29 +36,22 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	@Override
-	public void readFromCache(DownloadCacheTask cacheTask) {
+	public void readFromCache(DownloadCacheTask cacheTask) throws IOException {
 		synchronized (cacheTask) {
-			try {
-				final File f = getTaskFile(cacheTask.mDownloadInfo);
-				final RandomAccessFile raf = new RandomAccessFile(f,
-						RANDOM_FILE_MODE);
-				read(raf, cacheTask);
-			} catch (IOException e) {
-			}
+			final File f = getTaskFile(cacheTask.mDownloadInfo);
+			final RandomAccessFile raf = new RandomAccessFile(f,
+					RANDOM_FILE_MODE);
+			read(raf, cacheTask);
 		}
 	}
 
 	@Override
-	public void saveToCache(DownloadCacheTask cacheTask) {
+	public void saveToCache(DownloadCacheTask cacheTask) throws IOException {
 		synchronized (cacheTask) {
-			try {
-				final File f = getTaskFile(cacheTask.mDownloadInfo);
-				final RandomAccessFile raf = new RandomAccessFile(f,
-						RANDOM_FILE_MODE);
-				create(raf, cacheTask);
-			} catch (IOException e) {
-
-			}
+			final File f = getTaskFile(cacheTask.mDownloadInfo);
+			final RandomAccessFile raf = new RandomAccessFile(f,
+					RANDOM_FILE_MODE);
+			create(raf, cacheTask);
 		}
 	}
 
@@ -72,12 +67,15 @@ public class FileCacheManager extends DownloadCacheManager {
 
 	@Override
 	public void updateSectionProgress(int sectionNo, long progress,
-			DownloadCacheTask cacheTask) {
+			DownloadCacheTask cacheTask) throws IOException{
 		synchronized (cacheTask) {
-			cacheTask.mDownloadedLength =+ progress;
-			cacheTask.mSectionsOffset[sectionNo] = cacheTask.mSectionsOffset[sectionNo] + progress;
+			cacheTask.mDownloadedLength = cacheTask.mDownloadedLength + progress;
+			cacheTask.mSectionsOffset[sectionNo-1] = cacheTask.mSectionsOffset[sectionNo-1] + progress;
+			final File f = getTaskFile(cacheTask.mDownloadInfo);
+			final RandomAccessFile raf = new RandomAccessFile(f,
+					RANDOM_FILE_MODE);
+			updateProgress(raf, cacheTask);
 		}
-		saveToCache(cacheTask);
 	}
 
 	@Override
@@ -126,7 +124,7 @@ public class FileCacheManager extends DownloadCacheManager {
 			// read cache version 
 			final int readVersion = file.readInt();
 			if (readVersion != CACHE_VERSION) {
-				throw new CacheAccessException(TAG + ": cache version changed , need clear cache and create new!");
+				throw new CacheReadException(TAG + ": cache version changed , need clear cache and create new!");
 			}
 			// read download url
 			cacheTask.mDownloadInfo.setmDownloadUrl(file.readUTF());
@@ -137,7 +135,7 @@ public class FileCacheManager extends DownloadCacheManager {
 			// read contentLength
 			final long contentLength = file.readLong();
 			if (cacheTask.mContentLength != contentLength) {
-				throw new CacheAccessException(TAG + ": cache length not equal the new !");
+				throw new CacheReadException(TAG + ": cache length not equal the new !");
 			} else {
 				cacheTask.mContentLength = contentLength;
 			}
@@ -157,7 +155,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		} catch (Exception e) {
 			final File f = getTaskFile(cacheTask.mDownloadInfo);
 			f.delete();
-			throw new CacheAccessException(e.getMessage());
+			throw new CacheReadException(e.getMessage());
 		} finally {
 			IoUtils.closeSilently(file);
 		}
@@ -214,7 +212,7 @@ public class FileCacheManager extends DownloadCacheManager {
 			try {
 				dos.writeInt(Integer.valueOf(downloadInfo.getmId()));
 			} catch (Exception e) {
-				throw new CacheAccessException(
+				throw new CacheWriteException(
 						TAG + ": create file io error, id is not a integer!");
 			}
 
@@ -224,16 +222,31 @@ public class FileCacheManager extends DownloadCacheManager {
 			System.arraycopy(src, 0, temp, 0, src.length);
 			file.seek(0);
 			file.write(temp);
-			file.seek(HEAD_SIZE);
-			file.writeLong(cacheTask.mDownloadedLength);// write default
-														// downloaded count
-			for (int i = 0; i < cacheTask.mSectionsOffset.length; i++) {
-				file.writeLong(cacheTask.mSectionsOffset[i]);
-			}
+			updateFile(file, cacheTask);
 		} catch (IOException e) {
-			throw new CacheAccessException(e.getMessage());
+			throw new CacheWriteException(e.getMessage());
 		} finally {
 			IoUtils.closeSilently(file);
+		}
+	}
+	
+	private void updateProgress(final RandomAccessFile file, final DownloadCacheTask cacheTask) throws CacheAccessException  {
+		try {
+			updateFile(file, cacheTask);
+		} catch (IOException e) {
+			throw new CacheWriteException(e.getMessage());
+		} finally {
+			IoUtils.closeSilently(file);
+		}
+	}
+
+	private void updateFile(final RandomAccessFile file,
+			final DownloadCacheTask cacheTask) throws IOException {
+		file.seek(HEAD_SIZE);
+		file.writeLong(cacheTask.mDownloadedLength);// write default
+													// downloaded count
+		for (int i = 0; i < cacheTask.mSectionsOffset.length; i++) {
+			file.writeLong(cacheTask.mSectionsOffset[i]);
 		}
 	}
 	

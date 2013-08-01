@@ -23,6 +23,7 @@ public class Test {
 		downloadInfo.setmPackageName("com.nearme.gamecenter");
 		final DownloadManager dm = new DownloadManager(downloadConfig);
 		dm.startDownload(downloadInfo);
+		
 	}
 
 }

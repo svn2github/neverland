@@ -40,7 +40,7 @@ public abstract class DownloadTaskListener {
 	}
 
 	/**
-	 * not assigned main thread will call this method, you can count the current
+	 * Never assigned main-thread call this method, you can count the current
 	 * downloaded number by yourself.
 	 * 
 	 * @param added

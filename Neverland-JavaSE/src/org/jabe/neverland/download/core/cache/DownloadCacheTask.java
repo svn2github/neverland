@@ -4,6 +4,13 @@ import java.io.IOException;
 
 import org.jabe.neverland.download.core.DownloadInfo;
 
+/**
+ * 
+ * A task use to udpate downloaded-cache in manager
+ * 
+ * @author Jabe 2013-8-1
+ * 
+ */
 public class DownloadCacheTask {
 	
 	public long mDownloadedLength = 0;
@@ -26,6 +33,7 @@ public class DownloadCacheTask {
 	private void init() {
 		mSectionCount = mDownloadInfo.getInt(DownloadInfo.P_SECTION_COUNT, 1);
 		mWorkerCount = mDownloadInfo.getInt(DownloadInfo.P_WORKER_COUNT, 1);
+		initSectionOffset();
 	}
 
 	protected void initSectionOffset() {

@@ -15,7 +15,7 @@ import org.jabe.neverland.download.util.IoUtils;
 
 public class DownloadTask implements Runnable {
 	
-	private static final int BUFFER_SIZE = 8 * 1024;
+	private static final int BUFFER_SIZE = 16 * 1024;
 	
 	protected TaskConfig mTaskConfig;
 	
@@ -35,12 +35,11 @@ public class DownloadTask implements Runnable {
 		mTaskConfig.mDownloadTaskListener.onPreTask();
 		
 		try {
+			// whatever, need to get content length to check the task in cache
+			mCacheTask.mContentLength = getContentLength(mCacheTask.mDownloadInfo.getmDownloadUrl());
 			if (mCacheTask.isInCache()) {
 				mCacheTask.readFromCache();
 			} else {
-				if (mCacheTask.mContentLength == 0) {
-					mCacheTask.mContentLength = getContentLength(mCacheTask.mDownloadInfo.getmDownloadUrl());
-				}
 				mCacheTask.saveToCache();
 			}
 		} catch (Exception e) {
@@ -64,17 +63,36 @@ public class DownloadTask implements Runnable {
 		}
 	}
 	
-//	private long 
-
 	private void doSingleWork() {
 		try {
 			doRealDownload(1, mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
 		} catch (IOException e) {
+			// TODO
 		}
 	}
 
 	private void doMultipleWork() {
-		
+		final int secCount = mCacheTask.mSectionCount;
+		for (int j = 0; j < secCount; j++) {
+			final long length = mCacheTask.mContentLength;
+			final long start = mCacheTask.mSectionsOffset[j];
+			long endt = -1;
+			long per = 0;
+			// 计算当前块的长度
+			if (j < secCount - 1) {
+
+				per = length / secCount;
+
+				endt = per * (j + 1);
+
+			} else {
+
+				endt = length;
+
+				per = endt - start;
+
+			}
+		}
 	}
 
 	private void doRealDownload(final int sectionNo, final long contentLength, final long start, final long end) throws IOException {
@@ -83,7 +101,6 @@ public class DownloadTask implements Runnable {
 		try {
 			OutputStream os = new BufferedOutputStream(new FileOutputStream(mCacheTask.generateCacheSaveFullPath()), BUFFER_SIZE);
 			try {
-//				IoUtils.copyStream(is, os);
 				byte[] bytes = new byte[BUFFER_SIZE];
 				while (true) {
 					int count = is.read(bytes, 0, BUFFER_SIZE);
@@ -92,6 +109,7 @@ public class DownloadTask implements Runnable {
 					}
 					os.write(bytes, 0, count);
 					mCacheTask.updateSectionProgress(sectionNo, count);
+					mTaskConfig.mDownloadTaskListener.onUpdateProgress(count, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
 				}
 				onSuccess();
 			} finally {
