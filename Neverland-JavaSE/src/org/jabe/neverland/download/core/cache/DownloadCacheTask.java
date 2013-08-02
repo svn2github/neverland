@@ -36,11 +36,10 @@ public class DownloadCacheTask {
 		initSectionOffset();
 	}
 
-	protected void initSectionOffset() {
-		final long per = mContentLength / mSectionCount;
+	private void initSectionOffset() {
 		mSectionsOffset = new long[mSectionCount];
 		for (int i = 0; i < mSectionCount; i++) {
-			mSectionsOffset[i] = per * i;
+			mSectionsOffset[i] = 0;
 		}
 	}
 	

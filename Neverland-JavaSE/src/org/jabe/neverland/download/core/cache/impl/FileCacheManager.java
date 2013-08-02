@@ -71,6 +71,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		synchronized (cacheTask) {
 			cacheTask.mDownloadedLength = cacheTask.mDownloadedLength + progress;
 			cacheTask.mSectionsOffset[sectionNo-1] = cacheTask.mSectionsOffset[sectionNo-1] + progress;
+			System.out.println("changed by current thread " + Thread.currentThread().getName() + " " + cacheTask.mDownloadedLength + "/" + cacheTask.mContentLength);
 			final File f = getTaskFile(cacheTask.mDownloadInfo);
 			final RandomAccessFile raf = new RandomAccessFile(f,
 					RANDOM_FILE_MODE);
@@ -280,6 +281,8 @@ public class FileCacheManager extends DownloadCacheManager {
 	@Override
 	public boolean completeCacheTask(DownloadCacheTask cacheTask) {
 		final File saveFile = new File(generateCacheSaveFullPath(cacheTask.mDownloadInfo));
+		final File taskFIle = getTaskFile(cacheTask.mDownloadInfo);
+		taskFIle.delete();
 		if (!saveFile.exists()) {
 			return false;
 		} else {

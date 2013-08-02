@@ -99,12 +99,13 @@ public class DownloadTask implements Runnable {
 			}
 			final long endF = endt;
 			final int s = j + 1;
+			final long realStart = j * per + start;
 			mTaskConfig.mDownloadExecutorService.execute(new Runnable() {
 				
 				@Override
 				public void run() {
 					try {
-						doRealDownload(s, length, (s - 1) * per + start, endF);
+						doRealDownload(s, length,  realStart, endF);
 					} catch (IOException e) {
 						// TODO
 						triggerSectionFailure(s);
@@ -173,6 +174,7 @@ public class DownloadTask implements Runnable {
 	}
 	
 	private void onSuccess() {
+		IoUtils.closeSilently(mCacheAccessFile);
 		mCacheTask.checkFinish();
 		mTaskConfig.mDownloadTaskListener.onSuccess();
 	}

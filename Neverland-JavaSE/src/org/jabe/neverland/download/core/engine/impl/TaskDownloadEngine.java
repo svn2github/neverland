@@ -76,7 +76,9 @@ public class TaskDownloadEngine implements DownloadEngine {
 		@Override
 		public void onUpdateProgress(double added, double downloaded, double total) {
 			// TODO Auto-generated method stub
-			System.out.println("Downloaded Percent : " + downloaded/total*100);
+//			System.out.println("Downloaded Percent : " + downloaded/total);
+//			System.out.println("changed by current thread " + Thread.currentThread().getName() + " " + downloaded + "/" + total);
+			
 		}
 		
 		@Override
