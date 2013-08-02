@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jabe.neverland.download.core.DownloadInfo;
 import org.jabe.neverland.download.core.cache.CacheAccessException;
@@ -66,19 +68,69 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	@Override
-	public void updateSectionProgress(int sectionNo, long progress,
+	public void updateSectionProgress(byte[] bytes, int sectionNo, long progress,
 			DownloadCacheTask cacheTask) throws IOException{
+		
+		final long per = cacheTask.mContentLength / cacheTask.mSectionCount;
 		synchronized (cacheTask) {
+			
+			final RandomAccessFile rafs = getOrCreateRandomSaveFile(cacheTask);
+			rafs.seek((sectionNo - 1) * per + cacheTask.mSectionsOffset[sectionNo - 1]);
+			rafs.write(bytes, 0, (int) progress);
+			
 			cacheTask.mDownloadedLength = cacheTask.mDownloadedLength + progress;
 			cacheTask.mSectionsOffset[sectionNo-1] = cacheTask.mSectionsOffset[sectionNo-1] + progress;
-			System.out.println("changed by current thread " + Thread.currentThread().getName() + " " + cacheTask.mDownloadedLength + "/" + cacheTask.mContentLength);
-			final File f = getTaskFile(cacheTask.mDownloadInfo);
-			final RandomAccessFile raf = new RandomAccessFile(f,
-					RANDOM_FILE_MODE);
+			
+			
+			final RandomAccessFile raf = getOrCreateRandomTaskFile(cacheTask);
 			updateProgress(raf, cacheTask);
 		}
 	}
 
+	private Map<String, RandomAccessFile> mFileMap = new HashMap<String, RandomAccessFile>();
+	
+	private RandomAccessFile getOrCreateRandomSaveFile(DownloadCacheTask cacheTask) throws IOException {
+		final String key = generateCacheSaveFullPath(cacheTask.mDownloadInfo);
+		RandomAccessFile raf = mFileMap.get(key);
+		if (raf == null) {
+			raf = new RandomAccessFile(new File(key), RANDOM_FILE_MODE);
+			mFileMap.put(key, raf);
+			return raf;
+		} else {
+			return raf;
+		}
+	}
+	
+	private RandomAccessFile getOrCreateRandomTaskFile(DownloadCacheTask cacheTask) throws IOException {
+		final String key = getTaskFile(cacheTask.mDownloadInfo).getAbsolutePath();
+		RandomAccessFile raf = mFileMap.get(key);
+		if (raf == null) {
+			raf = new RandomAccessFile(new File(key), RANDOM_FILE_MODE);
+			mFileMap.put(key, raf);
+			return raf;
+		} else {
+			return raf;
+		}
+	}
+	
+	private void tryCloseSaveFile(DownloadCacheTask cacheTask) {
+		final String key = generateCacheSaveFullPath(cacheTask.mDownloadInfo);
+		final RandomAccessFile raf = mFileMap.get(key);
+		if (raf != null) {
+			IoUtils.closeSilently(raf);
+		}
+		mFileMap.remove(key);
+	}
+	
+	private void tryCloseTaskFile(DownloadCacheTask cacheTask) {
+		final String key = getTaskFile(cacheTask.mDownloadInfo).getAbsolutePath();
+		final RandomAccessFile raf = mFileMap.get(key);
+		if (raf != null) {
+			IoUtils.closeSilently(raf);
+		}
+		mFileMap.remove(key);
+	}
+	
 	@Override
 	public int getDownloadedPercent(DownloadInfo downloadInfo) {
 		if (isDownloadFinished(downloadInfo)) {
@@ -236,8 +288,6 @@ public class FileCacheManager extends DownloadCacheManager {
 			updateFile(file, cacheTask);
 		} catch (IOException e) {
 			throw new CacheWriteException(e.getMessage());
-		} finally {
-			IoUtils.closeSilently(file);
 		}
 	}
 
@@ -280,6 +330,11 @@ public class FileCacheManager extends DownloadCacheManager {
 
 	@Override
 	public boolean completeCacheTask(DownloadCacheTask cacheTask) {
+		
+		tryCloseSaveFile(cacheTask);
+		
+		tryCloseTaskFile(cacheTask);
+		
 		final File saveFile = new File(generateCacheSaveFullPath(cacheTask.mDownloadInfo));
 		final File taskFIle = getTaskFile(cacheTask.mDownloadInfo);
 		taskFIle.delete();
@@ -288,11 +343,14 @@ public class FileCacheManager extends DownloadCacheManager {
 		} else {
 			if (saveFile.length() == cacheTask.mContentLength) {
 				if (saveFile.renameTo(new File(generateFinishPath(cacheTask.mDownloadInfo)))) {
+					// TODO
+					clearCache(cacheTask);
 					return true;
 				} else {
 					return false;
 				}
 			} else {
+				// TODO length not equal means download failure
 				return false;
 			}
 		}
@@ -302,5 +360,14 @@ public class FileCacheManager extends DownloadCacheManager {
 	public String generateFinishPath(DownloadInfo downloadInfo) {
 		final File file = new File(CACHE_ROOT, md5(downloadInfo.getmPackageName()) + APPEND_FINISHFILE);
 		return file.getAbsolutePath();
+	}
+
+	@Override
+	public void clearCache(DownloadCacheTask cacheTask) {
+		tryCloseSaveFile(cacheTask);
+		tryCloseTaskFile(cacheTask);
+		final File saveFile = new File(generateCacheSaveFullPath(cacheTask.mDownloadInfo));
+		saveFile.delete();
+		getTaskFile(cacheTask.mDownloadInfo).delete();
 	}
 }

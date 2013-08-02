@@ -90,7 +90,7 @@ public final class DownloadConfig {
 			}
 			if (mCacheRootPath == null || mCacheRootPath.equals("")) {
 				// TODO  to get default cache root path by system properties.
-				mCacheRootPath = "F:\\";
+				mCacheRootPath = "C://Users//Administrator//Desktop//";
 			}
 			if (mProgressCacheManager == null) {
 				mProgressCacheManager = DefaultConfigurationFactory.getDefaultCacheManager(mCacheRootPath);

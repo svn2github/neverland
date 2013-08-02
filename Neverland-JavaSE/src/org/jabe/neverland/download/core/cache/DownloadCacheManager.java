@@ -35,7 +35,7 @@ public abstract class DownloadCacheManager {
 	 * @param progress 新增的数量
 	 * @param cacheTask 
 	 */
-	public abstract void updateSectionProgress(final int sectionNo, final long progress, final DownloadCacheTask cacheTask) throws IOException;
+	public abstract void updateSectionProgress(final byte[] bytes, final int sectionNo, final long progress, final DownloadCacheTask cacheTask) throws IOException;
 	
 	/**
 	 * 获取下载进度
@@ -76,5 +76,12 @@ public abstract class DownloadCacheManager {
 	 * @return
 	 */
 	public abstract boolean completeCacheTask(final DownloadCacheTask cacheTask);
+	
+	/**
+	 * 清除缓存
+	 * @param cacheTask
+	 * @return
+	 */
+	public abstract void clearCache(final DownloadCacheTask cacheTask);
 	
 }

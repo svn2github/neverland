@@ -63,8 +63,8 @@ public class DownloadCacheTask {
 		return mProgressCacheManager.completeCacheTask(this);
 	}
 	
-	public void updateSectionProgress(int sectionNo, long progress) throws IOException {
-		mProgressCacheManager.updateSectionProgress(sectionNo, progress, this);
+	public void updateSectionProgress(byte[] bytes, int sectionNo, long progress) throws IOException {
+		mProgressCacheManager.updateSectionProgress(bytes, sectionNo, progress, this);
 	}
 
 }

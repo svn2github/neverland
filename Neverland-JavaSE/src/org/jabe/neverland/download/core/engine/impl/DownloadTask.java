@@ -3,7 +3,6 @@ package org.jabe.neverland.download.core.engine.impl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -68,24 +67,17 @@ public class DownloadTask implements Runnable {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	
 	private void doSingleWork() throws IOException {
-		mCacheAccessFile = new RandomAccessFile(mCacheTask.generateCacheSaveFullPath(), "rw");
-		try {
-			doRealDownload(1, mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
-		} catch (IOException e) {
-			// TODO
-			IoUtils.closeSilently(mCacheAccessFile);
-		}
+		doRealDownload(1, mCacheTask.mContentLength, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
 	}
 	
-	private RandomAccessFile mCacheAccessFile;
-
 	private void doMultipleWork() throws FileNotFoundException {
 		final int secCount = mCacheTask.mSectionCount;
-		mCacheAccessFile = new RandomAccessFile(mCacheTask.generateCacheSaveFullPath(), "rw");
+//		mCacheAccessFile = new RandomAccessFile(mCacheTask.generateCacheSaveFullPath(), "rw");
 		for (int j = 0; j < secCount; j++) {
 			final long length = mCacheTask.mContentLength;
 			final long start = mCacheTask.mSectionsOffset[j];
@@ -105,7 +97,7 @@ public class DownloadTask implements Runnable {
 				@Override
 				public void run() {
 					try {
-						doRealDownload(s, length,  realStart, endF);
+						doRealDownload(s, length, realStart, endF);
 					} catch (IOException e) {
 						// TODO
 						triggerSectionFailure(s);
@@ -116,7 +108,6 @@ public class DownloadTask implements Runnable {
 	}
 
 	private void doRealDownload(final int sectionNo, final long contentLength, final long start, final long end) throws IOException {
-		final long per = contentLength / sectionNo;
 		final SizeBean sb = new SizeBean(contentLength, start, end);
 		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheTask.mDownloadInfo.getmDownloadUrl(), null, sb);
 		try {
@@ -127,16 +118,13 @@ public class DownloadTask implements Runnable {
 					if (count == -1) {
 						break;
 					}
-					synchronized (mCacheTask) {
-						mCacheAccessFile.seek((sectionNo - 1) * per + mCacheTask.mSectionsOffset[sectionNo - 1]);
-						mCacheAccessFile.write(bytes, 0, count);
-					}
-					mCacheTask.updateSectionProgress(sectionNo, count);
+//					mCacheAccessFile.seek((sectionNo - 1) * per + mCacheTask.mSectionsOffset[sectionNo - 1]);
+//					mCacheAccessFile.write(bytes, 0, count);
+					mCacheTask.updateSectionProgress(bytes, sectionNo, count);
 					mTaskConfig.mDownloadTaskListener.onUpdateProgress(count, mCacheTask.mDownloadedLength, mCacheTask.mContentLength);
 				}
 				triggerSuccess(sectionNo);
 			} finally {
-//				IoUtils.closeSilently(raf);
 			}
 		} finally {
 			IoUtils.closeSilently(is);
@@ -174,7 +162,6 @@ public class DownloadTask implements Runnable {
 	}
 	
 	private void onSuccess() {
-		IoUtils.closeSilently(mCacheAccessFile);
 		mCacheTask.checkFinish();
 		mTaskConfig.mDownloadTaskListener.onSuccess();
 	}

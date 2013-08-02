@@ -60,7 +60,7 @@ public class BaseIODownloader implements IODownloader {
 	protected InputStream getStreamFromNetwork(String imageUri, Object extra, SizeBean sb) throws IOException {
 		HttpURLConnection conn = createConnection(imageUri);
 		initHeaders(conn);
-		if (sb != null && sb.start > 0) {
+		if (sb != null) {
 			String range = "bytes=" + sb.start + "-" + (sb.end - 1);
 			conn.setRequestProperty("Range", range);
 		}
