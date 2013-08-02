@@ -104,7 +104,7 @@ public class DownloadTask implements Runnable {
 				@Override
 				public void run() {
 					try {
-						doRealDownload(s, length, start, endF);
+						doRealDownload(s, length, (s - 1) * per + start, endF);
 					} catch (IOException e) {
 						// TODO
 						triggerSectionFailure(s);
@@ -115,13 +115,10 @@ public class DownloadTask implements Runnable {
 	}
 
 	private void doRealDownload(final int sectionNo, final long contentLength, final long start, final long end) throws IOException {
+		final long per = contentLength / sectionNo;
 		final SizeBean sb = new SizeBean(contentLength, start, end);
 		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheTask.mDownloadInfo.getmDownloadUrl(), null, sb);
 		try {
-			final long per = contentLength / sectionNo;
-			synchronized (mCacheAccessFile) {
-				mCacheAccessFile.seek(sectionNo * per + start);
-			}
 			try {
 				byte[] bytes = new byte[BUFFER_SIZE];
 				while (true) {
@@ -129,7 +126,8 @@ public class DownloadTask implements Runnable {
 					if (count == -1) {
 						break;
 					}
-					synchronized (mCacheAccessFile) {
+					synchronized (mCacheTask) {
+						mCacheAccessFile.seek((sectionNo - 1) * per + mCacheTask.mSectionsOffset[sectionNo - 1]);
 						mCacheAccessFile.write(bytes, 0, count);
 					}
 					mCacheTask.updateSectionProgress(sectionNo, count);
