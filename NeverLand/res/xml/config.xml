@@ -86,5 +86,9 @@
     <item name="org.jabe.neverland.activity.ProgressTestActivity">
         <title>Progress</title>
         <description>Progress</description>
+    </item>com.jjoe64.graphviewdemos
+    <item name="com.jjoe64.graphviewdemos.MainActivity">
+        <title>图表GraphView</title>
+        <description>图表GraphView</description>
     </item>
 </config>

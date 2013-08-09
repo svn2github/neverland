@@ -79,7 +79,31 @@
         <activity android:name=".activity.MenuTestActivity" >
         </activity>
         <activity android:name=".activity.ProgressTestActivity" >
-        </activity> 
+        </activity>
+        <activity android:name="com.jjoe64.graphviewdemos.MainActivity" >
+        </activity>
+        <activity android:name="com.jjoe64.graphviewdemos.AdvancedMultipleSeriesGraph" >
+        </activity>
+        <activity android:name="com.jjoe64.graphviewdemos.RealtimeGraph" >
+        </activity>
+        <activity android:name="com.jjoe64.graphviewdemos.SimpleGraph" >
+        </activity>
+        <activity android:name="com.jjoe64.graphviewdemos.AdvancedGraph" >
+        </activity>
+        <activity android:name="Launcher">
+        </activity>
+        <activity android:name="TestBedDSLV"
+                  android:label="Basic usage" />
+        <activity android:name="ArbItemSizeDSLV"
+                  android:label="Arbitrary item heights" />
+        <activity android:name="WarpDSLV"
+                  android:label="Warp" />
+        <activity android:name="BGHandle"
+                  android:label="Background handle" />
+        <activity android:name="Sections"
+                  android:label="Sections" />
+        <activity android:name="CursorDSLV"
+                  android:label="Cursor-backed" />
     </application>
 
 </manifest>

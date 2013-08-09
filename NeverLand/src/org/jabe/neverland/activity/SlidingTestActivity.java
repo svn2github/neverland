@@ -4,7 +4,6 @@ import org.jabe.neverland.R;
 import org.jabe.neverland.activity.fragment.ColorFragment;
 import org.jabe.neverland.activity.fragment.ColorMenuFragment;
 import org.jabe.neverland.activity.fragment.SampleListFragment;
-import org.jabe.neverland.model.SimpleListItem;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
