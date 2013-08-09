@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <declare-styleable name="org.jabe.neverland.DragSortListView">
+  <declare-styleable name="DragSortListView">
     <attr name="collapsed_height" format="dimension" />
     <attr name="drag_scroll_start" format="float" />
     <attr name="max_drag_scroll_speed" format="float" />

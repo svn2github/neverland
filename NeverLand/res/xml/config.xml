@@ -91,4 +91,8 @@
         <title>图表GraphView</title>
         <description>图表GraphView</description>
     </item>
+    <item name="com.mobeta.android.demodslv.Launcher">
+        <title>拖拽排序</title>
+        <description>拖拽排序DragSort</description>
+    </item>
 </config>
