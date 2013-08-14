@@ -19,73 +19,84 @@ import android.widget.TextView;
 
 //import com.mobeta.android.demodslv.R;
 
-
 public class Launcher extends ListActivity {
 
-    //private ArrayAdapter<ActivityInfo> adapter;
-    private MyAdapter adapter;
+	// private ArrayAdapter<ActivityInfo> adapter;
+	private MyAdapter adapter;
 
-    private ArrayList<ActivityInfo> mActivities = null;
+	private ArrayList<ActivityInfo> mActivities = null;
 
-    private String[] mActTitles;
-    private String[] mActDescs;
+	private String[] mActTitles;
+	private String[] mActDescs;
 
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.launcher);
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.launcher);
 
-        try {
-          PackageInfo pi = getPackageManager().getPackageInfo(
-            "com.mobeta.android.demodslv", PackageManager.GET_ACTIVITIES);
+		try {
+			PackageInfo pi = getPackageManager().getPackageInfo(
+					"com.mobeta.android.demodslv",
+					PackageManager.GET_ACTIVITIES);
 
-          mActivities = new ArrayList<ActivityInfo>(Arrays.asList(pi.activities));
-          String ourName = getClass().getName();
-          for (int i = 0; i < mActivities.size(); ++i) {
-              if (ourName.equals(mActivities.get(i).name)) {
-                  mActivities.remove(i);
-                  break;
-              }
-          }
-        } catch (PackageManager.NameNotFoundException e) {
-          // Do nothing. Adapter will be empty.
-        }
+			mActivities = new ArrayList<ActivityInfo>(
+					Arrays.asList(pi.activities));
+			String ourName = getClass().getName();
+			for (int i = 0; i < mActivities.size(); ++i) {
+				if (ourName.equals(mActivities.get(i).name)) {
+					mActivities.remove(i);
+					break;
+				}
+			}
+		} catch (PackageManager.NameNotFoundException e) {
+			// Do nothing. Adapter will be empty.
+		}
 
-        mActTitles = getResources().getStringArray(R.array.activity_titles);
-        mActDescs = getResources().getStringArray(R.array.activity_descs);
+		mActTitles = getResources().getStringArray(R.array.activity_titles);
+		mActDescs = getResources().getStringArray(R.array.activity_descs);
 
-        //adapter = new ArrayAdapter<ActivityInfo>(this,
-        //  R.layout.launcher_item, R.id.text, mActivities);
-        adapter = new MyAdapter();
+		// adapter = new ArrayAdapter<ActivityInfo>(this,
+		// R.layout.launcher_item, R.id.text, mActivities);
+		adapter = new MyAdapter();
 
-        setListAdapter(adapter);
-    }
+		setListAdapter(adapter);
+	}
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-	    Intent intent = new Intent();
-	    intent.setClassName(this, mActivities.get(position).name);
-	    startActivity(intent);
-    }
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Intent intent = new Intent();
+		intent.setClassName(this, mActivities.get(position).name);
+		startActivity(intent);
+	}
 
-    private class MyAdapter extends ArrayAdapter<ActivityInfo> {
-      MyAdapter() {
-        super(Launcher.this, R.layout.launcher_item, R.id.activity_title, mActivities);
-      }
+	private class MyAdapter extends ArrayAdapter<ActivityInfo> {
+		MyAdapter() {
+			super(Launcher.this, R.layout.launcher_item, R.id.activity_title,
+					mActivities);
+		}
+			
+		@Override
+		public int getCount() {
+			return mActTitles.length;
+		}
 
-      @Override
-      public View getView(int position, View convertView, ViewGroup parent) {
-        View v = super.getView(position, convertView, parent);
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+//			if (position < 0 || position >= mActTitles.length) {
+//				System.out.println("fuck");
+//				return null;
+//			}
+			View v = super.getView(position, convertView, parent);
 
-        TextView title = (TextView) v.findViewById(R.id.activity_title);
-        TextView desc = (TextView) v.findViewById(R.id.activity_desc);
+			TextView title = (TextView) v.findViewById(R.id.activity_title);
+			TextView desc = (TextView) v.findViewById(R.id.activity_desc);
 
-        title.setText(mActTitles[position]);
-        desc.setText(mActDescs[position]);
-        return v;
-      }
+			title.setText(mActTitles[position]);
+			desc.setText(mActDescs[position]);
+			return v;
+		}
 
-    }
+	}
 
 }
