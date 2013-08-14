@@ -95,4 +95,9 @@
         <title>拖拽排序</title>
         <description>拖拽排序DragSort</description>
     </item>
+    
+    <item name="viewbadger.demo.DemoActivity">
+        <title>Viewbadger标记</title>
+        <description>Viewbadger标记</description>
+    </item>
 </config>

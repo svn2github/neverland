@@ -51,7 +51,6 @@ public class DownloadActivity extends Activity {
 		setUpView();
 //		testBigFile();
 		makeToast("AvailaleSize SD size : " + getAvailaleSize()/1024/1024 + "M");
-		beginToDown();
 	}
 
 	@SuppressWarnings("unused")
@@ -181,7 +180,11 @@ public class DownloadActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				taskAssign.resumeWork();
+				if (taskAssign != null) {
+					taskAssign.resumeWork();
+				} else {
+					beginToDown();
+				}
 			}
 		});
 		mRestartButton.setOnClickListener(new OnClickListener() {
