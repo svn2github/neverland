@@ -104,8 +104,9 @@
                   android:label="Sections" />
         <activity android:name="com.mobeta.android.demodslv.CursorDSLV"
                   android:label="Cursor-backed" />
-        
         <activity android:name="viewbadger.demo.DemoActivity">
+        </activity>
+        <activity android:name="za.co.immedia.pinnedheaderlistviewexample.MainActivity">
         </activity>
     </application>
 

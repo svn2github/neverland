@@ -100,4 +100,9 @@
         <title>Viewbadger标记</title>
         <description>Viewbadger标记</description>
     </item>
+    
+    <item name="za.co.immedia.pinnedheaderlistviewexample.MainActivity">
+        <title>头部固定的listview</title>
+        <description>头部固定的listview</description>
+    </item>
 </config>
