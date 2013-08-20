@@ -26,25 +26,21 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
 	private boolean mShouldPin = true;
 	private int mCurrentSection = 0;
 
-	@SuppressWarnings("unused")
 	public PinnedHeaderListView(Context context) {
 		super(context);
 		super.setOnScrollListener(this);
 	}
 
-	@SuppressWarnings("unused")
 	public PinnedHeaderListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		super.setOnScrollListener(this);
 	}
 
-	@SuppressWarnings("unused")
 	public PinnedHeaderListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		super.setOnScrollListener(this);
 	}
 
-	@SuppressWarnings("unused")
 	public void setPinHeaders(boolean shouldPin) {
 		mShouldPin = shouldPin;
 	}
@@ -69,7 +65,8 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
 				float pinnedHeaderHeight = mCurrentHeader.getMeasuredHeight();
 				header.setVisibility(VISIBLE);
 				if (pinnedHeaderHeight >= headerTop && headerTop > 0) {
-					mHeaderOffset = headerTop - header.getHeight();
+					mHeaderOffset = headerTop - pinnedHeaderHeight;
+//					mHeaderOffset = headerTop - header.getMeasuredHeight();
 				} else if (headerTop <= 0) {
 					header.setVisibility(INVISIBLE);
 				}
