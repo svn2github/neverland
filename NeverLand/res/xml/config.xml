@@ -105,4 +105,9 @@
         <title>头部固定的listview</title>
         <description>头部固定的listview</description>
     </item>
+    
+    <item name="com.stericson.RootTools.test.SanityCheckRootTools">
+        <title>RootTool Test</title>
+        <description>RootTool Test</description>
+    </item>
 </config>
