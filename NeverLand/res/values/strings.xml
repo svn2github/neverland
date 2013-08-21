@@ -16,7 +16,7 @@
     
     <string name="view_listview_sort_drag_1">View/ListView/ListView分组拖拽排序1</string>
     
-    <string name="view_textview_motion">View/TextView/Motion表情</string>
+    <string name="view_common_motion">View/Common/Motion表情</string>
     
     <string name="view_graphic_handwriting">View/Graphic/HandWriting手写</string>
     

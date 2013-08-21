@@ -81,7 +81,7 @@
         
         <activity android:name=".activity.DragActivity">
         </activity>
-        <activity android:name=".activity.MotionActivity" android:label="@string/view_textview_motion">
+        <activity android:name=".activity.MotionActivity" android:label="@string/view_common_motion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="org.jabe.neverland.intent.category.SAMPLE_CODE" />
@@ -173,8 +173,14 @@
         </activity>
         <activity android:name="com.jjoe64.graphviewdemos.AdvancedGraph" >
         </activity>
+        
         <activity android:name="com.mobeta.android.demodslv.Launcher" android:label="@string/view_listview_sort_drag_2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="org.jabe.neverland.intent.category.SAMPLE_CODE" />
+            </intent-filter>
         </activity>
+        
         <activity android:name="com.mobeta.android.demodslv.TestBedDSLV"
                   android:label="Basic usage" />
         <activity android:name="com.mobeta.android.demodslv.ArbItemSizeDSLV"

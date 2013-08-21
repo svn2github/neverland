@@ -59,7 +59,6 @@ public class TopFrameActivity extends Activity {
 		params.alpha = 80;
 		
 		params.gravity = Gravity.LEFT|Gravity.TOP;
-	    //����Ļ���Ͻ�Ϊԭ�㣬����x��y��ʼֵ
 		params.x = 0;
 		params.y = 0;
 	        
@@ -69,13 +68,25 @@ public class TopFrameActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		WindowManager wm = (WindowManager)getApplicationContext().getSystemService(WINDOW_SERVICE);
-		
-//		if(tv != null && tv.isShown()){
-//			wm.removeView(tv);
-//		}
+		tryDismiss();
 		super.onDestroy();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		tryDismiss();
+		super.onBackPressed();
+	}
+
+	private void tryDismiss() {
+		WindowManager wm = (WindowManager)getApplicationContext().getSystemService(WINDOW_SERVICE);
+		if(tv != null && tv.isShown()){
+			try {
+				wm.removeView(tv);
+				tv = null;
+			} catch (Exception e) {
+			}
+		}
 	}
 	
 	
