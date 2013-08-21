@@ -32,26 +32,32 @@
         <title>Download(多线程断点下载)</title>
         <description>Download Test</description>
     </item>
-    <item name="org.jabe.neverland.activity.SurfaceViewActivity">
+    
+    <!-- <item name="org.jabe.neverland.activity.SurfaceViewActivity">
         <title>SurfaceViewTest</title>
         <description>SurfaceViewTest</description>
-    </item>
+    </item> -->
+    
     <item name="org.jabe.neverland.activity.HandWriterActivity">
         <title>HandWriting(手写)</title>
         <description>HandWriting</description>
     </item>
+    
     <item name="org.jabe.neverland.activity.CircleActivity">
         <title>OpenGL_3D</title>
         <description>OpenGL_3D</description>
-    </item>SlidingDrawActivity
+    </item>
+    
     <item name="org.jabe.neverland.activity.SlidingDrawActivity">
         <title>SlidingDraw</title>
         <description>SlidingDraw</description>
     </item>
+    
     <item name="org.jabe.neverland.activity.MoveViewDemo">
         <title>MoveViewDemo</title>
         <description>MoveViewDemo</description>
     </item>
+    
     <item name="org.jabe.neverland.activity.TopFrameActivity">
         <title>歌词效果</title>
         <description>歌词效果</description>
@@ -79,14 +85,16 @@
         <description>翻页效果(GLSurfaceView)</description>
     </item>
     
-    <item name="org.jabe.neverland.activity.MenuTestActivity">
+    <!-- <item name="org.jabe.neverland.activity.MenuTestActivity">
         <title>MenuTest</title>
         <description>MenuTest</description>
     </item>
     <item name="org.jabe.neverland.activity.ProgressTestActivity">
         <title>Progress</title>
         <description>Progress</description>
-    </item>com.jjoe64.graphviewdemos
+    </item> -->
+    
+    
     <item name="com.jjoe64.graphviewdemos.MainActivity">
         <title>图表GraphView</title>
         <description>图表GraphView</description>
