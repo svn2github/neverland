@@ -104,16 +104,6 @@ public class PullRefreshActivity extends Activity {
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		switch (keyCode) {
-		case KeyEvent.KEYCODE_BACK:
-//			finish();
-			//测试System.exit(0)的作用~~~~
-			System.exit(0);
-			return true;
-		default:
-			break;
-		}
 		return super.onKeyDown(keyCode, event);
 	}
 }

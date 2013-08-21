@@ -72,14 +72,17 @@
         <title>贝塞尔曲线翻页效果</title>
         <description>贝塞尔曲线翻页效果</description>
     </item>
+    
     <item name="org.jabe.neverland.activity.ColClockAdjustActivity">
         <title>简单时钟效果</title>
         <description>简单时钟效果</description>
     </item>
+    
     <item name="org.jabe.neverland.activity.RolateAnimActivity">
         <title>磁贴点击下沉倾斜效果(ImageView)</title>
         <description>磁贴点击下沉倾斜效果</description>
     </item>
+    
     <item name="org.jabe.neverland.activity.CurlActivity">
         <title>翻页效果(GLSurfaceView)</title>
         <description>翻页效果(GLSurfaceView)</description>
@@ -117,5 +120,10 @@
     <item name="com.stericson.RootTools.test.SanityCheckRootTools">
         <title>RootTool Test</title>
         <description>RootTool Test</description>
+    </item>
+    
+    <item name="com.hb.examples.PinnedSectionListActivity">
+        <title>头部固定的listview2</title>
+        <description>头部固定的listview2</description>
     </item>
 </config>
