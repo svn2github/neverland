@@ -34,7 +34,7 @@
     
     <string name="view_common_imageview_rolate">View/Common/磁贴点击下沉倾斜效果(ImageView)</string>
     
-    <string name="view_graphic_page_turn_2">View/Graphic/PageTurn(GLSurfaceView翻页效果))</string>
+    <string name="view_graphic_page_turn_2">View/Graphic/PageTurn(GLSurfaceView翻页效果)</string>
     
     <string name="view_listview_pinned_header_1">View/ListView/头部固定的ListView1</string>
     
@@ -45,5 +45,7 @@
     <string name="view_common_viewbadger">View/Common/ViewBadger(标记View)</string>
     
     <string name="view_listview_pinned_header_2">View/ListView/头部固定的ListView2</string>
+    
+    <string name="view_common_satellite_menu">View/Common/卫星菜单</string>
 
 </resources>

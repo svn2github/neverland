@@ -210,6 +210,13 @@
             </intent-filter>
         </activity>
         
+        <activity android:name="android.view.ext.SatelliteMenuActivity" android:label="@string/view_common_satellite_menu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="org.jabe.neverland.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+        
         
         <activity android:name="com.stericson.RootTools.test.SanityCheckRootTools">
         </activity>
