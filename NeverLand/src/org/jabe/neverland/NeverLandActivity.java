@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.view.View;
@@ -123,6 +124,12 @@ public class NeverLandActivity extends ListActivity {
 				boy.displayMessage("嘿嘿");
 			}
 		}, new BoyPosition());
+		try {
+			this.createPackageContext("", 0);
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void initData() {
