@@ -330,30 +330,22 @@ public class FileCacheManager extends DownloadCacheManager {
 
 	@Override
 	public boolean completeCacheTask(DownloadCacheTask cacheTask) {
-		
+		boolean result = false;
 		tryCloseSaveFile(cacheTask);
-		
 		tryCloseTaskFile(cacheTask);
-		
 		final File saveFile = new File(generateCacheSaveFullPath(cacheTask.mDownloadInfo));
 		final File taskFIle = getTaskFile(cacheTask.mDownloadInfo);
 		taskFIle.delete();
-		if (!saveFile.exists()) {
-			return false;
-		} else {
+		if (saveFile.exists()) {
 			if (saveFile.length() == cacheTask.mContentLength) {
 				if (saveFile.renameTo(new File(generateFinishPath(cacheTask.mDownloadInfo)))) {
-					// TODO
-					clearCache(cacheTask);
-					return true;
+					result = true;
 				} else {
-					return false;
 				}
-			} else {
-				// TODO length not equal means download failure
-				return false;
 			}
 		}
+		clearCache(cacheTask);
+		return result;
 	}
 
 	@Override

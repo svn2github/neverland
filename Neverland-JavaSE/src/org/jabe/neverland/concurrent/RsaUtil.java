@@ -47,11 +47,11 @@ public class RsaUtil {
 	}
 
 	public static void main(String[] args) {
-		String sign = "GOLVlyBqkEhSwaD7oYPp1TTgnl3o0cpO9ZsNwetLvLcKPR2SXKa5b2WuYz36xmR/XXkDrYQznlWT5wLcL/I8JB8CSbN8FfCqyhT2z2XhdhCeRcoRDF/y6lXa1PbH9m2acpQU4/FhJ4Ba7qJlVQEXL0yMcsCE3OkHTjAK5nvipik=";
-		String content = "notify_id=16812&partner_code=c5217trjnrmU6gO5jG8VvUFU0&partner_order=30365&orders=zsol1.0130365&pay_result=OK";
+		String sign = "tW5uiyeRyTpPji6QrKQR8RyPT2z5tx8nNHvsk/hW4HpSgff85lkc4KfNdVwKt3Z//lk/DA+WXyhEzjUkaSj9OY6/5owQpUrwdHap9wCxxr1oK8QimUK0z+GM17q831eFW/eGNYJZh/ztu48WW3ONE4VFOoPFqlAn3WoojKM80xM=";
+		String content = "notify_id=461648&partner_code=8Ucnr487t2Os4SckK8o844oO0&partner_order=2013-1-oppo_13951997-1376894687&orders=钻石100.012013-1-oppo_13951997-1376894687&pay_result=OK";
 		System.out.println("public_key: " + PUBLIC_KEY);
 		System.out.println("sign: " + sign);
-		System.out.println("content: " + content);
+		System.out.println("baseString: " + content);
 		System.out.println("doCheckResult: " + doCheck(content, sign));
 	}
 
