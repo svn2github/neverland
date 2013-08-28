@@ -47,5 +47,7 @@
     <string name="view_listview_pinned_header_2">View/ListView/头部固定的ListView2</string>
     
     <string name="view_common_satellite_menu">View/Common/卫星菜单</string>
+    
+    <string name="view_common_plugin_apk">View/Common/动态加载APK</string>
 
 </resources>

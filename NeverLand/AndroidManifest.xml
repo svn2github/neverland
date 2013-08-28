@@ -217,6 +217,13 @@
             </intent-filter>
         </activity>
         
+        <activity android:name="org.jabe.neverland.plugin.PluginActivity" android:label="@string/view_common_plugin_apk">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="org.jabe.neverland.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+        
         
         <activity android:name="com.stericson.RootTools.test.SanityCheckRootTools">
         </activity>
