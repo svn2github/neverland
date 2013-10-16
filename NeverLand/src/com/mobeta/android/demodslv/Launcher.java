@@ -24,7 +24,7 @@ public class Launcher extends ListActivity {
 	// private ArrayAdapter<ActivityInfo> adapter;
 	private MyAdapter adapter;
 
-	private ArrayList<ActivityInfo> mActivities = null;
+	private ArrayList<ActivityInfo> mActivities = new ArrayList<ActivityInfo>();
 
 	private String[] mActTitles;
 	private String[] mActDescs;
@@ -37,16 +37,15 @@ public class Launcher extends ListActivity {
 
 		try {
 			PackageInfo pi = getPackageManager().getPackageInfo(
-					"com.mobeta.android.demodslv",
+					"org.jabe.neverland",
 					PackageManager.GET_ACTIVITIES);
 
-			mActivities = new ArrayList<ActivityInfo>(
+			ArrayList<ActivityInfo> temp = new ArrayList<ActivityInfo>(
 					Arrays.asList(pi.activities));
 			String ourName = getClass().getName();
-			for (int i = 0; i < mActivities.size(); ++i) {
-				if (ourName.equals(mActivities.get(i).name)) {
-					mActivities.remove(i);
-					break;
+			for (int i = 0; i < temp.size(); ++i) {
+				if (!ourName.equals(temp.get(i).name) && temp.get(i).name.contains("com.mobeta.android.demodslv")) {
+					mActivities.add(temp.get(i));
 				}
 			}
 		} catch (PackageManager.NameNotFoundException e) {
@@ -81,12 +80,20 @@ public class Launcher extends ListActivity {
 			return mActTitles.length;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.ArrayAdapter#getItem(int)
+		 */
+		@Override
+		public ActivityInfo getItem(int position) {
+			try {
+				return super.getItem(position);
+			} catch (Exception e) {
+			}
+			return null;
+		}
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-//			if (position < 0 || position >= mActTitles.length) {
-//				System.out.println("fuck");
-//				return null;
-//			}
 			View v = super.getView(position, convertView, parent);
 
 			TextView title = (TextView) v.findViewById(R.id.activity_title);
