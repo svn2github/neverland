@@ -1,5 +1,6 @@
 package org.jabe.neverland.concurrent;
 
+import java.net.URLDecoder;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -11,9 +12,137 @@ import org.apache.commons.codec.binary.Base64;
 public class RsaUtil {
 
 	/**
-	 * 这里为公钥,在pay_rsa_public_key.pem文件中
+	 * rsa 的 公钥，public key
 	 */
-	public static final String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCFVNJgbaXqvQMWlrbifOUt75WQKr4LreG2gCUz7P+IEJNx2IbuTApfGbITiMUVn7WCtXTNHiT2wsuj600KwGi9o1J9V+jDN/C/WfQXCT4ijBssujwqPcS4Yu+s3ItgzadAGY/EMWV7jMVBy2F+tGjL2iU8KU0Yp4BcC2Wue+hcQIDAQAB";
+	public static final String PUB_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCFVNJgbaXqvQMWlrbifOUt75WQKr4LreG2gCUz7P+IEJNx2IbuTApfGbITiMUVn7WCtXTNHiT2wsuj600KwGi9o1J9V+jDN/C/WfQXCT4ijBssujwqPcS4Yu+s3ItgzadAGY/EMWV7jMVBy2F+tGjL2iU8KU0Yp4BcC2Wue+hcQIDAQAB";
+	/**
+	 * 模拟的一段N宝支付回调数据（amount=1.0，消耗了1元宝）
+	 */
+	public static final String DATA_NBAO = "notify_id=2507&partner_code=c5217trjnrmU6gO5jG8VvUFU0&partner_order=1372750927530&orders=%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%B8%811.011372750927530&pay_result=OK&sign=aFdd%2FIIByga7s6dxSa7HbRWpxdTddDRe0H3wEuxwBWp17LRCbEp1oCtOWqjWu68FM5XxnXt6LSPT5hfoiodddJunfHnJ1V47FJCGGK5a6vZzsG5saKEon4V3IewSTGTwp4CKodjuXObrxg7pHrP%2BDBifzlb75jBGAsY4vVO6KSw%3D&amount=1.0";
+
+	/**
+	 * 模拟的一段RMB支付回调数据（消耗了0.01元）
+	 */
+	public static final String DATA_RMB = "notify_id=2532&partner_code=c5217trjnrmU6gO5jG8VvUFU0&partner_order=CZ2013070911364927131152126350&orders=0.01%262713115%26%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%B8%81%26%E5%A5%B3%E5%8F%8B%E6%9C%BA%E5%99%A8%E4%BA%BA&pay_result=OK&sign=qRWIG8w9vG8IU9OlClPmJoMJuPYxUiHch3ABSQzpUJC646ac%2Be1CapHuuDZaeuaFqpgi3z5fl4YrLzw21sbq0t5i7wRADjUDSdwCw3c%2BrBrGRx4GwQitGPVJQa%2FutvgPjsE3IdE8vi52efH%2FrugjZOODaIBUC17k%2BqfB2ma2zzs%3D&amount=0.01";
+
+	public static void main(String[] args) {
+
+		checkNBaoResult();
+
+		checkRMBResult();
+		
+		final String forTest = "notify_id=481002&partner_code=9X3ezgu6sogskg08sSw8O0OS8&partner_order=55541500-f326-4fcc-8e5e-64fd71fb7fc5|4&orders=credit_66.0155541500-f326-4fcc-8e5e-64fd71fb7fc5|4&pay_result=OK";
+		final String forTestSign = "FBb4EfFSK7WJ8tmjGlEdFIseMAGhaVwpTAcV5uWmFp+PFSvzAQclBqfYNBndzqB3D1cxL5ErhaEzLShipsyq/xqCq1poyBymofzUO7k1Li6iqlE9KrZ7yCNQzh/G12LBiyqWamIUK3x2wFiM8IpAhpJfw0/na7WKDJWC5nIbbS0=";
+		
+		System.out.println(doCheck(forTest, forTestSign));
+	}
+
+	/**
+	 * RMB支付回调验证
+	 */
+	private static void checkRMBResult() {
+
+		System.out.println("get data form callback server : "
+				+ URLDecoder.decode(DATA_RMB));
+		String content = getRMBContentString(DATA_RMB);
+		System.out.println("get content : " + URLDecoder.decode(content));
+		String sign = getSign(DATA_RMB);
+		System.out.println("get sign : " + sign);
+		System.out.println("check result :"
+				+ doCheck(URLDecoder.decode(content), URLDecoder.decode(sign)));
+
+	}
+
+	/**
+	 * N宝支付回调验证
+	 */
+	private static void checkNBaoResult() {
+
+		System.out.println("get data form callback server : "
+				+ URLDecoder.decode(DATA_NBAO));
+		String content = getNBaoContentString(DATA_NBAO);
+		System.out.println("get content : " + URLDecoder.decode(content));
+		String sign = getSign(DATA_NBAO);
+		System.out.println("get sign : " + sign);
+		System.out.println("check result :"
+				+ doCheck(URLDecoder.decode(content), URLDecoder.decode(sign)));
+
+	}
+
+	/**
+	 * notify_id=value&partner_code=value
+	 * &partner_order=value&orders=value&pay_result=value
+	 * 
+	 * @param url
+	 * @return
+	 */
+	private static String getNBaoContentString(String url) {
+		final String[] strings = url.split("&");
+		final StringBuilder sb = new StringBuilder();
+		for (String string : strings) {
+			if (string.startsWith("notify_id=")
+					|| string.startsWith("partner_code=")
+					|| string.startsWith("partner_order=")
+					|| string.startsWith("orders=")) {
+				sb.append(string).append("&");
+			} else if (string.startsWith("pay_result=")) {
+				sb.append(string);
+			}
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * notify_id=value&partner_code=value&partner_order=value&orders=value&
+	 * pay_result=value&amount=value&openid=value
+	 * 
+	 * @param url
+	 * @return
+	 */
+	private static String getRMBContentString(String url) {
+		final String[] strings = url.split("&");
+		final StringBuilder sb = new StringBuilder();
+		String amount = null;
+		String openid = null;
+		String productName;
+		String productDesc;
+		for (String string : strings) {
+			if (string.startsWith("notify_id=")
+					|| string.startsWith("partner_code=")
+					|| string.startsWith("partner_order=")
+					|| string.startsWith("orders=")) {
+				sb.append(string).append("&");
+				if (string.startsWith("orders=")) {
+					// orders=amount&openid&productName&productDesc
+					final String orders = URLDecoder
+							.decode(string.split("=")[1]);
+					final String[] orderss = orders.split("&");
+					amount = orderss[0];
+					openid = orderss[1];
+					productName = orderss[2];
+					productDesc = orderss[3];
+					// do some thing for productName and productDesc
+				}
+			} else if (string.startsWith("pay_result=")) {
+				sb.append(string);
+			}
+		}
+
+		sb.append("&" + "amount=" + amount);
+		sb.append("&" + "openid=" + openid);
+		return sb.toString();
+	}
+
+	private static String getSign(String url) {
+		final String[] strings = url.split("&");
+		final StringBuilder sb = new StringBuilder();
+		for (String string : strings) {
+			if (string.startsWith("sign=")) {
+				sb.append(string.split("=")[1]);
+			}
+		}
+		return sb.toString();
+	}
 
 	/**
 	 * 验证签名的方法
@@ -30,7 +159,7 @@ public class RsaUtil {
 		String charset = "utf-8";
 		try {
 			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-			byte[] encodedKey = Base64.decodeBase64(PUBLIC_KEY.getBytes());
+			byte[] encodedKey = Base64.decodeBase64(PUB_KEY.getBytes());
 			PublicKey pubKey = keyFactory
 					.generatePublic(new X509EncodedKeySpec(encodedKey));
 			java.security.Signature signature = java.security.Signature
@@ -46,21 +175,12 @@ public class RsaUtil {
 		return false;
 	}
 
-	public static void main(String[] args) {
-		String sign = "tW5uiyeRyTpPji6QrKQR8RyPT2z5tx8nNHvsk/hW4HpSgff85lkc4KfNdVwKt3Z//lk/DA+WXyhEzjUkaSj9OY6/5owQpUrwdHap9wCxxr1oK8QimUK0z+GM17q831eFW/eGNYJZh/ztu48WW3ONE4VFOoPFqlAn3WoojKM80xM=";
-		String content = "notify_id=461648&partner_code=8Ucnr487t2Os4SckK8o844oO0&partner_order=2013-1-oppo_13951997-1376894687&orders=钻石100.012013-1-oppo_13951997-1376894687&pay_result=OK";
-		System.out.println("public_key: " + PUBLIC_KEY);
-		System.out.println("sign: " + sign);
-		System.out.println("baseString: " + content);
-		System.out.println("doCheckResult: " + doCheck(content, sign));
-	}
-
 	public static String sign(String content, String privateKey) {
 		String charset = "utf-8";
 		try {
 			PKCS8EncodedKeySpec priPKCS8 = new PKCS8EncodedKeySpec(
 					Base64.decodeBase64(privateKey.getBytes()));
-			KeyFactory keyf = KeyFactory.getInstance("RSA", "BC");
+			KeyFactory keyf = KeyFactory.getInstance("RSA");
 			PrivateKey priKey = keyf.generatePrivate(priPKCS8);
 			java.security.Signature signature = java.security.Signature
 					.getInstance("SHA1WithRSA");
