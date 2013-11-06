@@ -1,23 +1,21 @@
-package com.myCard;
+ï»¿package com.myCard;
 
-import java.util.Vector;
 import java.util.List;
-
-import android.R.integer;
+import java.util.Vector;
 /*
  * QQ:361106306
- * by:Ğ¡Æâ
- * ×ªÔØ´Ë³ÌĞòĞë±£Áô°æÈ¨,Î´¾­×÷ÕßÔÊĞí²»ÄÜÓÃ×÷ÉÌÒµÓÃÍ¾!
+ * by:å°æŸ’
+ * è½¬è½½æ­¤ç¨‹åºé¡»ä¿ç•™ç‰ˆæƒ,æœªç»ä½œè€…å…è®¸ä¸èƒ½ç”¨ä½œå•†ä¸šç”¨é€”!
  * */
 public class Model {
-	int count;//ÊÖÊı
-	int value;//È¨Öµ
-	//Ò»×éÅÆ
-	List<String> a1=new Vector<String>(); //µ¥ÕÅ
-	List<String> a2=new Vector<String>(); //¶Ô×Ó
-	List<String> a3=new Vector<String>(); //3´ø
-	List<String> a123=new Vector<String>(); //Á¬×Ó
-	List<String> a112233=new Vector<String>(); //Á¬ÅÆ
-	List<String> a111222=new Vector<String>(); //·É»ú
-	List<String> a4=new Vector<String>(); //Õ¨µ¯
+	int count;//æ‰‹æ•°
+	int value;//æƒå€¼
+	//ä¸€ç»„ç‰Œ
+	List<String> a1=new Vector<String>(); //å•å¼ 
+	List<String> a2=new Vector<String>(); //å¯¹å­
+	List<String> a3=new Vector<String>(); //3å¸¦
+	List<String> a123=new Vector<String>(); //è¿å­
+	List<String> a112233=new Vector<String>(); //è¿ç‰Œ
+	List<String> a111222=new Vector<String>(); //é£æœº
+	List<String> a4=new Vector<String>(); //ç‚¸å¼¹
 }

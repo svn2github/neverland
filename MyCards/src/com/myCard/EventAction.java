@@ -1,17 +1,15 @@
-package com.myCard;
+ï»¿package com.myCard;
 
 import java.util.List;
-import java.util.Random;
 
-import android.R.integer;
 import android.util.Log;
 import android.view.MotionEvent;
 
 public class EventAction {
 	/*
 	 * QQ:361106306
-	 * by:Ð¡Æâ
-	 * ×ªÔØ´Ë³ÌÐòÐë±£Áô°æÈ¨,Î´¾­×÷ÕßÔÊÐí²»ÄÜÓÃ×÷ÉÌÒµÓÃÍ¾!
+	 * by:å°æŸ’
+	 * è½¬è½½æ­¤ç¨‹åºé¡»ä¿ç•™ç‰ˆæƒ,æœªç»ä½œè€…å…è®¸ä¸èƒ½ç”¨ä½œå•†ä¸šç”¨é€”!
 	 * */
 	MotionEvent event;
 	MyView view;
@@ -20,18 +18,18 @@ public class EventAction {
 		this.event = event;
 		this.view = view;
 	}
-	// ²Ù×÷°´Å¥ÊÂ¼þ
+	// æ“ä½œæŒ‰é’®äº‹ä»¶
 	public void getButton(){
 		if(!view.hideButton){
 			float x=event.getX(),y=event.getY();
-			//×ó±ß°´Å¥
+			//å·¦è¾¹æŒ‰é’®
 			if((x>view.screen_width/2-3*view.cardWidth)&&(y>view.screen_height-view.cardHeight*5/2)&&
 					(x<view.screen_width/2-view.cardWidth)&&(y<view.screen_height-view.cardHeight*11/6))
 			{
-				//ÇÀµØÖ÷
-				if(view.buttonText[0].equals("ÇÀµØÖ÷"))
+				//æŠ¢åœ°ä¸»
+				if(view.buttonText[0].equals("æŠ¢åœ°ä¸»"))
 				{
-					//¼ÓÈëµØÖ÷ÅÆ
+					//åŠ å…¥åœ°ä¸»ç‰Œ
 					for(Card card:view.dizhuList)
 					{
 						card.rear=false;
@@ -42,15 +40,15 @@ public class EventAction {
 					view.dizhuList.clear();
 					Common.setOrder(view.playerList[1]);
 					Common.rePosition(view, view.playerList[1], 1);
-					view.dizhuFlag=1;//µØÖ÷ÊÇÎÒ;
+					view.dizhuFlag=1;//åœ°ä¸»æ˜¯æˆ‘;
 					Common.dizhuFlag=view.dizhuFlag;
 					view.update();
 					view.turn=1;
 				}
-				//³öÅÆ
-				if(view.buttonText[0].equals("³öÅÆ"))
+				//å‡ºç‰Œ
+				if(view.buttonText[0].equals("å‡ºç‰Œ"))
 				{
-					//Ñ¡³ö×îºÃµÄ³öÅÆ(¸úÅÆºÍÖ÷¶¯³öÅÆ)
+					//é€‰å‡ºæœ€å¥½çš„å‡ºç‰Œ(è·Ÿç‰Œå’Œä¸»åŠ¨å‡ºç‰Œ)
 					List<Card> oppo=null;
 					if(view.outList[0].size()<=0&&view.outList[2].size()<=0)
 					{
@@ -64,10 +62,10 @@ public class EventAction {
 					if(mybest==null)
 						return;
 					synchronized (view) {
-						//¼ÓÈëoutlist
+						//åŠ å…¥outlist
 						view.outList[1].clear();
 						view.outList[1].addAll(mybest);
-						//ÍË³öplayerlist
+						//é€€å‡ºplayerlist
 						view.playerList[1].removeAll(mybest);
 					}
 					Common.rePosition(view, view.playerList[1], 1);
@@ -78,25 +76,25 @@ public class EventAction {
 				}
 				view.hideButton=!view.hideButton;
 			}
-			//ÓÒ±ß
+			//å³è¾¹
 			if(x>view.screen_width/2+view.cardWidth&& y>view.screen_height-view.cardHeight*5/2&&
 					x<view.screen_width/2+3*view.cardWidth&&y<view.screen_height-view.cardHeight*11/6)
 			{
-				//²»ÇÀ
-				if(view.buttonText[1].equals("²»ÇÀ"))
+				//ä¸æŠ¢
+				if(view.buttonText[1].equals("ä¸æŠ¢"))
 				{
 					view.dizhuFlag=Common.getBestDizhuFlag();
 					//view.dizhuFlag=0;
 					Common.dizhuFlag=view.dizhuFlag;
 					for(Card card:view.dizhuList)
 					{
-						card.rear=false;//·­¿ª
+						card.rear=false;//ç¿»å¼€
 					}
 					view.update();
 					view.Sleep(3000);
 					for(Card card:view.dizhuList)
 					{
-						card.rear=true;//¹ØÉÏ
+						card.rear=true;//å…³ä¸Š
 					}
 					view.playerList[view.dizhuFlag].addAll(view.dizhuList);
 					view.dizhuList.clear();
@@ -106,15 +104,15 @@ public class EventAction {
 					view.turn=view.dizhuFlag;
 					view.hideButton=true;
 				}
-				//²»³ö
-				if(view.buttonText[1].equals("²»Òª")){
+				//ä¸å‡º
+				if(view.buttonText[1].equals("ä¸è¦")){
 					if(view.outList[0].size()==0&&view.outList[2].size()==0)
 					{
-						Log.i("mylog", "²»ÄÜ²»²»Òª");
+						Log.i("mylog", "ä¸èƒ½ä¸ä¸è¦");
 						return;
 					}
-					Log.i("mylog", "²»Òª");
-					view.message[1]="²»Òª";
+					Log.i("mylog", "ä¸è¦");
+					view.message[1]="ä¸è¦";
 					view.hideButton=true;
 					view.nextTurn();
 					view.flag[1]=0;
@@ -124,18 +122,18 @@ public class EventAction {
 			}
 		}
 	}
-	// È¡³öµã»÷µÄÊÇÄÄÕÅÅÆ
+	// å–å‡ºç‚¹å‡»çš„æ˜¯å“ªå¼ ç‰Œ
 	public Card getCard() {
 		Card card = null;
-		float x = event.getX();// ´¥Ãþx×ø±ê
-		float y = event.getY();// ´¥Ãþy×ø±ê
+		float x = event.getX();// è§¦æ‘¸xåæ ‡
+		float y = event.getY();// è§¦æ‘¸yåæ ‡
 		float xoffset = view.cardWidth * 4 / 5f;
 		float yoffset = view.cardHeight;
 		if (y < view.screen_height - 4 * view.cardHeight / 3)
 			return null;
 		for (Card card2 : view.playerList[1]) {
 			if (card2.clicked) {
-				// ²éÑ¯·ûºÏ·¶Î§µÄ
+				// æŸ¥è¯¢ç¬¦åˆèŒƒå›´çš„
 				if ((x - card2.x > 0)
 						&& (y - card2.y > 0)
 						&& (((x - card2.x < xoffset) && (y - card2.y < yoffset)) || ((x
@@ -143,7 +141,7 @@ public class EventAction {
 					return card2;
 				}
 			} else {
-				// ²éÑ¯·ûºÏ·¶Î§µÄ
+				// æŸ¥è¯¢ç¬¦åˆèŒƒå›´çš„
 				if ((x - card2.x > 0) && (x - card2.x < xoffset)
 						&& (y - card2.y > 0) && (y - card2.y < yoffset)) {
 					return card2;

@@ -1,4 +1,4 @@
-package com.myCard;
+ï»¿package com.myCard;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,22 +9,22 @@ import android.util.Log;
 
 /*
  * QQ:361106306
- * by:Ğ¡Æâ
- * ×ªÔØ´Ë³ÌĞòĞë±£Áô°æÈ¨,Î´¾­×÷ÕßÔÊĞí²»ÄÜÓÃ×÷ÉÌÒµÓÃÍ¾!
+ * by:å°æŸ’
+ * è½¬è½½æ­¤ç¨‹åºé¡»ä¿ç•™ç‰ˆæƒ,æœªç»ä½œè€…å…è®¸ä¸èƒ½ç”¨ä½œå•†ä¸šç”¨é€”!
  * */
 public class Common {
 	
-	public static int dizhuFlag; //µØÖ÷id
-	public static int currentFlag;//µ±Ç°id
-	public static int oppoerFlag;//¶ÔÊÖÅÆid
+	public static int dizhuFlag; //åœ°ä¸»id
+	public static int currentFlag;//å½“å‰id
+	public static int oppoerFlag;//å¯¹æ‰‹ç‰Œid
 	public static MyView view;
-	//µÃµ½µçÄÔ×î¼ÑÑ¡ÅÆ
+	//å¾—åˆ°ç”µè„‘æœ€ä½³é€‰ç‰Œ
 	public static List<Card> getBestAI(List<Card> curList,List<Card> oppo){
 		List<Card> list=new Vector<Card>(curList);
 		Model model=new Model();
 		Model modelSingle=new Model();
 		
-		//ÕÒ³öËùÓĞ¶Ô×Ó,3´ø£¬Õ¨µ¯£¬·É»ú£¬Ë«Ë³£¬µ¥Ë³
+		//æ‰¾å‡ºæ‰€æœ‰å¯¹å­,3å¸¦ï¼Œç‚¸å¼¹ï¼Œé£æœºï¼ŒåŒé¡ºï¼Œå•é¡º
 		Common.getTwo(list, model);
 		Common.getThree(list, model);
 		Common.get123(list, model);
@@ -32,11 +32,11 @@ public class Common {
 		Common.getTwoTwo(list, model);
 		Common.getPlane(list, model);
 		Common.getSingle(list, model);
-		//È¥³ımodelÀïÃæ¶ÀÁ¢ÅÆĞÍ
+		//å»é™¤modelé‡Œé¢ç‹¬ç«‹ç‰Œå‹
 		Common.checkModel(list,model, modelSingle);
-		//ÏÖÔÚ·Ö±ğ¼ÆËãÃ¿ÖÖ¿ÉÄÜĞÔµÄÈ¨Öµ,ºÍÊÖÊı£¬È¡×î´óµÄÄÇ¸ö(×¢ÒâÓĞĞ©ÅÆĞÍÊÇÏà¹ØµÄ£¬×é³ÉÕâ¸ö¾Í²»ÄÜ×é³ÉÆäËû)
-		//ËùÒÔ×é³ÉÒ»ÖÖÅÆĞÍÇ°ÒªÅĞ¶ÏÕâÖÖÅÆĞÍµÄÅÆ»¹ÊÇ·ñ´æÔÚ
-		//ÏÈ±È½ÏÊÖÊıÔÙ±È½ÏÈ¨Öµ
+		//ç°åœ¨åˆ†åˆ«è®¡ç®—æ¯ç§å¯èƒ½æ€§çš„æƒå€¼,å’Œæ‰‹æ•°ï¼Œå–æœ€å¤§çš„é‚£ä¸ª(æ³¨æ„æœ‰äº›ç‰Œå‹æ˜¯ç›¸å…³çš„ï¼Œç»„æˆè¿™ä¸ªå°±ä¸èƒ½ç»„æˆå…¶ä»–)
+		//æ‰€ä»¥ç»„æˆä¸€ç§ç‰Œå‹å‰è¦åˆ¤æ–­è¿™ç§ç‰Œå‹çš„ç‰Œè¿˜æ˜¯å¦å­˜åœ¨
+		//å…ˆæ¯”è¾ƒæ‰‹æ•°å†æ¯”è¾ƒæƒå€¼
 		Model bestModel=null,myModel=null;
 		int value=0;
 		int time=99;
@@ -48,9 +48,9 @@ public class Common {
 							for(int n=0,len6=model.a111222.size();n<=len6;n++)
 							{
 								List<Card> newlist=new Vector<Card>(list);
-								//ÎÒ³ĞÈÏÕâ¸öÑ­»·ÓĞµã³¤..ÏàĞÅÄãµÄCPU
+								//æˆ‘æ‰¿è®¤è¿™ä¸ªå¾ªç¯æœ‰ç‚¹é•¿..ç›¸ä¿¡ä½ çš„CPU
 								bestModel=Common.getBestModel(newlist,model,new int[]{i,j,k,l,m,n});
-								//¼ÓÉÏ¶ÀÁ¢µÄÅÆ
+								//åŠ ä¸Šç‹¬ç«‹çš„ç‰Œ
 								bestModel.a1.addAll(modelSingle.a1);
 								bestModel.a2.addAll(modelSingle.a2);
 								bestModel.a3.addAll(modelSingle.a3);
@@ -58,12 +58,12 @@ public class Common {
 								bestModel.a123.addAll(modelSingle.a123);
 								bestModel.a112233.addAll(modelSingle.a112233);
 								bestModel.a111222.addAll(modelSingle.a111222);
-								//¼ÓÉÏµ¥ÅÆ
+								//åŠ ä¸Šå•ç‰Œ
 								for(Card singleCard:newlist)
 								{
 									bestModel.a1.add(singleCard.name);
 								}
-								//¼ÆËãÊÖÊı£¬¼ÆËãÈ¨Öµ
+								//è®¡ç®—æ‰‹æ•°ï¼Œè®¡ç®—æƒå€¼
 								if(Common.getTimes(bestModel)<time)
 								{
 									time=Common.getTimes(bestModel);
@@ -75,32 +75,32 @@ public class Common {
 								}
 							
 							}
-		//¿ªÊ¼³öÅÆ
+		//å¼€å§‹å‡ºç‰Œ
 		List<Card> showCardslList=new Vector<Card>();
 		if(oppo==null)
 		{
 			Log.i("mylog", "AI oppo==null");
-			//Ö÷¶¯³öÅÆ
+			//ä¸»åŠ¨å‡ºç‰Œ
 			showCards(myModel, showCardslList, curList);
 		}else {
 			showCards2(myModel, showCardslList, curList, oppo);
 		}
 		
-		//±»¶¯³öÅÆ
+		//è¢«åŠ¨å‡ºç‰Œ
 		if(showCardslList==null||showCardslList.size()==0)
 			return null;
 		return showCardslList;
 	}
-	//±»¶¯³öÅÆ
+	//è¢«åŠ¨å‡ºç‰Œ
 	public static void showCards2(Model model,List<Card> to,List<Card> from,List<Card> oppo){
-		//oppoÊÇ¶ÔÊÖ³öµÄÅÆ,fromÊÇ×Ô¼ºÒÑÓĞµÄÅÆ,toÊÇÒ©×ß³öµÄÅÆ
-		List<String> list=new Vector<String>();//×°Òª×ß³öµÄÅÆµÄname
+		//oppoæ˜¯å¯¹æ‰‹å‡ºçš„ç‰Œ,fromæ˜¯è‡ªå·±å·²æœ‰çš„ç‰Œ,toæ˜¯è¯èµ°å‡ºçš„ç‰Œ
+		List<String> list=new Vector<String>();//è£…è¦èµ°å‡ºçš„ç‰Œçš„name
 		CardType cType = Common.jugdeType(oppo);
-		//°´ÖØ¸´ÊıÅÅĞò,ÕâÑùÖ»Ğè±È½ÏµÚÒ»ÕÅÅÆ
+		//æŒ‰é‡å¤æ•°æ’åº,è¿™æ ·åªéœ€æ¯”è¾ƒç¬¬ä¸€å¼ ç‰Œ
 		oppo=Common.getOrder2(oppo);
 		switch (cType) {
 		case c1:
-			//Èç¹û¶ÓÓÑ³öÅÆ±È½Ï´ó£¬ÎÒ¾Í²»½Ó£¬ÏÂÃæ¾Í²»×¢ÊÍÁË
+			//å¦‚æœé˜Ÿå‹å‡ºç‰Œæ¯”è¾ƒå¤§ï¼Œæˆ‘å°±ä¸æ¥ï¼Œä¸‹é¢å°±ä¸æ³¨é‡Šäº†
 			if(Common.isFriend()&&(Common.getValue(oppo.get(0))>=13))
 				break;
 			for (int len = model.a1.size(), i = len - 1; i >= 0; i--) {
@@ -135,7 +135,7 @@ public class Common {
 				}
 			}
 			if(Common.isLessFive()&&model.a3.size()>0){
-				//´Ó3´ø²ğ
+				//ä»3å¸¦æ‹†
 				for(int len=model.a3.size(),i=len-1;i>=0;i--)
 				{
 					
@@ -317,7 +317,7 @@ public class Common {
 		}
 		if(list.size()==0)
 		{
-			if(Common.isLessFive())//¶ÔÊÖÉÙÓÚ5ÕÅ£¬¿ÉÒÔÕ¨ÁË
+			if(Common.isLessFive())//å¯¹æ‰‹å°‘äº5å¼ ï¼Œå¯ä»¥ç‚¸äº†
 			{
 				if(model.a4.size()>0)
 				{
@@ -336,46 +336,46 @@ public class Common {
 			}
 		}
 	}
-	//Ö÷¶¯³öÅÆ
+	//ä¸»åŠ¨å‡ºç‰Œ
 	public static void showCards(Model model,List<Card> to,List<Card> from){
 
 		List<String> list=new Vector<String>();
 		if (model.a123.size() > 0) {
 			list.add(model.a123.get(model.a123.size() - 1));
 		}
-		// ÓĞµ¥³öµ¥ (³ı¿ª3´ø£¬·É»úÄÜ´øµÄµ¥ÅÆ)
+		// æœ‰å•å‡ºå• (é™¤å¼€3å¸¦ï¼Œé£æœºèƒ½å¸¦çš„å•ç‰Œ)
 		else if((!Common.isSingleOpper())&&model.a1.size() > (model.a111222.size() * 2 + model.a3.size())
 				&&Common.getValueByName(model.a1.get(model.a1.size()-1))<15) {
 			list.add(model.a1.get(model.a1.size() - 1));
 		}else if(Common.isSingleOpper()&&model.a1.size() > (model.a111222.size() * 2 + model.a3.size()))
 			{list.add(model.a1.get(0));}
-		// ÓĞ¶Ô×Ó³ö¶Ô×Ó (³ı¿ª3´ø£¬·É»ú)
+		// æœ‰å¯¹å­å‡ºå¯¹å­ (é™¤å¼€3å¸¦ï¼Œé£æœº)
 		else if(model.a2.size() > (model.a111222.size() * 2 + model.a3
 				.size())&&Common.getValueByName(model.a2.get(model.a2.size()-1))<15){
 			list.add(model.a2.get(model.a2.size() - 1));
 		}
-		// ÓĞ3´ø¾Í³ö3´ø£¬Ã»ÓĞ¾Í³ö¹â3
+		// æœ‰3å¸¦å°±å‡º3å¸¦ï¼Œæ²¡æœ‰å°±å‡ºå…‰3
 		else if (model.a3.size() > 0&&Common.getValueByName(model.a3.get(model.a3.size()-1))<15) {
-			// 3´øµ¥,ÇÒ·Ç¹Ø¼üÊ±¿Ì²»ÄÜ´øÍõ£¬2
+			// 3å¸¦å•,ä¸”éå…³é”®æ—¶åˆ»ä¸èƒ½å¸¦ç‹ï¼Œ2
 			if (model.a1.size() > 0) {
 				list.add(model.a1.get(model.a1.size() - 1));
-			}// 3´ø¶Ô
+			}// 3å¸¦å¯¹
 			else if (model.a2.size() > 0) {
 				list.add(model.a2.get(model.a2.size() - 1));
 			}
 			list.add(model.a3.get(model.a3.size() - 1));
-		}// ÓĞË«Ë³³öË«Ë³
+		}// æœ‰åŒé¡ºå‡ºåŒé¡º
 		else if (model.a112233.size() > 0) {
 			list.add(model.a112233.get(model.a112233.size() - 1));
-		}// ÓĞ·É»ú³ö·É»ú
+		}// æœ‰é£æœºå‡ºé£æœº
 		else if (model.a111222.size() > 0) {
 			String name[] = model.a111222.get(0).split(",");
-			// ´øµ¥
+			// å¸¦å•
 			if (name.length / 3 <= model.a1.size()) {
 				list.add(model.a111222.get(model.a111222.size() - 1));
 				for (int i = 0; i < name.length / 3; i++)
 					list.add(model.a1.get(i));
-			} else if (name.length / 3 <= model.a2.size())// ´øË«
+			} else if (name.length / 3 <= model.a2.size())// å¸¦åŒ
 			{
 				list.add(model.a111222.get(model.a111222.size() - 1));
 				for (int i = 0; i < name.length / 3; i++)
@@ -391,18 +391,18 @@ public class Common {
 			list.add(model.a2.get(model.a2.size() - 1));
 		}
 		else if (Common.getValueByName(model.a3.get(0))<15&&model.a3.size() > 0) {
-			// 3´øµ¥,ÇÒ·Ç¹Ø¼üÊ±¿Ì²»ÄÜ´øÍõ£¬2
+			// 3å¸¦å•,ä¸”éå…³é”®æ—¶åˆ»ä¸èƒ½å¸¦ç‹ï¼Œ2
 			if (model.a1.size() > 0) {
 				list.add(model.a1.get(model.a1.size() - 1));
-			}// 3´ø¶Ô
+			}// 3å¸¦å¯¹
 			else if (model.a2.size() > 0) {
 				list.add(model.a2.get(model.a2.size() - 1));
 			}
 			list.add(model.a3.get(model.a3.size() - 1));
 		}
-		// ÓĞÕ¨µ¯³öÕ¨µ¯
+		// æœ‰ç‚¸å¼¹å‡ºç‚¸å¼¹
 		else if (model.a4.size() > 0) {
-			// 4´ø2,1
+			// 4å¸¦2,1
 			int sizea1 = model.a1.size();
 			int sizea2 = model.a2.size();
 			if (sizea1 >= 2) {
@@ -415,7 +415,7 @@ public class Common {
 				list.add(model.a2.get(sizea1 - 2));
 				list.add(model.a4.get(0));
 
-			} else {// Ö±½ÓÕ¨
+			} else {// ç›´æ¥ç‚¸
 				list.add(model.a4.get(0));
 
 			}
@@ -425,9 +425,9 @@ public class Common {
 		}
 		
 	}
-	//µÃµ½ÎÒµÄ×î¼ÑµÄÅÆ
+	//å¾—åˆ°æˆ‘çš„æœ€ä½³çš„ç‰Œ
 	public static List<Card> getMyBestCards(List<Card> current,List<Card> oppo){
-		//currentÊÇÎÒµÄÅÆ,oppoÊÇ¶ÔÊÖ³öµÄÅÆ,Èç¹ûÎª¿ÕÔòÎÒÖ÷¶¯³öÅÆ
+		//currentæ˜¯æˆ‘çš„ç‰Œ,oppoæ˜¯å¯¹æ‰‹å‡ºçš„ç‰Œ,å¦‚æœä¸ºç©ºåˆ™æˆ‘ä¸»åŠ¨å‡ºç‰Œ
 		List<Card> list=new Vector<Card>();
 		
 		for(int i=0,len=current.size();i<len;i++){
@@ -437,17 +437,17 @@ public class Common {
 		}
 		Log.i("mylog", Common.jugdeType(list).toString()+",");
 		CardType myType=Common.jugdeType(list);
-		if(oppo==null)//ÎÒÖ÷¶¯×ßÅÆ
+		if(oppo==null)//æˆ‘ä¸»åŠ¨èµ°ç‰Œ
 		{
-			Log.i("mylog", "ÎÒÖ÷¶¯×ßÅÆ");
+			Log.i("mylog", "æˆ‘ä¸»åŠ¨èµ°ç‰Œ");
 			if(myType!=CardType.c0)
 				return list;
 			else {
 				return null;
 			}
-		}else {//ÎÒ¸úÅÆ
-			Log.i("mylog", "ÎÒ¸úÅÆ");
-			if(Common.checkCards(list, oppo)==1)//¼ì²éÊÇ·ñÄÜ³ö
+		}else {//æˆ‘è·Ÿç‰Œ
+			Log.i("mylog", "æˆ‘è·Ÿç‰Œ");
+			if(Common.checkCards(list, oppo)==1)//æ£€æŸ¥æ˜¯å¦èƒ½å‡º
 				return list;
 			else {
 				return null;
@@ -455,15 +455,15 @@ public class Common {
 		}
 		
 	}
-	// ÅĞ¶ÏÅÆĞÍ
+	// åˆ¤æ–­ç‰Œå‹
 	public static CardType jugdeType(List<Card> list) {
-		// ÒòÎªÖ®Ç°ÅÅĞò¹ıËùÒÔ±È½ÏºÃÅĞ¶Ï
+		// å› ä¸ºä¹‹å‰æ’åºè¿‡æ‰€ä»¥æ¯”è¾ƒå¥½åˆ¤æ–­
 		int len = list.size();
-		// Ë«Íõ,»¯Îª¶Ô×Ó·µ»Ø
+		// åŒç‹,åŒ–ä¸ºå¯¹å­è¿”å›
 		if (len == 2 && Common.getColor(list.get(1)) == 5)
 			return CardType.c4;
-		// µ¥ÅÆ,¶Ô×Ó£¬3²»´ø£¬4¸öÒ»ÑùÕ¨µ¯
-		if (len <= 4) { // Èç¹ûµÚÒ»¸öºÍ×îºó¸öÏàÍ¬£¬ËµÃ÷È«²¿ÏàÍ¬
+		// å•ç‰Œ,å¯¹å­ï¼Œ3ä¸å¸¦ï¼Œ4ä¸ªä¸€æ ·ç‚¸å¼¹
+		if (len <= 4) { // å¦‚æœç¬¬ä¸€ä¸ªå’Œæœ€åä¸ªç›¸åŒï¼Œè¯´æ˜å…¨éƒ¨ç›¸åŒ
 			if (list.size() > 0
 					&& Common.getValue(list.get(0)) == Common.getValue(list
 							.get(len - 1))) {
@@ -478,7 +478,7 @@ public class Common {
 					return CardType.c4;
 				}
 			}
-			// µ±µÚÒ»¸öºÍ×îºó¸ö²»Í¬Ê±,3´ø1
+			// å½“ç¬¬ä¸€ä¸ªå’Œæœ€åä¸ªä¸åŒæ—¶,3å¸¦1
 			if (len == 4
 					&& ((Common.getValue(list.get(0)) == Common.getValue(list
 							.get(len - 2))) || Common.getValue(list.get(1)) == Common
@@ -488,50 +488,50 @@ public class Common {
 				return CardType.c0;
 			}
 		}
-		// µ±5ÕÅÒÔÉÏÊ±£¬Á¬×Ö£¬3´ø2£¬·É»ú£¬2Ë³£¬4´ø2µÈµÈ
-		if (len >= 5) {// ÏÖÔÚ°´ÏàÍ¬Êı×Ö×î´ó³öÏÖ´ÎÊı
+		// å½“5å¼ ä»¥ä¸Šæ—¶ï¼Œè¿å­—ï¼Œ3å¸¦2ï¼Œé£æœºï¼Œ2é¡ºï¼Œ4å¸¦2ç­‰ç­‰
+		if (len >= 5) {// ç°åœ¨æŒ‰ç›¸åŒæ•°å­—æœ€å¤§å‡ºç°æ¬¡æ•°
 			Card_index card_index = new Card_index();
 			for (int i = 0; i < 4; i++)
 				card_index.a[i] = new Vector<Integer>();
-			// Çó³ö¸÷ÖÖÊı×Ö³öÏÖÆµÂÊ
-			Common.getMax(card_index, list); // a[0,1,2,3]·Ö±ğ±íÊ¾ÖØ¸´1,2,3,4´ÎµÄÅÆ
-			// 3´ø2 -----±Øº¬ÖØ¸´3´ÎµÄÅÆ
+			// æ±‚å‡ºå„ç§æ•°å­—å‡ºç°é¢‘ç‡
+			Common.getMax(card_index, list); // a[0,1,2,3]åˆ†åˆ«è¡¨ç¤ºé‡å¤1,2,3,4æ¬¡çš„ç‰Œ
+			// 3å¸¦2 -----å¿…å«é‡å¤3æ¬¡çš„ç‰Œ
 			if (card_index.a[2].size() == 1 && card_index.a[1].size() == 1
 					&& len == 5)
 				return CardType.c32;
-			// 4´ø2(µ¥,Ë«)
+			// 4å¸¦2(å•,åŒ)
 			if (card_index.a[3].size() == 1 && len == 6)
 				return CardType.c411;
 			if (card_index.a[3].size() == 1 && card_index.a[1].size() == 2
 					&& len == 8)
 				return CardType.c422;
-			// µ¥Á¬,±£Ö¤²»´æÔÚÍõ
+			// å•è¿,ä¿è¯ä¸å­˜åœ¨ç‹
 			if ((Common.getColor(list.get(0)) != 5)
 					&& (card_index.a[0].size() == len)
 					&& (Common.getValue(list.get(0))
 							- Common.getValue(list.get(len - 1)) == len - 1))
 				return CardType.c123;
-			// Á¬¶Ó
+			// è¿é˜Ÿ
 			if (card_index.a[1].size() == len / 2
 					&& len % 2 == 0
 					&& len / 2 >= 3
 					&& (Common.getValue(list.get(0))
 							- Common.getValue(list.get(len - 1)) == (len / 2 - 1)))
 				return CardType.c1122;
-			// ·É»ú
+			// é£æœº
 			if (card_index.a[2].size() == len / 3
 					&& (len % 3 == 0)
 					&& (Common.getValue(list.get(0))
 							- Common.getValue(list.get(len - 1)) == (len / 3 - 1)))
 				return CardType.c111222;
-			// ·É»ú´ønµ¥,n/2¶Ô
+			// é£æœºå¸¦nå•,n/2å¯¹
 			if (card_index.a[2].size()>=2&&card_index.a[2].size() == len / 4
 					&& ((Integer) (card_index.a[2].get(len / 4 - 1))
 							- (Integer) (card_index.a[2].get(0)) == len / 4 - 1)
 							&&len==card_index.a[2].size()*4)
 				return CardType.c11122234;
 
-			// ·É»ú´ønË«
+			// é£æœºå¸¦nåŒ
 			if (card_index.a[2].size()>=2&&card_index.a[2].size() == len / 5
 					&& card_index.a[2].size() == len / 5
 					&& ((Integer) (card_index.a[2].get(len / 5 - 1))
@@ -543,15 +543,15 @@ public class Common {
 		return CardType.c0;
 	}
 
-	//Éè¶¨ÅÆµÄË³Ğò
+	//è®¾å®šç‰Œçš„é¡ºåº
 	public static void setOrder(List<Card> list){
 		Collections.sort(list, new Comparator<Card>() {
 			@Override
 			public int compare(Card o1, Card o2) {
 				// TODO Auto-generated method stub
-				int a1 = Common.getColor(o1);// »¨É«
+				int a1 = Common.getColor(o1);// èŠ±è‰²
 				int a2 = Common.getColor(o2);
-				int b1 = Common.getValue(o1);// ÊıÖµ
+				int b1 = Common.getValue(o1);// æ•°å€¼
 				int b2 = Common.getValue(o2);
 				int flag = 0;
 				flag = b2 - b1;
@@ -563,8 +563,8 @@ public class Common {
 			}
 		});
 	}
-	//Éè¶¨Ë³ĞòºóÖØĞÂÉè¶¨Î»ÖÃ
-	// ÖØĞÂ¶¨Î» flag´ú±íµçÄÔ1 ,2 »òÕßÊÇÎÒ0
+	//è®¾å®šé¡ºåºåé‡æ–°è®¾å®šä½ç½®
+	// é‡æ–°å®šä½ flagä»£è¡¨ç”µè„‘1 ,2 æˆ–è€…æ˜¯æˆ‘0
 	public static void rePosition(MyView view, List<Card> list, int flag) {
 		if(flag==1)
 		{
@@ -591,18 +591,18 @@ public class Common {
 			}
 		}
 	}
-	// ·µ»ØÖµ
+	// è¿”å›å€¼
 	public static int getValue(Card card) {
 		int i = Integer.parseInt(card.name.substring(3, card.name.length()));
 		return i;
 	}
-	// ·µ»Ø»¨É«
+	// è¿”å›èŠ±è‰²
 	public static int getColor(Card card) {
 		return Integer.parseInt(card.name.substring(1, 2));
 	}
-	// µÃµ½×î´óÏàÍ¬Êı
+	// å¾—åˆ°æœ€å¤§ç›¸åŒæ•°
 	public static void getMax(Card_index card_index, List<Card> list) {
-		int count[] = new int[17];// 1-16¸÷ËãÒ»ÖÖ,ÍõËãµÚ16ÖÖ
+		int count[] = new int[17];// 1-16å„ç®—ä¸€ç§,ç‹ç®—ç¬¬16ç§
 		for (int i = 0; i < 17; i++)
 			count[i] = 0;
 		for (int i = 0, len = list.size(); i < len; i++) {
@@ -628,22 +628,22 @@ public class Common {
 			}
 		}
 	}
-	// ¼ì²éÅÆµÄÊÇ·ñÄÜ³ö
+	// æ£€æŸ¥ç‰Œçš„æ˜¯å¦èƒ½å‡º
 	public static int checkCards(List<Card> c, List<Card> oppo) {
-		// ÕÒ³öµ±Ç°×î´óµÄÅÆÊÇÄÄ¸öµçÄÔ³öµÄ,cÊÇµãÑ¡µÄÅÆ
+		// æ‰¾å‡ºå½“å‰æœ€å¤§çš„ç‰Œæ˜¯å“ªä¸ªç”µè„‘å‡ºçš„,cæ˜¯ç‚¹é€‰çš„ç‰Œ
 		List<Card> currentlist=oppo;
 		CardType cType = Common.jugdeType(c);
 		CardType cType2=Common.jugdeType(currentlist);
-		// Èç¹ûÕÅÊı²»Í¬Ö±½Ó¹ıÂË
+		// å¦‚æœå¼ æ•°ä¸åŒç›´æ¥è¿‡æ»¤
 		if (cType != CardType.c4 && c.size() != currentlist.size())
 			return 0;
-		// ±È½ÏÎÒµÄ³öÅÆÀàĞÍ
+		// æ¯”è¾ƒæˆ‘çš„å‡ºç‰Œç±»å‹
 		if (cType != CardType.c4&&cType != cType2) {
 
 			return 0;
 		}
-		// ±È½Ï³öµÄÅÆÊÇ·ñÒª´ó
-		// ÎÒÊÇÕ¨µ¯
+		// æ¯”è¾ƒå‡ºçš„ç‰Œæ˜¯å¦è¦å¤§
+		// æˆ‘æ˜¯ç‚¸å¼¹
 		if (cType == CardType.c4) {
 			if(c.size()==2)
 				return 1;
@@ -653,7 +653,7 @@ public class Common {
 			}
 		}
 
-		// µ¥ÅÆ,¶Ô×Ó,3´ø,4Õ¨µ¯
+		// å•ç‰Œ,å¯¹å­,3å¸¦,4ç‚¸å¼¹
 		if (cType == CardType.c1 || cType == CardType.c2
 				|| cType == CardType.c3 || cType == CardType.c4) {
 			if (Common.getValue(c.get(0)) <= Common
@@ -663,7 +663,7 @@ public class Common {
 				return 1;
 			}
 		}
-		// Ë³×Ó,Á¬¶Ó£¬·É»úÂã
+		// é¡ºå­,è¿é˜Ÿï¼Œé£æœºè£¸
 		if (cType == CardType.c123 || cType == CardType.c1122
 				|| cType == CardType.c111222) {
 			if (Common.getValue(c.get(0)) <= Common
@@ -672,19 +672,19 @@ public class Common {
 			else
 				return 1;
 		}
-		// °´ÖØ¸´¶àÉÙÅÅĞò
-		// 3´ø1,3´ø2 ,·É»ú´øµ¥£¬Ë«,4´ø1,2,Ö»Ğè±È½ÏµÚÒ»¸ö¾ÍĞĞ£¬¶ÀÒ»ÎŞ¶şµÄ
+		// æŒ‰é‡å¤å¤šå°‘æ’åº
+		// 3å¸¦1,3å¸¦2 ,é£æœºå¸¦å•ï¼ŒåŒ,4å¸¦1,2,åªéœ€æ¯”è¾ƒç¬¬ä¸€ä¸ªå°±è¡Œï¼Œç‹¬ä¸€æ— äºŒçš„
 		if (cType == CardType.c31 || cType == CardType.c32
 				|| cType == CardType.c411 || cType == CardType.c422
 				|| cType == CardType.c11122234 || cType == CardType.c1112223344) {
-			List<Card> a1 = Common.getOrder2(c); // ÎÒ³öµÄÅÆ
-			List<Card> a2 = Common.getOrder2(currentlist);// µ±Ç°×î´óÅÆ
+			List<Card> a1 = Common.getOrder2(c); // æˆ‘å‡ºçš„ç‰Œ
+			List<Card> a2 = Common.getOrder2(currentlist);// å½“å‰æœ€å¤§ç‰Œ
 			if (Common.getValue(a1.get(0)) < Common.getValue(a2.get(0)))
 				return 0;
 		}
 		return 1;
 	}
-	// °´ÕÕÖØ¸´´ÎÊıÅÅĞò
+	// æŒ‰ç…§é‡å¤æ¬¡æ•°æ’åº
 	public static List getOrder2(List<Card> list) {
 		List<Card> list2 = new Vector<Card>(list);
 		List<Card> list3 = new Vector<Card>();
@@ -714,10 +714,10 @@ public class Common {
 		}
 		return list3;
 	}
-	// ²ğ¶Ô×Ó
+	// æ‹†å¯¹å­
 	public static void getTwo(List<Card> list, Model model) {
-		//List<Card> del = new Vector<Card>();// ÒªÉ¾³ıµÄCards
-		// Á¬Ğø2ÕÅÏàÍ¬
+		//List<Card> del = new Vector<Card>();// è¦åˆ é™¤çš„Cards
+		// è¿ç»­2å¼ ç›¸åŒ
 		for (int i = 0, len = list.size(); i < len; i++) {
 			if (i + 1 < len
 					&& Common.getValue(list.get(i)) == Common.getValue(list
@@ -732,10 +732,10 @@ public class Common {
 		}
 		//list.removeAll(del);
 	}
-	// ²ğ3´ø
+	// æ‹†3å¸¦
 	public static void getThree(List<Card> list, Model model) {
-		//List<Card> del = new Vector<Card>();// ÒªÉ¾³ıµÄCards
-		// Á¬Ğø3ÕÅÏàÍ¬
+		//List<Card> del = new Vector<Card>();// è¦åˆ é™¤çš„Cards
+		// è¿ç»­3å¼ ç›¸åŒ
 		for (int i = 0, len = list.size(); i < len; i++) {
 			if (i + 2 < len
 					&& Common.getValue(list.get(i)) == Common.getValue(list
@@ -751,26 +751,26 @@ public class Common {
 		}
 		//list.removeAll(del);
 	}
-	// ²ğÕ¨µ¯
+	// æ‹†ç‚¸å¼¹
 	public static void getBoomb(List<Card> list, Model model) {
-		//List<Card> del = new Vector<Card>();// ÒªÉ¾³ıµÄCards
+		//List<Card> del = new Vector<Card>();// è¦åˆ é™¤çš„Cards
 		if(list.size()<1)
 			return;
-		// ÍõÕ¨
+		// ç‹ç‚¸
 		if (list.size() >= 2 && Common.getColor(list.get(0)) == 5
 				&& Common.getColor(list.get(1)) == 5) {
-			model.a4.add(list.get(0).name + "," + list.get(1).name); // °´Ãû×Ö¼ÓÈë
+			model.a4.add(list.get(0).name + "," + list.get(1).name); // æŒ‰åå­—åŠ å…¥
 			//del.add(list.get(0));
 			//del.add(list.get(1));
 		}
-		// Èç¹ûÍõ²»¹¹³ÉÕ¨µ¯Õ¦ÏÈ²ğµ¥
+		// å¦‚æœç‹ä¸æ„æˆç‚¸å¼¹å’‹å…ˆæ‹†å•
 		/*if (Common.getColor(list.get(0)) == 5
 				&& Common.getColor(list.get(1)) != 5) {
 			//del.add(list.get(0));
 			model.a1.add(list.get(0).name);
 		}*/
 		//list.removeAll(del);
-		// Ò»°ãµÄÕ¨µ¯
+		// ä¸€èˆ¬çš„ç‚¸å¼¹
 		for (int i = 0, len = list.size(); i < len; i++) {
 			if (i + 3 < len
 					&& Common.getValue(list.get(i)) == Common.getValue(list
@@ -787,10 +787,10 @@ public class Common {
 		}
 		//list.removeAll(del);
 	}
-	// ²ğË«Ë³
+	// æ‹†åŒé¡º
 	public static void getTwoTwo(List<Card> list, Model model) {
-		//List<String> del = new Vector<String>();// ÒªÉ¾³ıµÄCards
-		// ´ÓmodelÀïÃæµÄ¶Ô×ÓÕÒ
+		//List<String> del = new Vector<String>();// è¦åˆ é™¤çš„Cards
+		// ä»modelé‡Œé¢çš„å¯¹å­æ‰¾
 		List<String> l = model.a2;
 		if (l.size() < 3)
 			return;
@@ -807,7 +807,7 @@ public class Common {
 					k = j;
 			}
 			if (k - i >= 2)// k=4 i=1
-			{// ËµÃ÷´Óiµ½kÊÇÁ¬¶Ó
+			{// è¯´æ˜ä»iåˆ°kæ˜¯è¿é˜Ÿ
 				String ss = "";
 				for (int j = i; j < k; j++) {
 					ss += l.get(j) + ",";
@@ -821,10 +821,10 @@ public class Common {
 		}
 		//l.removeAll(del);
 	}
-	// ²ğ·É»ú
+	// æ‹†é£æœº
 	public static void getPlane(List<Card> list, Model model) {
-		//List<String> del = new Vector<String>();// ÒªÉ¾³ıµÄCards
-		// ´ÓmodelÀïÃæµÄ3´øÕÒ
+		//List<String> del = new Vector<String>();// è¦åˆ é™¤çš„Cards
+		// ä»modelé‡Œé¢çš„3å¸¦æ‰¾
 		List<String> l = model.a3;
 		if (l.size() < 2)
 			return;
@@ -839,7 +839,7 @@ public class Common {
 				if (s[i] - s[j] == j - i)
 					k = j;
 			}
-			if (k != i) {// ËµÃ÷´Óiµ½kÊÇ·É»ú
+			if (k != i) {// è¯´æ˜ä»iåˆ°kæ˜¯é£æœº
 				String ss = "";
 				for (int j = i; j < k; j++) {
 					ss += l.get(j) + ",";
@@ -853,12 +853,12 @@ public class Common {
 		}
 		//l.removeAll(del);
 	}
-	// ²ğÁ¬×Ó
+	// æ‹†è¿å­
 	public static void get123(List<Card> list, Model model) {
-		//List<Card> del = new Vector<Card>();// ÒªÉ¾³ıµÄCards
+		//List<Card> del = new Vector<Card>();// è¦åˆ é™¤çš„Cards
 		if (list.size() < 5)
 			return;
-		// ÏÈÒª°ÑËùÓĞ²»ÖØ¸´µÄÅÆ¹éÎªÒ»Àà£¬·ÀÖ¹3´ø£¬¶Ô×ÓÓ°Ïì
+		// å…ˆè¦æŠŠæ‰€æœ‰ä¸é‡å¤çš„ç‰Œå½’ä¸ºä¸€ç±»ï¼Œé˜²æ­¢3å¸¦ï¼Œå¯¹å­å½±å“
 		List<Card> list2 = new Vector<Card>(list);
 		List<Card> temp = new Vector<Card>();
 		List<Integer> integers = new Vector<Integer>();
@@ -892,9 +892,9 @@ public class Common {
 		}
 		//list.removeAll(del);
 	}
-	// ²ğµ¥ÅÆ
+	// æ‹†å•ç‰Œ
 	public static void getSingle(List<Card> list, Model model) {
-		//List<Card> del = new Vector<Card>();// ÒªÉ¾³ıµÄCards
+		//List<Card> del = new Vector<Card>();// è¦åˆ é™¤çš„Cards
 		// 1
 		for (int i = 0, len = list.size(); i < len; i++) {
 			model.a1.add(list.get(i).name);
@@ -908,7 +908,7 @@ public class Common {
 		Common.delSingle(model.a111222, model);
 		//list.removeAll(del);
 	}
-	//È¡µ¥
+	//å–å•
 	public static void delSingle(List<String> list,Model model){
 		for(int i=0,len=list.size();i<len;i++)
 		{
@@ -917,11 +917,11 @@ public class Common {
 				model.a1.remove(s[j]);
 		}
 	}
-	// Í³¼Æ¸÷ÖÖÅÆĞÍÈ¨Öµ£¬ÊÖÊı
+	// ç»Ÿè®¡å„ç§ç‰Œå‹æƒå€¼ï¼Œæ‰‹æ•°
 	public static Model getBestModel(List<Card> list2,Model oldModel,int []n){
 		//a4 a3 a2 a123 a112233 a111222
 		Model temp=new Model();
-		//´¦ÀíÕ¨µ¯
+		//å¤„ç†ç‚¸å¼¹
 		for(int i=0;i<n[0];i++)
 		{
 			if(Common.isExists(list2, oldModel.a4.get(i))){
@@ -929,7 +929,7 @@ public class Common {
 				list2.removeAll(Common.getCardsByName(list2, oldModel.a4.get(i)));
 			}
 		}
-		//3´ø
+		//3å¸¦
 		for(int i=0;i<n[1];i++)
 		{
 			if(Common.isExists(list2, oldModel.a3.get(i))){
@@ -937,7 +937,7 @@ public class Common {
 				list2.removeAll(Common.getCardsByName(list2, oldModel.a3.get(i)));
 			}
 		}
-		//¶Ô×Ó
+		//å¯¹å­
 		for(int i=0;i<n[2];i++)
 		{
 			if(Common.isExists(list2, oldModel.a2.get(i))){
@@ -945,7 +945,7 @@ public class Common {
 				list2.removeAll(Common.getCardsByName(list2,oldModel.a2.get(i)));
 			}
 		}
-		//Ë³×Ó
+		//é¡ºå­
 		for(int i=0;i<n[3];i++)
 		{
 			if(Common.isExists(list2, oldModel.a123.get(i))){
@@ -953,7 +953,7 @@ public class Common {
 				list2.removeAll(Common.getCardsByName(list2, oldModel.a123.get(i)));
 			}
 		}
-		//Ë«Ë³
+		//åŒé¡º
 		for(int i=0;i<n[4];i++)
 		{
 			if(Common.isExists(list2, oldModel.a112233.get(i))){
@@ -961,7 +961,7 @@ public class Common {
 				list2.removeAll(Common.getCardsByName(list2, oldModel.a112233.get(i)));
 			}
 		}
-		//·É»ú
+		//é£æœº
 		for(int i=0;i<n[5];i++)
 		{
 			if(Common.isExists(list2, oldModel.a111222.get(i))){
@@ -971,7 +971,7 @@ public class Common {
 		}
 		return temp;
 	}
-	//Í¨¹ınameµÃµ½card
+	//é€šè¿‡nameå¾—åˆ°card
 	public static List<Card> getCardsByName(List<Card> list,String s){
 		String []name=s.split(",");
 		List<Card> temp=new Vector<Card>();
@@ -988,7 +988,7 @@ public class Common {
 		}
 		return temp;
 	}
-	//ÅĞ¶ÏÄ³ÅÆĞÍ»¹´æÔÚlist²»
+	//åˆ¤æ–­æŸç‰Œå‹è¿˜å­˜åœ¨listä¸
 	public static Boolean isExists(List<Card> list,String s){
 		String name[]=s.split(",");
 		int c=0;
@@ -1005,9 +1005,9 @@ public class Common {
 		
 		return false;
 	}
-	//È¥³ı¶ÀÁ¢ÅÆĞÍ
+	//å»é™¤ç‹¬ç«‹ç‰Œå‹
 	public static void checkModel(List<Card> list,Model model1,Model modelSingle){
-		//ÕÒ³öÓëÆäËû²»Ïà¹ØµÄÅÆĞÍ
+		//æ‰¾å‡ºä¸å…¶ä»–ä¸ç›¸å…³çš„ç‰Œå‹
 		for(int i=0,len=model1.a2.size();i<len;i++)
 		{
 			int flag=0;
@@ -1131,7 +1131,7 @@ public class Common {
 		return 0;
 	}
 	
-	//¼ÆËãÊÖÊı
+	//è®¡ç®—æ‰‹æ•°
 	public static int getTimes(Model model){
 		int count=0;
 		count+=model.a4.size()+model.a3.size()+model.a2.size();
@@ -1141,19 +1141,19 @@ public class Common {
 		count+=temp;
 		return count;
 	}
-	//¼ÆËãÈ¨Öµ   µ¥1 ¶Ô×Ó2 ´ø3 Õ¨µ¯10 ·É»ú7 Ë«Ë³5 Ë³×Ó4
+	//è®¡ç®—æƒå€¼   å•1 å¯¹å­2 å¸¦3 ç‚¸å¼¹10 é£æœº7 åŒé¡º5 é¡ºå­4
 	public static int getCountValues(Model model){
 		int count=0;
 		count+=model.a1.size()+model.a2.size()*2+model.a3.size()*3;
 		count+=model.a4.size()*10+model.a111222.size()*7+model.a112233.size()*5+model.a123.size()*4;
 		return count;
 	}
-	//Í¨¹ıname·µ»ØÖµ
+	//é€šè¿‡nameè¿”å›å€¼
 	public static int getValueByName(String ss){
 		String s[]=ss.split(",");
 		return Integer.parseInt(s[0].substring(3,s[0].length()));
 	}
-	//ÅĞ¶Ï×Ô¼ºÊÇ²»ÊÇµØÖ÷
+	//åˆ¤æ–­è‡ªå·±æ˜¯ä¸æ˜¯åœ°ä¸»
 	public static Boolean isDizhu(){
 		if(Common.currentFlag==Common.dizhuFlag)
 			return true;
@@ -1161,7 +1161,7 @@ public class Common {
 			return false;
 		}
 	}
-	//ÅĞ¶Ï¶ÔÊÖÅÆÊÇ²»ÊÇ×Ô¼ºµÄ¶ÓÓÑ
+	//åˆ¤æ–­å¯¹æ‰‹ç‰Œæ˜¯ä¸æ˜¯è‡ªå·±çš„é˜Ÿå‹
 	public static Boolean isFriend(){
 		if(Common.isDizhu())
 			return false;
@@ -1173,7 +1173,7 @@ public class Common {
 			return false;
 		}
 	}
-	//Èç¹ûµĞÈËÖ»ÓĞ5ÕÅÅÆÒ»ÏÂ£¬¾¡Á¿²ğÅÆ
+	//å¦‚æœæ•Œäººåªæœ‰5å¼ ç‰Œä¸€ä¸‹ï¼Œå°½é‡æ‹†ç‰Œ
 	public static Boolean isLessFive(){
 		if(!Common.isFriend()&&view.playerList[Common.oppoerFlag].size()<=5)
 		{
@@ -1181,7 +1181,7 @@ public class Common {
 		}
 		return false;
 	}
-	//Èç¹ûµĞÈËÖ»ÓĞÒ»ÕÅÅÆ£¬¾¡Á¿²»³öµ¥£¬³öµ¥Ò²´Ó×î´óµÄ³ö
+	//å¦‚æœæ•Œäººåªæœ‰ä¸€å¼ ç‰Œï¼Œå°½é‡ä¸å‡ºå•ï¼Œå‡ºå•ä¹Ÿä»æœ€å¤§çš„å‡º
 	public static Boolean isSingleOpper(){
 		if(!Common.isFriend()&&view.playerList[Common.oppoerFlag].size()==1)
 			return true;
@@ -1206,7 +1206,7 @@ public class Common {
 	}
 
 }
-//ÅĞ¶ÏÅÆĞÍÓÃµÄ
+//åˆ¤æ–­ç‰Œå‹ç”¨çš„
 class Card_index {
-	List a[] = new Vector[4];// µ¥ÕÅ
+	List a[] = new Vector[4];// å•å¼ 
 }

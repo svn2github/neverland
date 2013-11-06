@@ -1,23 +1,21 @@
-package com.myCard;
+ï»¿package com.myCard;
 
-import android.R.bool;
-import android.R.integer;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 /*
  * QQ:361106306
- * by:Ğ¡Æâ
- * ×ªÔØ´Ë³ÌĞòĞë±£Áô°æÈ¨,Î´¾­×÷ÕßÔÊĞí²»ÄÜÓÃ×÷ÉÌÒµÓÃÍ¾!
+ * by:å°æŸ’
+ * è½¬è½½æ­¤ç¨‹åºé¡»ä¿ç•™ç‰ˆæƒ,æœªç»ä½œè€…å…è®¸ä¸èƒ½ç”¨ä½œå•†ä¸šç”¨é€”!
  * */
 public class Card {
-	int x=0;      //ºá×ø±ê
-	int y=0;	  //×İ×ø±ê
-	int width;    //¿í¶È
-	int height;   //¸ß¶È
-	Bitmap bitmap;//Í¼Æ¬ 
-	String name; //CardµÄÃû³Æ
-	boolean rear=true;//ÊÇ·ñÊÇ±³Ãæ
-	boolean clicked=false;//ÊÇ·ñ±»µã»÷
+	int x=0;      //æ¨ªåæ ‡
+	int y=0;	  //çºµåæ ‡
+	int width;    //å®½åº¦
+	int height;   //é«˜åº¦
+	Bitmap bitmap;//å›¾ç‰‡ 
+	String name; //Cardçš„åç§°
+	boolean rear=true;//æ˜¯å¦æ˜¯èƒŒé¢
+	boolean clicked=false;//æ˜¯å¦è¢«ç‚¹å‡»
 	public Card(int width,int height,Bitmap bitmap){
 		this.width=width;
 		this.height=height;

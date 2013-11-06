@@ -1,16 +1,10 @@
-package com.myCard;
+ï»¿package com.myCard;
 
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
-import com.myfive.R;
 
-import android.R.integer;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,22 +12,22 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Rect;
 import android.graphics.Paint.Style;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
+
+import com.myfive.R;
 /*
  * QQ:361106306
- * by:Ğ¡Æâ
- * ×ªÔØ´Ë³ÌĞòĞë±£Áô°æÈ¨,Î´¾­×÷ÕßÔÊĞí²»ÄÜÓÃ×÷ÉÌÒµÓÃÍ¾!
+ * by:å°æŸ’
+ * è½¬è½½æ­¤ç¨‹åºé¡»ä¿ç•™ç‰ˆæƒ,æœªç»ä½œè€…å…è®¸ä¸èƒ½ç”¨ä½œå•†ä¸šç”¨é€”!
  * */
 public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 		Runnable {
@@ -43,39 +37,39 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 	Boolean repaint=false;
 	Boolean start;
 	Thread gameThread,drawThread;
-	// ÅĞ¶Ïµ±Ç°ÊÇ·ñÒªÅÆ
+	// åˆ¤æ–­å½“å‰æ˜¯å¦è¦ç‰Œ
 	int []flag=new int[3];
-	// ÆÁÄ»¿í¶ÈºÍ¸ß¶È
+	// å±å¹•å®½åº¦å’Œé«˜åº¦
 	int screen_height;
 	int screen_width;
-	// Í¼Æ¬×ÊÔ´
+	// å›¾ç‰‡èµ„æº
 	Bitmap cardBitmap[] = new Bitmap[54];
-	Bitmap bgBitmap;    //±³Ãæ
-	Bitmap cardBgBitmap;//Í¼Æ¬±³Ãæ
-	Bitmap dizhuBitmap;//µØÖ÷Í¼±ê
-	// »ù±¾²ÎÊı
+	Bitmap bgBitmap;    //èƒŒé¢
+	Bitmap cardBgBitmap;//å›¾ç‰‡èƒŒé¢
+	Bitmap dizhuBitmap;//åœ°ä¸»å›¾æ ‡
+	// åŸºæœ¬å‚æ•°
 	int cardWidth, cardHeight;
-	//»­±Ê
+	//ç”»ç¬”
 	Paint paint;
-	// ÅÆ¶ÔÏó
+	// ç‰Œå¯¹è±¡
 	Card card[] = new Card[54];
-	//°´Å¥
+	//æŒ‰é’®
 	String buttonText[]=new String[2];
-	//ÌáÊ¾
+	//æç¤º
 	String message[]=new String[3];
 	boolean hideButton=true;
 	// List
 	List<Card> playerList[]=new Vector[3];
-	//µØÖ÷ÅÆ
+	//åœ°ä¸»ç‰Œ
 	List<Card> dizhuList=new Vector<Card>();
-	//Ë­ÊÇµØÖ÷
+	//è°æ˜¯åœ°ä¸»
 	int dizhuFlag=-1;
-	//ÂÖÁ÷
+	//è½®æµ
 	int turn=-1;
-	//ÒÑ³öÅÆ±í
+	//å·²å‡ºç‰Œè¡¨
 	List<Card> outList[]=new Vector[3];
 	Handler handler;
-	// ¹¹Ôìº¯Êı
+	// æ„é€ å‡½æ•°
 	public MyView(Context context,Handler handler) {
 		super(context);
 		Common.view=this;
@@ -84,7 +78,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 		surfaceHolder.addCallback(this);
 	}
 
-	// ³õÊ¼»¯Í¼Æ¬,²ÎÊı
+	// åˆå§‹åŒ–å›¾ç‰‡,å‚æ•°
 	public void InitBitMap() {
 		for(int i=0;i<3;i++)
 			flag[i]=0;
@@ -93,7 +87,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 		int count=0;
 		for (int i = 1; i <= 4; i++) {
 			for (int j = 3; j <= 15; j++) {
-				//¸ù¾İÃû×ÖÕÒ³öID
+				//æ ¹æ®åå­—æ‰¾å‡ºID
 				String name = "a" + i + "_" + j;
 				ApplicationInfo appInfo = getContext().getApplicationInfo();
 				int id = getResources().getIdentifier(name, "drawable",
@@ -101,12 +95,12 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 				cardBitmap[count] = BitmapFactory.decodeResource(getResources(),
 						id);
 				card[count] = new Card(cardBitmap[count].getWidth(),cardBitmap[count].getHeight(), cardBitmap[count]);
-				//ÉèÖÃCardµÄÃû×Ö
+				//è®¾ç½®Cardçš„åå­—
 				card[count].setName(name);
 				count++;
 			}
 		}
-		//×îºóĞ¡Íõ£¬´óÍõ
+		//æœ€åå°ç‹ï¼Œå¤§ç‹
 		cardBitmap[52] = BitmapFactory.decodeResource(getResources(),
 				R.drawable.a5_16);
 		card[52]=new Card(cardBitmap[52].getWidth(), cardBitmap[52].getHeight(),cardBitmap[52]);
@@ -117,19 +111,19 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 		card[53].setName("a5_17");
 		cardWidth=card[53].width;
 		cardHeight=card[53].height;
-		//µØÖ÷Í¼±ê
+		//åœ°ä¸»å›¾æ ‡
 		dizhuBitmap=BitmapFactory.decodeResource(getResources(), R.drawable.dizhu);
-		//±³¾°
+		//èƒŒæ™¯
 		bgBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
 		cardBgBitmap=BitmapFactory.decodeResource(getResources(), R.drawable.cardbg1);
-		//°´Å¥
+		//æŒ‰é’®
 		for(int i=0;i<2;i++)
 		{
 			buttonText[i]=new String();
 		}
-		buttonText[0]="ÇÀµØÖ÷";
-		buttonText[1]="²»ÇÀ";
-		//ÏûÏ¢,ÒÑ³öÅÆ
+		buttonText[0]="æŠ¢åœ°ä¸»";
+		buttonText[1]="ä¸æŠ¢";
+		//æ¶ˆæ¯,å·²å‡ºç‰Œ
 		for(int i=0;i<3;i++)
 		{
 			message[i]=new String("");
@@ -145,14 +139,14 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 
 	}
 
-	// »­±³¾°
+	// ç”»èƒŒæ™¯
 	public void drawBackground() {
 			Rect src = new Rect(0, 0, bgBitmap.getWidth()*3 / 4,
 					2*bgBitmap.getHeight() / 3);
 			Rect dst = new Rect(0, 0, screen_width, screen_height);
 			canvas.drawBitmap(bgBitmap, src, dst, null);
 	}
-	// Íæ¼ÒÅÆ
+	// ç©å®¶ç‰Œ
 	public void drawPlayer(int player){
 			if(playerList[player]!=null&&playerList[player].size()>0)
 			{
@@ -160,7 +154,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 					drawCard(card);
 			}
 	}
-	//»­ÅÆ
+	//ç”»ç‰Œ
 	public void drawCard(Card card){
 		Bitmap tempbitBitmap;
 		if(card.rear)
@@ -171,9 +165,9 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 		canvas.drawBitmap(tempbitBitmap, card.getSRC(),
 				card.getDST(), null);
 	}
-	//Ï´ÅÆ
+	//æ´—ç‰Œ
 	public void washCards() {
-		//´òÂÒË³Ğò
+		//æ‰“ä¹±é¡ºåº
 		for(int i=0;i<100;i++){
 			Random random=new Random();
 			int a=random.nextInt(54);
@@ -183,18 +177,18 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			card[b]=k;
 		}
 	}
-	//·¢ÅÆ
+	//å‘ç‰Œ
 	public void handCards(){
-		//¿ªÊ¼·¢ÅÆ
+		//å¼€å§‹å‘ç‰Œ
 		int t=0;
 		for(int i=0;i<3;i++){
 			playerList[i]=new Vector<Card>();
 		}
 		for(int i=0;i<54;i++)
 		{
-			if(i>50)//µØÖ÷ÅÆ
+			if(i>50)//åœ°ä¸»ç‰Œ
 			{
-				//·ÅÖÃµØÖ÷ÅÆ
+				//æ”¾ç½®åœ°ä¸»ç‰Œ
 				card[i].setLocation(screen_width/2-(3*i-155)*cardWidth/2,0);
 				dizhuList.add(card[i]);
 				update();
@@ -202,18 +196,18 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			}
 			switch ((t++)%3) {
 			case 0:
-				//×ó±ßÍæ¼Ò
+				//å·¦è¾¹ç©å®¶
 				card[i].setLocation(cardWidth/2,cardHeight/2+i*cardHeight/21);
 				playerList[0].add(card[i]);
 				break;
 			case 1:
-				//ÎÒ
+				//æˆ‘
 				card[i].setLocation(screen_width/2-(9-i/3)*cardWidth*2/3,screen_height-cardHeight);
-				card[i].rear=false;//·­¿ª
+				card[i].rear=false;//ç¿»å¼€
 				playerList[1].add(card[i]);
 				break;
 			case 2:
-				//ÓÒ±ßÍæ¼Ò
+				//å³è¾¹ç©å®¶
 				card[i].setLocation(screen_width-3*cardWidth/2,cardHeight/2+i*cardHeight/21);
 				playerList[2].add(card[i]);
 				break;
@@ -221,12 +215,12 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			update();
 			Sleep(100);
 		}
-		//ÖØĞÂÅÅĞò
+		//é‡æ–°æ’åº
 		for(int i=0;i<3;i++){
 			Common.setOrder(playerList[i]);
 			Common.rePosition(this, playerList[i],i);
 		}
-		//´ò¿ª°´Å¥
+		//æ‰“å¼€æŒ‰é’®
 		hideButton=false;
 		update();
 	}
@@ -239,7 +233,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			e.printStackTrace();
 		}
 	}
-	//°´Å¥(ÇÀµØÖ÷£¬²»ÇÀ£¬³öÅÆ£¬²»ÇÀ)
+	//æŒ‰é’®(æŠ¢åœ°ä¸»ï¼Œä¸æŠ¢ï¼Œå‡ºç‰Œï¼Œä¸æŠ¢)
 	public void drawButton(){
 		if(!hideButton)
 		{
@@ -268,11 +262,11 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			canvas.drawText(message[2],screen_width-cardWidth*3,screen_height/4,paint);
 		}
 	}
-	//ÏÂÒ»¸öÍæ¼Ò
+	//ä¸‹ä¸€ä¸ªç©å®¶
 	public void nextTurn(){
 		turn=(turn+1)%3;
 	}
-	//»­µØÖ÷Í·Ïñ
+	//ç”»åœ°ä¸»å¤´åƒ
 	public void drawDizhuIcon(){
 		if(dizhuFlag>=0){
 			float x=0f,y=0f;
@@ -294,7 +288,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			canvas.drawBitmap(dizhuBitmap,x,y,null);
 		}
 	}
-	//»­ÒÑ×ßµÄÅÆ
+	//ç”»å·²èµ°çš„ç‰Œ
 	public void drawOutList(){
 		int x=0,y=0;
 		for(int i=0,len=outList[1].size();i<len;i++)
@@ -326,18 +320,18 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 		start=true;
 		screen_height = getHeight();
 		screen_width = getWidth();
-		// ³õÊ¼»¯
+		// åˆå§‹åŒ–
 		InitBitMap();
-		// Ï´ÅÆ
+		// æ´—ç‰Œ
 		washCards();
-		// ¿ªÊ¼ÓÎÏ·½ø³Ì
+		// å¼€å§‹æ¸¸æˆè¿›ç¨‹
 		gameThread=new Thread(new Runnable() {
 			@Override
 			public void run() {
-				//¿ªÊ¼·¢ÅÆ
+				//å¼€å§‹å‘ç‰Œ
 				handCards();
 				
-				//µÈ´ıµØÖ÷Ñ¡Íê
+				//ç­‰å¾…åœ°ä¸»é€‰å®Œ
 				while(start){
 					switch (turn) {
 					case 0:
@@ -360,13 +354,13 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			}
 		});
 		gameThread.start();
-		// ¿ªÊ¼»æÍ¼½ø³Ì
+		// å¼€å§‹ç»˜å›¾è¿›ç¨‹
 		drawThread=new Thread(this);
 		drawThread.start();
 	}
 	//player0
 	public void player0(){
-		//Log.i("mylog", "Íæ¼Ò0");
+		//Log.i("mylog", "ç©å®¶0");
 		List<Card> player0=null;
 		Common.currentFlag=0;
 		if(flag[1]==0&&flag[2]==0)
@@ -394,7 +388,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			message[0]="";
 			flag[0]=1;
 		}else {
-			message[0]="²»Òª";
+			message[0]="ä¸è¦";
 			flag[0]=0;
 		}
 		update();
@@ -402,7 +396,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 	}
 	//player2
 	public void player2(){
-		//Log.i("mylog", "Íæ¼Ò2");
+		//Log.i("mylog", "ç©å®¶2");
 		Common.currentFlag=2;
 		List<Card> player2=null;
 		if(flag[1]==0&&flag[0]==0)
@@ -429,7 +423,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			message[2]="";
 			flag[2]=1;
 		}else {
-			message[2]="²»Òª";
+			message[2]="ä¸è¦";
 			flag[2]=0;
 		}
 		update();
@@ -438,26 +432,26 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 	//player1
 	public void player1(){
 		Sleep(1000);
-		//¿ªÊ¼Ğ´³öÅÆµÄÁË
-		buttonText[0]="³öÅÆ";
-		buttonText[1]="²»Òª";
+		//å¼€å§‹å†™å‡ºç‰Œçš„äº†
+		buttonText[0]="å‡ºç‰Œ";
+		buttonText[1]="ä¸è¦";
 		hideButton=false;
 		outList[1].clear();
 		update();
-		//µ¹¼ÆÊ±
+		//å€’è®¡æ—¶
 		int i=28;
 		while((turn==1)&&(i-->0)){
-			//¼ÆÊ±Æ÷º¯Êıdraw timer.»­³ö¼ÆÊ±»­Ãæ
+			//è®¡æ—¶å™¨å‡½æ•°draw timer.ç”»å‡ºè®¡æ—¶ç”»é¢
 			message[1]=i+"";
 			update();
 			Sleep(1000);
 		}
 		hideButton=true;
 		update();
-		if(turn==1&&i<=0)//ËµÃ÷ÓÃ»§Ã»ÓĞÈÎºÎ²Ù×÷
+		if(turn==1&&i<=0)//è¯´æ˜ç”¨æˆ·æ²¡æœ‰ä»»ä½•æ“ä½œ
 		{
-			//×Ô¶¯²»Òª£¬»òÕßÑ¡Ò»ÕÅËæ±ã³ö
-			message[1]="²»Òª";
+			//è‡ªåŠ¨ä¸è¦ï¼Œæˆ–è€…é€‰ä¸€å¼ éšä¾¿å‡º
+			message[1]="ä¸è¦";
 			flag[1]=0;
 			nextTurn();
 		}
@@ -467,7 +461,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		start=false;
 	}
-	//Ö÷Òª»æÍ¼Ïß³Ì
+	//ä¸»è¦ç»˜å›¾çº¿ç¨‹
 	@Override
 	public void run() {
 		while (start) {
@@ -479,27 +473,27 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			}
 		}
 	}
-	//»­Í¼º¯Êı
+	//ç”»å›¾å‡½æ•°
 	public void onDraw(){
-		//¼ÏËø
+		//æ·é”
 		synchronized (surfaceHolder) {
 			try {
 				canvas = surfaceHolder.lockCanvas();
-				// »­±³¾°
+				// ç”»èƒŒæ™¯
 				drawBackground();
-				// »­ÅÆ
+				// ç”»ç‰Œ
 				for(int i=0;i<3;i++)
 					drawPlayer(i);
-				// µØÖ÷ÅÆ
+				// åœ°ä¸»ç‰Œ
 				for(int i=0,len=dizhuList.size();i<len;i++)
 					drawCard(dizhuList.get(i));
-				// »­°´Å¥( ÇÀµØÖ÷,²»ÇÀ,³öÅÆ,²»³ö)
+				// ç”»æŒ‰é’®( æŠ¢åœ°ä¸»,ä¸æŠ¢,å‡ºç‰Œ,ä¸å‡º)
 				drawButton();
-				// message²¿·Ö ÓÃ3¸öString´æ
+				// messageéƒ¨åˆ† ç”¨3ä¸ªStringå­˜
 				drawMessage();
-				// »­µØÖ÷Í¼±ê
+				// ç”»åœ°ä¸»å›¾æ ‡
 				drawDizhuIcon();
-				// ³öÅÆ½çÃæ(3¸öµØ·½,ÓÃ3¸övector´æ)
+				// å‡ºç‰Œç•Œé¢(3ä¸ªåœ°æ–¹,ç”¨3ä¸ªvectorå­˜)
 				drawOutList();
 				
 			} catch (Exception e) {
@@ -510,17 +504,17 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			}
 		}
 	}
-	//¸üĞÂº¯Êı
+	//æ›´æ–°å‡½æ•°
 	public void update(){
 		repaint=true;
 	}
-	//´¥ÃşÊÂ¼ş
+	//è§¦æ‘¸äº‹ä»¶
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		//Ö»½ÓÊÜ°´ÏÂÊÂ¼ş
+		//åªæ¥å—æŒ‰ä¸‹äº‹ä»¶
 		if(event.getAction()!=MotionEvent.ACTION_UP)
 			return true;
-		//µãÑ¡ÅÆ
+		//ç‚¹é€‰ç‰Œ
 		EventAction eventAction=new EventAction(this,event);
 		Card card=eventAction.getCard();
 		if(card!=null)
@@ -531,13 +525,13 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			else 
 				card.y-=card.height/3;
 			card.clicked=!card.clicked;
-			update();//ÖØ»æ
+			update();//é‡ç»˜
 		}
-		//°´Å¥ÊÂ¼ş
+		//æŒ‰é’®äº‹ä»¶
 		eventAction.getButton();
 		return true;
 	}
-	//¼ÆÊ±Æ÷
+	//è®¡æ—¶å™¨
 	public void setTimer(int t,int flag)
 	{
 		while(t-->0){
@@ -547,7 +541,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 		}
 		message[flag]="";
 	}
-	//ÅĞ¶Ï³É¹¦
+	//åˆ¤æ–­æˆåŠŸ
 	public void win(){
 		int flag=-1;
 		if(playerList[0].size()==0)
@@ -567,11 +561,11 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,
 			msg.what=0;
 			Bundle builder=new Bundle();
 			if(flag==1)
-				builder.putString("data","¹§Ï²ÄãÓ®ÁË");
+				builder.putString("data","æ­å–œä½ èµ¢äº†");
 			if(flag==dizhuFlag&&flag!=1)
-				builder.putString("data","¹§Ï²µçÄÔ"+flag+"Ó®ÁË");
+				builder.putString("data","æ­å–œç”µè„‘"+flag+"èµ¢äº†");
 			if(flag!=dizhuFlag&&flag!=1)
-				builder.putString("data","¹§Ï²ÄãÍ¬°éÓ®ÁË");
+				builder.putString("data","æ­å–œä½ åŒä¼´èµ¢äº†");
 			for(int i=0;i<54;i++)
 				card[i].rear=false;
 			msg.setData(builder);

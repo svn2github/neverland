@@ -1,21 +1,21 @@
-package com.myCard;
+ï»¿package com.myCard;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Window;
 import android.view.WindowManager;
 
 public class MyActivity extends Activity {
 	/*
 	 * QQ:361106306
-	 * by:Ğ¡Æâ
-	 * ×ªÔØ´Ë³ÌĞòĞë±£Áô°æÈ¨,Î´¾­×÷ÕßÔÊĞí²»ÄÜÓÃ×÷ÉÌÒµÓÃÍ¾!
+	 * by:å°æŸ’
+	 * è½¬è½½æ­¤ç¨‹åºé¡»ä¿ç•™ç‰ˆæƒ,æœªç»ä½œè€…å…è®¸ä¸èƒ½ç”¨ä½œå•†ä¸šç”¨é€”!
 	 * */
 	MyView myView;
 	String messString;
@@ -32,28 +32,28 @@ public class MyActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().setFormat(PixelFormat.RGBA_8888);
-		// Òş²Ø±êÌâÀ¸
+		// éšè—æ ‡é¢˜æ 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// Òş²Ø×´Ì¬À¸
+		// éšè—çŠ¶æ€æ 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		// Ëø¶¨ºáÆÁ
+		// é”å®šæ¨ªå±
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		myView = new MyView(this,handler);
 		setContentView(myView);
 	}
 	public void showDialog(){
 		new AlertDialog.Builder(this).setMessage(messString)
-		.setPositiveButton("ÖØĞÂ¿ªÊ¼ÓÎÏ·", new DialogInterface.OnClickListener() {
+		.setPositiveButton("é‡æ–°å¼€å§‹æ¸¸æˆ", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				reGame();
 			}
-		}).setTitle("By:Ğ¡Æâ,QQ:361106306").create().show();
+		}).setTitle("By:å°æŸ’,QQ:361106306").create().show();
 	}
-	//ÖØĞÂ¿ªÊ¼ÓÎÏ·
+	//é‡æ–°å¼€å§‹æ¸¸æˆ
 	public void reGame(){
 		myView = new MyView(this,handler);
 		setContentView(myView);
