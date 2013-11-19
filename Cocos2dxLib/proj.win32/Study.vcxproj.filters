@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\CCBase">
+      <UniqueIdentifier>{6800a9a8-334b-4bfd-8481-0021febf6f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\CCNet">
+      <UniqueIdentifier>{025ce0c0-6e2f-4141-b228-4440c6213f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\CCWidget">
+      <UniqueIdentifier>{220ce5c3-a046-4447-84dc-ed0924868049}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccbase\array.cpp">
+      <Filter>Classes\CCBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccbase\popupbox.cpp">
+      <Filter>Classes\CCBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccbase\scene.cpp">
+      <Filter>Classes\CCBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccbase\scenemanager.cpp">
+      <Filter>Classes\CCBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccnet\inetaddress.cpp">
+      <Filter>Classes\CCNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccnet\netbean.cpp">
+      <Filter>Classes\CCNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccnet\socket.cpp">
+      <Filter>Classes\CCNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccnet\stream.cpp">
+      <Filter>Classes\CCNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccwidget\button.cpp">
+      <Filter>Classes\CCWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccwidget\label.cpp">
+      <Filter>Classes\CCWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccwidget\tableview.cpp">
+      <Filter>Classes\CCWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccwidget\togglebutton.cpp">
+      <Filter>Classes\CCWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccwidget\widgetlayout.cpp">
+      <Filter>Classes\CCWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameModel.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameNetBean.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GamePlayerLayer.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LoginScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MessageBox.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccbase\array.h">
+      <Filter>Classes\CCBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccbase\base.h">
+      <Filter>Classes\CCBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccbase\popupbox.h">
+      <Filter>Classes\CCBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccbase\scene.h">
+      <Filter>Classes\CCBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccbase\scenemanager.h">
+      <Filter>Classes\CCBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccnet\inetaddress.h">
+      <Filter>Classes\CCNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccnet\inetpredef.h">
+      <Filter>Classes\CCNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccnet\net.h">
+      <Filter>Classes\CCNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccnet\netbean.h">
+      <Filter>Classes\CCNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccnet\socket.h">
+      <Filter>Classes\CCNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccnet\stream.h">
+      <Filter>Classes\CCNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccwidget\button.h">
+      <Filter>Classes\CCWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccwidget\label.h">
+      <Filter>Classes\CCWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccwidget\tableview.h">
+      <Filter>Classes\CCWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccwidget\togglebutton.h">
+      <Filter>Classes\CCWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccwidget\widget.h">
+      <Filter>Classes\CCWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccwidget\widgetlayout.h">
+      <Filter>Classes\CCWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameModel.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameNetBean.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GamePlayerLayer.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LoginScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MessageBox.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
