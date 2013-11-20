@@ -7,9 +7,29 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
-                   ../../Classes/AppDelegate.cpp \
-                   ../../Classes/HelloWorldScene.cpp
-
+				../../Classes/AppDelegate.cpp \
+				../../Classes/HelloWorldScene.cpp \
+				../../Classes/GameModel.cpp \
+				../../Classes/GameNetBean.cpp \
+				../../Classes/MessageBox.cpp \
+				../../Classes/GamePlayerLayer.cpp \
+				../../Classes/LoginScene.cpp \
+				../../Classes/MainScene.cpp \
+				../../Classes/Player.cpp \
+				../../Classes/ccbase/array.cpp \
+				../../Classes/ccbase/popupbox.cpp \
+				../../Classes/ccbase/scene.cpp \
+				../../Classes/ccbase/scenemanager.cpp \
+				../../Classes/ccnet/netbean.cpp \
+				../../Classes/ccnet/socket.cpp \
+				../../Classes/ccnet/inetaddress.cpp \
+				../../Classes/ccnet/stream.cpp \
+				../../Classes/ccwidget/button.cpp \
+				../../Classes/ccwidget/label.cpp \
+				../../Classes/ccwidget/tableview.cpp \
+				../../Classes/ccwidget/togglebutton.cpp \
+				../../Classes/ccwidget/widgetlayout.cpp
+				
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_static
