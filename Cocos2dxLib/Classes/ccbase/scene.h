@@ -6,7 +6,7 @@
 ******************************************************************************/
 #ifndef __CCBASE_SCENE_H__
 #define __CCBASE_SCENE_H__
-
+USING_NS_CC;
 /******************************************************************************
 类    名: CScene
 功能描述: 场景基类，用于协助CSceneManager管理场景
@@ -41,6 +41,8 @@ protected:
 	string	m_strClassName;
 	//场景是否缓存
 	bool	m_bIsCached;
+
+	CCPoint getCenterPoint();
 };
 
 

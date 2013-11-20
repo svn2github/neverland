@@ -260,6 +260,25 @@ void CSceneManager::openPopupBox(const char* pClassName, PARAM param)
 	this->pRunningBoxNode->addChild(pBox);
 }
 
+bool CSceneManager::hasOpenPopBox(const char* pClassName) 
+{
+	if (pRunningBoxNode == NULL) 
+	{
+		return false;
+	}
+	if( pRunningBoxNode->getChildrenCount() > 0 ) {
+		CCArray  *pArrs = pRunningBoxNode->getChildren();
+		CCObject *pObject = NULL;
+		CCARRAY_FOREACH( pArrs, pObject ) {
+			CPopupBox *pBox = (CPopupBox*) pObject;
+			if( pBox->getClassName() == pClassName ) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 ///关闭对话框
 void CSceneManager::closePopupBox(const char* pClassName)
 {
@@ -331,4 +350,13 @@ CSceneManager* CSceneManager::sharedSceneManager()
 		pSceneManager = new CSceneManager();
 	}
 	return pSceneManager;
+}
+
+CCPoint CSceneManager::getCenterPoint()
+{
+	float x,y;
+	CCSize size = CCDirector::sharedDirector()->getWinSize();
+	x = size.width;
+	y = size.height;
+	return ccp(x/2, y/2);
 }

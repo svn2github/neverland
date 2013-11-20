@@ -1,10 +1,19 @@
 #include "LoginScene.h"
 #include "GameNetBean.h"
+#include "ResourceInc.h"
+#include "OppoServer.h"
 
 //当场景创建时调用
 void CLoginScene::onCreate() 
 {
 	CCSize ccSize = CCDirector::sharedDirector()->getWinSize();
+
+	//设置背景
+	m_pBg = CCSprite::create(s_pLoginSceneBg);
+	m_pBg->setPosition(getCenterPoint());
+	//m_pBg->setContentSize(ccSize);
+	m_pBg->setScale(10000);
+	addChild(m_pBg,-1);
 
 	CCScale9Sprite* pNickNameTextFieldBg = CCScale9Sprite::create("textfield.png");
 
@@ -72,7 +81,8 @@ void CLoginScene::onClick(CCObject *pSender)
 	//退出按钮
 	if(pSender == m_pExitButton)
 	{
-		CSceneManager::sharedSceneManager()->exit();
+		//CSceneManager::sharedSceneManager()->exit();
+		this->testUrl();
 	}
 	//登陆按钮
 	else if(pSender == m_pLoginButton)
@@ -95,5 +105,35 @@ void CLoginScene::login()
 		CGameNetBean::sharedNetBean()->cs_login(pNickName);
 	} else {
 		CSceneManager::sharedSceneManager()->openPopupBox(GETBOX(CMessageBox), (void*)"type your name!");
+	}
+}
+
+void CLoginScene::testUrl()
+{
+	CSceneManager::sharedSceneManager()->openPopupBox(GETBOX(CLoadingBox), (void*)(""));
+	OppoServer* pServer = OppoServer::shareOppoServer();
+	CCHttpRequest* request = CHttpServer::getGetRequestByUrl("http://www.bsdfsaidu.com");
+	request->setResponseCallback(this, callfuncND_selector(CLoginScene::urlCallback));
+	pServer->send(request);
+	request->release();
+}
+
+void CLoginScene::urlCallback(CCNode *sender ,void *data)
+{
+	CSceneManager::sharedSceneManager()->closePopupBox(GETBOX(CLoadingBox));
+	CCHttpResponse* response = (CCHttpResponse*) data;
+	if (!response) 
+	{
+		CSceneManager::sharedSceneManager()->openPopupBox(GETBOX(CMessageBox), (void*)"failure");
+		return;
+	}
+	int statusCode = response->getResponseCode();
+	if (response->isSucceed()) 
+	{
+		
+		CSceneManager::sharedSceneManager()->openPopupBox(GETBOX(CMessageBox), (void*)"success");
+	} else 
+	{
+		CSceneManager::sharedSceneManager()->openPopupBox(GETBOX(CMessageBox), (void*)"failure");
 	}
 }

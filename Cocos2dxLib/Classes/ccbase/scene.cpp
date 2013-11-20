@@ -7,6 +7,7 @@
 
 #include "base.h"
 #include "scene.h"
+#include "support/CCPointExtension.h"
 
 ///构造函数，初始化默认值
 CScene::CScene(): m_bIsCached(false)
@@ -18,4 +19,13 @@ CScene::CScene(): m_bIsCached(false)
 CScene::~CScene() 
 {
 	CCLOG("## [DEBUG] Release Scene [%s]", m_strClassName.c_str());
+}
+
+CCPoint CScene::getCenterPoint()
+{
+	float x,y;
+	CCSize size = CCDirector::sharedDirector()->getWinSize();
+	x = size.width;
+	y = size.height;
+	return ccp(x/2, y/2);
 }

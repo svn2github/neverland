@@ -8,6 +8,7 @@
 #include "LoginScene.h"
 #include "MainScene.h"
 #include "MessageBox.h"
+#include "LoadingBox.h"
 
 USING_NS_CC;
 
@@ -23,7 +24,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
-	CCEGLView::sharedOpenGLView()->setDesignResolutionSize(960, 640, kResolutionShowAll);
+	CCEGLView::sharedOpenGLView()->setDesignResolutionSize(800, 480, kResolutionShowAll);
     pDirector->setDisplayStats(true);
     pDirector->setAnimationInterval(1.0 / 60);
 
@@ -36,6 +37,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	//注册弹出框
 	REGISTE_POPUPBOX_CLASS(CMessageBox);
+	REGISTE_POPUPBOX_CLASS(CLoadingBox);
 
 	//运行场景
 	CSceneManager::sharedSceneManager()->runScene(GETSCENE(CLoginScene));

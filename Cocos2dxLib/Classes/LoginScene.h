@@ -4,6 +4,8 @@
 #include "ccbase/base.h"
 #include "ccwidget/widget.h"
 
+USING_NS_CC;
+
 ///µÇÂ½½çÃæ
 class CLoginScene : public CScene
 {
@@ -22,11 +24,16 @@ public:
 	void login();
 
 protected:
+	CCSprite *m_pBg;
+
 	CCEditBox *m_pNickNameEdit;
 
 	CButton *m_pExitButton;
 	CButton *m_pLoginButton;
 
+private:
+	void testUrl();
+	void urlCallback(CCNode *sender ,void *data);
 };
 
 #endif //__LOGIN_SCENE_H__

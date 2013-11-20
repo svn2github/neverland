@@ -132,6 +132,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClCompile Include="..\Classes\ccbase\popupbox.cpp" />
     <ClCompile Include="..\Classes\ccbase\scene.cpp" />
     <ClCompile Include="..\Classes\ccbase\scenemanager.cpp" />
+    <ClCompile Include="..\Classes\ccnet\httpserver.cpp" />
     <ClCompile Include="..\Classes\ccnet\inetaddress.cpp" />
     <ClCompile Include="..\Classes\ccnet\netbean.cpp" />
     <ClCompile Include="..\Classes\ccnet\socket.cpp" />
@@ -144,10 +145,11 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClCompile Include="..\Classes\GameModel.cpp" />
     <ClCompile Include="..\Classes\GameNetBean.cpp" />
     <ClCompile Include="..\Classes\GamePlayerLayer.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\LoadingBox.cpp" />
     <ClCompile Include="..\Classes\LoginScene.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MessageBox.cpp" />
+    <ClCompile Include="..\Classes\OppoServer.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -158,6 +160,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClInclude Include="..\Classes\ccbase\popupbox.h" />
     <ClInclude Include="..\Classes\ccbase\scene.h" />
     <ClInclude Include="..\Classes\ccbase\scenemanager.h" />
+    <ClInclude Include="..\Classes\ccnet\httpserver.h" />
     <ClInclude Include="..\Classes\ccnet\inetaddress.h" />
     <ClInclude Include="..\Classes\ccnet\inetpredef.h" />
     <ClInclude Include="..\Classes\ccnet\net.h" />
@@ -173,11 +176,13 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClInclude Include="..\Classes\GameModel.h" />
     <ClInclude Include="..\Classes\GameNetBean.h" />
     <ClInclude Include="..\Classes\GamePlayerLayer.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\LoadingBox.h" />
     <ClInclude Include="..\Classes\LoginScene.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MessageBox.h" />
+    <ClInclude Include="..\Classes\OppoServer.h" />
     <ClInclude Include="..\Classes\Player.h" />
+    <ClInclude Include="..\Classes\ResourceInc.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

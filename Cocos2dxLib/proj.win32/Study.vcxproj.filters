@@ -16,15 +16,27 @@
     <Filter Include="Classes\CCWidget">
       <UniqueIdentifier>{220ce5c3-a046-4447-84dc-ed0924868049}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\PopBox">
+      <UniqueIdentifier>{0ed0eaff-22a5-433d-99fb-ebaad5ef62fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene">
+      <UniqueIdentifier>{a6617b9e-5e5c-4434-9b18-ce816cd83199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene\MainGame">
+      <UniqueIdentifier>{f7ed6c34-5e1b-4518-9c16-080a451f4739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene\LoginHall">
+      <UniqueIdentifier>{3e792cdf-48ba-4ca7-844d-1feebb519dd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene\Logical">
+      <UniqueIdentifier>{44927b73-1db6-4ee1-9a10-491e08f9f3d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ccbase\array.cpp">
@@ -66,26 +78,35 @@
     <ClCompile Include="..\Classes\ccwidget\widgetlayout.cpp">
       <Filter>Classes\CCWidget</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameModel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameNetBean.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GamePlayerLayer.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\LoginScene.cpp">
-      <Filter>Classes</Filter>
+    <ClCompile Include="..\Classes\MessageBox.cpp">
+      <Filter>Classes\PopBox</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MainScene.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Scene\MainGame</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MessageBox.cpp">
-      <Filter>Classes</Filter>
+    <ClCompile Include="..\Classes\GameModel.cpp">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameNetBean.cpp">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GamePlayerLayer.cpp">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LoginScene.cpp">
+      <Filter>Classes\Scene\LoginHall</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LoadingBox.cpp">
+      <Filter>Classes\PopBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ccnet\httpserver.cpp">
+      <Filter>Classes\CCNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\OppoServer.cpp">
+      <Filter>Classes\Scene\Logical</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +114,6 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ccbase\array.h">
@@ -149,26 +167,38 @@
     <ClInclude Include="..\Classes\ccwidget\widgetlayout.h">
       <Filter>Classes\CCWidget</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameModel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameNetBean.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GamePlayerLayer.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LoginScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainScene.h">
+    <ClInclude Include="..\Classes\ResourceInc.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MessageBox.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\PopBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameModel.h">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameNetBean.h">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GamePlayerLayer.h">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LoginScene.h">
+      <Filter>Classes\Scene\LoginHall</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LoadingBox.h">
+      <Filter>Classes\PopBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ccnet\httpserver.h">
+      <Filter>Classes\CCNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\OppoServer.h">
+      <Filter>Classes\Scene\Logical</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

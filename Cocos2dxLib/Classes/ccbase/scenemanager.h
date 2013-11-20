@@ -62,6 +62,8 @@ public:
 	void openPopupBox(const char* pClassName, PARAM param = NULL);
 	///关闭对话框
 	void closePopupBox(const char* pClassName);
+	///是否打开某个弹出框
+	bool hasOpenPopBox(const char* pClassName);
 
 	///通过场景类名获得场景实例，从缓存池中取出，如果不存在于缓存池，就new
 	CScene* getScene(const char* pClassName);
@@ -93,7 +95,8 @@ protected:
 
 public:
 	///单例
-	static CSceneManager* sharedSceneManager(); 
+	static CSceneManager* sharedSceneManager();
+	static CCPoint getCenterPoint();
 
 };
 
