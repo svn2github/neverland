@@ -28,7 +28,7 @@
     <Filter Include="Classes\Scene\LoginHall">
       <UniqueIdentifier>{3e792cdf-48ba-4ca7-844d-1feebb519dd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Scene\Logical">
+    <Filter Include="Classes\Logical">
       <UniqueIdentifier>{44927b73-1db6-4ee1-9a10-491e08f9f3d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -106,7 +106,7 @@
       <Filter>Classes\CCNet</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\OppoServer.cpp">
-      <Filter>Classes\Scene\Logical</Filter>
+      <Filter>Classes\Logical</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +198,7 @@
       <Filter>Classes\CCNet</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\OppoServer.h">
-      <Filter>Classes\Scene\Logical</Filter>
+      <Filter>Classes\Logical</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
