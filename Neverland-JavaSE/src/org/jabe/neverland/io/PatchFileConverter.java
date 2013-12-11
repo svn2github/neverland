@@ -52,6 +52,10 @@ public class PatchFileConverter {
 					final BufferedReader bufferIo = new BufferedReader(new FileReader(file));
 					String line = "";
 					while ((line = bufferIo.readLine()) != null) {
+						if (line.equals("import com.nearme.gamecenter.open.R;")) {
+							needChange = true;
+							continue;
+						}
 						bufferedWriter.write(convertStringLine(line));
 						bufferedWriter.newLine();
 					}
@@ -74,7 +78,7 @@ public class PatchFileConverter {
 		}
 	}
 	
-	private static String PATTERN = "\\([R][.][a-z]+[.][a-z_]+\\)";
+	private static String PATTERN = "[R][.][a-zA-Z]+[.][a-z_0-9A-Z]+";
 	
 	private static String convertStringLine(String line) {
 		final Pattern pattern = Pattern.compile(PATTERN);
@@ -84,23 +88,30 @@ public class PatchFileConverter {
 			needChange = true;
 			final String group = matcher.group();
 			final String con = convertString(group);
-			newLine = newLine.replace(group, con);
+			newLine = newLine.replaceFirst(group, con);
+			
 		}
 		return  newLine;
 	}
 	
 	private static String convertString(String content) {
-		final String data = content.substring(1, content.length() - 1);
+		final String data = content;
 		final String[] list = data.split("\\.");
 		String out = "";
 		if (list[1].equals("id")) {
-			out = "(GetResource.getIdResource(\"" + list[2] + "\"))";
+			out = "GetResource.getIdResource(\"" + list[2] + "\")";
 		} else if (list[1].equals("layout")) {
-			out = "(GetResource.getLayoutResource(\"" + list[2] + "\"))";
+			out = "GetResource.getLayoutResource(\"" + list[2] + "\")";
 		} else if (list[1].equals("drawable")) {
-			out = "(GetResource.getDrawableResource(\"" + list[2] + "\"))";
+			out = "GetResource.getDrawableResource(\"" + list[2] + "\")";
 		} else if (list[1].equals("string")) {
-			out = "(GetResource.getStringResource(\"" + list[2] + "\"))";
+			out = "GetResource.getStringResource(\"" + list[2] + "\")";
+		} else if (list[1].equals("style")) {
+			out = "GetResource.getStyleResource(\"" + list[2] + "\")";
+		} else if (list[1].equals("dimen")) {
+			out = "GetResource.getDimenResource(\"" + list[2] + "\")";
+		} else if (list[1].equals("anim")) {
+			out = "GetResource.getAnimResource(\"" + list[2] + "\")";
 		}
 		if (out.equals("")) {
 			return content;
