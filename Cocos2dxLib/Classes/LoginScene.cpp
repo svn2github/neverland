@@ -11,8 +11,8 @@ void CLoginScene::onCreate()
 	CCNode *scene = CCSSceneReader::sharedSceneReader()->createNodeWithSceneFile(s_pGameRoomScene);
 
 	UIPanel *toolBarPanel = (UIPanel*)scene->getChildByTag(10004);
-	 
-	UIButton * button = (UIButton*)toolBarPanel->getChildByName("button_ai");
+
+	toolBarPanel->setVisible(false);
 
 	//button->
 	 
