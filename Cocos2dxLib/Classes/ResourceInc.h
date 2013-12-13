@@ -6,5 +6,6 @@ static const char s_pLoadingIcon[]       = "Images/common/loading.png";
 
 // image resource for login scene
 static const char s_pLoginSceneBg[]       = "Images/login_scene/hall_bg.png";
+static const char s_pGameRoomScene[]     = "DDZ_ROOM_SCENE.json";
 
 #endif

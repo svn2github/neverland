@@ -3,6 +3,7 @@
 
 #include "ccbase/base.h"
 #include "ccwidget/widget.h"
+#include "cocos-ext.h"
 
 USING_NS_CC;
 

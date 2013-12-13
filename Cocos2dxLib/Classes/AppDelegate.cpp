@@ -24,7 +24,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
-	CCEGLView::sharedOpenGLView()->setDesignResolutionSize(800, 480, kResolutionShowAll);
+	CCEGLView::sharedOpenGLView()->setDesignResolutionSize(1280, 720, kResolutionShowAll);
     pDirector->setDisplayStats(true);
     pDirector->setAnimationInterval(1.0 / 60);
 
