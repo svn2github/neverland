@@ -7,16 +7,29 @@
 void CLoginScene::onCreate() 
 {
 	CCSize ccSize = CCDirector::sharedDirector()->getWinSize();
+	CCNode *root = CCSSceneReader::sharedSceneReader()->createNodeWithSceneFile(s_pGameRoomScene);
 
-	CCNode *scene = CCSSceneReader::sharedSceneReader()->createNodeWithSceneFile(s_pGameRoomScene);
+	CCComRender *render = dynamic_cast<CCComRender*>(root->getChildByTag(10004)->getComponent("GUIComponent"));
+	UILayer *layer = dynamic_cast<UILayer*>(render->getNode());
+	UIPanel *panel = dynamic_cast<UIPanel*>(layer->getWidgetByName("pannel_toolbar"));
+	UIButton *settings = dynamic_cast<UIButton*>(layer->getWidgetByName("button_settings"));
+	settings->addReleaseEvent(this, coco_releaseselector(CLoginScene::onSettingsClick));
 
-	UIPanel *toolBarPanel = (UIPanel*)scene->getChildByTag(10004);
+	CCComRender *table = dynamic_cast<CCComRender*>(root->getChildByTag(10009)->getComponent("CCSprite"));
 
-	toolBarPanel->setVisible(false);
+	//table->setVisible(false);
+	if (table)
+	{
+		CCSprite *sprite = dynamic_cast<CCSprite*>(table->getNode());
+		CCLOG("get the table");
+	}
 
-	//button->
-	 
-	this->addChild(scene);
+	this->addChild(root);
+}
+
+void CLoginScene::onSettingsClick(CCObject *pSender)
+{
+	CCLOG("on Settings click");
 }
 
 //当场景接收到消息时调用

@@ -70,7 +70,7 @@
           },
           "pressed": null,
           "pressedData": {
-            "path": "gui_ui/icon/icon_setting.png",
+            "path": "gui_ui/icon/icon_face_touched.png",
             "plistFile": null,
             "resourceType": 0
           },
@@ -166,8 +166,8 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.8468368,
-          "positionPercentY": 0.4997999,
+          "positionPercentX": 0.846153855,
+          "positionPercentY": 0.4965986,
           "positionType": 1,
           "rotation": 0,
           "scaleX": 1,
@@ -200,7 +200,7 @@
           },
           "pressed": null,
           "pressedData": {
-            "path": "gui_ui/icon/icon_setting.png",
+            "path": "gui_ui/icon/icon_out_touched.png",
             "plistFile": null,
             "resourceType": 0
           },

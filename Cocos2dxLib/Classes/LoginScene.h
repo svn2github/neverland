@@ -35,6 +35,7 @@ protected:
 private:
 	void testUrl();
 	void urlCallback(CCNode *sender ,void *data);
+	void onSettingsClick(CCObject *pSender);
 };
 
 #endif //__LOGIN_SCENE_H__
