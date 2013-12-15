@@ -7,8 +7,10 @@
 void CLoginScene::onCreate() 
 {
 	CCSize ccSize = CCDirector::sharedDirector()->getWinSize();
-	CCNode *root = CCSSceneReader::sharedSceneReader()->createNodeWithSceneFile(s_pGameRoomScene);
-	this->addChild(root);
+	UILayer *layer = UILayer::create();
+	Layout *uiLayout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("DDZ_UI_GAME.json"));
+	layer->addWidget(uiLayout);
+	this->addChild(layer);
 }
 
 void CLoginScene::onSettingsClick(CCObject *pSender)
