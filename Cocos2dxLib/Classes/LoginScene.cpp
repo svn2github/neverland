@@ -8,22 +8,6 @@ void CLoginScene::onCreate()
 {
 	CCSize ccSize = CCDirector::sharedDirector()->getWinSize();
 	CCNode *root = CCSSceneReader::sharedSceneReader()->createNodeWithSceneFile(s_pGameRoomScene);
-
-	CCComRender *render = dynamic_cast<CCComRender*>(root->getChildByTag(10004)->getComponent("GUIComponent"));
-	UILayer *layer = dynamic_cast<UILayer*>(render->getNode());
-	UIPanel *panel = dynamic_cast<UIPanel*>(layer->getWidgetByName("pannel_toolbar"));
-	UIButton *settings = dynamic_cast<UIButton*>(layer->getWidgetByName("button_settings"));
-	settings->addReleaseEvent(this, coco_releaseselector(CLoginScene::onSettingsClick));
-
-	CCComRender *table = dynamic_cast<CCComRender*>(root->getChildByTag(10009)->getComponent("CCSprite"));
-
-	//table->setVisible(false);
-	if (table)
-	{
-		CCSprite *sprite = dynamic_cast<CCSprite*>(table->getNode());
-		CCLOG("get the table");
-	}
-
 	this->addChild(root);
 }
 

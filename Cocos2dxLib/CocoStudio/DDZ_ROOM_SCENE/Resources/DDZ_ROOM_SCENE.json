@@ -14,43 +14,15 @@
     {
       "__type": "ComGameObjectSurrogate:#EditorCommon.JsonModel",
       "classname": "CCNode",
-      "name": "toobar",
-      "canedit": false,
-      "objecttag": 10004,
-      "rotation": 0,
-      "scalex": 1,
-      "scaley": 1,
-      "visible": 1,
-      "x": 296.5,
-      "y": 572.5001220703125,
-      "zorder": 1,
-      "gameobjects": [],
-      "components": [
-        {
-          "__type": "ComGUIAdapterSurrogate:#EditorCommon.JsonModel.Component",
-          "classname": "GUIComponent",
-          "name": "GUIComponent",
-          "file": null,
-          "fileData": {
-            "path": "DDZ_UI_TOOLBAR.json",
-            "plistFile": null,
-            "resourceType": 0
-          }
-        }
-      ]
-    },
-    {
-      "__type": "ComGameObjectSurrogate:#EditorCommon.JsonModel",
-      "classname": "CCNode",
       "name": "table",
-      "canedit": false,
+      "canedit": true,
       "objecttag": 10009,
       "rotation": 0,
       "scalex": 1,
       "scaley": 1,
       "visible": 1,
       "x": 640.666748046875,
-      "y": 282.24996948242188,
+      "y": 284.63092041015625,
       "zorder": 1,
       "gameobjects": [],
       "components": [
@@ -61,6 +33,34 @@
           "file": null,
           "fileData": {
             "path": "gui_scene/table.png",
+            "plistFile": null,
+            "resourceType": 0
+          }
+        }
+      ]
+    },
+    {
+      "__type": "ComGameObjectSurrogate:#EditorCommon.JsonModel",
+      "classname": "CCNode",
+      "name": "ui",
+      "canedit": true,
+      "objecttag": 10009,
+      "rotation": 0,
+      "scalex": 1,
+      "scaley": 1,
+      "visible": 1,
+      "x": 0,
+      "y": 0,
+      "zorder": 1,
+      "gameobjects": [],
+      "components": [
+        {
+          "__type": "ComGUIAdapterSurrogate:#EditorCommon.JsonModel.Component",
+          "classname": "GUIComponent",
+          "name": "GUIComponent",
+          "file": null,
+          "fileData": {
+            "path": "DDZ_UI_GAME.json",
             "plistFile": null,
             "resourceType": 0
           }
