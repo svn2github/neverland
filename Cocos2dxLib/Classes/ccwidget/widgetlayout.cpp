@@ -76,6 +76,16 @@ void CWidgetLayout::addChild(CCMenuItem *pChild)
 	}
 }
 
+///重载addChild,添加MENU控件,用于分发事件
+void CWidgetLayout::addChild(CCMenuItemImage *pChild)
+{
+	if(!m_pChildArrs->containsObject(pChild))
+	{
+		m_pChildArrs->addObject(pChild);
+		CCLayer::addChild(pChild, pChild->getZOrder(), pChild->getTag());
+	}
+}
+
 ///重载removeChild
 void CWidgetLayout::removeChild(CCNode* pChild)
 {

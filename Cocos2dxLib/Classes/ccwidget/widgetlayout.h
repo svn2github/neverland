@@ -52,6 +52,8 @@ public:
     virtual void addChild(CCNode *pChild, int zOrder, int nTag);
 	///重载addChild,添加MENU控件,用于分发事件
 	virtual void addChild(CCMenuItem *pChild);
+	///addChild,添加MENUIMAGE
+	virtual void addChild(CCMenuItemImage *pChild);
 	///重载addChild,添加子布局
 	virtual void addChild(CWidgetLayout *pChild);
 

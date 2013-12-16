@@ -2,20 +2,23 @@
 #include "GameNetBean.h"
 #include "ResourceInc.h"
 #include "OppoServer.h"
+#include "PokerSprite.h";
 
 //当场景创建时调用
 void CLoginScene::onCreate() 
 {
-	CCSize ccSize = CCDirector::sharedDirector()->getWinSize();
-	UILayer *layer = UILayer::create();
-	Layout *uiLayout = dynamic_cast<Layout*>(CCUIHELPER->createWidgetFromJsonFile("DDZ_UI_GAME.json"));
-	layer->addWidget(uiLayout);
-	this->addChild(layer);
+	CWidgetLayout *bgLayer = new CWidgetLayout();
+	CCMenuItemImage *bg = CCMenuItemImage::create(s_pLoginSceneAll,"",this,menu_selector(CLoginScene::onSettingsClick));
+	bg->setPosition(getCenterPoint());
+	bg->setEnabled(true);
+	bgLayer->addChild(bg);
+	this->addChild(bgLayer);
 }
 
 void CLoginScene::onSettingsClick(CCObject *pSender)
 {
-	CCLOG("on Settings click");
+	CCLOG("on click");
+	CSceneManager::sharedSceneManager()->pushScene(GETSCENE(CMainScene));
 }
 
 //当场景接收到消息时调用
