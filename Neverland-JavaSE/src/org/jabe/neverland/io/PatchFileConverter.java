@@ -112,6 +112,8 @@ public class PatchFileConverter {
 			out = "GetResource.getDimenResource(\"" + list[2] + "\")";
 		} else if (list[1].equals("anim")) {
 			out = "GetResource.getAnimResource(\"" + list[2] + "\")";
+		} else if (list[1].equals("styleable")) {
+			out = "GetResource.getStyleableResource(\"" + list[2] + "\")";
 		}
 		if (out.equals("")) {
 			return content;
