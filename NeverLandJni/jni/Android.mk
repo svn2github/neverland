@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := GCJniTool
-LOCAL_SRC_FILES := com_nearme_gamecenter_jnitool_JniTools.c com_example_hellojni_HelloJni.c bsdiff.c bspatch.c
+LOCAL_SRC_FILES := com_nearme_gamecenter_jnitool_JniTools.c com_example_hellojni_HelloJni.c
 
 bz_SRC_FILES := \
 	bzip2/blocksort.c \

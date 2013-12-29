@@ -193,7 +193,7 @@ static void offtout(off_t x,u_char *buf)
 	if(x<0) buf[7]|=0x80;
 }
 
-int main(int argc,char *argv[])
+int bsdiff_main(int argc,char *argv[])
 {
 	int fd;
 	u_char *old,*new;

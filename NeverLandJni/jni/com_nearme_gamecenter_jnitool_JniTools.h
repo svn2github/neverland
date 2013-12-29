@@ -15,6 +15,22 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_com_nearme_gamecenter_jnitool_JniTools_getFileMD5
   (JNIEnv *, jclass, jstring);
 
+/*
+ * Class:     com_nearme_gamecenter_jnitool_JniTools
+ * Method:    genDiff
+ * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_com_nearme_gamecenter_jnitool_JniTools_genDiff
+  (JNIEnv *, jclass, jstring, jstring, jstring);
+
+/*
+ * Class:     com_nearme_gamecenter_jnitool_JniTools
+ * Method:    patch
+ * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_com_nearme_gamecenter_jnitool_JniTools_patch
+  (JNIEnv *, jclass, jstring, jstring, jstring);
+
 #ifdef __cplusplus
 }
 #endif
