@@ -1,4 +1,4 @@
-package org.jabe.neverland.concurrent;
+package org.jabe.neverland.rsa;
 
 import java.net.URLDecoder;
 import java.security.KeyFactory;
@@ -9,7 +9,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
-public class RsaUtil {
+public class RsaNBao {
 
 	/**
 	 * rsa 的 公钥，public key
