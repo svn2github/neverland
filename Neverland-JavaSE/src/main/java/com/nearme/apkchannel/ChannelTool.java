@@ -96,7 +96,7 @@ public class ChannelTool {
         }
         // check apk's channel 
         try {
-            String get_channel = readChannel(apkPath + ".channel.apk");
+            String get_channel = readChannelFromApk(apkPath + ".channel.apk");
             System.out.println("Check apk's channel : " + get_channel);
             System.out.println("Check result : " + (prefix + code).equals(get_channel));
         } catch (Exception e) {
@@ -157,7 +157,7 @@ public class ChannelTool {
         return fileList;
     }
 
-    public static String readChannel(String file) throws IOException {
+    public static String readChannelFromApk(String file) throws IOException {
         String result = null;
         ZipFile zf = new ZipFile(file);
         InputStream in = new BufferedInputStream(new FileInputStream(file));
@@ -187,7 +187,7 @@ public class ChannelTool {
         return decodeChannelString(result, 3);
     }
 
-    private static String decodeChannelString(String data, int preLength) {
+    public static String decodeChannelString(String data, int preLength) {
         if (data == null) {
             return null;
         }
