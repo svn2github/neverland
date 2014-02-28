@@ -18,6 +18,7 @@ public class ApkChannnel {
     
     static String channelDir = "update\\assets";
     static String channelFile = "update\\assets\\channel";
+
     
     static {
         createDir(channelDir);
