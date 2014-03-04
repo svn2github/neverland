@@ -1,4 +1,4 @@
-package org.jabe.neverland.concurrent;
+package org.jabe.neverland.io;
 
 import java.util.LinkedList;
 import java.util.List;

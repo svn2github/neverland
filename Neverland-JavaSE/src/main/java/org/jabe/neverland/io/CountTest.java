@@ -1,4 +1,4 @@
-package org.jabe.neverland.concurrent;
+package org.jabe.neverland.io;
 
 
 import java.io.BufferedReader;
