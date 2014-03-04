@@ -8,6 +8,7 @@ public class JedisTest {
 		final Jedis jedis = new Jedis("localhost");
 		jedis.set("key", "value");
 		System.out.println(jedis.get("key"));
+		
 	}
 	
 }
