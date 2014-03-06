@@ -23,7 +23,7 @@ public class DownloadInfo {
 	
 	static {
 		EMPTY = new DownloadInfo();
-		EMPTY.mMap = Collections.unmodifiableMap(new HashMap<String, Object>());
+		EMPTY.mMap = Collections.unmodifiableMap(EMPTY.mMap);
 	}
 
 	public Map<String, Object> mMap = null;

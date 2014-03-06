@@ -7,12 +7,12 @@ import org.jabe.neverland.download.core.DownloadOperationMaper;
 import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 import org.jabe.neverland.download.core.cache.impl.FileCacheManager;
 import org.jabe.neverland.download.core.engine.impl.DefaultOperationMaper;
-import org.jabe.neverland.download.core.engine.impl.TaskDownloadEngine;
+import org.jabe.neverland.download.core.engine.impl.CacheDownloadEngine;
 
 public class DefaultConfigurationFactory {
 
 	public static DownloadEngine getDefaultDownloadEngine(DownloadCacheManager progressCacheManager, ExecutorService executorService) {
-		return new TaskDownloadEngine(progressCacheManager, executorService);
+		return new CacheDownloadEngine(progressCacheManager, executorService);
 	}
 	
 	public static DownloadOperationMaper getDefaultMaper(DownloadEngine downloadEngine) {

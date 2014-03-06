@@ -63,6 +63,11 @@ public final class DownloadConfig {
 			return this;
 		}
 		
+		public Builder addDownloadCacheManager(DownloadCacheManager cacheManager) {
+			this.mProgressCacheManager = cacheManager;
+			return this;
+		}
+		
 		public Builder addDownloadEngine(DownloadEngine downloadEngine) {
 			this.mDownloadEngine = downloadEngine;
 			return this;

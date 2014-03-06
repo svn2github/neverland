@@ -12,10 +12,11 @@ import java.util.Map;
 
 import org.jabe.neverland.download.core.DownloadInfo;
 import org.jabe.neverland.download.core.cache.CacheAccessException;
+import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
 import org.jabe.neverland.download.core.cache.CacheReadException;
 import org.jabe.neverland.download.core.cache.CacheWriteException;
 import org.jabe.neverland.download.core.cache.DownloadCacheManager;
-import org.jabe.neverland.download.core.cache.DownloadCacheTask;
+import org.jabe.neverland.download.core.engine.impl.DownloadCacheInvoker;
 import org.jabe.neverland.download.util.IoUtils;
 
 public class FileCacheManager extends DownloadCacheManager {
@@ -38,7 +39,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	@Override
-	public void readFromCache(DownloadCacheTask cacheTask) throws IOException {
+	public void readFromCache(CacheDownloadInfo cacheTask) throws IOException {
 		synchronized (cacheTask) {
 			final File f = getTaskFile(cacheTask.mDownloadInfo);
 			final RandomAccessFile raf = new RandomAccessFile(f,
@@ -48,7 +49,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	@Override
-	public void saveToCache(DownloadCacheTask cacheTask) throws IOException {
+	public void saveToCache(CacheDownloadInfo cacheTask) throws IOException {
 		synchronized (cacheTask) {
 			final File f = getTaskFile(cacheTask.mDownloadInfo);
 			final RandomAccessFile raf = new RandomAccessFile(f,
@@ -58,7 +59,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	@Override
-	public boolean isInCache(DownloadCacheTask cacheTask) {
+	public boolean isInCache(CacheDownloadInfo cacheTask) {
 		final File taskFile = getTaskFile(cacheTask.mDownloadInfo);
 		if (taskFile.exists()) {
 			return true;
@@ -69,7 +70,7 @@ public class FileCacheManager extends DownloadCacheManager {
 
 	@Override
 	public void updateSectionProgress(byte[] bytes, int sectionNo, long progress,
-			DownloadCacheTask cacheTask) throws IOException{
+			CacheDownloadInfo cacheTask) throws IOException{
 		
 		final long per = cacheTask.mContentLength / cacheTask.mSectionCount;
 		synchronized (cacheTask) {
@@ -89,7 +90,7 @@ public class FileCacheManager extends DownloadCacheManager {
 
 	private Map<String, RandomAccessFile> mFileMap = new HashMap<String, RandomAccessFile>();
 	
-	private RandomAccessFile getOrCreateRandomSaveFile(DownloadCacheTask cacheTask) throws IOException {
+	private RandomAccessFile getOrCreateRandomSaveFile(CacheDownloadInfo cacheTask) throws IOException {
 		final String key = generateCacheSaveFullPath(cacheTask.mDownloadInfo);
 		RandomAccessFile raf = mFileMap.get(key);
 		if (raf == null) {
@@ -101,7 +102,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		}
 	}
 	
-	private RandomAccessFile getOrCreateRandomTaskFile(DownloadCacheTask cacheTask) throws IOException {
+	private RandomAccessFile getOrCreateRandomTaskFile(CacheDownloadInfo cacheTask) throws IOException {
 		final String key = getTaskFile(cacheTask.mDownloadInfo).getAbsolutePath();
 		RandomAccessFile raf = mFileMap.get(key);
 		if (raf == null) {
@@ -113,7 +114,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		}
 	}
 	
-	private void tryCloseSaveFile(DownloadCacheTask cacheTask) {
+	private void tryCloseSaveFile(CacheDownloadInfo cacheTask) {
 		final String key = generateCacheSaveFullPath(cacheTask.mDownloadInfo);
 		final RandomAccessFile raf = mFileMap.get(key);
 		if (raf != null) {
@@ -122,7 +123,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		mFileMap.remove(key);
 	}
 	
-	private void tryCloseTaskFile(DownloadCacheTask cacheTask) {
+	private void tryCloseTaskFile(CacheDownloadInfo cacheTask) {
 		final String key = getTaskFile(cacheTask.mDownloadInfo).getAbsolutePath();
 		final RandomAccessFile raf = mFileMap.get(key);
 		if (raf != null) {
@@ -170,7 +171,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 	
 
-	private void read(final RandomAccessFile file, final DownloadCacheTask cacheTask)
+	private void read(final RandomAccessFile file, final CacheDownloadInfo cacheTask)
 			throws CacheAccessException {
 		try {
 			file.seek(0);
@@ -239,7 +240,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		}
 	}
 
-	private void create(final RandomAccessFile file, final DownloadCacheTask cacheTask)
+	private void create(final RandomAccessFile file, final CacheDownloadInfo cacheTask)
 			throws CacheAccessException {
 		try {
 			final DownloadInfo downloadInfo = cacheTask.mDownloadInfo;
@@ -283,7 +284,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		}
 	}
 	
-	private void updateProgress(final RandomAccessFile file, final DownloadCacheTask cacheTask) throws CacheAccessException  {
+	private void updateProgress(final RandomAccessFile file, final CacheDownloadInfo cacheTask) throws CacheAccessException  {
 		try {
 			updateFile(file, cacheTask);
 		} catch (IOException e) {
@@ -292,7 +293,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	private void updateFile(final RandomAccessFile file,
-			final DownloadCacheTask cacheTask) throws IOException {
+			final CacheDownloadInfo cacheTask) throws IOException {
 		file.seek(HEAD_SIZE);
 		file.writeLong(cacheTask.mDownloadedLength);// write default
 													// downloaded count
@@ -329,7 +330,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	@Override
-	public boolean completeCacheTask(DownloadCacheTask cacheTask) {
+	public boolean completeCacheTask(CacheDownloadInfo cacheTask) {
 		boolean result = false;
 		tryCloseSaveFile(cacheTask);
 		tryCloseTaskFile(cacheTask);
@@ -355,7 +356,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	}
 
 	@Override
-	public void clearCache(DownloadCacheTask cacheTask) {
+	public void clearCache(CacheDownloadInfo cacheTask) {
 		tryCloseSaveFile(cacheTask);
 		tryCloseTaskFile(cacheTask);
 		final File saveFile = new File(generateCacheSaveFullPath(cacheTask.mDownloadInfo));

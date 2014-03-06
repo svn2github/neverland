@@ -1,0 +1,32 @@
+/**
+ * Copyright (C) 2014, all rights reserved.
+ * Company	SHENZHEN YUNZHONGFEI TECHNOLOGY CORP., LTD. 
+ * Author	lailong
+ * Since	2014年3月6日
+ */
+package org.jabe.neverland.download.core.engine.impl;
+
+import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
+
+/**
+ * 
+ * @Author	LaiLong
+ * @Since	2014年3月6日
+ */
+public abstract class CacheDownloadTask extends DownloadTask implements DownloadTaskListener {
+
+	/**
+	 * 
+	 */
+	public CacheDownloadTask(DownloadCacheInvoker cacheInvoker) {
+		super();
+		mCacheDownloadInfo = cacheInvoker.mCacheDownloadInfo;
+		mCacheInvoker = cacheInvoker;
+//		mInvoker = mTaskConfig.mDownloadTaskListener;
+	}
+	
+	protected CacheDownloadInfo mCacheDownloadInfo;
+	protected DownloadCacheInvoker mCacheInvoker;
+	
+	
+}

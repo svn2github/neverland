@@ -2,17 +2,15 @@ package org.jabe.neverland.download.core.engine.impl;
 
 import java.util.concurrent.ExecutorService;
 
-import org.jabe.neverland.download.core.cache.DownloadCacheTask;
-
-public class TaskConfig {
+public class CacheTaskConfig {
 	
-	public final DownloadCacheTask mCacheTask;
+	public final DownloadCacheInvoker mCacheInvoker;
 	public final DownloadTaskListener mDownloadTaskListener;
 	public final ExecutorService mDownloadExecutorService;
 	public final IODownloader mDownloader;
 	
-	private TaskConfig(final Builder builder) {
-		mCacheTask = builder.mCacheTask;
+	private CacheTaskConfig(final Builder builder) {
+		mCacheInvoker = builder.mCacheTask;
 		mDownloadTaskListener = builder.mDownloadTaskListener;
 		mDownloadExecutorService = builder.mDownloadExecutorService;
 		mDownloader = builder.mDownloader;
@@ -20,7 +18,7 @@ public class TaskConfig {
 	
 	public static class Builder {
 		
-		private DownloadCacheTask mCacheTask;
+		private DownloadCacheInvoker mCacheTask;
 		private DownloadTaskListener mDownloadTaskListener;
 		private ExecutorService mDownloadExecutorService;
 		private IODownloader mDownloader;
@@ -28,7 +26,7 @@ public class TaskConfig {
 		public Builder() {
 		}
 		
-		public Builder addCacheTask(final DownloadCacheTask cacheTask) {
+		public Builder addCacheInvoker(final DownloadCacheInvoker cacheTask) {
 			this.mCacheTask = cacheTask;
 			return this;
 		}
@@ -48,8 +46,8 @@ public class TaskConfig {
 			return this;
 		}
 		
-		public TaskConfig build() {
-			return new TaskConfig(this);
+		public CacheTaskConfig build() {
+			return new CacheTaskConfig(this);
 		}
 	}
 }

@@ -11,14 +11,14 @@ public abstract class DownloadCacheManager {
 	 * 
 	 * @param cacheTask
 	 */
-	public abstract void readFromCache(final DownloadCacheTask cacheTask)  throws IOException;
+	public abstract void readFromCache(final CacheDownloadInfo info)  throws IOException;
 	
 	/**
 	 * 更新下载缓存
 	 * 
 	 * @param cacheTask
 	 */
-	public abstract void saveToCache(final DownloadCacheTask cacheTask)  throws IOException;
+	public abstract void saveToCache(final CacheDownloadInfo info)  throws IOException;
 	
 	/**
 	 * 下载是否有缓存
@@ -26,7 +26,7 @@ public abstract class DownloadCacheManager {
 	 * @param cacheTask
 	 * @return
 	 */
-	public abstract boolean isInCache(final DownloadCacheTask cacheTask);
+	public abstract boolean isInCache(final CacheDownloadInfo info);
 	
 	/**
 	 * 更新下载进度
@@ -35,7 +35,7 @@ public abstract class DownloadCacheManager {
 	 * @param progress 新增的数量
 	 * @param cacheTask 
 	 */
-	public abstract void updateSectionProgress(final byte[] bytes, final int sectionNo, final long progress, final DownloadCacheTask cacheTask) throws IOException;
+	public abstract void updateSectionProgress(final byte[] bytes, final int sectionNo, final long progress, final CacheDownloadInfo info) throws IOException;
 	
 	/**
 	 * 获取下载进度
@@ -75,13 +75,13 @@ public abstract class DownloadCacheManager {
 	 * @param cacheTask
 	 * @return
 	 */
-	public abstract boolean completeCacheTask(final DownloadCacheTask cacheTask);
+	public abstract boolean completeCacheTask(final CacheDownloadInfo info);
 	
 	/**
 	 * 清除缓存
 	 * @param cacheTask
 	 * @return
 	 */
-	public abstract void clearCache(final DownloadCacheTask cacheTask);
+	public abstract void clearCache(final CacheDownloadInfo info);
 	
 }
