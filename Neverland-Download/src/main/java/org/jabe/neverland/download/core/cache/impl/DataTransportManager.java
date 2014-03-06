@@ -26,8 +26,10 @@ public class DataTransportManager {
 		return sInstance;
 	}
 	
+	@SuppressWarnings("unused")
 	private Object mDataInLock = new Object();
 	
+	@SuppressWarnings("unused")
 	private Object mDataOutLock = new Object();
 	
 	private Object mDataRegisterLock = new Object();
@@ -50,6 +52,7 @@ public class DataTransportManager {
 		mDataBeanQueue.add(dataBean);
 	}
 	
+	@SuppressWarnings("unused")
 	private class Worker implements Runnable {
 
 		@Override

@@ -16,7 +16,6 @@ import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
 import org.jabe.neverland.download.core.cache.CacheReadException;
 import org.jabe.neverland.download.core.cache.CacheWriteException;
 import org.jabe.neverland.download.core.cache.DownloadCacheManager;
-import org.jabe.neverland.download.core.engine.impl.DownloadCacheInvoker;
 import org.jabe.neverland.download.util.IoUtils;
 
 public class FileCacheManager extends DownloadCacheManager {

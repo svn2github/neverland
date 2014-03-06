@@ -6,8 +6,8 @@ import org.jabe.neverland.download.core.DownloadEngine;
 import org.jabe.neverland.download.core.DownloadOperationMaper;
 import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 import org.jabe.neverland.download.core.cache.impl.FileCacheManager;
-import org.jabe.neverland.download.core.engine.impl.DefaultOperationMaper;
 import org.jabe.neverland.download.core.engine.impl.CacheDownloadEngine;
+import org.jabe.neverland.download.core.engine.impl.DefaultOperationMaper;
 
 public class DefaultConfigurationFactory {
 
