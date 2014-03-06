@@ -13,7 +13,7 @@ import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
  * @Author	LaiLong
  * @Since	2014年3月6日
  */
-public abstract class CacheDownloadTask extends DownloadTask implements DownloadTaskListener {
+public abstract class CacheDownloadTask extends DownloadTask {
 
 	/**
 	 * 

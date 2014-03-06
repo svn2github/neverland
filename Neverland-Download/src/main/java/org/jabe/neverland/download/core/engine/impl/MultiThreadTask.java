@@ -11,17 +11,13 @@ import org.jabe.neverland.download.core.engine.impl.IODownloader.SizeBean;
 import org.jabe.neverland.download.util.IoUtils;
 
 
-public class UrlDownloadTask extends DownloadTask {
+public class MultiThreadTask extends AbstractTask {
 	
 	private static final int BUFFER_SIZE = 16 * 1024;
 	
-	protected CacheTaskConfig mTaskConfig;
 	
-	public UrlDownloadTask(CacheTaskConfig mTaskConfig) {
-		super();
-		this.mTaskConfig = mTaskConfig;
-		mCacheDownloadInfo = mTaskConfig.mCacheInvoker.mCacheDownloadInfo;
-		mCacheInvoker = mTaskConfig.mCacheInvoker;
+	public MultiThreadTask(TaskConfig mTaskConfig) {
+		super(mTaskConfig);
 	}
 
 	private Boolean[] successTag;
@@ -33,7 +29,7 @@ public class UrlDownloadTask extends DownloadTask {
 	public void run() {
 		hasStarted = true;
 		// task life cycle
-		mTaskConfig.mDownloadTaskListener.onPreTask();
+		onPreTask();
 		
 		try {
 			// whatever, need to get content length to check the task in cache
@@ -50,10 +46,10 @@ public class UrlDownloadTask extends DownloadTask {
 		final int secCount = mCacheDownloadInfo.mSectionCount;
 
 		// task life cycle
-		mTaskConfig.mDownloadTaskListener.onBeforeExecute();
+		onBeforeExecute();
 		
 		if (mCacheDownloadInfo.mDownloadedLength == mCacheDownloadInfo.mContentLength && mCacheDownloadInfo.mContentLength > 0) {
-			onSuccess();
+			success();
 			return;
 		}
 		
@@ -94,7 +90,7 @@ public class UrlDownloadTask extends DownloadTask {
 			final long endF = endt;
 			final int s = j + 1;
 			final long realStart = j * per + start;
-			mTaskConfig.mDownloadExecutorService.execute(new Runnable() {
+			getExecutorService().execute(new Runnable() {
 				
 				@Override
 				public void run() {
@@ -111,7 +107,7 @@ public class UrlDownloadTask extends DownloadTask {
 
 	private void doRealDownload(final int sectionNo, final long contentLength, final long start, final long end) throws IOException {
 		final SizeBean sb = new SizeBean(contentLength, start, end);
-		final InputStream is = mTaskConfig.mDownloader.getStream(mCacheDownloadInfo.mDownloadInfo.getmDownloadUrl(), null, sb);
+		final InputStream is = mDownloader.getStream(mCacheDownloadInfo.mDownloadInfo.getmDownloadUrl(), null, sb);
 		try {
 			try {
 				byte[] bytes = new byte[BUFFER_SIZE];
@@ -123,7 +119,7 @@ public class UrlDownloadTask extends DownloadTask {
 //					mCacheAccessFile.seek((sectionNo - 1) * per + mCacheTask.mSectionsOffset[sectionNo - 1]);
 //					mCacheAccessFile.write(bytes, 0, count);
 					mCacheInvoker.updateSectionProgress(bytes, sectionNo, count);
-					mTaskConfig.mDownloadTaskListener.onUpdateProgress(count, mCacheDownloadInfo.mDownloadedLength, mCacheDownloadInfo.mContentLength);
+					onUpdateProgress(count, mCacheDownloadInfo.mDownloadedLength, mCacheDownloadInfo.mContentLength);
 				}
 				triggerSuccess(sectionNo);
 			} finally {
@@ -159,13 +155,13 @@ public class UrlDownloadTask extends DownloadTask {
 			}
 		}
 		if (temp) {
-			onSuccess();
+			success();
 		}
 	}
 	
-	private void onSuccess() {
+	private void success() {
 		mCacheInvoker.checkFinish();
-		mTaskConfig.mDownloadTaskListener.onSuccess();
+		super.onSuccess();
 	}
 
 	/* (non-Javadoc)
@@ -174,7 +170,7 @@ public class UrlDownloadTask extends DownloadTask {
 	@Override
 	public boolean start() {
 		if (!hasStarted) {
-			mTaskConfig.mDownloadExecutorService.execute(this);
+			getExecutorService().execute(this);
 		}
 		return true;
 	}

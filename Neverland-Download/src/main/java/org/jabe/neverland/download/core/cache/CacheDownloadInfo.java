@@ -18,10 +18,10 @@ public class CacheDownloadInfo {
 	public long mDownloadedLength = 0;
 
 	public long[] mSectionsOffset;
-	public int mWorkerCount;
-	public int mSectionCount;
+	public int mWorkerCount = 0;
+	public int mSectionCount = 0;
 
-	public long mContentLength;
+	public long mContentLength = 0;
 	public DownloadInfo mDownloadInfo;
 	
 	public CacheDownloadInfo(DownloadInfo downloadInfo) {

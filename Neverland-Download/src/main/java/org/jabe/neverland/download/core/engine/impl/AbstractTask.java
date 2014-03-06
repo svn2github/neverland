@@ -7,23 +7,34 @@
 package org.jabe.neverland.download.core.engine.impl;
 
 import java.io.File;
+import java.util.concurrent.ExecutorService;
 
 /**
  * 
  * @Author	LaiLong
  * @Since	2014年3月6日
  */
-public abstract class InvokableTask extends CacheDownloadTask {
+public abstract class AbstractTask extends CacheDownloadTask implements DownloadTaskListener {
 
 	private DownloadTaskListener mInvoker;
-
+	
+	protected IODownloader mDownloader;
+	
+	private ExecutorService mExecutorService;
+	
 	/**
 	 * @param cacheInvoker
 	 * @param listener
 	 */
-	public InvokableTask(DownloadCacheInvoker cacheInvoker, DownloadTaskListener listener) {
-		super(cacheInvoker);
-		this.mInvoker = listener;
+	public AbstractTask(TaskConfig taskConfig) {
+		super(taskConfig.mCacheInvoker);
+		this.mInvoker = taskConfig.mDownloadTaskListener;
+		this.mDownloader = taskConfig.mDownloader;
+		this.mExecutorService = taskConfig.mDownloadExecutorService;
+	}
+	
+	protected ExecutorService getExecutorService() {
+		return mExecutorService;
 	}
 	
 

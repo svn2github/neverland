@@ -12,7 +12,7 @@ import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 
 public class CacheDownloadEngine implements DownloadEngine {
 
-	protected final Map<String, UrlDownloadTask> mDownloadTaskMap = Collections.synchronizedMap(new HashMap<String, UrlDownloadTask>());
+	protected final Map<String, MultiThreadTask> mDownloadTaskMap = Collections.synchronizedMap(new HashMap<String, MultiThreadTask>());
 	protected final DownloadCacheManager mProgressCacheManager;
 	protected final ExecutorService mDownloadExecutor;
 
@@ -59,13 +59,13 @@ public class CacheDownloadEngine implements DownloadEngine {
 			return downloadTask.start();
 		} else {
 			final DownloadCacheInvoker cacheInvoker = new DownloadCacheInvoker(mProgressCacheManager, downloadInfo);
-			final CacheTaskConfig taskConfig = new CacheTaskConfig.Builder()
+			final TaskConfig taskConfig = new TaskConfig.Builder()
 					.addCacheInvoker(cacheInvoker)
 					.addDownloadExecutor(mDownloadExecutor)
 					.addDownloadTaskListener(mGlobalTaskListener)
 					.addDownloader(new BaseIODownloader())
 					.build();
-			final UrlDownloadTask downloadTask = new UrlDownloadTask(taskConfig);
+			final MultiThreadTask downloadTask = new MultiThreadTask(taskConfig);
 			mDownloadTaskMap.put(downloadInfo.getmPackageName(), downloadTask);
 			return downloadTask.start();
 		}
