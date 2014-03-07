@@ -7,6 +7,8 @@
 package org.jabe.neverland.download.core.engine.impl;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -14,11 +16,11 @@ import java.util.concurrent.ExecutorService;
  * @Author	LaiLong
  * @Since	2014年3月6日
  */
-public abstract class AbstractTask extends CacheDownloadTask implements DownloadTaskListener {
+public abstract class AbstractTask extends CacheDownloadTask implements DownloadTaskListener , IODownloader{
 
 	private DownloadTaskListener mInvoker;
 	
-	protected IODownloader mDownloader;
+	private IODownloader mDownloader;
 	
 	private ExecutorService mExecutorService;
 	
@@ -102,4 +104,13 @@ public abstract class AbstractTask extends CacheDownloadTask implements Download
 		mInvoker.onFileExist(file);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabe.neverland.download.core.engine.impl.IODownloader#getStream(java.lang.String, java.lang.Object, org.jabe.neverland.download.core.engine.impl.IODownloader.SizeBean)
+	 */
+	@Override
+	public InputStream getStream(String imageUri, Object extra, SizeBean sb)
+			throws IOException {
+		return mDownloader.getStream(imageUri, extra, sb);
+	}
+	
 }

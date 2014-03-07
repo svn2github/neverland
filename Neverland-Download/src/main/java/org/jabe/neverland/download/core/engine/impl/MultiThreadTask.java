@@ -7,7 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
-import org.jabe.neverland.download.core.engine.impl.IODownloader.SizeBean;
 import org.jabe.neverland.download.util.IoUtils;
 
 
@@ -33,7 +32,9 @@ public class MultiThreadTask extends AbstractTask {
 		
 		try {
 			// whatever, need to get content length to check the task in cache
-			mCacheDownloadInfo.mContentLength = getContentLength(mCacheDownloadInfo.mDownloadInfo.getmDownloadUrl());
+			if (mCacheDownloadInfo.mContentLength == 0) {
+				mCacheDownloadInfo.mContentLength = getContentLength(mCacheDownloadInfo.mDownloadInfo.getmDownloadUrl());
+			}
 			if (mCacheInvoker.isInCache()) {
 				mCacheInvoker.readFromCache();
 			} else {
@@ -107,7 +108,7 @@ public class MultiThreadTask extends AbstractTask {
 
 	private void doRealDownload(final int sectionNo, final long contentLength, final long start, final long end) throws IOException {
 		final SizeBean sb = new SizeBean(contentLength, start, end);
-		final InputStream is = mDownloader.getStream(mCacheDownloadInfo.mDownloadInfo.getmDownloadUrl(), null, sb);
+		final InputStream is = getStream(mCacheDownloadInfo.mDownloadInfo.getmDownloadUrl(), null, sb);
 		try {
 			try {
 				byte[] bytes = new byte[BUFFER_SIZE];
