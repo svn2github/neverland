@@ -25,7 +25,7 @@ public abstract class CacheDownloadTask extends DownloadTask {
 //		mInvoker = mTaskConfig.mDownloadTaskListener;
 	}
 	
-	protected CacheDownloadInfo mCacheDownloadInfo;
+	protected volatile CacheDownloadInfo mCacheDownloadInfo;
 	protected DownloadCacheInvoker mCacheInvoker;
 	
 	

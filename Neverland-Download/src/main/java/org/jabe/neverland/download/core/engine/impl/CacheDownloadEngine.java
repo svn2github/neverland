@@ -53,6 +53,7 @@ public class CacheDownloadEngine implements DownloadEngine {
 	}
 
 	protected boolean startD(DownloadInfo downloadInfo) {
+		// if the task was already in the map.
 		if (mDownloadTaskMap.containsKey(downloadInfo.getmPackageName())) {
 			final DownloadTask downloadTask = mDownloadTaskMap.get(downloadInfo
 					.getmPackageName());
@@ -76,7 +77,7 @@ public class CacheDownloadEngine implements DownloadEngine {
 		@Override
 		public void onUpdateProgress(double added, double downloaded, double total) {
 			// TODO Auto-generated method stub
-			System.out.println("Downloaded Percent : " + downloaded/total);
+//			System.out.println("Downloaded Percent : " + downloaded/total);
 //			System.out.println("changed by current thread " + Thread.currentThread().getName() + " " + downloaded + "/" + total);
 			
 		}

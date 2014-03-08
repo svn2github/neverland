@@ -74,6 +74,8 @@ public class FileCacheManager extends DownloadCacheManager {
 		final long per = cacheTask.mContentLength / cacheTask.mSectionCount;
 		synchronized (cacheTask) {
 			
+			// first to write the save file, and then write the task file.
+			
 			final RandomAccessFile rafs = getOrCreateRandomSaveFile(cacheTask);
 			rafs.seek((sectionNo - 1) * per + cacheTask.mSectionsOffset[sectionNo - 1]);
 			rafs.write(bytes, 0, (int) progress);

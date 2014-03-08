@@ -5,7 +5,6 @@ import org.jabe.neverland.download.core.DownloadInfo;
 import org.jabe.neverland.download.core.DownloadManager;
 
 public class Test {
-
 	/**
 	 * @param args
 	 */
@@ -24,7 +23,5 @@ public class Test {
 		downloadInfo.putInt(DownloadInfo.P_SECTION_COUNT, 5);
 		final DownloadManager dm = new DownloadManager(downloadConfig);
 		dm.startDownload(downloadInfo);
-		
 	}
-
 }

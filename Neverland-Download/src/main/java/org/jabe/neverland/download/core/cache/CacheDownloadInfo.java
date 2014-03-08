@@ -15,9 +15,10 @@ import org.jabe.neverland.download.core.DownloadInfo;
  */
 public class CacheDownloadInfo {
 
-	public long mDownloadedLength = 0;
+	public volatile long mDownloadedLength = 0;
 
-	public long[] mSectionsOffset;
+	public volatile long[] mSectionsOffset;
+	
 	public int mWorkerCount = 0;
 	public int mSectionCount = 0;
 
@@ -40,5 +41,16 @@ public class CacheDownloadInfo {
 		for (int i = 0; i < mSectionCount; i++) {
 			mSectionsOffset[i] = 0;
 		}
+	}
+	
+	public boolean isSectionOk(int sectionNum) {
+		final long per = mContentLength / mSectionCount;
+		if (per == mSectionsOffset[sectionNum -1]) {
+			return true;
+		}
+		if (mSectionsOffset[sectionNum - 1] == (per + mContentLength % per)) {
+			return true;
+		}
+		return false;
 	}
 }

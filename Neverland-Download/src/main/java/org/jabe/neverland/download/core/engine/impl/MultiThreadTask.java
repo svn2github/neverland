@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
+import org.jabe.neverland.download.log.Logger;
 import org.jabe.neverland.download.util.IoUtils;
 
 
@@ -19,10 +19,7 @@ public class MultiThreadTask extends AbstractTask {
 		super(mTaskConfig);
 	}
 
-	private Boolean[] successTag;
-	
-	private CacheDownloadInfo mCacheDownloadInfo;
-	private DownloadCacheInvoker mCacheInvoker;
+	private volatile Boolean[] successTag;
 	
 	@Override
 	public void run() {
@@ -65,7 +62,6 @@ public class MultiThreadTask extends AbstractTask {
 				doSingleWork();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
@@ -130,6 +126,13 @@ public class MultiThreadTask extends AbstractTask {
 		}
 	}
 	
+	/**
+	 * get content length by url connection.
+	 * 
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
 	private long getContentLength(String url) throws IOException {
 		URL u = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
@@ -143,19 +146,24 @@ public class MultiThreadTask extends AbstractTask {
 	}
 	
 	private void triggerSuccess(int sectionNo) {
-		successTag[sectionNo - 1] = true;
-		checkAllSuccess();
+		if (mCacheDownloadInfo.isSectionOk(sectionNo)) {
+			successTag[sectionNo - 1] = true;
+			Logger.i("section num : " + sectionNo + " ok.");
+			checkAllSuccess();	
+		} else {
+			triggerSectionFailure(sectionNo);
+		}
 	}
 
 	private void checkAllSuccess() {
-		boolean temp = true;
+		boolean success = true;
 		for (int i = 0; i < successTag.length; i++) {
 			if (!successTag[i]) {
-				temp = false;
+				success = false;
 				break;
 			}
 		}
-		if (temp) {
+		if (success) {
 			success();
 		}
 	}
