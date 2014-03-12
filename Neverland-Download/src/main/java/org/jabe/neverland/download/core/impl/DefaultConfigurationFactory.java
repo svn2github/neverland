@@ -2,6 +2,7 @@ package org.jabe.neverland.download.core.impl;
 
 import java.util.concurrent.ExecutorService;
 
+import org.jabe.neverland.download.core.AbstractMessageDeliver;
 import org.jabe.neverland.download.core.DownloadEngine;
 import org.jabe.neverland.download.core.DownloadOperationMaper;
 import org.jabe.neverland.download.core.cache.DownloadCacheManager;
@@ -11,8 +12,8 @@ import org.jabe.neverland.download.core.engine.impl.DefaultOperationMaper;
 
 public class DefaultConfigurationFactory {
 
-	public static DownloadEngine getDefaultDownloadEngine(DownloadCacheManager progressCacheManager, ExecutorService executorService) {
-		return new CacheDownloadEngine(progressCacheManager, executorService);
+	public static DownloadEngine getDefaultDownloadEngine(DownloadCacheManager progressCacheManager, ExecutorService executorService, AbstractMessageDeliver messageDeliver) {
+		return new CacheDownloadEngine(progressCacheManager, executorService, messageDeliver);
 	}
 	
 	public static DownloadOperationMaper getDefaultMaper(DownloadEngine downloadEngine) {

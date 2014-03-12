@@ -11,106 +11,77 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 
+import org.jabe.neverland.download.core.AbstractMessageDeliver;
+
 /**
  * 
- * @Author	LaiLong
- * @Since	2014年3月6日
+ * @Author LaiLong
+ * @Since 2014年3月6日
  */
-public abstract class AbstractTask extends CacheDownloadTask implements DownloadTaskListener , IODownloader{
+public abstract class AbstractTask extends CacheDownloadTask implements
+		IODownloader {
 
-	private DownloadTaskListener mInvoker;
-	
 	private IODownloader mDownloader;
-	
+
 	private ExecutorService mExecutorService;
 	
+	private AbstractMessageDeliver mMessageDeliver;
+
 	/**
 	 * @param cacheInvoker
 	 * @param listener
 	 */
 	public AbstractTask(TaskConfig taskConfig) {
 		super(taskConfig.mCacheInvoker);
-		this.mInvoker = taskConfig.mDownloadTaskListener;
 		this.mDownloader = taskConfig.mDownloader;
+		this.mMessageDeliver = taskConfig.mMessageDeliver;
 		this.mExecutorService = taskConfig.mDownloadExecutorService;
 	}
-	
+
 	protected ExecutorService getExecutorService() {
 		return mExecutorService;
 	}
-	
 
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onSuccess()
-	 */
-	@Override
-	public void onSuccess() {
-		mInvoker.onSuccess();
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onFailure(java.lang.Exception)
-	 */
-	@Override
-	public void onFailure(Exception e) {
-		mInvoker.onFailure(e);
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onPreTask()
-	 */
-	@Override
-	public void onPreTask() {
-		mInvoker.onPreTask();
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onResumeTask()
-	 */
-	@Override
-	public void onResumeTask() {
-		mInvoker.onResumeTask();
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onPauseTask()
-	 */
-	@Override
-	public void onPauseTask() {
-		mInvoker.onPauseTask();
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onBeforeExecute()
-	 */
-	@Override
-	public void onBeforeExecute() {
-		mInvoker.onBeforeExecute();
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onCancel()
-	 */
-	@Override
-	public void onCancel() {
-		mInvoker.onCancel();
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onUpdateProgress(double, double, double)
-	 */
-	@Override
-	public void onUpdateProgress(double added, double downloaded, double total) {
-		mInvoker.onUpdateProgress(added, downloaded, total);
-	}
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTaskListener#onFileExist(java.io.File)
-	 */
-	@Override
-	public void onFileExist(File file) {
-		mInvoker.onFileExist(file);
+	protected void onSuccess() {
+		mMessageDeliver.pushFinishMessage(getPackageName());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.IODownloader#getStream(java.lang.String, java.lang.Object, org.jabe.neverland.download.core.engine.impl.IODownloader.SizeBean)
-	 */
+	protected void onFailure(Exception e) {
+		mMessageDeliver.pushExceptionMessage(getPackageName(), e);
+	}
+
+	protected void onPreTask() {
+		// TODO
+	}
+
+	protected void onResumeTask() {
+		// TODO
+	}
+
+	protected void onPauseTask() {
+		// TODO
+	}
+
+	protected void onBeforeExecute() {
+		// TODO
+	}
+
+	protected void onCancel() {
+		// TODO
+	}
+
+	protected void onUpdateProgress(double added, double downloaded, double total) {
+		mMessageDeliver.pushUpdateProgressMessage(getPackageName(), added, downloaded, total);
+	}
+
+	protected void onFileExist(File file) {
+		this.onSuccess();
+	}
+
 	@Override
 	public InputStream getStream(String imageUri, Object extra, SizeBean sb)
 			throws IOException {
 		return mDownloader.getStream(imageUri, extra, sb);
 	}
-	
+
 }

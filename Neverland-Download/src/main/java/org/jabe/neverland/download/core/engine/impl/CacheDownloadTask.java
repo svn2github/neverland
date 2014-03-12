@@ -22,7 +22,10 @@ public abstract class CacheDownloadTask extends DownloadTask {
 		super();
 		mCacheDownloadInfo = cacheInvoker.mCacheDownloadInfo;
 		mCacheInvoker = cacheInvoker;
-//		mInvoker = mTaskConfig.mDownloadTaskListener;
+	}
+	
+	protected String getPackageName() {
+		return mCacheDownloadInfo.mDownloadInfo.getmPackageName();
 	}
 	
 	protected volatile CacheDownloadInfo mCacheDownloadInfo;

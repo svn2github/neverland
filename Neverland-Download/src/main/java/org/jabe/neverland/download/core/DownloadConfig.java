@@ -16,6 +16,7 @@ public final class DownloadConfig {
 	public final DownloadOperationMaper mDownloadOperationMaper;
 	public final DownloadEngine mDownloadEngine;
 	public final DownloadCacheManager mProgressCacheManager;
+	public final AbstractMessageDeliver mMessageDeliver;
 	public final String mCacheRootPath;
 	
 	private static final int DEFAULT_TASK_WAITING_SIZE = 3;
@@ -29,6 +30,7 @@ public final class DownloadConfig {
 		mDownloadEngine = builder.mDownloadEngine;
 		mProgressCacheManager = builder.mProgressCacheManager;
 		mCacheRootPath = builder.mCacheRootPath;
+		mMessageDeliver = builder.mMessageDeliver;
 	}
 	public static class Builder {
 		
@@ -38,6 +40,7 @@ public final class DownloadConfig {
 		private DownloadOperationMaper mDownloadOperationMaper;
 		private DownloadEngine mDownloadEngine;
 		private DownloadCacheManager mProgressCacheManager;
+		private AbstractMessageDeliver mMessageDeliver;
 		private String mCacheRootPath;
 		public Builder() {
 			
@@ -78,6 +81,11 @@ public final class DownloadConfig {
 			return this;
 		}
 		
+		public Builder addMessageDeliver(AbstractMessageDeliver deliver) {
+			this.mMessageDeliver = deliver;
+			return this;
+		}
+		
 		public DownloadConfig build() {
 			initEmptyConfig();
 			return new DownloadConfig(this);
@@ -100,8 +108,14 @@ public final class DownloadConfig {
 			if (mProgressCacheManager == null) {
 				mProgressCacheManager = DefaultConfigurationFactory.getDefaultCacheManager(mCacheRootPath);
 			}
+			
+			if (mMessageDeliver == null) {
+				mMessageDeliver = new DefaultMessageDeliver();
+				mMessageDeliver.start();
+			}
+			
 			if (mDownloadEngine == null) {
-				mDownloadEngine = DefaultConfigurationFactory.getDefaultDownloadEngine(mProgressCacheManager, mTaskExecutor);
+				mDownloadEngine = DefaultConfigurationFactory.getDefaultDownloadEngine(mProgressCacheManager, mTaskExecutor, mMessageDeliver);
 			}
 			if (mDownloadOperationMaper == null) {
 				mDownloadOperationMaper = DefaultConfigurationFactory.getDefaultMaper(mDownloadEngine);

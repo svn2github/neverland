@@ -5,7 +5,7 @@ public class DownloadManager extends DownloadEngineWraper {
 	private DownloadConfig mDownloadConfig;
 
 	public DownloadManager(DownloadConfig downloadConfig) {
-		super(downloadConfig.mDownloadEngine);
+		super(downloadConfig.mDownloadEngine, downloadConfig.mMessageDeliver);
 		this.mDownloadConfig = downloadConfig;
 	}
 	

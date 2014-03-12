@@ -3,6 +3,8 @@ package org.jabe.neverland.download.test;
 import org.jabe.neverland.download.core.DownloadConfig;
 import org.jabe.neverland.download.core.DownloadInfo;
 import org.jabe.neverland.download.core.DownloadManager;
+import org.jabe.neverland.download.core.DownloadProgressListener;
+import org.jabe.neverland.download.core.DownloadStatusListener;
 
 public class Test {
 	/**
@@ -22,6 +24,38 @@ public class Test {
 		downloadInfo.setmPackageName("com.nearme.gamecenter");
 		downloadInfo.putInt(DownloadInfo.P_SECTION_COUNT, 5);
 		final DownloadManager dm = new DownloadManager(downloadConfig);
+		
+		dm.registerListener(new DownloadStatusListener() {
+			
+			@Override
+			public void onStatusCountChanged(int downloadingCount) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onStatusChanged(String packageName, int status) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onFailure(String packageName, Exception e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		dm.registerListener(new DownloadProgressListener() {
+			
+			@Override
+			public void onUpdateProgress(String packageName, double added,
+					double downloaded, double total) {
+//				System.out.println("Downloaded Percent : " + downloaded/total);
+				System.out.println("changed by current thread " + Thread.currentThread().getName() + " " + downloaded/total);
+			}
+		});
+		
 		dm.startDownload(downloadInfo);
 	}
 }

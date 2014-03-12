@@ -1,30 +1,35 @@
 package org.jabe.neverland.download.core.engine.impl;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
+import org.jabe.neverland.download.core.AbstractMessageDeliver;
 import org.jabe.neverland.download.core.DownloadEngine;
 import org.jabe.neverland.download.core.DownloadInfo;
+import org.jabe.neverland.download.core.DownloadListenerWraper;
 import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 
-public class CacheDownloadEngine implements DownloadEngine {
+public class CacheDownloadEngine extends DownloadListenerWraper implements DownloadEngine {
 
 	protected final Map<String, MultiThreadTask> mDownloadTaskMap = Collections.synchronizedMap(new HashMap<String, MultiThreadTask>());
 	protected final DownloadCacheManager mProgressCacheManager;
 	protected final ExecutorService mDownloadExecutor;
+	protected volatile IODownloader mIODownloader = null;
+	
+	private AbstractMessageDeliver mMessageDeliver;
 
 	public CacheDownloadEngine(DownloadCacheManager mProgressCacheManager,
-			ExecutorService executorService) {
+			ExecutorService executorService, AbstractMessageDeliver messageDeliver) {
+		super(null);
 		this.mProgressCacheManager = mProgressCacheManager;
 		this.mDownloadExecutor = executorService;
+		this.mMessageDeliver = messageDeliver;
 	}
 
 	@Override
 	public boolean startDownload(DownloadInfo downloadInfo) {
-		// TODO Auto-generated method stub
 		return startD(downloadInfo);
 	}
 
@@ -63,8 +68,8 @@ public class CacheDownloadEngine implements DownloadEngine {
 			final TaskConfig taskConfig = new TaskConfig.Builder()
 					.addCacheInvoker(cacheInvoker)
 					.addDownloadExecutor(mDownloadExecutor)
-					.addDownloadTaskListener(mGlobalTaskListener)
-					.addDownloader(new BaseIODownloader())
+					.addMessageDeliver(mMessageDeliver)
+					.addDownloader(mIODownloader != null ? mIODownloader : getDefaultDownloader())
 					.build();
 			final MultiThreadTask downloadTask = new MultiThreadTask(taskConfig);
 			mDownloadTaskMap.put(downloadInfo.getmPackageName(), downloadTask);
@@ -72,62 +77,16 @@ public class CacheDownloadEngine implements DownloadEngine {
 		}
 	}
 	
-	protected DownloadTaskListener mGlobalTaskListener = new DownloadTaskListener() {
-		
-		@Override
-		public void onUpdateProgress(double added, double downloaded, double total) {
-			// TODO Auto-generated method stub
-//			System.out.println("Downloaded Percent : " + downloaded/total);
-//			System.out.println("changed by current thread " + Thread.currentThread().getName() + " " + downloaded + "/" + total);
-			
+	private IODownloader defaultDownloader = null;
+	private IODownloader getDefaultDownloader() {
+		if (defaultDownloader == null) {
+			defaultDownloader = new BaseIODownloader();
 		}
-		
-		@Override
-		public void onSuccess() {
-			// TODO Auto-generated method stub
-			System.out.println("Download Success ");
-		}
-		
-		@Override
-		public void onFailure(Exception e) {
-			// TODO Auto-generated method stub
-			
-		}
+		return defaultDownloader;
+	}
 
-		@Override
-		public void onPreTask() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onResumeTask() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onPauseTask() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onBeforeExecute() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onCancel() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onFileExist(File file) {
-			// TODO Auto-generated method stub
-			
-		}
-	};
+	@Override
+	public void setIoDownloader(IODownloader downloader) {
+		this.mIODownloader = downloader;
+	}
 }

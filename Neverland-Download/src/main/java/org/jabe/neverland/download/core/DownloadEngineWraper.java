@@ -1,12 +1,17 @@
 package org.jabe.neverland.download.core;
 
-public class DownloadEngineWraper extends DownloadListenerManager implements DownloadEngine {
+import org.jabe.neverland.download.core.engine.impl.IODownloader;
+
+public class DownloadEngineWraper implements DownloadEngine, DownloadInterface{
 	
 	protected DownloadEngine mDownloadEngine;
 	
-	protected DownloadEngineWraper(DownloadEngine mDownloadEngine) {
+	protected DownloadListenerWraper mDownloadListenerWraper;
+	
+	protected DownloadEngineWraper(DownloadEngine mDownloadEngine, AbstractMessageDeliver deliver) {
 		super();
 		this.mDownloadEngine = mDownloadEngine;
+		this.mDownloadListenerWraper = new DownloadListenerWraper(deliver);
 	}
 
 	@Override
@@ -32,5 +37,23 @@ public class DownloadEngineWraper extends DownloadListenerManager implements Dow
 	@Override
 	public boolean restartDownload(DownloadInfo downloadInfo) {
 		return mDownloadEngine.restartDownload(downloadInfo);
+	}
+
+	@Override
+	public void registerListener(DownloadListener downloadInterface) {
+		mDownloadListenerWraper.registerListener(downloadInterface);
+	}
+
+	@Override
+	public void removeListenter(DownloadListener downloadInterface) {
+		mDownloadListenerWraper.removeListenter(downloadInterface);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.jabe.neverland.download.core.DownloadEngine#setIoDownloader(org.jabe.neverland.download.core.engine.impl.IODownloader)
+	 */
+	@Override
+	public void setIoDownloader(IODownloader downloader) {
+		mDownloadEngine.setIoDownloader(downloader);
 	}
 }
