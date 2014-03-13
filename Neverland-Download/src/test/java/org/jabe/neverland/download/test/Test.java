@@ -11,7 +11,7 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		Thread.currentThread().setName("thread-main");
 		final DownloadConfig downloadConfig = new DownloadConfig.Builder()
 				.addMaxTaskSizeInRunning(2)
 				.addMaxTaskSizeInWaiting(2)

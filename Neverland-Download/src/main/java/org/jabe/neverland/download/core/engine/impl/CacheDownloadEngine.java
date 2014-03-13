@@ -1,9 +1,9 @@
 package org.jabe.neverland.download.core.engine.impl;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.jabe.neverland.download.core.AbstractMessageDeliver;
 import org.jabe.neverland.download.core.DownloadEngine;
@@ -13,7 +13,8 @@ import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 
 public class CacheDownloadEngine extends DownloadListenerWraper implements DownloadEngine {
 
-	protected final Map<String, MultiThreadTask> mDownloadTaskMap = Collections.synchronizedMap(new HashMap<String, MultiThreadTask>());
+	protected final Map<String, MultiThreadTask> mDownloadTaskMap = new HashMap<String, MultiThreadTask>();
+	protected final ReentrantLock mTaskLock = new ReentrantLock();
 	protected final DownloadCacheManager mProgressCacheManager;
 	protected final ExecutorService mDownloadExecutor;
 	protected volatile IODownloader mIODownloader = null;
@@ -59,9 +60,11 @@ public class CacheDownloadEngine extends DownloadListenerWraper implements Downl
 
 	protected boolean startD(DownloadInfo downloadInfo) {
 		// if the task was already in the map.
+		mTaskLock.lock();
 		if (mDownloadTaskMap.containsKey(downloadInfo.getmPackageName())) {
 			final DownloadTask downloadTask = mDownloadTaskMap.get(downloadInfo
 					.getmPackageName());
+			mTaskLock.unlock();
 			return downloadTask.start();
 		} else {
 			final DownloadCacheInvoker cacheInvoker = new DownloadCacheInvoker(mProgressCacheManager, downloadInfo);
@@ -73,8 +76,10 @@ public class CacheDownloadEngine extends DownloadListenerWraper implements Downl
 					.build();
 			final MultiThreadTask downloadTask = new MultiThreadTask(taskConfig);
 			mDownloadTaskMap.put(downloadInfo.getmPackageName(), downloadTask);
+			mTaskLock.unlock();
 			return downloadTask.start();
 		}
+		
 	}
 	
 	private IODownloader defaultDownloader = null;

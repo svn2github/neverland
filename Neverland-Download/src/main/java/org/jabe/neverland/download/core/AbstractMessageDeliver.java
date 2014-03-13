@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @Author	LaiLong
  * @Since	2014年3月12日
  */
-public abstract class AbstractMessageDeliver implements DownloadInterface {
+public abstract class AbstractMessageDeliver implements DownloadRegister {
 	
 	public static class Message {
 		public MessageType type;

@@ -1,6 +1,6 @@
 package org.jabe.neverland.download.core;
 
-public class DownloadListenerWraper implements DownloadInterface {
+public class DownloadListenerWraper implements DownloadRegister {
 	
 	private AbstractMessageDeliver mDeliver;
 	

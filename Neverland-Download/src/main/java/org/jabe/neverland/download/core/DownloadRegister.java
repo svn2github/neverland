@@ -11,7 +11,7 @@ package org.jabe.neverland.download.core;
  * @Author	LaiLong
  * @Since	2014年3月12日
  */
-public interface DownloadInterface {
+public interface DownloadRegister {
 
 	public void registerListener(DownloadListener downloadInterface);
 	

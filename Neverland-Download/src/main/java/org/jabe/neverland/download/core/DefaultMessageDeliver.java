@@ -53,7 +53,7 @@ public class DefaultMessageDeliver extends AbstractMessageDeliver {
 			@Override
 			public Thread newThread(Runnable r) {
 				final Thread th = new Thread(r);
-				th.setName(DefaultMessageDeliver.class.getSimpleName());
+				th.setName("thread-" + DefaultMessageDeliver.class.getSimpleName());
 				th.setPriority(Thread.MAX_PRIORITY);
 				return th;
 			}
