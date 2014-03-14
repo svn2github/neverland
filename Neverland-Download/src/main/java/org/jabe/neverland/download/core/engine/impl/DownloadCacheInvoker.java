@@ -44,6 +44,10 @@ public class DownloadCacheInvoker {
 		return mProgressCacheManager.completeCacheTask(mCacheDownloadInfo);
 	}
 	
+	public void clearCache() {
+		mProgressCacheManager.clearCache(mCacheDownloadInfo);
+	}
+	
 	public void updateSectionProgress(byte[] bytes, int sectionNo, long progress) throws IOException {
 		mProgressCacheManager.updateSectionProgress(bytes, sectionNo, progress, mCacheDownloadInfo);
 	}

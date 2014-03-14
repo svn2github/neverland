@@ -17,6 +17,19 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public abstract class AbstractMessageDeliver implements DownloadRegister {
 	
+	private MessageListener mEngineMessger;
+	
+	/**
+	 * @param mEngineMessger the mEngineMessger to set
+	 */
+	public void setEngineMessger(MessageListener mEngineMessger) {
+		this.mEngineMessger = mEngineMessger;
+	}
+
+	public interface MessageListener {
+		public void onFire(Message message);
+	}
+	
 	public static class Message {
 		public MessageType type;
 		public String packageName;
@@ -75,12 +88,18 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 	
 	public abstract void shutdown();
 	
+	public void fireMessageToEngine(final Message message) {
+		if (mEngineMessger != null) {
+			mEngineMessger.onFire(message);
+		}
+	}
+	
 
 	/**
 	 * 
 	 * @param m
 	 */
-	protected void fireMessage(final Message m) {
+	protected void fireMessageToClient(final Message m) {
 		if (m.type == MessageType.PROGRESS) {
 			final ProgressMessage progressMessage = (ProgressMessage) m;
 			invokeUpdateProgress(progressMessage.packageName,

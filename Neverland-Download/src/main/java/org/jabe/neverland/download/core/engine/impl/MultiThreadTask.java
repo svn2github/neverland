@@ -10,7 +10,7 @@ import org.jabe.neverland.download.log.Logger;
 import org.jabe.neverland.download.util.IoUtils;
 
 
-public class MultiThreadTask extends AbstractTask {
+public class MultiThreadTask extends AbstractMessageTask {
 	
 	private static final int BUFFER_SIZE = 16 * 1024;
 	
@@ -108,7 +108,7 @@ public class MultiThreadTask extends AbstractTask {
 		try {
 			try {
 				byte[] bytes = new byte[BUFFER_SIZE];
-				while (true) {
+				while (hasStarted) {
 					int count = is.read(bytes, 0, BUFFER_SIZE);
 					if (count == -1) {
 						break;
@@ -119,7 +119,10 @@ public class MultiThreadTask extends AbstractTask {
 					onUpdateProgress(count, mCacheDownloadInfo.mDownloadedLength, mCacheDownloadInfo.mContentLength);
 				}
 				triggerSuccess(sectionNo);
+			} catch(IOException e) {
+				
 			} finally {
+				
 			}
 		} finally {
 			IoUtils.closeSilently(is);
@@ -173,9 +176,6 @@ public class MultiThreadTask extends AbstractTask {
 		super.onSuccess();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTask#start()
-	 */
 	@Override
 	public boolean start() {
 		if (!hasStarted) {
@@ -184,30 +184,31 @@ public class MultiThreadTask extends AbstractTask {
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTask#resume()
-	 */
 	@Override
 	public boolean resume() {
-		// TODO Auto-generated method stub
-		return false;
+		return start();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTask#cancel()
-	 */
 	@Override
 	public boolean cancel() {
-		// TODO Auto-generated method stub
-		return false;
+		stop();
+		clearCache();
+		onCancel();
+		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.jabe.neverland.download.core.engine.impl.DownloadTask#pause()
-	 */
 	@Override
 	public boolean pause() {
-		// TODO Auto-generated method stub
-		return false;
+		return cancel();
+	}
+
+	@Override
+	public void clearCache() {
+		mCacheInvoker.clearCache();
+	}
+
+	@Override
+	public void stop() {
+		hasStarted = false;
 	}
 }

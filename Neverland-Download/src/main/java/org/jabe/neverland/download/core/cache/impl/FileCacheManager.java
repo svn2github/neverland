@@ -315,7 +315,7 @@ public class FileCacheManager extends DownloadCacheManager {
 		return sb.toString();
 	}
 	
-	public static String md5(String s) {
+	private static String md5(String s) {
 		try {
 			// Create MD5 Hash
 			MessageDigest digest = java.security.MessageDigest

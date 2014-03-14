@@ -14,6 +14,11 @@ import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
  * @Since	2014年3月6日
  */
 public abstract class CacheDownloadTask extends DownloadTask {
+	
+	public void clear() {
+		mCacheDownloadInfo = null;
+		mCacheInvoker = null;
+	}
 
 	/**
 	 * 

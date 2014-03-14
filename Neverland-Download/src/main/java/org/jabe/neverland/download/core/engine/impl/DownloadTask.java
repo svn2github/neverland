@@ -30,4 +30,8 @@ public abstract class DownloadTask implements Runnable{
 	
 	public abstract boolean pause();
 	
+	public abstract void clearCache();
+	
+	public abstract void stop();
+	
 }

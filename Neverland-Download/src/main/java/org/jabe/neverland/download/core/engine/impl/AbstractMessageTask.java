@@ -12,13 +12,16 @@ import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 
 import org.jabe.neverland.download.core.AbstractMessageDeliver;
+import org.jabe.neverland.download.core.DownloadStatus;
+import org.jabe.neverland.download.core.AbstractMessageDeliver.StatusMessage;
 
 /**
+ * message deliver task
  * 
  * @Author LaiLong
  * @Since 2014年3月6日
  */
-public abstract class AbstractTask extends CacheDownloadTask implements
+public abstract class AbstractMessageTask extends CacheDownloadTask implements
 		IODownloader {
 
 	private IODownloader mDownloader;
@@ -26,12 +29,19 @@ public abstract class AbstractTask extends CacheDownloadTask implements
 	private ExecutorService mExecutorService;
 	
 	private AbstractMessageDeliver mMessageDeliver;
+	
+	public void clear() {
+		super.clear();
+		mDownloader = null;
+		mExecutorService = null;
+		mMessageDeliver = null;
+	}
 
 	/**
 	 * @param cacheInvoker
 	 * @param listener
 	 */
-	public AbstractTask(TaskConfig taskConfig) {
+	public AbstractMessageTask(TaskConfig taskConfig) {
 		super(taskConfig.mCacheInvoker);
 		this.mDownloader = taskConfig.mDownloader;
 		this.mMessageDeliver = taskConfig.mMessageDeliver;
@@ -51,23 +61,26 @@ public abstract class AbstractTask extends CacheDownloadTask implements
 	}
 
 	protected void onPreTask() {
-		// TODO
+		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_PREPARE.ordinal());
 	}
 
 	protected void onResumeTask() {
-		// TODO
+		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_RESUME.ordinal());
 	}
 
 	protected void onPauseTask() {
-		// TODO
+		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_PAUSED.ordinal());
 	}
 
 	protected void onBeforeExecute() {
-		// TODO
+		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_STARTED.ordinal());
 	}
 
 	protected void onCancel() {
-		// TODO
+		final StatusMessage statusMessage = new StatusMessage(getPackageName());
+		statusMessage.changedStatus = DownloadStatus.DOWNLOAD_STATUS_CANCEL.ordinal();
+//		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_CANCEL.ordinal());
+		mMessageDeliver.fireMessageToEngine(statusMessage);
 	}
 
 	protected void onUpdateProgress(double added, double downloaded, double total) {

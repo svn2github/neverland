@@ -37,6 +37,7 @@ public class DefaultMessageDeliver extends AbstractMessageDeliver {
 	 */
 	@Override
 	public void push(Message message) {
+		fireMessageToEngine(message);
 		queue.add(message);
 	}
 
@@ -64,7 +65,7 @@ public class DefaultMessageDeliver extends AbstractMessageDeliver {
 				while (isRunning) {
 					try {
 						final Message m = queue.take();
-						fireMessage(m);
+						fireMessageToClient(m);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -79,5 +80,6 @@ public class DefaultMessageDeliver extends AbstractMessageDeliver {
 		isRunning = false;
 		queue.clear();
 	}
+
 
 }
