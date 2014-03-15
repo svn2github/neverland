@@ -27,7 +27,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	private static final String APPEND_FINISHFILE = ".apk";
 	
 	private static final String RANDOM_FILE_MODE = "rw";
-	private static final int HEAD_SIZE = 2 * 1024;// 单位字节
+	private static final int HEAD_SIZE = 2 * 1024;// 2kb
 	private static final int CACHE_VERSION = 1;
 	
 	private String CACHE_ROOT;
