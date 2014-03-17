@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.cache.impl;
+package org.jabe.neverland.download.core.cache;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -10,12 +10,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jabe.neverland.download.core.CacheAccessException;
+import org.jabe.neverland.download.core.CacheDownloadInfo;
+import org.jabe.neverland.download.core.CacheReadException;
+import org.jabe.neverland.download.core.CacheWriteException;
+import org.jabe.neverland.download.core.DownloadCacheManager;
 import org.jabe.neverland.download.core.DownloadInfo;
-import org.jabe.neverland.download.core.cache.CacheAccessException;
-import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
-import org.jabe.neverland.download.core.cache.CacheReadException;
-import org.jabe.neverland.download.core.cache.CacheWriteException;
-import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 import org.jabe.neverland.download.util.IoUtils;
 
 public class FileCacheManager extends DownloadCacheManager {
@@ -27,7 +27,7 @@ public class FileCacheManager extends DownloadCacheManager {
 	private static final String APPEND_FINISHFILE = ".apk";
 	
 	private static final String RANDOM_FILE_MODE = "rw";
-	private static final int HEAD_SIZE = 2 * 1024;// 2kb
+	private static final int HEAD_SIZE = 2 * 1024;// 单位字节
 	private static final int CACHE_VERSION = 1;
 	
 	private String CACHE_ROOT;

@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,15 +6,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.jabe.neverland.download.core.AbstractMessageDeliver;
+import org.jabe.neverland.download.core.DownloadCacheManager;
 import org.jabe.neverland.download.core.DownloadEngine;
 import org.jabe.neverland.download.core.DownloadInfo;
 import org.jabe.neverland.download.core.DownloadListenerWraper;
+import org.jabe.neverland.download.core.IODownloader;
 import org.jabe.neverland.download.core.AbstractMessageDeliver.Message;
 import org.jabe.neverland.download.core.AbstractMessageDeliver.MessageListener;
 import org.jabe.neverland.download.core.AbstractMessageDeliver.MessageType;
 import org.jabe.neverland.download.core.AbstractMessageDeliver.StatusMessage;
 import org.jabe.neverland.download.core.DownloadStatus;
-import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 
 public class CacheDownloadEngine extends DownloadListenerWraper implements
 		DownloadEngine {

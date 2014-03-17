@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 import org.jabe.neverland.download.core.DownloadEngine;
 import org.jabe.neverland.download.core.DownloadInfo;

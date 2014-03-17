@@ -4,9 +4,8 @@
  * Author	lailong
  * Since	2014年3月6日
  */
-package org.jabe.neverland.download.core.cache;
+package org.jabe.neverland.download.core;
 
-import org.jabe.neverland.download.core.DownloadInfo;
 
 /**
  * 

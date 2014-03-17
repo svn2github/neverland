@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.cache.impl;
+package org.jabe.neverland.download.core.cache;
 
 import java.util.Collections;
 import java.util.HashMap;

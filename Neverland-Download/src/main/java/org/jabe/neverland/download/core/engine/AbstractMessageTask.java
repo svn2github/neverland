@@ -4,7 +4,7 @@
  * Author	lailong
  * Since	2014年3月6日
  */
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 
 import org.jabe.neverland.download.core.AbstractMessageDeliver;
 import org.jabe.neverland.download.core.DownloadStatus;
+import org.jabe.neverland.download.core.IODownloader;
 import org.jabe.neverland.download.core.AbstractMessageDeliver.StatusMessage;
 
 /**

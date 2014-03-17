@@ -1,6 +1,5 @@
 package org.jabe.neverland.download.core;
 
-import org.jabe.neverland.download.core.engine.impl.IODownloader;
 
 public interface DownloadEngine {
 	

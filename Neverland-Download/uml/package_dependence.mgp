@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PackageAnalysis>
+    <Package name="org.jabe.neverland.download.core" x="27" y="280">
+        <DependencyLink destination="org.jabe.neverland.download.core.factory"/>
+    </Package>
+    <Package name="org.jabe.neverland.download.core.cache" x="299" y="422">
+        <DependencyLink destination="org.jabe.neverland.download.util"/>
+        <DependencyLink destination="org.jabe.neverland.download.core"/>
+    </Package>
+    <Package name="org.jabe.neverland.download.core.engine" x="317" y="185">
+        <DependencyLink destination="org.jabe.neverland.download.util"/>
+        <DependencyLink destination="org.jabe.neverland.download.log"/>
+        <DependencyLink destination="org.jabe.neverland.download.core"/>
+    </Package>
+    <Package name="org.jabe.neverland.download.core.factory" x="339" y="326">
+        <DependencyLink destination="org.jabe.neverland.download.core.engine"/>
+        <DependencyLink destination="org.jabe.neverland.download.core"/>
+        <DependencyLink destination="org.jabe.neverland.download.core.cache"/>
+    </Package>
+    <Package name="org.jabe.neverland.download.log" x="466" y="106"/>
+    <Package name="org.jabe.neverland.download.util" x="663" y="328"/>
+</PackageAnalysis>

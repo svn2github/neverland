@@ -1,8 +1,9 @@
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 import java.util.concurrent.ExecutorService;
 
 import org.jabe.neverland.download.core.AbstractMessageDeliver;
+import org.jabe.neverland.download.core.IODownloader;
 
 public class TaskConfig {
 	

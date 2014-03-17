@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.jabe.neverland.download.core.IODownloader;
 
 public class BaseIODownloader implements IODownloader {
 	/** {@value} */

@@ -1,10 +1,10 @@
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 import java.io.IOException;
 
+import org.jabe.neverland.download.core.CacheDownloadInfo;
+import org.jabe.neverland.download.core.DownloadCacheManager;
 import org.jabe.neverland.download.core.DownloadInfo;
-import org.jabe.neverland.download.core.cache.CacheDownloadInfo;
-import org.jabe.neverland.download.core.cache.DownloadCacheManager;
 
 /**
  * 

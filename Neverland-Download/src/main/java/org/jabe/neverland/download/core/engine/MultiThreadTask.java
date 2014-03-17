@@ -1,4 +1,4 @@
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

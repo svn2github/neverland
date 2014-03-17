@@ -4,7 +4,7 @@
  * Author	lailong
  * Since	2014年3月6日
  */
-package org.jabe.neverland.download.core.engine.impl;
+package org.jabe.neverland.download.core.engine;
 
 
 /**
