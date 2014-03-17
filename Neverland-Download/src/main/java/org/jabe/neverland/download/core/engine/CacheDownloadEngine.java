@@ -20,7 +20,7 @@ import org.jabe.neverland.download.core.DownloadStatus;
 public class CacheDownloadEngine extends DownloadListenerWraper implements
 		DownloadEngine {
 
-	protected final Map<String, MultiThreadTask> mDownloadTaskMap = new HashMap<String, MultiThreadTask>();
+	protected final Map<String, AbstractMessageTask> mDownloadTaskMap = new HashMap<String, AbstractMessageTask>();
 	protected final ReentrantLock mTaskLock = new ReentrantLock();
 	protected final DownloadCacheManager mProgressCacheManager;
 	protected final ExecutorService mDownloadExecutor;
@@ -100,7 +100,7 @@ public class CacheDownloadEngine extends DownloadListenerWraper implements
 					.addDownloader(
 							mIODownloader != null ? mIODownloader
 									: getDefaultDownloader()).build();
-			final MultiThreadTask downloadTask = new MultiThreadTask(taskConfig);
+			final AbstractMessageTask downloadTask = new MultiThreadTask(taskConfig);
 			mDownloadTaskMap.put(downloadInfo.getmPackageName(), downloadTask);
 			mTaskLock.unlock();
 			return downloadTask.start();
@@ -111,7 +111,7 @@ public class CacheDownloadEngine extends DownloadListenerWraper implements
 	private void removeTaskByPackageName(String name) {
 		mTaskLock.lock();
 		if (mDownloadTaskMap.containsKey(name)) {
-			final MultiThreadTask multiThreadTask = mDownloadTaskMap.get(name);
+			final AbstractMessageTask multiThreadTask = mDownloadTaskMap.get(name);
 			multiThreadTask.clear();
 			mDownloadTaskMap.remove(name);
 		}
