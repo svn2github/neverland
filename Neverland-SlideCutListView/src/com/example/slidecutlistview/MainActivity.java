@@ -31,7 +31,7 @@ public class MainActivity extends Activity implements RemoveListener{
 		slideCutListView.setRemoveListener(this);
 		
 		for(int i=0; i<20; i++){
-			dataSourceList.add("»¬¶¯É¾³ı" + i); 
+			dataSourceList.add("æ»‘åŠ¨åˆ é™¤" + i); 
 		}
 		
 		adapter = new ArrayAdapter<String>(this, R.layout.listview_item, R.id.list_item, dataSourceList);
@@ -48,7 +48,7 @@ public class MainActivity extends Activity implements RemoveListener{
 	}
 
 	
-	//»¬¶¯É¾³ıÖ®ºóµÄ»Øµ÷·½·¨
+	//æ»‘åŠ¨åˆ é™¤ä¹‹åçš„å›è°ƒæ–¹æ³•
 	@Override
 	public void removeItem(RemoveDirection direction, int position) {
 		adapter.remove(adapter.getItem(position));
@@ -56,10 +56,10 @@ public class MainActivity extends Activity implements RemoveListener{
 		
 		switch (direction) {
 		case RIGHT:
-			Toast.makeText(this, "ÏòÓÒÉ¾³ı  "+ position, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "å‘å³åˆ é™¤  "+ position, Toast.LENGTH_SHORT).show();
 			break;
 		case LEFT:
-			Toast.makeText(this, "Ïò×óÉ¾³ı  "+ position, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "å‘å·¦åˆ é™¤  "+ position, Toast.LENGTH_SHORT).show();
 			break;
 
 		default:
