@@ -142,6 +142,11 @@ void CNetBean::read(char* buff, int len)
 		//read length of pack head
 		if(this->m_vFrameDecodeBuffer.size() >= 4) {
 			//read 4 char to int
+			//这里需要解释一下CPU字节序和网络字节序的问题
+			//网络字节序是大端字节序，即先到的第一个字节是高位。
+			//JVM是大端字节序。
+			//intel x86 和 ARM cpu一般都是小端字节序。
+			// 故这里的一个接受的字节是高位，而CPU（手机和PC）一般都是小端，所以高位放在高位地址上。
 			this->m_nRecvPackLength = 0;
 			for(int i = 0; i < 4; i++) {
 				this->m_nRecvPackLength <<= 8;

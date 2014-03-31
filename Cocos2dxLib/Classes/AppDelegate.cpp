@@ -9,6 +9,7 @@
 #include "MainScene.h"
 #include "MessageBox.h"
 #include "LoadingBox.h"
+#include "SimpleGameScene.h"
 
 USING_NS_CC;
 
@@ -29,11 +30,12 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setAnimationInterval(1.0 / 60);
 
 	//设置网络对象
-	CGameNetBean::sharedNetBean()->setAddress("192.168.4.145", 7789);
+	CGameNetBean::sharedNetBean()->setAddress("127.0.0.1", 7789);
 
 	//注册所有场景
 	REGISTE_SCENE_CLASS(CLoginScene);
 	REGISTE_SCENE_CLASS(CMainScene);
+	REGISTE_SCENE_CLASS(CSimpleGameScene);
 
 	//注册弹出框
 	REGISTE_POPUPBOX_CLASS(CMessageBox);

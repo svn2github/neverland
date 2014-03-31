@@ -111,6 +111,9 @@
     <ClCompile Include="..\Classes\PokerSprite.cpp">
       <Filter>Classes\Scene\MainGame</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SimpleGameScene.cpp">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -204,6 +207,9 @@
       <Filter>Classes\Logical</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PokerSprite.h">
+      <Filter>Classes\Scene\MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SimpleGameScene.h">
       <Filter>Classes\Scene\MainGame</Filter>
     </ClInclude>
   </ItemGroup>
