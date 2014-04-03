@@ -76,7 +76,7 @@ public abstract class DownloadCacheManager {
 	public abstract boolean completeCacheTask(final CacheDownloadInfo info);
 	
 	/**
-	 * 清除缓存
+	 * 清除下载缓存
 	 * @param cacheTask
 	 * @return
 	 */

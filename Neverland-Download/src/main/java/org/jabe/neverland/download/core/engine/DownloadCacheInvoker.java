@@ -40,7 +40,7 @@ public class DownloadCacheInvoker {
 		return mProgressCacheManager.isInCache(mCacheDownloadInfo);
 	}
 	
-	public boolean checkFinish() {
+	public boolean completeCacheTask() {
 		return mProgressCacheManager.completeCacheTask(mCacheDownloadInfo);
 	}
 	
@@ -50,6 +50,10 @@ public class DownloadCacheInvoker {
 	
 	public void updateSectionProgress(byte[] bytes, int sectionNo, long progress) throws IOException {
 		mProgressCacheManager.updateSectionProgress(bytes, sectionNo, progress, mCacheDownloadInfo);
+	}
+	
+	public boolean isDownloadFinished() {
+		return mProgressCacheManager.isDownloadFinished(mCacheDownloadInfo.mDownloadInfo);
 	}
 
 }

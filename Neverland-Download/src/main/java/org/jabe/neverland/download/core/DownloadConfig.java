@@ -9,7 +9,6 @@ public final class DownloadConfig {
 	
 	public final ExecutorService mTaskExecutor;
 	
-	public final int mMaxTaskSizeInWaitingQueue;
 	public final int mMaxTaskSizeInRunningQueue;
 	
 	public final DownloadOperationMaper mDownloadOperationMaper;
@@ -18,13 +17,11 @@ public final class DownloadConfig {
 	public final AbstractMessageDeliver mMessageDeliver;
 	public final String mCacheRootPath;
 	
-	private static final int DEFAULT_TASK_WAITING_SIZE = 3;
 	private static final int DEFAULT_TASK_RUNNING_SIZE = 3;
 	
 	private DownloadConfig(final Builder builder) {
 		mTaskExecutor = builder.mTaskExecutor;
 		mMaxTaskSizeInRunningQueue = builder.mMaxTaskSizeInRunningQueue;
-		mMaxTaskSizeInWaitingQueue = builder.mMaxTaskSizeInWaitingQueue;
 		mDownloadOperationMaper = builder.mDownloadOperationMaper;
 		mDownloadEngine = builder.mDownloadEngine;
 		mProgressCacheManager = builder.mProgressCacheManager;
@@ -34,7 +31,6 @@ public final class DownloadConfig {
 	public static class Builder {
 		
 		private ExecutorService mTaskExecutor;
-		private int mMaxTaskSizeInWaitingQueue = 0;
 		private int mMaxTaskSizeInRunningQueue = 0;
 		private DownloadOperationMaper mDownloadOperationMaper;
 		private DownloadEngine mDownloadEngine;
@@ -47,11 +43,6 @@ public final class DownloadConfig {
 		
 		public Builder addTaskExcutor(ExecutorService taskExecutor) {
 			this.mTaskExecutor = taskExecutor;
-			return this;
-		}
-		
-		public Builder addMaxTaskSizeInWaiting(int count) {
-			this.mMaxTaskSizeInWaitingQueue = count;
 			return this;
 		}
 		
@@ -94,9 +85,6 @@ public final class DownloadConfig {
 			if (mMaxTaskSizeInRunningQueue == 0) {
 				mMaxTaskSizeInRunningQueue = DEFAULT_TASK_RUNNING_SIZE;
 			}
-			if (mMaxTaskSizeInWaitingQueue == 0) {
-				mMaxTaskSizeInWaitingQueue = DEFAULT_TASK_WAITING_SIZE;
-			}
 			if (mTaskExecutor == null) {
 				mTaskExecutor = Executors.newCachedThreadPool();
 			}
@@ -110,11 +98,10 @@ public final class DownloadConfig {
 			
 			if (mMessageDeliver == null) {
 				mMessageDeliver = new DefaultMessageDeliver();
-				mMessageDeliver.start();
 			}
 			
 			if (mDownloadEngine == null) {
-				mDownloadEngine = DefaultConfigurationFactory.getDefaultDownloadEngine(mProgressCacheManager, mTaskExecutor, mMessageDeliver);
+				mDownloadEngine = DefaultConfigurationFactory.getDefaultDownloadEngine(mProgressCacheManager, mTaskExecutor, mMessageDeliver, mMaxTaskSizeInRunningQueue);
 			}
 			if (mDownloadOperationMaper == null) {
 				mDownloadOperationMaper = DefaultConfigurationFactory.getDefaultMaper(mDownloadEngine);

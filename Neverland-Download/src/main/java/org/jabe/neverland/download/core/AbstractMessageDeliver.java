@@ -27,7 +27,7 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 	}
 
 	public interface MessageListener {
-		public void onFire(Message message);
+		public boolean onFire(Message message);
 	}
 	
 	public static class Message {
@@ -82,16 +82,17 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 		PROGRESS, STATUS
 	}
 	
-	public abstract void push(Message message);
+	protected abstract void push(Message message);
 	
 	public abstract void start();
 	
 	public abstract void shutdown();
 	
-	public void fireMessageToEngine(final Message message) {
+	protected boolean fireMessageToEngine(final Message message) {
 		if (mEngineMessger != null) {
-			mEngineMessger.onFire(message);
+			return mEngineMessger.onFire(message);
 		}
+		return false;
 	}
 	
 
@@ -113,7 +114,7 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 			} else if (statusMessage.exception != null) {
 				invokeFailure(statusMessage.packageName, statusMessage.exception);
 			} else if (statusMessage.downloadingCount >= 0) {
-				invokeStatusChanged(statusMessage.packageName, statusMessage.downloadingCount);
+				invokeCountChanged(statusMessage.downloadingCount);
 			}
 		}
 	}
@@ -221,5 +222,11 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 		progressMessage.downloaded = downloaded;
 		progressMessage.total = total;
 		push(progressMessage);
+	}
+	
+	public final void pushDownloadingCountMessage(String packageName, int count) {
+		final StatusMessage statusMessage = new StatusMessage(packageName);
+		statusMessage.downloadingCount = count;
+		push(statusMessage);
 	}
 }

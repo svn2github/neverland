@@ -12,8 +12,8 @@ import org.jabe.neverland.download.core.engine.DefaultOperationMaper;
 
 public class DefaultConfigurationFactory {
 
-	public static DownloadEngine getDefaultDownloadEngine(DownloadCacheManager progressCacheManager, ExecutorService executorService, AbstractMessageDeliver messageDeliver) {
-		return new CacheDownloadEngine(progressCacheManager, executorService, messageDeliver);
+	public static DownloadEngine getDefaultDownloadEngine(DownloadCacheManager progressCacheManager, ExecutorService executorService, AbstractMessageDeliver messageDeliver, int coreCount) {
+		return new CacheDownloadEngine(progressCacheManager, executorService, messageDeliver, coreCount);
 	}
 	
 	public static DownloadOperationMaper getDefaultMaper(DownloadEngine downloadEngine) {

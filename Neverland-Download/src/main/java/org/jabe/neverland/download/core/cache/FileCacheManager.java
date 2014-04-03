@@ -360,6 +360,8 @@ public class FileCacheManager extends DownloadCacheManager {
 	public void clearCache(CacheDownloadInfo cacheTask) {
 		tryCloseSaveFile(cacheTask);
 		tryCloseTaskFile(cacheTask);
+		//if the file is so big may blocking and may cause io exception.
+		// need do this by another thread ?
 		final File saveFile = new File(generateCacheSaveFullPath(cacheTask.mDownloadInfo));
 		saveFile.delete();
 		getTaskFile(cacheTask.mDownloadInfo).delete();

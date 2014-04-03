@@ -6,7 +6,6 @@
  */
 package org.jabe.neverland.download.core.engine;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
@@ -14,7 +13,6 @@ import java.util.concurrent.ExecutorService;
 import org.jabe.neverland.download.core.AbstractMessageDeliver;
 import org.jabe.neverland.download.core.DownloadStatus;
 import org.jabe.neverland.download.core.IODownloader;
-import org.jabe.neverland.download.core.AbstractMessageDeliver.StatusMessage;
 
 /**
  * message deliver task
@@ -77,19 +75,12 @@ public abstract class AbstractMessageTask extends CacheDownloadTask implements
 		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_STARTED.ordinal());
 	}
 
-	protected void onCancel() {
-		final StatusMessage statusMessage = new StatusMessage(getPackageName());
-		statusMessage.changedStatus = DownloadStatus.DOWNLOAD_STATUS_CANCEL.ordinal();
-//		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_CANCEL.ordinal());
-		mMessageDeliver.fireMessageToEngine(statusMessage);
+	protected void onCancelTask() {
+		mMessageDeliver.pushStatusChangedMessage(getPackageName(), DownloadStatus.DOWNLOAD_STATUS_CANCEL.ordinal());
 	}
 
 	protected void onUpdateProgress(double added, double downloaded, double total) {
 		mMessageDeliver.pushUpdateProgressMessage(getPackageName(), added, downloaded, total);
-	}
-
-	protected void onFileExist(File file) {
-		this.onSuccess();
 	}
 
 	@Override

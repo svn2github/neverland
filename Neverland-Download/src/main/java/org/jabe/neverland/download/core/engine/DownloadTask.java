@@ -14,7 +14,7 @@ package org.jabe.neverland.download.core.engine;
  */
 public abstract class DownloadTask implements Runnable{
 
-	protected volatile boolean hasStarted = false;
+	protected volatile boolean keepRunning = false;
 	
 	/**
 	 * 
@@ -33,5 +33,7 @@ public abstract class DownloadTask implements Runnable{
 	public abstract void clearCache();
 	
 	public abstract void stop();
+	
+	public abstract boolean isDownloading();
 	
 }

@@ -23,7 +23,7 @@ public class MultiThreadTask extends AbstractMessageTask {
 	
 	@Override
 	public void run() {
-		hasStarted = true;
+		keepRunning = true;
 		// task life cycle
 		onPreTask();
 		
@@ -37,8 +37,9 @@ public class MultiThreadTask extends AbstractMessageTask {
 			} else {
 				mCacheInvoker.saveToCache();
 			}
-		} catch (Exception e) {
-			
+		} catch (IOException e) {
+			triggerIOException(e);
+			return;
 		}
 		
 		final int secCount = mCacheDownloadInfo.mSectionCount;
@@ -61,8 +62,8 @@ public class MultiThreadTask extends AbstractMessageTask {
 			} else {
 				doSingleWork();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException e) {
+			triggerIOException(e);
 		}
 	}
 	
@@ -87,6 +88,10 @@ public class MultiThreadTask extends AbstractMessageTask {
 			final long endF = endt;
 			final int s = j + 1;
 			final long realStart = j * per + start;
+			if (realStart == endF) {
+				triggerSuccess(s);
+				continue;
+			}
 			getExecutorService().execute(new Runnable() {
 				
 				@Override
@@ -106,24 +111,21 @@ public class MultiThreadTask extends AbstractMessageTask {
 		final SizeBean sb = new SizeBean(contentLength, start, end);
 		final InputStream is = getStream(mCacheDownloadInfo.mDownloadInfo.getmDownloadUrl(), null, sb);
 		try {
-			try {
-				byte[] bytes = new byte[BUFFER_SIZE];
-				while (hasStarted) {
-					int count = is.read(bytes, 0, BUFFER_SIZE);
-					if (count == -1) {
-						break;
-					}
-//					mCacheAccessFile.seek((sectionNo - 1) * per + mCacheTask.mSectionsOffset[sectionNo - 1]);
-//					mCacheAccessFile.write(bytes, 0, count);
+			byte[] bytes = new byte[BUFFER_SIZE];
+			while (keepRunning) {
+				int count = is.read(bytes, 0, BUFFER_SIZE);
+				if (count == -1) {
+					break;
+				}
+				if (keepRunning) {
 					mCacheInvoker.updateSectionProgress(bytes, sectionNo, count);
 					onUpdateProgress(count, mCacheDownloadInfo.mDownloadedLength, mCacheDownloadInfo.mContentLength);
 				}
-				triggerSuccess(sectionNo);
-			} catch(IOException e) {
-				
-			} finally {
-				
 			}
+			triggerSuccess(sectionNo);
+		} catch(IOException e) {
+			e.printStackTrace();
+			triggerSectionFailure(sectionNo);
 		} finally {
 			IoUtils.closeSilently(is);
 		}
@@ -145,13 +147,23 @@ public class MultiThreadTask extends AbstractMessageTask {
 	}
 	
 	private void triggerSectionFailure(int section) {
-		
+		Logger.i(getPackageName() + " " + section + " section download failure.");
+		triggerIOException(null);
+	}
+	
+	private void triggerIOException(IOException e) {
+		stop();
+		if (e != null) {
+			onFailure(e);
+		} else {
+			onFailure(new IOException("File or Network Exception."));
+		}
 	}
 	
 	private void triggerSuccess(int sectionNo) {
 		if (mCacheDownloadInfo.isSectionOk(sectionNo)) {
 			successTag[sectionNo - 1] = true;
-			Logger.i("section num : " + sectionNo + " ok.");
+			Logger.i(getPackageName() + " section num : " + sectionNo + " ok.");
 			checkAllSuccess();	
 		} else {
 			triggerSectionFailure(sectionNo);
@@ -172,13 +184,13 @@ public class MultiThreadTask extends AbstractMessageTask {
 	}
 	
 	private void success() {
-		mCacheInvoker.checkFinish();
+		mCacheInvoker.completeCacheTask();
 		super.onSuccess();
 	}
 
 	@Override
 	public boolean start() {
-		if (!hasStarted) {
+		if (!keepRunning) {
 			getExecutorService().execute(this);
 		}
 		return true;
@@ -193,13 +205,15 @@ public class MultiThreadTask extends AbstractMessageTask {
 	public boolean cancel() {
 		stop();
 		clearCache();
-		onCancel();
+		super.onCancelTask();
 		return true;
 	}
 
 	@Override
 	public boolean pause() {
-		return cancel();
+		stop();
+		super.onPauseTask();
+		return true;
 	}
 
 	@Override
@@ -209,6 +223,11 @@ public class MultiThreadTask extends AbstractMessageTask {
 
 	@Override
 	public void stop() {
-		hasStarted = false;
+		keepRunning = false;
+	}
+	
+	@Override
+	public boolean isDownloading() {
+		return keepRunning;
 	}
 }

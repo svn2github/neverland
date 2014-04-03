@@ -25,7 +25,7 @@ public class DefaultMessageDeliver extends AbstractMessageDeliver {
 	 * 
 	 */
 	public DefaultMessageDeliver() {
-		// TODO Auto-generated constructor stub
+		start();
 	}
 
 	/*
@@ -36,9 +36,11 @@ public class DefaultMessageDeliver extends AbstractMessageDeliver {
 	 * .neverland.download.core.AbstractMessageDeliver.Message)
 	 */
 	@Override
-	public void push(Message message) {
-		fireMessageToEngine(message);
-		queue.add(message);
+	protected void push(Message message) {
+		// whether the engine has fire the message.
+		if (!fireMessageToEngine(message)) {
+			queue.add(message);
+		}
 	}
 
 	/*

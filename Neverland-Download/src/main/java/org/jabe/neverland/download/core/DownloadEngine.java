@@ -14,5 +14,4 @@ public interface DownloadEngine {
 	public boolean restartDownload(DownloadInfo downloadInfo);
 	
 	public void setIoDownloader(IODownloader downloader);
-	
 }
