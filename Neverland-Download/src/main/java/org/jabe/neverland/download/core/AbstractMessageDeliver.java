@@ -121,9 +121,11 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 	
 	private final List<DownloadStatusListener> mDownloadStatusListeners = new ArrayList<DownloadStatusListener>();
 	private final List<DownloadProgressListener> mDownloadProgressListeners = new ArrayList<DownloadProgressListener>();
+	private final List<DownloadSpeedListener> mDownloadSpeedListeners = new ArrayList<DownloadSpeedListener>();
 	
 	protected final ReentrantLock mStatusLock = new ReentrantLock();
 	protected final ReentrantLock mProgressLock = new ReentrantLock();
+	protected final ReentrantLock mSpeedLock = new ReentrantLock();
 	
 
 	protected final void invokeUpdateProgress(String packageName, double added,
@@ -158,6 +160,14 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 		}
 		mStatusLock.unlock();
 	}
+	
+	protected final void invokeSpeedNotify(String message, String packageName, long downloadBytes, long castTime) {
+		mSpeedLock.lock();
+		for (DownloadSpeedListener dl : mDownloadSpeedListeners) {
+			dl.onSpeedNotify(message, packageName, downloadBytes, castTime);
+		}
+		mSpeedLock.unlock();
+	}
 
 	public final void removeListenter(DownloadListener downloadInterface) {
 		if (downloadInterface == null) {
@@ -171,7 +181,11 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 		} else if (downloadInterface instanceof DownloadStatusListener) {
 			mStatusLock.lock();
 			mDownloadStatusListeners.remove(downloadInterface);
-			mStatusLock.lock();
+			mStatusLock.unlock();
+		} else if (downloadInterface instanceof DownloadSpeedListener) {
+			mSpeedLock.lock();
+			mDownloadSpeedListeners.remove(downloadInterface);
+			mSpeedLock.unlock();
 		}
 	}
 
@@ -194,6 +208,12 @@ public abstract class AbstractMessageDeliver implements DownloadRegister {
 				mDownloadStatusListeners.add((DownloadStatusListener) downloadInterface);
 			}
 			mStatusLock.unlock();
+		} else if (downloadInterface instanceof DownloadSpeedListener) {
+			mSpeedLock.lock();
+			if (!mDownloadSpeedListeners.contains(downloadInterface)) {
+				mDownloadSpeedListeners.add((DownloadSpeedListener) downloadInterface);
+			}
+			mSpeedLock.unlock();
 		}
 	}
 	

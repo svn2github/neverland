@@ -24,7 +24,7 @@ public class DownloadTestBase {
 
 	}
 
-	private final static String ROOT_PATH = "C://Users//Administrator//Desktop//";
+	protected final static String ROOT_PATH = "C://Users//Administrator//Desktop//";
 
 	protected DownloadManager dm;
 
@@ -89,7 +89,7 @@ public class DownloadTestBase {
 	/**
 	 * 
 	 */
-	private void initManager() {
+	protected void initManager() {
 		final DownloadConfig downloadConfig = new DownloadConfig.Builder()
 				.addMaxTaskSizeInRunning(2)
 				.addCacheRootPath(ROOT_PATH).build();
